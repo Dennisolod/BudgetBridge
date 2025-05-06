@@ -1,0 +1,24 @@
+.modern-flat-button {
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #000000;
+    -fx-font-size: 14px;
+    -fx-font-weight: 500;
+    -fx-padding: 22 35; /* approx 1.5em 2.2em */
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 2, 0, 0, 1);
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+    -fx-text-transform: uppercase;
+    -fx-font-family: "Helvetica", "Arial", sans-serif;
+}
+
+.modern-flat-button:hover {
+    -fx-background-color: #EBEBEB;
+}
+
+.modern-flat-button:pressed {
+    -fx-background-color: #d6d6d6;
+}
