@@ -4,8 +4,8 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 
-// Budget screen
-public class SecondaryController {
+// Exhchange Store screen
+public class StoreController {
 
     @FXML
     private void switchToSecondary() throws IOException {
@@ -26,4 +26,5 @@ public class SecondaryController {
     private void switchToStore() throws IOException {
         App.setRoot("store");
     }
+
 }

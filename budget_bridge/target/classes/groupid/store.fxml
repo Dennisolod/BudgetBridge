@@ -17,55 +17,44 @@
 <?import javafx.scene.textfield.*?>
 
 <!-- WORK IN PROGRESS -->
-<BorderPane stylesheets="@style.css" fx:controller="groupid.PrimaryController" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane stylesheets="@style.css" fx:controller="groupid.StoreController" xmlns:fx="http://javafx.com/fxml/1">
    <top>
-      <VBox alignment="CENTER">
-         <children>
-            <HBox>
-               <children>
-                  <MenuBar styleClass="modern-menu-bar">
-                     <Menu text ="≡" styleClass="modern-menu">
-                        <MenuItem text="Profile" styleClass="menu-item"/>
-                        <MenuItem text="Settings" styleClass="menu-item"/>
-                        <MenuItem text="Tutorial" styleClass="menu-item"/>
-                        <MenuItem text="Logoff" styleClass="menu-item"/>
-                     </Menu>
-                  </MenuBar>
+        <VBox alignment="CENTER">
+            <children>
+                <HBox>
+                    <children>
+                        <MenuBar styleClass="modern-menu-bar">
+                            <Menu text ="≡" styleClass="modern-menu">
+                                <MenuItem text="Profile" styleClass="menu-item"/>
+                                <MenuItem text="Settings" styleClass="menu-item"/>
+                                <MenuItem text="Tutorial" styleClass="menu-item"/>
+                                <MenuItem text="Logoff" styleClass="menu-item"/>
+                            </Menu>
+                        </MenuBar>
 
-                  <Button fx:id="dashboardButton" text="My dashboard" styleClass="modern-flat-button" onAction="#switchToPrimary"/>
-                  <Button fx:id="leaderboardsButton" text="Leaderboards" styleClass="modern-flat-button" onAction="#switchToLeaderboard"/>
-                  <Button fx:id="budgetButton" text="Update Budget" styleClass="modern-flat-button" onAction="#switchToSecondary"/>
-                  <Button fx:id="storeButton" text="Exchange Store" styleClass="modern-flat-button" />
-                  <Label text="20,000 points"/>
-               </children>
-            </HBox>      
+                        <Button fx:id="dashboardButton" text="My dashboard" styleClass="modern-flat-button" onAction="#switchToPrimary"/>
+                        <Button fx:id="leaderboardsButton" text="Leaderboards" styleClass="modern-flat-button" onAction="#switchToLeaderboard"/>
+                        <Button fx:id="budgetButton" text="Update Budget" styleClass="modern-flat-button" onAction="#switchToSecondary"/>
+                        <Button fx:id="storeButton" text="Exchange Store" styleClass="modern-flat-button" />
+                        <Label text="20,000 points"/>
+                    </children>
+                </HBox>      
+            </children>
 
-         </children>
       </VBox>
    </top>
 
-   <left>
-      <HBox>
+   <!-- <left>
+      <VBox alignment="TOP_CENTER" spacing="20">
          <children>
-            <VBox alignment="TOP_CENTER" spacing="20">
-               <children>
-                  <Label text="Monthly Income:" />
-                  <Label text="\$750" styleClass="income"/>
-                  <Button fx:id="primaryButton" text="Switch to Secondary View" onAction="#switchToSecondary" styleClass="modern-flat-button"/>
-               </children>
-            </VBox>
-            <VBox alignment="TOP_CENTER" spacing ="20">
-               <children>                  
-                  <Label text="Monthly Expenses:" />
-                  <Label text="\$750" styleClass="expense"/>
-                  <Button fx:id="primaryButton" text="Switch to Secondary View" onAction="#switchToSecondary" styleClass="modern-flat-button"/>
-
-               </children>
-            </VBox>
+            <Label text="TOP LEFT" />
+            <Label text="\$750" />
+            <Label text="Remaining" />
+            <Button fx:id="primaryButton" text="Switch to Secondary View" onAction="#switchToSecondary" styleClass="modern-flat-button"/>
          </children>
-      </HBox>
+      </VBox>
       <padding>
-         <Insets bottom="100" left="100" right="100" top="55" />
+         <Insets bottom="55" left="55" right="55" top="55" />
       </padding>
    </left>
 
@@ -133,19 +122,10 @@
       </padding>
    </bottom>
 
-   
+    -->
+
+    <center>
+        <Label text="Exchange Store"/>
+    </center>
 </BorderPane>
 
-
-
-<!-- WORKING TEMPLATE BELOW!! -->
-
-<!-- <VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="groupid.PrimaryController">
-   <children>
-      <Label text="HOMESCREEN View" />
-      <Button fx:id="primaryButton" text="Switch to Secondary View" onAction="#switchToSecondary"/>
-   </children>
-   <padding>
-      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-   </padding>
-</VBox> -->

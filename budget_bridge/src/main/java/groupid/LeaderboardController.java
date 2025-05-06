@@ -21,4 +21,9 @@ public class LeaderboardController {
     private void switchToLeaderboard() throws IOException {
         App.setRoot("leaderboard");
     }
+
+    @FXML
+    private void switchToStore() throws IOException {
+        App.setRoot("store");
+    }
 }

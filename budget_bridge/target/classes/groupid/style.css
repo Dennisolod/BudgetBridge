@@ -12,7 +12,7 @@
 
 .modern-menu-bar {
     -fx-background-color: #ffffff;
-    -fx-padding: 5 10;
+    -fx-padding: 22 35;
     -fx-background-radius: 6px;
     -fx-border-color: transparent;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 2, 0, 0, 1);
