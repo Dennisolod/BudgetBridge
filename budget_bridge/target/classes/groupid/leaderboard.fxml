@@ -17,7 +17,7 @@
 <?import javafx.scene.textfield.*?>
 
 <!-- WORK IN PROGRESS -->
-<BorderPane stylesheets="@style.css" fx:controller="groupid.SecondaryController" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane stylesheets="@style.css" fx:controller="groupid.LeaderboardController" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <VBox alignment="CENTER">
          <children>
@@ -125,7 +125,7 @@
     -->
 
     <center>
-        <Label text="BUDGET SCREEN"/>
+        <Label text="LEADERBOARD"/>
     </center>
 </BorderPane>
 

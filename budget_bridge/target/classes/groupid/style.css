@@ -1,3 +1,42 @@
+.expense {
+    -fx-text-fill: #FF8C42; /* Soft orange */
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+.income {
+    -fx-text-fill: #00E5FF; /* Vibrant cyan */
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+.modern-menu-bar {
+    -fx-background-color: #ffffff;
+    -fx-padding: 5 10;
+    -fx-background-radius: 6px;
+    -fx-border-color: transparent;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 2, 0, 0, 1);
+}
+
+/* Top-level Menu (≡) */
+.modern-menu {
+    -fx-font-family: "Helvetica", "Arial", sans-serif;
+    -fx-font-size: 18px;
+    -fx-font-weight: 600;
+    -fx-text-fill: #ffffff;
+    -fx-padding: 8 14;
+    -fx-background-color: transparent;
+}
+
+/* MenuItem (dropdown options) */
+.menu-item {
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #000000;
+    -fx-font-size: 14px;
+    -fx-padding: 10 20;
+}
+
+
 .modern-flat-button {
     -fx-background-color: #FFFFFF;
     -fx-text-fill: #000000;
@@ -13,6 +52,7 @@
     -fx-alignment: center;
     -fx-text-transform: uppercase;
     -fx-font-family: "Helvetica", "Arial", sans-serif;
+    -fx-transition: all 0.3s ease; /* NOTE: Not fully supported in JavaFX, but kept for documentation */
 }
 
 .modern-flat-button:hover {

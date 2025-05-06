@@ -4,8 +4,8 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 
-// Budget screen
-public class SecondaryController {
+// Leaderboard screen
+public class LeaderboardController {
 
     @FXML
     private void switchToSecondary() throws IOException {
