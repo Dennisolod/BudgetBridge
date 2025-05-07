@@ -17,7 +17,7 @@
 <?import javafx.scene.textfield.*?>
 <?import javafx.scene.layout.StackPane?>
 <!-- WORK IN PROGRESS -->
-<BorderPane stylesheets="@style.css" fx:controller="groupid.PrimaryController" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane stylesheets="@style.css" fx:controller="groupid.PrimaryController" xmlns:fx="http://javafx.com/fxml/1" styleClass="background">
    <top>
       <VBox alignment="CENTER">
          <children>
@@ -45,11 +45,11 @@
    </top>
 
    <left>
-      <VBox alignment="TOP_LEFT" spacing="30">
+      <VBox alignment="TOP_LEFT" spacing="30" styleClass="vbox-welcome">
          <children>
             <Label text="Welcome back, John Smith" styleClass="big-heading"/>
             <Label text="Budget overview:" styleClass="heading"/>
-            <Label text="20,000 Gems"/>
+            <Label text="20,000 Gems" styleClass="norm-text"/>
 
             <HBox spacing="25">
                <children>
@@ -92,7 +92,7 @@
    </left>
 
    <right>
-      <VBox alignment="BOTTOM_LEFT" spacing="30">
+      <VBox alignment="BOTTOM_LEFT" spacing="30" styleClass="vbox-badges">
          <children>
             <Label text="Badges:" styleClass="heading"/>
             <Label text="---- BADGES ----" styleClass="norm-text"/>
@@ -112,7 +112,7 @@
    </right>
 
    <center>
-      <VBox alignment="CENTER" spacing="50">
+      <VBox alignment="CENTER" spacing="50" styleClass="vbox-spending">
          <children>
             <Label text="Spending:" styleClass="heading"/>
 

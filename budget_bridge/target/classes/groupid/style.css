@@ -1,3 +1,7 @@
+.background {
+    -fx-background-color: #202538;
+}
+
 .norm-text {
     -fx-text-fill: #000000; /* Soft orange */
     -fx-font-weight: 600;
@@ -81,3 +85,10 @@
 .modern-flat-button:pressed {
     -fx-background-color: #6a74ff;
 }
+
+.vbox-welcome, .norm-text, .big-heading, .heading, .vbox-badges, .vbox-spending {
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #222c3c;
+    -fx-background-radius: 15;
+}
+
