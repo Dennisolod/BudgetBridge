@@ -1,5 +1,6 @@
 .background {
     -fx-background-color: #202538;
+    -fx-padding: 10 20 100 20;
 }
 
 .norm-text {
@@ -90,5 +91,10 @@
     -fx-text-fill: #ffffff;
     -fx-background-color: #222c3c;
     -fx-background-radius: 15;
+    -fx-background-padding: 20;
+}
+
+.vbox-spending {
+    -fx-background-padding: 20;
 }
 

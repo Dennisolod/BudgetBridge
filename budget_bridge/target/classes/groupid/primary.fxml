@@ -19,9 +19,16 @@
 <!-- WORK IN PROGRESS -->
 <BorderPane stylesheets="@style.css" fx:controller="groupid.PrimaryController" xmlns:fx="http://javafx.com/fxml/1" styleClass="background">
    <top>
+      
       <VBox alignment="CENTER">
+         <BorderPane.margin>
+            <Insets top="20" right="20" bottom="20" left="20"/>
+         </BorderPane.margin>
          <children>
-            <HBox>
+            <HBox spacing="15">
+               <HBox.margin>
+                  <Insets top="0" right="50" bottom="0" left="50"/>
+               </HBox.margin>
                <children>
                   <MenuBar styleClass="modern-menu-bar">
                      <Menu text ="≡" styleClass="modern-menu">
@@ -45,7 +52,11 @@
    </top>
 
    <left>
+      
       <VBox alignment="TOP_LEFT" spacing="30" styleClass="vbox-welcome">
+         <BorderPane.margin>
+            <Insets top="20" right="20" bottom="20" left="20"/>
+         </BorderPane.margin>
          <children>
             <Label text="Welcome back, John Smith" styleClass="big-heading"/>
             <Label text="Budget overview:" styleClass="heading"/>
@@ -92,7 +103,11 @@
    </left>
 
    <right>
+      
       <VBox alignment="BOTTOM_LEFT" spacing="30" styleClass="vbox-badges">
+         <BorderPane.margin>
+            <Insets top="20" right="20" bottom="20" left="20"/>
+         </BorderPane.margin>
          <children>
             <Label text="Badges:" styleClass="heading"/>
             <Label text="---- BADGES ----" styleClass="norm-text"/>
@@ -112,13 +127,17 @@
    </right>
 
    <center>
+
       <VBox alignment="CENTER" spacing="50" styleClass="vbox-spending">
+         <BorderPane.margin>
+            <Insets top="20" right="20" bottom="20" left="20"/>
+         </BorderPane.margin>
          <children>
             <Label text="Spending:" styleClass="heading"/>
 
             <HBox alignment="CENTER" spacing="25">
                <children>
-                  <VBox alignment="CENTER_RIGHT" spacing="10">
+                  <VBox alignment="CENTER" spacing="10">
                      <Label text=" ---- PIE CHART HERE ---- " styleClass="norm-text" />
                   </VBox>
                </children>
