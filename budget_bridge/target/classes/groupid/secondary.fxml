@@ -35,7 +35,7 @@
                   <Button fx:id="dashboardButton" text="My dashboard" styleClass="modern-flat-button" onAction="#switchToPrimary"/>
                   <Button fx:id="leaderboardsButton" text="Leaderboards" styleClass="modern-flat-button" onAction="#switchToLeaderboard"/>
                   <Button fx:id="budgetButton" text="Update Budget" styleClass="modern-flat-button" onAction="#switchToSecondary"/>
-                  <Button fx:id="storeButton" text="Exchange Store" styleClass="modern-flat-button" />
+                  <Button fx:id="storeButton" text="Exchange Store" styleClass="modern-flat-button" onAction="#switchToStore"/>
                   <Label text="20,000 points"/>
                </children>
             </HBox>      

@@ -14,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage; 
 import javafx.scene.control.Alert.AlertType; 
 import java.time.LocalDate; 
+
 /**
  * JavaFX App
  */
@@ -30,6 +31,10 @@ public class App extends Application {
         scene.getStylesheets().add(App.class.getResource("style.css").toExternalForm());
         
         stage.setScene(scene);
+       
+        // Force css updates
+        //scene.getRoot().applyCss();
+
         stage.show();
 
 
