@@ -36,7 +36,7 @@
                   <Button fx:id="leaderboardsButton" text="Leaderboards" styleClass="modern-flat-button" onAction="#switchToLeaderboard"/>
                   <Button fx:id="budgetButton" text="Update Budget" styleClass="modern-flat-button" onAction="#switchToSecondary"/>
                   <Button fx:id="storeButton" text="Exchange Store" styleClass="modern-flat-button" onAction="#switchToStore"/>
-                  <Label text="20,000 points"/>
+
                </children>
             </HBox>      
 
@@ -49,6 +49,7 @@
          <children>
             <Label text="Welcome back, John Smith" styleClass="big-heading"/>
             <Label text="Budget overview:" styleClass="heading"/>
+            <Label text="20,000 Gems"/>
 
             <HBox spacing="25">
                <children>
@@ -68,21 +69,21 @@
                   </VBox>
                </children>
             </HBox>
-            
-            <VBox alignment="BOTTOM_LEFT" spacing="30">
+            <HBox alignment="TOP_LEFT" spacing="10">
                <children>
-                  <Label text="Badges:" styleClass="heading"/>
-                  <Label text="---- BADGES ----" />
-                  <Label text="---- BADGES ----" />
-                  <Label text="---- BADGES ----" />
-                  <Label text="---- BADGES ----" />
-                  <Label text="---- BADGES ----" />
-                  <Label text="---- BADGES ----" />
-                  <Label text="---- BADGES ----" />
-                  <Label text="---- BADGES ----" />
+                  <VBox alignment="CENTER_LEFT" spacing="30">
+                     <children>
+                        <Label text="Missions" styleClass="heading"/>
+                        <Label text="---- MISSION 1 ----" styleClass="norm-text"/>
+                        <Label text="---- MISSION 2 ----" styleClass="norm-text"/>
+                        <Label text="---- MISSION 3 ----" styleClass="norm-text"/>
+                        <Label text="---- MISSION 4 ----" styleClass="norm-text"/>
+                        
 
+                     </children>
+                  </VBox>
                </children>
-            </VBox>
+            </HBox>
          </children>
       </VBox>
       <padding>
@@ -91,15 +92,31 @@
    </left>
 
    <right>
-      
+      <VBox alignment="BOTTOM_LEFT" spacing="30">
+         <children>
+            <Label text="Badges:" styleClass="heading"/>
+            <Label text="---- BADGES ----" styleClass="norm-text"/>
+            <Label text="---- BADGES ----" styleClass="norm-text"/>
+            <Label text="---- BADGES ----" styleClass="norm-text"/>
+            <Label text="---- BADGES ----" styleClass="norm-text"/>
+            <Label text="---- BADGES ----" styleClass="norm-text"/>
+            <Label text="---- BADGES ----" styleClass="norm-text"/>
+            <Label text="---- BADGES ----" styleClass="norm-text"/>
+            <Label text="---- BADGES ----" styleClass="norm-text"/>
+
+         </children>
+      </VBox>
+      <padding>
+         <Insets bottom="200" left="55" right="200" top="55" />
+      </padding>
    </right>
 
    <center>
-      <VBox alignment="CENTER_LEFT" spacing="50">
+      <VBox alignment="CENTER" spacing="50">
          <children>
             <Label text="Spending:" styleClass="heading"/>
 
-            <HBox alignment="CENTER_LEFT" spacing="25">
+            <HBox alignment="CENTER" spacing="25">
                <children>
                   <VBox alignment="CENTER_RIGHT" spacing="10">
                      <Label text=" ---- PIE CHART HERE ---- " styleClass="norm-text" />
@@ -110,63 +127,13 @@
          </children>
       </VBox>
       <padding>
-         <Insets bottom="55" left="55" right="55" top="55" />
-      </padding>
-      <padding>
-         <Insets bottom="55" left="55" right="55" top="55" />
+         <Insets bottom="200" left="10" right="55" top="55" />
       </padding>  
    </center>
 
    <bottom>
-      <HBox alignment="CENTER" spacing="100">
-         <children>
-            <VBox alignment="BOTTOM_LEFT" spacing="50">
-               <children>
-                  <Label text="BOTTOM LEFT:" />
-                  <Label text="---- BADGES ----" />
-                  <Label text="---- BADGES ----" />
-                  <Label text="---- BADGES ----" />
-                  <Label text="---- BADGES ----" />
-                  
-
-               </children>
-            </VBox>
-            
-            <VBox alignment="CENTER" spacing="50">
-               <children>
-                  <Label text="CENTER View" />
-                  <Label text="Label 1" />
-                  <Label text="Label 2" />
-               </children>
-            </VBox>
-
-            <VBox alignment="CENTER_RIGHT" spacing="50">
-               <children>
-                  <Label text="BOTTOM CENTER RIGHT View" />
-                  <Label text="Label 1" />
-                  <Label text="Label 2" />
-               </children>
-            </VBox>
-         </children>
-      </HBox>
-      <padding>
-         <Insets bottom="55" left="55" right="55" top="55" />
-      </padding>
+      
    </bottom>
 
    
 </BorderPane>
-
-
-
-<!-- WORKING TEMPLATE BELOW!! -->
-
-<!-- <VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="groupid.PrimaryController">
-   <children>
-      <Label text="HOMESCREEN View" />
-      <Button fx:id="primaryButton" text="Switch to Secondary View" onAction="#switchToSecondary"/>
-   </children>
-   <padding>
-      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-   </padding>
-</VBox> -->
