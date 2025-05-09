@@ -1,19 +1,13 @@
 package groupid;
 
+import java.io.IOException;
+
+import groupid.model.BudgetModel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
-import java.io.IOException;
-import javafx.scene.control.Button; 
-import javafx.scene.layout.*; 
-import javafx.event.ActionEvent; 
-import javafx.event.EventHandler; 
-import javafx.scene.control.*; 
 import javafx.stage.Stage; 
-import javafx.scene.control.Alert.AlertType; 
-import java.time.LocalDate; 
 
 /**
  * JavaFX App
@@ -21,6 +15,7 @@ import java.time.LocalDate;
 public class App extends Application {
 
     private static Scene scene;
+    private static final BudgetModel model = new BudgetModel();
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -36,9 +31,6 @@ public class App extends Application {
         //scene.getRoot().applyCss();
 
         stage.show();
-
-
-        
     }
 
     static void setRoot(String fxml) throws IOException {
@@ -47,6 +39,8 @@ public class App extends Application {
 
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+        Object c = fxmlLoader.getController();
+        if (c instanceof ModelAware m){m.setModel(model);}
         return fxmlLoader.load();
     }
 
