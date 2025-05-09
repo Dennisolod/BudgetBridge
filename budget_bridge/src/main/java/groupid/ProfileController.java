@@ -4,8 +4,7 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 
-// Homescreen / My Dashboard
-public class PrimaryController {
+public class ProfileController {
 
     @FXML
     private void switchToSecondary() throws IOException {

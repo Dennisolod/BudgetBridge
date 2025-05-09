@@ -26,4 +26,24 @@ public class LeaderboardController {
     private void switchToStore() throws IOException {
         App.setRoot("store");
     }
+
+    @FXML
+    private void switchToProfile() throws IOException {
+        App.setRoot("profile");
+    }
+
+    @FXML
+    private void switchToSettings() throws IOException {
+        App.setRoot("settings");
+    }
+
+    @FXML
+    private void switchToTutorial() throws IOException {
+        App.setRoot("tutorial");
+    }
+
+    @FXML
+    private void logoff() throws IOException {
+        System.exit(0);
+    }
 }

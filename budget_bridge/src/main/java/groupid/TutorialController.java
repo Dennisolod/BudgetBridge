@@ -4,9 +4,8 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 
-// Homescreen / My Dashboard
-public class PrimaryController {
-
+public class TutorialController {
+    
     @FXML
     private void switchToSecondary() throws IOException {
         App.setRoot("secondary");

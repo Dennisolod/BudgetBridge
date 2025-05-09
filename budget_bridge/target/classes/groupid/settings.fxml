@@ -17,7 +17,7 @@
 <?import javafx.scene.textfield.*?>
 
 <!-- WORK IN PROGRESS -->
-<BorderPane stylesheets="@style.css" fx:controller="groupid.StoreController" xmlns:fx="http://javafx.com/fxml/1" styleClass="background">
+<BorderPane stylesheets="@style.css" fx:controller="groupid.SettingsController" xmlns:fx="http://javafx.com/fxml/1" styleClass="background">
    <top>
       <VBox alignment="CENTER">
          <children>
@@ -125,7 +125,6 @@
     -->
 
     <center>
-        <Label text="Exchange Store" styleClass="norm-text"/>
+        <Label text="Settings" styleClass="norm-text"/>
     </center>
 </BorderPane>
-
