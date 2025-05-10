@@ -4,4 +4,6 @@ module groupid {
 
     opens groupid to javafx.fxml;
     exports groupid;
+    requires static lombok;
+
 }

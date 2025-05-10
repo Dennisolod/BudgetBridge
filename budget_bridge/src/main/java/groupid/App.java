@@ -40,7 +40,8 @@ public class App extends Application {
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         Object c = fxmlLoader.getController();
-        if (c instanceof ModelAware m){m.setModel(model);}
+    
+        //if (c instanceof ModelAware m){m.setModel(model);}
         return fxmlLoader.load();
     }
 

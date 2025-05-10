@@ -17,30 +17,30 @@
 <?import javafx.scene.textfield.*?>
 
 <!-- WORK IN PROGRESS -->
-<BorderPane stylesheets="@style.css" fx:controller="groupid.SecondaryController" xmlns:fx="http://javafx.com/fxml/1" styleClass="background">
+<BorderPane stylesheets="@style.css" fx:controller="groupid.ProfileController" xmlns:fx="http://javafx.com/fxml/1" styleClass="background">
    <top>
-      <VBox alignment="CENTER">
-         <children>
-            <HBox>
-               <children>
-                  <MenuBar styleClass="modern-menu-bar">
-                     <Menu text ="≡" styleClass="modern-menu">
-                        <MenuItem fx:id="profileButton" text="Profile" styleClass="menu-item" onAction="#switchToProfile"/>
-                        <MenuItem fx:id="settingsButton" text="Settings" styleClass="menu-item" onAction="#switchToSettings"/>
-                        <MenuItem fx:id="tutorialButton" text="Tutorial" styleClass="menu-item" onAction="#switchToTutorial"/>
-                        <MenuItem fx:id="logoffButton" text="Logoff" styleClass="menu-item" onAction="#logoff"/>
-                     </Menu>
-                  </MenuBar>
+        <VBox alignment="CENTER">
+            <children>
+                <HBox>
+                    <children>
+                        <MenuBar styleClass="modern-menu-bar">
+                            <Menu text ="≡" styleClass="modern-menu">
+                                <MenuItem fx:id="profileButton" text="Profile" styleClass="menu-item" onAction="#switchToProfile"/>
+                                <MenuItem fx:id="settingsButton" text="Settings" styleClass="menu-item" onAction="#switchToSettings"/>
+                                <MenuItem fx:id="tutorialButton" text="Tutorial" styleClass="menu-item" onAction="#switchToTutorial"/>
+                                <MenuItem fx:id="logoffButton" text="Logoff" styleClass="menu-item" onAction="#logoff"/>
+                            </Menu>
+                        </MenuBar>
 
-                  <Button fx:id="dashboardButton" text="My dashboard" styleClass="modern-flat-button" onAction="#switchToPrimary"/>
-                  <Button fx:id="leaderboardsButton" text="Leaderboards" styleClass="modern-flat-button" onAction="#switchToLeaderboard"/>
-                  <Button fx:id="budgetButton" text="Update Budget" styleClass="modern-flat-button" onAction="#switchToSecondary"/>
-                  <Button fx:id="storeButton" text="Exchange Store" styleClass="modern-flat-button" onAction="#switchToStore"/>
-                  <Label text="20,000 points"/>
-               </children>
-            </HBox>      
+                        <Button fx:id="dashboardButton" text="My dashboard" styleClass="modern-flat-button" onAction="#switchToPrimary"/>
+                        <Button fx:id="leaderboardsButton" text="Leaderboards" styleClass="modern-flat-button" onAction="#switchToLeaderboard"/>
+                        <Button fx:id="budgetButton" text="Update Budget" styleClass="modern-flat-button" onAction="#switchToSecondary"/>
+                        <Button fx:id="storeButton" text="Exchange Store" styleClass="modern-flat-button" onAction="#switchToStore"/>
+                        <Label text="20,000 points"/>
+                    </children>
+                </HBox>      
+            </children>
 
-         </children>
       </VBox>
    </top>
 
@@ -125,6 +125,6 @@
     -->
 
     <center>
-        <Label text="BUDGET SCREEN" styleClass="norm-text"/>
+        <Label text="Profile" styleClass="norm-text"/>
     </center>
 </BorderPane>

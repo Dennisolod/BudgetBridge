@@ -17,7 +17,7 @@
 <?import javafx.scene.textfield.*?>
 
 <!-- WORK IN PROGRESS -->
-<BorderPane stylesheets="@style.css" fx:controller="groupid.SecondaryController" xmlns:fx="http://javafx.com/fxml/1" styleClass="background">
+<BorderPane stylesheets="@style.css" fx:controller="groupid.TutorialController" xmlns:fx="http://javafx.com/fxml/1" styleClass="background">
    <top>
       <VBox alignment="CENTER">
          <children>
@@ -39,8 +39,8 @@
                   <Label text="20,000 points"/>
                </children>
             </HBox>      
-
          </children>
+
       </VBox>
    </top>
 
@@ -125,6 +125,6 @@
     -->
 
     <center>
-        <Label text="BUDGET SCREEN" styleClass="norm-text"/>
+        <Label text="Tutorial" styleClass="norm-text"/>
     </center>
 </BorderPane>

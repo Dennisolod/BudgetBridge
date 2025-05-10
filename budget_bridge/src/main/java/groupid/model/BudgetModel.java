@@ -34,9 +34,16 @@ public class BudgetModel {
         recalc.invalidated(null);
     }
     private void recalcTotals() {
-        totalIncome.set(incomes .stream().mapToDouble(MoneyLine::amount).sum());
-        totalExpense.set(expenses.stream().mapToDouble(MoneyLine::amount).sum());
-        netBalance.set(totalIncome.get() - totalExpense.get());
+        totalIncome.set(
+            incomes.stream()
+                   .mapToDouble(MoneyLine::getAmount)
+                   .sum()
+          );
+          totalExpense.set(
+            expenses.stream()
+                    .mapToDouble(MoneyLine::getAmount)
+                    .sum()
+          );        netBalance.set(totalIncome.get() - totalExpense.get());
     }
 
     // getters
