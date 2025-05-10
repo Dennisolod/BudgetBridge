@@ -67,4 +67,8 @@ public class BudgetModel {
         if (points.get() >= 50 && !badges.contains("Novice Saver"))
             badges.add("Novice Saver");
     }
+
+    public void addPoints(int p) {
+        points.set(points.get() + p);
+    }
 }
