@@ -1,18 +1,18 @@
 .norm-text {
-    -fx-text-fill: #000000; /* Soft orange */
+    -fx-text-fill: #ffffff; /* Soft orange */
     -fx-font-weight: 600;
     -fx-font-size: 18px;
 }
 
 .big-heading {
-    -fx-text-fill: #000000; /* Soft orange */
+    -fx-text-fill: #ffffff; /* Soft orange */
     -fx-font-weight: bold;
     -fx-font-size: 32px;
 }
 
 
 .heading {
-    -fx-text-fill: #000000; /* Soft orange */
+    -fx-text-fill: #ffffff; /* Soft orange */
     -fx-font-weight: bold;
     -fx-font-size: 24px;
 }
@@ -80,4 +80,14 @@
 
 .modern-flat-button:pressed {
     -fx-background-color: #6a74ff;
+}
+
+.background {
+    -fx-background-color: #202538;
+}
+
+.vbox-welcome, .vbox-badges, .vbox-spending {
+    -fx-background-color: #222c3c;
+    -fx-background-radius: 10px;
+
 }

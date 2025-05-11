@@ -16,6 +16,9 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.textfield.*?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+
 <!-- WORK IN PROGRESS -->
 <BorderPane stylesheets="@style.css" fx:controller="groupid.PrimaryController" xmlns:fx="http://javafx.com/fxml/1" styleClass="background">
    <top>
@@ -137,8 +140,13 @@
 
             <HBox alignment="CENTER" spacing="25">
                <children>
-                  <VBox alignment="CENTER" spacing="10">
-                     <Label text=" ---- PIE CHART HERE ---- " styleClass="norm-text" />
+                  <VBox alignment="CENTER" spacing="10" prefWidth="300" prefHeight="300">
+                     <!--<Label text="  PIE CHART HERE  " styleClass="norm-text" />-->
+                     <ImageView fx:id="pieChart" fitWidth="600" fitHeight="600" preserveRatio="true">
+                        <image>
+                           <Image url="file:/home/ackleyl/csci436/BudgetBridge/budget_bridge/src/main/resources/images/budget_chart_example.png" />
+                        </image>
+                     </ImageView>
                   </VBox>
                </children>
             </HBox>
