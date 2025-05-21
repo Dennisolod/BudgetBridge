@@ -35,7 +35,7 @@ public class App extends Application {
         
        
         // Force css updates
-        //scene.getRoot().applyCss();
+        scene.getRoot().applyCss();
 
         stage.show();
     }
@@ -59,7 +59,8 @@ public class App extends Application {
         Parent root = loader.load();
 
         Object ctrl = loader.getController();
-        if (ctrl instanceof ModelAware mAware) {
+        if (ctrl instanceof ModelAware) {
+            ModelAware mAware = (ModelAware) ctrl;
             mAware.setModel(model);
         }
         return root;
