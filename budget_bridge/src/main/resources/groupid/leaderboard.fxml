@@ -15,6 +15,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.textfield.*?>
+<?import javafx.scene.control.ScrollPane?>
 
 <!-- WORK IN PROGRESS -->
 <BorderPane stylesheets="@style.css" fx:controller="groupid.LeaderboardController" xmlns:fx="http://javafx.com/fxml/1" styleClass="background">
@@ -44,87 +45,78 @@
       </VBox>
    </top>
 
-   <!-- <left>
-      <VBox alignment="TOP_CENTER" spacing="20">
-         <children>
-            <Label text="TOP LEFT" />
-            <Label text="\$750" />
-            <Label text="Remaining" />
-            <Button fx:id="primaryButton" text="Switch to Secondary View" onAction="#switchToSecondary" styleClass="modern-flat-button"/>
-         </children>
-      </VBox>
-      <padding>
-         <Insets bottom="55" left="55" right="55" top="55" />
-      </padding>
-   </left>
-
-   <right>
-      <VBox alignment="TOP_CENTER" spacing="20">
-         <children>
-            <Label text="TOP RIGHT" />
-            <Label text="78%" />
-            <Label text="Label 2" />
-            <Button fx:id="primaryButton" text="Switch to Secondary View" onAction="#switchToSecondary" styleClass="modern-flat-button"/>
-         </children>
-      </VBox>
-      <padding>
-         <Insets bottom="55" left="55" right="55" top="55" />
-      </padding>
-   </right>
-
-   <center>
-      <VBox alignment="CENTER" spacing="20">
-         <children>
-            <Label text="CENTER" />
-            <Label text="Label 1" />
-            <Label text="Label 2" />
-            <Button fx:id="primaryButton" text="Switch to Secondary View" onAction="#switchToSecondary" styleClass="modern-flat-button"/>
-         </children>
-      </VBox>
-      <padding>
-         <Insets bottom="55" left="55" right="55" top="55" />
-      </padding>
-   </center>
-
-   <bottom>
-      <HBox alignment="CENTER">
-         <children>
-            <VBox alignment="CENTER_LEFT" spacing="50">
-               <children>
-                  <Label text="BOTTOM CENTER LEFT View" />
-                  <Label text="Label 1" />
-                  <Label text="Label 2" />
-                  <Button fx:id="primaryButton" text="Switch to Secondary View" onAction="#switchToSecondary" styleClass="modern-flat-button"/>
-               </children>
-            </VBox>
-
-            <VBox alignment="CENTER" spacing="50">
-               <children>
-                  <Label text="CENTER View" />
-                  <Label text="Label 1" />
-                  <Label text="Label 2" />
-                  <Button fx:id="primaryButton" text="Switch to Secondary View" onAction="#switchToSecondary" styleClass="modern-flat-button"/>
-               </children>
-            </VBox>
-
-            <VBox alignment="CENTER_RIGHT" spacing="50">
-               <children>
-                  <Label text="BOTTOM CENTER RIGHT View" />
-                  <Label text="Label 1" />
-                  <Label text="Label 2" />
-                  <Button fx:id="primaryButton" text="Switch to Secondary View" onAction="#switchToSecondary" styleClass="modern-flat-button"/>
-               </children>
-            </VBox>
-         </children>
-      </HBox>
-      <padding>
-         <Insets bottom="55" left="55" right="55" top="55" />
-      </padding>
-   </bottom>
-
-    -->
-
     <center>
         <Label text="LEADERBOARD" styleClass="norm-text"/>
+         <ScrollPane>
+            <content>
+               <VBox>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+                  <Label text="TEST"/>
+
+               </VBox>
+            </content>
+         </ScrollPane>
+
     </center>
 </BorderPane>
