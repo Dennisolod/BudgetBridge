@@ -61,7 +61,7 @@
             <Insets top="20" right="20" bottom="20" left="20"/>
          </BorderPane.margin>
          <children>
-            <Label text="Welcome back, John Smith" styleClass="big-heading"/>
+            <Label fx:id="userLabel" styleClass="big-heading"/>
             <Label text="Budget overview:" styleClass="heading"/>
             <Label text="20,000 Gems" styleClass="norm-text"/>
 
@@ -144,6 +144,7 @@
                      <!--<Label text="  PIE CHART HERE  " styleClass="norm-text" />-->
                      <ImageView fx:id="pieChart" fitWidth="600" fitHeight="600" preserveRatio="true">
                         <image>
+                           <!--<Image url="@images/budget_chart_example.png" />-->
                            <Image url="file:/home/ackleyl/csci436/BudgetBridge/budget_bridge/src/main/resources/images/budget_chart_example.png" />
                         </image>
                      </ImageView>
