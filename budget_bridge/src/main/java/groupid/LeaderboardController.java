@@ -27,8 +27,8 @@ public class LeaderboardController implements ModelAware{
         for (var entry : m.getLeaderboard()) {
             HBox row = new HBox(10); // spacing between elements
 
-            Label nameLabel = new Label(String.format("%d. %s", rank++, entry.getKey()));
-            Label pointsLabel = new Label(String.format("%d pts", entry.getValue()));
+            Label nameLabel = new Label(String.format("%3d %-15s", rank++, entry.getKey()));
+            Label pointsLabel = new Label(String.format("%5d pts", entry.getValue()));
             pointsLabel.getStyleClass().add("leaderboard-points");
 
             row.getChildren().addAll(nameLabel, pointsLabel);

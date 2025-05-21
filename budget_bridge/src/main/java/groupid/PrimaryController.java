@@ -26,7 +26,6 @@ public class PrimaryController implements ModelAware {
         userLabel.textProperty().bind(m.usernameProperty());
         //pointsLabel.textProperty().bind(m.pointsProperty().asString());
 
-
         //netLabel.textProperty().bind(m.netBalanceProperty().asString("$%.2f"));
 
         //incomeList.setItems(m.incomes());
