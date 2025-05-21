@@ -1,3 +1,7 @@
+.scrollpane .viewport {
+    -fx-background-color: #202538;
+}
+
 .norm-text {
     -fx-text-fill: #ffffff; /* Soft orange */
     -fx-font-weight: 600;
@@ -90,4 +94,9 @@
     -fx-background-color: #222c3c;
     -fx-background-radius: 10px;
 
+}
+
+.leaderVbox Label {
+    -fx-text-fill:#ffffff;
+    -fx-font-size: 36px;
 }

@@ -47,74 +47,9 @@
 
     <center>
         <Label text="LEADERBOARD" styleClass="norm-text"/>
-         <ScrollPane>
+         <ScrollPane styleClass="scrollpane" fitToWidth="true" prefHeight="500">
             <content>
-               <VBox>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-                  <Label text="TEST"/>
-
-               </VBox>
+               <VBox fx:id="leaderboardVBox" styleClass="leaderVbox"> </VBox>
             </content>
          </ScrollPane>
 

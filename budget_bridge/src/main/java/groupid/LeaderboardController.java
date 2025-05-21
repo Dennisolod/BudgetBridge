@@ -9,7 +9,7 @@ import javafx.scene.control.Label;
 // Leaderboard screen
 public class LeaderboardController implements ModelAware{
 
-
+    @FXML private javafx.scene.layout.VBox leaderboardVBox;
     @FXML private Label userPoints;
     @FXML private Label userBadges;
 
@@ -19,6 +19,16 @@ public class LeaderboardController implements ModelAware{
     public void setModel(BudgetModel m) {
         //userPoints.textProperty().bind(m.pointsProperty().asString("%d pts"));
         //userBadges.textProperty().bind(m.badges().size().asString("%d badges"));
+
+        leaderboardVBox.getChildren().clear();
+
+        int rank = 1;
+        for (var entry : m.getLeaderboard()) {
+            String rowText = String.format("%d. %s - %d pts", rank++, entry.getKey(), entry.getValue());
+            Label row = new Label(rowText);
+            row.getStyleClass().add("leaderboard-entry");
+            leaderboardVBox.getChildren().add(row);
+        }
     }
 
     @FXML private void switchToSecondary() throws IOException { App.setRoot("secondary"); }

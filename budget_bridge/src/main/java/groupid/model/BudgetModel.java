@@ -1,5 +1,7 @@
 package groupid.model;
 
+import java.util.Map;
+
 import javafx.beans.InvalidationListener;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ReadOnlyDoubleProperty;
@@ -20,7 +22,8 @@ public class BudgetModel {
     // gamification
     private final IntegerProperty points = new SimpleIntegerProperty(0);
     private final ObservableList<String> badges = FXCollections.observableArrayList();
-
+    private final ObservableList<Map.Entry<String, Integer>> leaderboard = FXCollections.observableArrayList();
+    
     // convenience derived values (totals, net)
 
     private final ReadOnlyDoubleWrapper totalIncome = new ReadOnlyDoubleWrapper();
@@ -32,6 +35,39 @@ public class BudgetModel {
         incomes .addListener(recalc);
         expenses.addListener(recalc);
         recalc.invalidated(null);
+
+        leaderboard.addAll(
+            Map.entry("Alice", 15000),
+            Map.entry("Bob", 14000),
+            Map.entry("Charlie", 13000),
+            Map.entry("Diana", 12000),
+            Map.entry("Ethan", 11000), 
+            Map.entry("Alice", 15000),
+            Map.entry("Bob", 14000),
+            Map.entry("Charlie", 13000),
+            Map.entry("Diana", 12000),
+            Map.entry("Ethan", 11000), 
+            Map.entry("Alice", 15000),
+            Map.entry("Bob", 14000),
+            Map.entry("Charlie", 13000),
+            Map.entry("Diana", 12000),
+            Map.entry("Ethan", 11000), 
+            Map.entry("Alice", 15000),
+            Map.entry("Bob", 14000),
+            Map.entry("Charlie", 13000),
+            Map.entry("Diana", 12000),
+            Map.entry("Ethan", 11000), 
+            Map.entry("Alice", 15000),
+            Map.entry("Bob", 14000),
+            Map.entry("Charlie", 13000),
+            Map.entry("Diana", 12000),
+            Map.entry("Ethan", 11000), 
+            Map.entry("Alice", 15000),
+            Map.entry("Bob", 14000),
+            Map.entry("Charlie", 13000),
+            Map.entry("Diana", 12000)
+        );
+
     }
     private void recalcTotals() {
         totalIncome.set(
@@ -47,12 +83,12 @@ public class BudgetModel {
     }
 
     // getters
-
     public StringProperty usernameProperty() { return username; }
     public ObservableList<MoneyLine> incomes() { return incomes; }
     public ObservableList<MoneyLine> expenses(){ return expenses; }
     public IntegerProperty pointsProperty() { return points; }
     public ObservableList<String> badges(){ return badges; }
+    public ObservableList<Map.Entry<String, Integer>> getLeaderboard() { return leaderboard; }
 
     public ReadOnlyDoubleProperty totalIncomeProperty(){ return totalIncome.getReadOnlyProperty(); }
     public ReadOnlyDoubleProperty totalExpenseProperty(){ return totalExpense.getReadOnlyProperty(); }
@@ -71,4 +107,5 @@ public class BudgetModel {
     public void addPoints(int p) {
         points.set(points.get() + p);
     }
+
 }
