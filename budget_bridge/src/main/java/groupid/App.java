@@ -1,12 +1,15 @@
 package groupid;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import groupid.model.BudgetModel;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage; 
 
 /**
@@ -24,8 +27,12 @@ public class App extends Application {
         //                loadFXML("primary")
         scene = new Scene(loadFXML("primary"), 1920, 1080);
         scene.getStylesheets().add(App.class.getResource("style.css").toExternalForm());
-        
+        getUsername();
+        addDefaultPoints();
+
+        scene = new Scene(loadAndInject("primary"));
         stage.setScene(scene);
+        
        
         // Force css updates
         //scene.getRoot().applyCss();
@@ -33,21 +40,40 @@ public class App extends Application {
         stage.show();
     }
 
-    static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
+    private void getUsername() {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Welcome!");
+        dialog.setHeaderText("Please enter your name");
+        dialog.setContentText("Name:");
+
+        Optional<String> result = dialog.showAndWait();
+        result.ifPresentOrElse(name -> model.usernameProperty().set(name.strip()), ()   -> Platform.exit());                  // quit if user cancels
+    }
+
+    public static void setRoot(String fxml) throws IOException {
+        scene.setRoot(loadAndInject(fxml));
+    }
+
+    private static Parent loadAndInject(String name) throws IOException {
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("/groupid/" + name + ".fxml"));
+        Parent root = loader.load();
+
+        Object ctrl = loader.getController();
+        if (ctrl instanceof ModelAware mAware) {
+            mAware.setModel(model);
+        }
+        return root;
     }
 
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
-        Parent root = fxmlLoader.load();
-
         Object c = fxmlLoader.getController();
-    
-        if (c instanceof PrimaryController ){
-            PrimaryController pc = (PrimaryController) c;
-            pc.setModel(model);
-        }
-        return root;
+
+        return fxmlLoader.load();
+    }
+
+    private static void addDefaultPoints(){
+        model.addPoints(1000);
     }
 
     public static void main(String[] args) {

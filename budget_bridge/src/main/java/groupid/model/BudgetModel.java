@@ -13,7 +13,7 @@ import javafx.collections.ObservableList;
 public class BudgetModel {
 
     // user‑enterable fields
-    private final StringProperty username = new SimpleStringProperty("Jack S Smith");
+    private final StringProperty username = new SimpleStringProperty();
     private final ObservableList<MoneyLine> incomes = FXCollections.observableArrayList();
     private final ObservableList<MoneyLine> expenses = FXCollections.observableArrayList();
 
