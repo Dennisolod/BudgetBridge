@@ -144,8 +144,8 @@
                      <!--<Label text="  PIE CHART HERE  " styleClass="norm-text" />-->
                      <ImageView fx:id="pieChart" fitWidth="600" fitHeight="600" preserveRatio="true">
                         <image>
-                           <!--<Image url="@images/budget_chart_example.png" />-->
-                           <Image url="file:/home/ackleyl/csci436/BudgetBridge/budget_bridge/src/main/resources/images/budget_chart_example.png" />
+                           <Image url="@../images/budget_chart_example.png" />
+                           <!--<Image url="file:/home/ackleyl/csci436/BudgetBridge/budget_bridge/src/main/resources/images/budget_chart_example.png" />-->
                         </image>
                      </ImageView>
                   </VBox>

@@ -28,7 +28,6 @@ public class PrimaryController implements ModelAware {
 
 
         //netLabel.textProperty().bind(m.netBalanceProperty().asString("$%.2f"));
-        System.out.println("setModel called with username: " + m.usernameProperty().get());
 
         //incomeList.setItems(m.incomes());
         //expenseList.setItems(m.expenses());

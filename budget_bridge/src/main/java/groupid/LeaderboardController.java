@@ -17,7 +17,7 @@ public class LeaderboardController implements ModelAware{
 
     @Override 
     public void setModel(BudgetModel m) {
-        userPoints.textProperty().bind(m.pointsProperty().asString("%d pts"));
+        //userPoints.textProperty().bind(m.pointsProperty().asString("%d pts"));
         //userBadges.textProperty().bind(m.badges().size().asString("%d badges"));
     }
 

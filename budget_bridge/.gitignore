@@ -2,3 +2,4 @@
 .vscode/
 *.class
 pom.xml
+*.log
