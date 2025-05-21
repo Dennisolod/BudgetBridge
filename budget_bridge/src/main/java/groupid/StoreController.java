@@ -17,8 +17,8 @@ public class StoreController implements ModelAware{
     @Override 
     public void setModel(BudgetModel m) {
         this.model = m;
-        pointsLabel.textProperty().bind(m.pointsProperty().asString("%d pts"));
-        badgeList.setItems(m.badges());
+        //pointsLabel.textProperty().bind(m.pointsProperty().asString("%d pts"));
+        //badgeList.setItems(m.badges());
     }
 
     @FXML 

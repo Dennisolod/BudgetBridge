@@ -13,9 +13,8 @@ public class ProfileController implements ModelAware{
     //@FXML private ImageView  avatarView;   // possible static image
 
     @Override public void setModel(BudgetModel m) {
-        nameLabel.textProperty().bind(m.usernameProperty());
-        balanceLabel.textProperty().bind(
-            m.netBalanceProperty().asString("Net balance: $%.2f"));
+        //nameLabel.textProperty().bind(m.usernameProperty());
+        //balanceLabel.textProperty().bind(m.netBalanceProperty().asString("Net balance: $%.2f"));
         // avatarView could load based on username
     }
     

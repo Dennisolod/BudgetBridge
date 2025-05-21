@@ -16,7 +16,7 @@ public class SettingsController implements ModelAware{
         model = m;
 
         // keep field /model in sync
-        usernameField.textProperty().bindBidirectional(m.usernameProperty());
+        //usernameField.textProperty().bindBidirectional(m.usernameProperty());
     }
     @FXML private void switchToSecondary() throws IOException { App.setRoot("secondary"); }
     @FXML private void switchToPrimary() throws IOException { App.setRoot("primary"); }
