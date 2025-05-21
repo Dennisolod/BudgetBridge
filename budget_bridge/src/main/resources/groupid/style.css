@@ -100,3 +100,8 @@
     -fx-text-fill:#ffffff;
     -fx-font-size: 36px;
 }
+
+.leaderboard-points {
+    -fx-text-fill: #00E5FF; /* Vibrant cyan */
+    -fx-font-weight: bold;
+}

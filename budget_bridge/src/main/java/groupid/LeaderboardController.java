@@ -5,6 +5,7 @@ import java.io.IOException;
 import groupid.model.BudgetModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 
 // Leaderboard screen
 public class LeaderboardController implements ModelAware{
@@ -24,9 +25,13 @@ public class LeaderboardController implements ModelAware{
 
         int rank = 1;
         for (var entry : m.getLeaderboard()) {
-            String rowText = String.format("%d. %s - %d pts", rank++, entry.getKey(), entry.getValue());
-            Label row = new Label(rowText);
-            row.getStyleClass().add("leaderboard-entry");
+            HBox row = new HBox(10); // spacing between elements
+
+            Label nameLabel = new Label(String.format("%d. %s", rank++, entry.getKey()));
+            Label pointsLabel = new Label(String.format("%d pts", entry.getValue()));
+            pointsLabel.getStyleClass().add("leaderboard-points");
+
+            row.getChildren().addAll(nameLabel, pointsLabel);
             leaderboardVBox.getChildren().add(row);
         }
     }
