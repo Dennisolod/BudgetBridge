@@ -13,6 +13,7 @@ public class LeaderboardController implements ModelAware{
     @FXML private javafx.scene.layout.VBox leaderboardVBox;
     @FXML private Label userPoints;
     @FXML private Label userBadges;
+    @FXML private Label userLabel;
 
     /* assuming friends leaderboard rows are hard coded in the FXML */
 
@@ -20,6 +21,9 @@ public class LeaderboardController implements ModelAware{
     public void setModel(BudgetModel m) {
         //userPoints.textProperty().bind(m.pointsProperty().asString("%d pts"));
         //userBadges.textProperty().bind(m.badges().size().asString("%d badges"));
+        userLabel.textProperty().bind(m.usernameProperty());
+
+
 
         leaderboardVBox.getChildren().clear();
 
@@ -27,7 +31,7 @@ public class LeaderboardController implements ModelAware{
         for (var entry : m.getLeaderboard()) {
             HBox row = new HBox(10); // spacing between elements
 
-            Label nameLabel = new Label(String.format("%3d %-15s", rank++, entry.getKey()));
+            Label nameLabel = new Label(String.format("%-3d %-20s", rank++, entry.getKey()));
             Label pointsLabel = new Label(String.format("%5d pts", entry.getValue()));
             pointsLabel.getStyleClass().add("leaderboard-points");
 

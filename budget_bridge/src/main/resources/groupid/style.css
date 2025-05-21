@@ -3,20 +3,20 @@
 }
 
 .norm-text {
-    -fx-text-fill: #ffffff; /* Soft orange */
+    -fx-text-fill: #ffffff;
     -fx-font-weight: 600;
     -fx-font-size: 18px;
 }
 
 .big-heading {
-    -fx-text-fill: #ffffff; /* Soft orange */
+    -fx-text-fill: #ffffff; 
     -fx-font-weight: bold;
     -fx-font-size: 32px;
 }
 
 
 .heading {
-    -fx-text-fill: #ffffff; /* Soft orange */
+    -fx-text-fill: #ffffff; 
     -fx-font-weight: bold;
     -fx-font-size: 24px;
 }
@@ -103,5 +103,6 @@
 
 .leaderboard-points {
     -fx-text-fill: #00E5FF; /* Vibrant cyan */
+    -fx-font-size: 36px;
     -fx-font-weight: bold;
 }
