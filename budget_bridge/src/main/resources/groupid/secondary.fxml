@@ -6,6 +6,7 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.Menu?>
@@ -125,6 +126,12 @@
     -->
 
     <center>
-        <Label text="BUDGET SCREEN" styleClass="norm-text"/>
+         <Label text="BUDGET SCREEN" styleClass="norm-text"/>
+         <VBox>
+            <TextField fx:id="incomeTypeInput" promptText="Please enter and income item" />
+            <TextField fx:id="incomeAmountInput" promptText="Please enter and income amount" />
+            <Button text="Add" onAction="#addInputIncome" />
+            <ListView fx:id="incomeList" />
+         </VBox>
     </center>
 </BorderPane>

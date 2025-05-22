@@ -7,6 +7,7 @@ import groupid.model.MoneyLine;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 
 
 // Budget screen
@@ -19,6 +20,8 @@ public class SecondaryController implements ModelAware {
     @FXML private Label totalIncomeLabel;
     @FXML private Label totalExpenseLabel;
     @FXML private Label netLabel;
+    @FXML private TextField incomeTypeInput;
+    @FXML private TextField incomeAmountInput;
 
     private BudgetModel model;
 
@@ -26,9 +29,24 @@ public class SecondaryController implements ModelAware {
         model = m;
 
         /* live lists */
-        //incomeList .setItems(m.incomes());
+        //m.addIncome(null, 0);
+        incomeList.setItems(m.incomes());
         //expenseList.setItems(m.expenses());
     }
+
+    @FXML
+    private void addInputIncome() {
+        try {
+            String type = incomeTypeInput.getText();
+            double amount = Double.parseDouble(incomeAmountInput.getText());
+            model.incomes().add(new MoneyLine(type, amount));
+            incomeTypeInput.clear();
+            incomeAmountInput.clear();
+        } catch (NumberFormatException e) {
+            incomeAmountInput.setText("Invalid number");
+        }
+    }
+
 
     /* demo buttons wired in FXML */
     @FXML private void addIncome()  { model.addIncome ("Freelance",120.0); }
