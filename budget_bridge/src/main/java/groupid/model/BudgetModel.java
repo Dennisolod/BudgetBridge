@@ -1,5 +1,6 @@
 package groupid.model;
 
+import java.util.AbstractMap;
 import java.util.Map;
 
 import javafx.beans.InvalidationListener;
@@ -24,12 +25,30 @@ public class BudgetModel {
     // gamification
     private final IntegerProperty points = new SimpleIntegerProperty(0);
     private final ObservableList<Map.Entry<String, Integer>> leaderboard = FXCollections.observableArrayList();
+    private final StringProperty rank = new SimpleStringProperty();
+    private final StringProperty leaderboardPos = new SimpleStringProperty();
+
+
     
     // convenience derived values (totals, net)
 
     private final ReadOnlyDoubleWrapper totalIncome = new ReadOnlyDoubleWrapper();
     private final ReadOnlyDoubleWrapper totalExpense= new ReadOnlyDoubleWrapper();
     private final ReadOnlyDoubleWrapper netBalance = new ReadOnlyDoubleWrapper();
+
+    // helper method to add the user to the leaderboard
+    public void addUserToLeaderboard(String userName, int points) {
+        // Remove existing entry for username if it exists
+        leaderboard.removeIf(entry -> entry.getKey().equals(userName));
+
+        // Add new entry
+        Map.Entry<String, Integer> newEntry = new AbstractMap.SimpleEntry<String, Integer>(userName, points);
+        leaderboard.add(newEntry);
+
+        // Sort the leaderboard in descending order of points
+        leaderboard.sort((a, b) -> Integer.compare(b.getValue(), a.getValue()));
+    }
+
 
     public BudgetModel() {
         InvalidationListener recalc = obs -> recalcTotals();
@@ -68,16 +87,17 @@ public class BudgetModel {
     public IntegerProperty pointsProperty() { return points; }
     public ObservableList<BadgeLine> badges(){ return badges; }
     public ObservableList<Map.Entry<String, Integer>> getLeaderboard() { return leaderboard; }
+    public StringProperty rankProperty() { return rank; }
+    public StringProperty getLeaderboardPos() { return leaderboardPos; }
 
     public ReadOnlyDoubleProperty totalIncomeProperty(){ return totalIncome.getReadOnlyProperty(); }
     public ReadOnlyDoubleProperty totalExpenseProperty(){ return totalExpense.getReadOnlyProperty(); }
     public ReadOnlyDoubleProperty netBalanceProperty(){ return netBalance .getReadOnlyProperty(); }
 
     // helpers
-    public void addIncome (String d, double a) { incomes .add(new MoneyLine(d, a)); }
-    public void addExpense(String d, double a) { expenses.add(new MoneyLine(d, a)); }
-    public void addMission(String d, String f, double p) { missions.add(new MissionLine(d, f, p)); }
-    public void addBadge(String n, String p, Paint c) { badges.add(new BadgeLine(n, p, c)); }
+    public void addIncome (String d, double a) { incomes .add(new MoneyLine(d, a));  }
+    public void addExpense(String d, double a) { expenses.add(new MoneyLine(d, a));  }
+    public void setRankPos(String r) { leaderboardPos.set(r + "."); }
 
     /*private void reward() {
         points.set(points.get() + 10);
