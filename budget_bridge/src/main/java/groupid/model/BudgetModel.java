@@ -97,6 +97,7 @@ public class BudgetModel {
     // helpers
     public void addIncome (String d, double a) { incomes .add(new MoneyLine(d, a));  }
     public void addExpense(String d, double a) { expenses.add(new MoneyLine(d, a));  }
+    public void addMission(String d, String f, double a) { missions.add(new MissionLine(d, f, a)); }
     public void setRankPos(String r) { leaderboardPos.set(r + "."); }
 
     /*private void reward() {
