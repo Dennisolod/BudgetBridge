@@ -47,10 +47,11 @@
 
     <center>
          <VBox>
-            <HBox alignment="CENTER_LEFT" spacing="20">
+            <HBox alignment="CENTER_LEFT" spacing="10">
+               <Label fx:id="userRankPos" styleClass="big-heading"/>
                <Label fx:id="userLabel" styleClass="big-heading"/>
                <Label fx:id="userPoints" styleClass="leaderboard-points" />
-               <Label text="LEAGUE: BRONZE" styleClass="heading" />
+               <Label text="LEAGUE: BRONZE" styleClass="big-heading" />
             </HBox>
             <padding>
                <Insets bottom="25" left="25" right="25" top="25" />

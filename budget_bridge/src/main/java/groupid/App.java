@@ -25,7 +25,6 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         stage.setTitle("BudgetBridge");
 
-        //                loadFXML("primary")
         scene = new Scene(loadFXML("primary"), 1920, 1080);
         scene.getStylesheets().add(App.class.getResource("style.css").toExternalForm());
         getUsername();

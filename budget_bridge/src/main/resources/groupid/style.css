@@ -106,3 +106,13 @@
     -fx-font-size: 36px;
     -fx-font-weight: bold;
 }
+
+.leaderboard-name {
+    -fx-font-size: 36px;
+    -fx-text-fill: #ffffff;
+}
+
+.leaderboard-rank {
+    -fx-font-size: 36px;
+    -fx-text-fill: #ffffff;
+}

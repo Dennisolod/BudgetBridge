@@ -3,9 +3,11 @@ package groupid;
 import java.io.IOException;
 
 import groupid.model.BudgetModel;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 
 // Leaderboard screen
 public class LeaderboardController implements ModelAware{
@@ -14,29 +16,54 @@ public class LeaderboardController implements ModelAware{
     @FXML private Label userPoints;
     @FXML private Label userBadges;
     @FXML private Label userLabel;
+    @FXML private Label userRankPos;
 
     /* assuming friends leaderboard rows are hard coded in the FXML */
 
-
     @Override 
     public void setModel(BudgetModel m) {
-        userPoints.textProperty().bind(m.pointsProperty().asString("%d pts"));
         // userBadges.textProperty().bind(m.badges().size().asString("%d badges"));
+        userPoints.textProperty().bind(m.pointsProperty().asString("%d pts"));
         userLabel.textProperty().bind(m.usernameProperty());
+        userRankPos.textProperty().bind(m.getLeaderboardPos());
 
+        // adds the current player to the leaderboard
         m.addUserToLeaderboard(m.usernameProperty().get(), m.pointsProperty().get());
-
         leaderboardVBox.getChildren().clear();
 
+
+        String currentUser = m.usernameProperty().get();
+        boolean userFound = false;
+        
         int rank = 1;
         for (var entry : m.getLeaderboard()) {
-            HBox row = new HBox(10); // spacing between elements
 
-            Label nameLabel = new Label(String.format("%-3d %-20s", rank++, entry.getKey()));
-            Label pointsLabel = new Label(String.format("%5d pts", entry.getValue()));
+            // sets the leaderboard position of the user
+            if (entry.getKey().equals(currentUser) && !userFound) {
+                String r = String.valueOf(rank);
+                m.setRankPos(r);
+                userFound = true;
+            }
+
+            GridPane row = new GridPane(); // spacing between elements
+            row.setHgap(10);
+
+            Label rankLabel = new Label(String.format("%d.", rank++));
+            Label nameLabel = new Label(String.format(entry.getKey()));
+            Label pointsLabel = new Label(String.format("%d pts", entry.getValue()));
+
             pointsLabel.getStyleClass().add("leaderboard-points");
+            nameLabel.getStyleClass().add("leaderboard-name");
+            rankLabel.getStyleClass().add("leaderboard-rank");
 
-            row.getChildren().addAll(nameLabel, pointsLabel);
+
+            row.add(rankLabel, 0, 0);
+            row.add(nameLabel, 1, 0);
+            row.add(pointsLabel, 2, 0);
+
+            // makes the name label grow to take up extra space
+            GridPane.setHgrow(nameLabel, Priority.ALWAYS);
+            nameLabel.setMaxWidth(Double.MAX_VALUE);
             leaderboardVBox.getChildren().add(row);
         }
 

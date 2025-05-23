@@ -24,6 +24,10 @@ public class BudgetModel {
     private final IntegerProperty points = new SimpleIntegerProperty(0);
     private final ObservableList<String> badges = FXCollections.observableArrayList();
     private final ObservableList<Map.Entry<String, Integer>> leaderboard = FXCollections.observableArrayList();
+    private final StringProperty rank = new SimpleStringProperty();
+    private final StringProperty leaderboardPos = new SimpleStringProperty();
+
+
     
     // convenience derived values (totals, net)
 
@@ -31,7 +35,7 @@ public class BudgetModel {
     private final ReadOnlyDoubleWrapper totalExpense= new ReadOnlyDoubleWrapper();
     private final ReadOnlyDoubleWrapper netBalance = new ReadOnlyDoubleWrapper();
 
-    // helper method to add user to the leaderboard
+    // helper method to add the user to the leaderboard
     public void addUserToLeaderboard(String userName, int points) {
         // Remove existing entry for username if it exists
         leaderboard.removeIf(entry -> entry.getKey().equals(userName));
@@ -43,6 +47,7 @@ public class BudgetModel {
         // Sort the leaderboard in descending order of points
         leaderboard.sort((a, b) -> Integer.compare(b.getValue(), a.getValue()));
     }
+
 
     public BudgetModel() {
         InvalidationListener recalc = obs -> recalcTotals();
@@ -103,6 +108,8 @@ public class BudgetModel {
     public IntegerProperty pointsProperty() { return points; }
     public ObservableList<String> badges(){ return badges; }
     public ObservableList<Map.Entry<String, Integer>> getLeaderboard() { return leaderboard; }
+    public StringProperty rankProperty() { return rank; }
+    public StringProperty getLeaderboardPos() { return leaderboardPos; }
 
     public ReadOnlyDoubleProperty totalIncomeProperty(){ return totalIncome.getReadOnlyProperty(); }
     public ReadOnlyDoubleProperty totalExpenseProperty(){ return totalExpense.getReadOnlyProperty(); }
@@ -111,6 +118,7 @@ public class BudgetModel {
     // helpers
     public void addIncome (String d, double a) { incomes .add(new MoneyLine(d, a)); reward(); }
     public void addExpense(String d, double a) { expenses.add(new MoneyLine(d, a)); reward(); }
+    public void setRankPos(String r) { leaderboardPos.set(r + "."); }
 
     private void reward() {
         points.set(points.get() + 10);
