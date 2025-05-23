@@ -17,13 +17,14 @@ public class LeaderboardController implements ModelAware{
 
     /* assuming friends leaderboard rows are hard coded in the FXML */
 
+
     @Override 
     public void setModel(BudgetModel m) {
-        //userPoints.textProperty().bind(m.pointsProperty().asString("%d pts"));
-        //userBadges.textProperty().bind(m.badges().size().asString("%d badges"));
+        userPoints.textProperty().bind(m.pointsProperty().asString("%d pts"));
+        // userBadges.textProperty().bind(m.badges().size().asString("%d badges"));
         userLabel.textProperty().bind(m.usernameProperty());
 
-
+        m.addUserToLeaderboard(m.usernameProperty().get(), m.pointsProperty().get());
 
         leaderboardVBox.getChildren().clear();
 
@@ -38,6 +39,7 @@ public class LeaderboardController implements ModelAware{
             row.getChildren().addAll(nameLabel, pointsLabel);
             leaderboardVBox.getChildren().add(row);
         }
+
     }
 
     @FXML private void switchToSecondary() throws IOException { App.setRoot("secondary"); }

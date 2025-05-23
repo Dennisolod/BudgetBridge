@@ -1,5 +1,6 @@
 package groupid.model;
 
+import java.util.AbstractMap;
 import java.util.Map;
 
 import javafx.beans.InvalidationListener;
@@ -29,6 +30,19 @@ public class BudgetModel {
     private final ReadOnlyDoubleWrapper totalIncome = new ReadOnlyDoubleWrapper();
     private final ReadOnlyDoubleWrapper totalExpense= new ReadOnlyDoubleWrapper();
     private final ReadOnlyDoubleWrapper netBalance = new ReadOnlyDoubleWrapper();
+
+    // helper method to add user to the leaderboard
+    public void addUserToLeaderboard(String userName, int points) {
+        // Remove existing entry for username if it exists
+        leaderboard.removeIf(entry -> entry.getKey().equals(userName));
+
+        // Add new entry
+        Map.Entry<String, Integer> newEntry = new AbstractMap.SimpleEntry<String, Integer>(userName, points);
+        leaderboard.add(newEntry);
+
+        // Sort the leaderboard in descending order of points
+        leaderboard.sort((a, b) -> Integer.compare(b.getValue(), a.getValue()));
+    }
 
     public BudgetModel() {
         InvalidationListener recalc = obs -> recalcTotals();

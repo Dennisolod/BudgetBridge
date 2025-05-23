@@ -48,8 +48,8 @@
     <center>
          <VBox>
             <HBox alignment="CENTER_LEFT" spacing="20">
-               <Label fx:id="userLabel" styleClass="heading"/>
-               <Label text="200 Points" styleClass="leaderboard-points" />
+               <Label fx:id="userLabel" styleClass="big-heading"/>
+               <Label fx:id="userPoints" styleClass="leaderboard-points" />
                <Label text="LEAGUE: BRONZE" styleClass="heading" />
             </HBox>
             <padding>
