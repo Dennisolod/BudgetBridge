@@ -1,63 +1,112 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>groupid</groupId>
     <artifactId>budget_bridge</artifactId>
     <version>1.0</version>
+
+    <!-- ► 1.  CENTRALISE the versions you’ll reuse ⬇︎ -->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+
+        <!-- match the JDK you actually run; 21 is safest on macOS today -->
+        <java.version>21</java.version>
+
+        <!-- JavaFX library version (pair it with the same major JDK) -->
+        <javafx.version>21.0.3</javafx.version>
     </properties>
+
+    <!-- ► 2.  DEPENDENCIES ⬇︎ (use ${javafx.version} instead of hard‑coding 13) -->
     <dependencies>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>13</version>
+            <version>${javafx.version}</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
-            <version>13</version>
+            <version>${javafx.version}</version>
+        </dependency>
+
+        <!-- lombok unchanged -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.38</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
-		    <groupId>org.projectlombok</groupId>
-		    <artifactId>lombok</artifactId>
-		    <version>1.18.38</version>
-		    <scope>provided</scope>
-	    </dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-javafx</artifactId>
+            <version>12.4.0</version>
+        </dependency>
+
+    <!-- core utility classes (pulled transitively, but add it explicitly
+         if your build tool insists) -->
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-core</artifactId>
+            <version>12.4.0</version>
+        </dependency>
+
+    <!-- one or more icon packs -->
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-fontawesome5-pack</artifactId>
+            <version>12.4.0</version>
+        </dependency>
     </dependencies>
+
+    <!-- ► 3.  BUILD SECTION ⬇︎ -->
     <build>
+
+        <!-- 3‑A  𝗙𝗼𝗿𝗰𝗲 the JavaFX plugin to stay on 0.0.8 even if a parent tells Maven otherwise -->
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.openjfx</groupId>
+                    <artifactId>javafx-maven-plugin</artifactId>
+                    <version>0.0.8</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <!-- 3‑B  Normal plugins -->
         <plugins>
+            <!-- Compiler -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.0</version>
+                <version>3.11.0</version>
                 <configuration>
-                    <release>11</release>
+                    <release>${java.version}</release>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
                             <version>1.18.38</version>
                         </path>
-				    </annotationProcessorPaths>
+                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
+
+            <!-- JavaFX runtime plugin -->
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
-                <version>0.0.6</version>
-                <executions>
-                    <execution>
-                        <!-- Default configuration for running -->
-                        <!-- Usage: mvn clean javafx:run -->
-                        <id>default-cli</id>
-                        <configuration>
-                            <mainClass>groupid.App</mainClass>
-                        </configuration>
-                    </execution>
-                </executions>
+                <version>0.0.8</version>
+
+                <configuration>
+                    <mainClass>groupid.App</mainClass>
+
+                    <!-- macOS crash workaround (remove once JavaFX 21.0.4 lands) -->
+                    <options>
+                        <option>-Dglass.disableClearNSView=true</option>
+                    </options>
+                </configuration>
             </plugin>
         </plugins>
     </build>

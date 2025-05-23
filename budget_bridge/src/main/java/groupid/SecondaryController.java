@@ -22,6 +22,8 @@ public class SecondaryController implements ModelAware {
     @FXML private Label netLabel;
     @FXML private TextField incomeTypeInput;
     @FXML private TextField incomeAmountInput;
+    @FXML private TextField expenseTypeInput;
+    @FXML private TextField expenseAmountInput;
 
     private BudgetModel model;
 
@@ -39,11 +41,24 @@ public class SecondaryController implements ModelAware {
         try {
             String type = incomeTypeInput.getText();
             double amount = Double.parseDouble(incomeAmountInput.getText());
-            model.incomes().add(new MoneyLine(type, amount));
+            model.addIncome(type, amount);
             incomeTypeInput.clear();
             incomeAmountInput.clear();
         } catch (NumberFormatException e) {
             incomeAmountInput.setText("Invalid number");
+        }
+    }
+
+    @FXML
+    private void addInputExpense() {
+        try {
+            String type = expenseTypeInput.getText();
+            double amount = Double.parseDouble(expenseAmountInput.getText());
+            model.addExpense(type, amount);
+            expenseTypeInput.clear();
+            expenseAmountInput.clear();
+        } catch (NumberFormatException e) {
+            expenseAmountInput.setText("Invalid number");
         }
     }
 

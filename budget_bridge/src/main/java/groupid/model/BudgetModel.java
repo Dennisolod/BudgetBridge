@@ -11,6 +11,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.paint.Paint;
 
 public class BudgetModel {
 
@@ -18,10 +19,10 @@ public class BudgetModel {
     private final StringProperty username = new SimpleStringProperty();
     private final ObservableList<MoneyLine> incomes = FXCollections.observableArrayList();
     private final ObservableList<MoneyLine> expenses = FXCollections.observableArrayList();
-
+    private final ObservableList<MissionLine> missions = FXCollections.observableArrayList();
+    private final ObservableList<BadgeLine> badges = FXCollections.observableArrayList();
     // gamification
     private final IntegerProperty points = new SimpleIntegerProperty(0);
-    private final ObservableList<String> badges = FXCollections.observableArrayList();
     private final ObservableList<Map.Entry<String, Integer>> leaderboard = FXCollections.observableArrayList();
     
     // convenience derived values (totals, net)
@@ -42,30 +43,7 @@ public class BudgetModel {
             Map.entry("Charlie", 13000),
             Map.entry("Diana", 12000),
             Map.entry("Ethan", 11000), 
-            Map.entry("Dylan", 10000),
-            Map.entry("Tom", 9000),
-            Map.entry("Charles", 8000),
-            Map.entry("TheLegend27", 7000),
-            Map.entry("Johnnys", 6000), 
-            Map.entry("Alias", 5000),
-            Map.entry("Elias", 4000),
-            Map.entry("Olias", 3000),
-            Map.entry("Tommy", 2000),
-            Map.entry("Thompson", 1000), 
-            Map.entry("Johnathan", 900),
-            Map.entry("Bob", 800),
-            Map.entry("Charlie", 750),
-            Map.entry("Diana", 700),
-            Map.entry("Ethan", 600), 
-            Map.entry("Alice", 579),
-            Map.entry("Bob", 577),
-            Map.entry("Charlie", 550),
-            Map.entry("Diana", 500),
-            Map.entry("Ethan", 490), 
-            Map.entry("Alice", 480),
-            Map.entry("Bob", 470),
-            Map.entry("Charlie", 400),
-            Map.entry("Diana", 200)
+            Map.entry("Dylan", 10000)
         );
 
     }
@@ -86,8 +64,9 @@ public class BudgetModel {
     public StringProperty usernameProperty() { return username; }
     public ObservableList<MoneyLine> incomes() { return incomes; }
     public ObservableList<MoneyLine> expenses(){ return expenses; }
+    public ObservableList<MissionLine> missions() { return missions; }
     public IntegerProperty pointsProperty() { return points; }
-    public ObservableList<String> badges(){ return badges; }
+    public ObservableList<BadgeLine> badges(){ return badges; }
     public ObservableList<Map.Entry<String, Integer>> getLeaderboard() { return leaderboard; }
 
     public ReadOnlyDoubleProperty totalIncomeProperty(){ return totalIncome.getReadOnlyProperty(); }
@@ -95,14 +74,16 @@ public class BudgetModel {
     public ReadOnlyDoubleProperty netBalanceProperty(){ return netBalance .getReadOnlyProperty(); }
 
     // helpers
-    public void addIncome (String d, double a) { incomes .add(new MoneyLine(d, a)); reward(); }
-    public void addExpense(String d, double a) { expenses.add(new MoneyLine(d, a)); reward(); }
+    public void addIncome (String d, double a) { incomes .add(new MoneyLine(d, a)); }
+    public void addExpense(String d, double a) { expenses.add(new MoneyLine(d, a)); }
+    public void addMission(String d, String f, double p) { missions.add(new MissionLine(d, f, p)); }
+    public void addBadge(String n, String p, Paint c) { badges.add(new BadgeLine(n, p, c)); }
 
-    private void reward() {
+    /*private void reward() {
         points.set(points.get() + 10);
         if (points.get() >= 50 && !badges.contains("Novice Saver"))
             badges.add("Novice Saver");
-    }
+    }*/
 
     public void addPoints(int p) {
         points.set(points.get() + p);

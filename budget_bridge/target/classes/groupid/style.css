@@ -1,0 +1,108 @@
+.scrollpane .viewport {
+    -fx-background-color: #202538;
+}
+
+.norm-text {
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: 600;
+    -fx-font-size: 18px;
+}
+
+.big-heading {
+    -fx-text-fill: #ffffff; 
+    -fx-font-weight: bold;
+    -fx-font-size: 32px;
+}
+
+
+.heading {
+    -fx-text-fill: #ffffff; 
+    -fx-font-weight: bold;
+    -fx-font-size: 24px;
+}
+
+.expense {
+    -fx-text-fill: #FF8C42; /* Soft orange */
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
+}
+
+.income {
+    -fx-text-fill: #00E5FF; /* Vibrant cyan */
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
+}
+
+.modern-menu-bar {
+    -fx-background-color: #ffffff;
+    -fx-padding: 17 14;
+    -fx-background-radius: 6px;
+    -fx-border-color: transparent;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 2, 0, 0, 1);
+}
+
+/* Top-level Menu (≡) */
+.modern-menu {
+    -fx-font-family: "Helvetica", "Arial", sans-serif;
+    -fx-font-size: 24px;
+    -fx-font-weight: 600;
+    -fx-text-fill: #000000;
+    -fx-padding: 8 14;
+    -fx-background-color: transparent;
+}
+
+/* MenuItem (dropdown options) */
+.menu-item {
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #000000;
+    -fx-font-size: 14px;
+    -fx-padding: 10 20;
+}
+
+
+.modern-flat-button {
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #000000;
+    -fx-font-size: 14px;
+    -fx-font-weight: 500;
+    -fx-padding: 22 35; /* approx 1.5em 2.2em */
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 2, 0, 0, 1);
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+    -fx-text-transform: uppercase;
+    -fx-font-family: "Helvetica", "Arial", sans-serif;
+    -fx-transition: all 0.3s ease; /* NOTE: Not fully supported in JavaFX, but kept for documentation */
+}
+
+.modern-flat-button:hover {
+    -fx-background-color: #7fa3d3;
+}
+
+.modern-flat-button:pressed {
+    -fx-background-color: #6a74ff;
+}
+
+.background {
+    -fx-background-color: #202538;
+}
+
+.vbox-welcome, .vbox-badges, .vbox-spending {
+    -fx-background-color: #222c3c;
+    -fx-background-radius: 10px;
+
+}
+
+.leaderVbox Label {
+    -fx-text-fill:#ffffff;
+    -fx-font-size: 36px;
+}
+
+.leaderboard-points {
+    -fx-text-fill: #00E5FF; /* Vibrant cyan */
+    -fx-font-size: 36px;
+    -fx-font-weight: bold;
+}

@@ -25,7 +25,7 @@ public class StoreController implements ModelAware{
     private void buyBadge() {
         if (model.pointsProperty().get() >= 30) {
             model.pointsProperty().set(model.pointsProperty().get() - 30);
-            model.badges().add("Saver Level 1");
+            //model.badges().add("Saver Level 1");
         }
     }
 

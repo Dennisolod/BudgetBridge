@@ -10,7 +10,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextInputDialog;
-import javafx.scene.image.Image;
 import javafx.stage.Stage; 
 
 /**
@@ -30,6 +29,7 @@ public class App extends Application {
         scene.getStylesheets().add(App.class.getResource("style.css").toExternalForm());
         getUsername();
         addDefaultPoints();
+        addDefaultMissions();;
 
         scene = new Scene(loadAndInject("primary"));
         stage.setScene(scene);
@@ -53,6 +53,13 @@ public class App extends Application {
 
     public static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadAndInject(fxml));
+    }
+
+    private void addDefaultMissions(){
+        model.addMission("Mission1", "daily", (double) 0.0);
+        model.addMission("Mission2", "weekly", (double) 0.0);
+        model.addMission("Mission3", "monthly", (double) 0.0);
+
     }
 
     private static Parent loadAndInject(String name) throws IOException {

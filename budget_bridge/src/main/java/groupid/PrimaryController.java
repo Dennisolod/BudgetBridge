@@ -3,6 +3,7 @@ package groupid;
 import java.io.IOException;
 
 import groupid.model.BudgetModel;
+import groupid.model.MissionLine;
 import groupid.model.MoneyLine;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -16,6 +17,7 @@ public class PrimaryController implements ModelAware {
     @FXML private ListView<MoneyLine> incomeList;
     @FXML private ListView<MoneyLine> expenseList;
     @FXML private Label pointsLabel;
+    @FXML private ListView<MissionLine> missionList;
 
     private BudgetModel model;
 
@@ -24,6 +26,8 @@ public class PrimaryController implements ModelAware {
         this.model = m;
 
         userLabel.textProperty().bind(m.usernameProperty());
+        missionList.setItems(m.missions());
+
         //pointsLabel.textProperty().bind(m.pointsProperty().asString());
 
         //netLabel.textProperty().bind(m.netBalanceProperty().asString("$%.2f"));
@@ -31,8 +35,6 @@ public class PrimaryController implements ModelAware {
         //incomeList.setItems(m.incomes());
         //expenseList.setItems(m.expenses());
     }
-
-   
 
     @FXML private void onAddIncome()  { model.addIncome("Side Hustle", 200); }
     @FXML private void onAddExpense() { model.addExpense("Coffee", 5);   }
