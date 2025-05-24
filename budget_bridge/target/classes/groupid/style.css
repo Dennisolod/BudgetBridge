@@ -143,3 +143,10 @@
     -fx-background-color: #7fa3d3;
 }
 
+.scrollpane-badges {
+    -fx-background-color: transparent;
+    -fx-control-inner-background: #222c3c;
+    -fx-background-insets: 0;
+    -fx-padding: 10;
+}
+
