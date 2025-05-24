@@ -51,24 +51,21 @@ public class PrimaryController implements ModelAware, Initializable {
         badgeList.setCellFactory(lv -> new ListCell<>() {
             private final FontIcon icon = new FontIcon();
             private final Label    name = new Label();
-            private final HBox     row  = new HBox(8, icon, name);
+            private final HBox     row  = new HBox(16, icon, name);
             @Override protected void updateItem(BadgeLine b, boolean empty) {
                 super.updateItem(b, empty);
                 if (empty || b == null) { setGraphic(null); }
                 else {
                     icon.setIconLiteral(b.getIconLiteral());
                     icon.setIconColor(b.getColor());
-                    icon.setIconSize(24);
+                    icon.setIconSize(48);
                     name.setText(b.getName());
+                    name.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white;");
                     setGraphic(row);
                 }
             }
         });
-        // badgeList.getItems().addAll(
-        //     new BadgeLine("Top Earner",            "fas-medal",      Color.GOLD),
-        //     new BadgeLine("Savings Streak (30 d)", "fas-piggy-bank", Color.DEEPPINK),
-        //     new BadgeLine("Expense Tracker",       "fas-receipt",    Color.DARKSLATEBLUE)
-        // );
+       
     }
 
     public void addBadge(BadgeLine badge) {

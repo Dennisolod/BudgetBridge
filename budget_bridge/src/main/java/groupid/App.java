@@ -35,7 +35,7 @@ public class App extends Application {
         
        
         // Force css updates
-        scene.getRoot().applyCss();
+        // scene.getRoot().applyCss();
 
         stage.show();
     }
@@ -81,7 +81,7 @@ public class App extends Application {
     }
 
     private static void addDefaultPoints(){
-        model.addPoints(1000);
+        model.addPoints(0);
     }
 
     public static void main(String[] args) {

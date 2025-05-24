@@ -27,7 +27,7 @@ public class BudgetModel {
     private final ObservableList<Map.Entry<String, Integer>> leaderboard = FXCollections.observableArrayList();
     private final StringProperty rank = new SimpleStringProperty();
     private final StringProperty leaderboardPos = new SimpleStringProperty();            // LEADERBOARD POINTS
-    private final IntegerProperty gems = new SimpleIntegerProperty(1000);   // VIRTUAL CURRENCY
+    private final IntegerProperty gems = new SimpleIntegerProperty(1000000);   // VIRTUAL CURRENCY
 
     // convenience derived values (totals, net)
     private final ReadOnlyDoubleWrapper totalIncome = new ReadOnlyDoubleWrapper();
