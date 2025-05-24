@@ -12,7 +12,6 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.paint.Paint;
 
 public class BudgetModel {
 
@@ -22,11 +21,13 @@ public class BudgetModel {
     private final ObservableList<MoneyLine> expenses = FXCollections.observableArrayList();
     private final ObservableList<MissionLine> missions = FXCollections.observableArrayList();
     private final ObservableList<BadgeLine> badges = FXCollections.observableArrayList();
+
     // gamification
     private final IntegerProperty points = new SimpleIntegerProperty(0);
     private final ObservableList<Map.Entry<String, Integer>> leaderboard = FXCollections.observableArrayList();
     private final StringProperty rank = new SimpleStringProperty();
     private final StringProperty leaderboardPos = new SimpleStringProperty();
+    private final IntegerProperty gems = new SimpleIntegerProperty(0);
 
 
     
@@ -89,6 +90,7 @@ public class BudgetModel {
     public ObservableList<Map.Entry<String, Integer>> getLeaderboard() { return leaderboard; }
     public StringProperty rankProperty() { return rank; }
     public StringProperty getLeaderboardPos() { return leaderboardPos; }
+    public IntegerProperty getGems() { return gems; }
 
     public ReadOnlyDoubleProperty totalIncomeProperty(){ return totalIncome.getReadOnlyProperty(); }
     public ReadOnlyDoubleProperty totalExpenseProperty(){ return totalExpense.getReadOnlyProperty(); }
@@ -99,13 +101,15 @@ public class BudgetModel {
     public void addExpense(String d, double a) { expenses.add(new MoneyLine(d, a));  }
     public void addMission(String d, String f, double a) { missions.add(new MissionLine(d, f, a)); }
     public void setRankPos(String r) { leaderboardPos.set(r + "."); }
-
+    public void setGems(int amount) { gems.set(amount); }
+    
     /*private void reward() {
         points.set(points.get() + 10);
         if (points.get() >= 50 && !badges.contains("Novice Saver"))
             badges.add("Novice Saver");
     }*/
 
+    // add points to the player for their leaderboard position
     public void addPoints(int p) {
         points.set(points.get() + p);
     }

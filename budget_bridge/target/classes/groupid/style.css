@@ -11,7 +11,7 @@
 .big-heading {
     -fx-text-fill: #ffffff; 
     -fx-font-weight: bold;
-    -fx-font-size: 32px;
+    -fx-font-size: 38px;
 }
 
 
@@ -103,6 +103,22 @@
 
 .leaderboard-points {
     -fx-text-fill: #00E5FF; /* Vibrant cyan */
+    -fx-font-size: 36px;
+    -fx-font-weight: bold;
+}
+
+.leaderboard-name {
+    -fx-font-size: 36px;
+    -fx-text-fill: #ffffff;
+}
+
+.leaderboard-rank {
+    -fx-font-size: 36px;
+    -fx-text-fill: #ffffff;
+}
+
+.store-gems {
+    -fx-text-fill: #00ff2a; /* Vibrant Green */
     -fx-font-size: 36px;
     -fx-font-weight: bold;
 }

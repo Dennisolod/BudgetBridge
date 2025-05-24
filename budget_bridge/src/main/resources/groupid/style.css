@@ -116,3 +116,9 @@
     -fx-font-size: 36px;
     -fx-text-fill: #ffffff;
 }
+
+.store-gems {
+    -fx-text-fill: #00ff2a; /* Vibrant Green */
+    -fx-font-size: 36px;
+    -fx-font-weight: bold;
+}
