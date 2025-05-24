@@ -74,10 +74,10 @@
          </BorderPane.margin>
 
          <Label text="Badges:" styleClass="heading"/>
-         <ListView fx:id="badgeList" styleClass="scrollpane-badges" prefHeight="500"/>
+         <ListView fx:id="badgeList" styleClass="scrollpane-badges" prefHeight="700" prefWidth="300"/>
       </VBox>
       <padding>
-         <Insets bottom="200" left="55" right="200" top="55"/>
+         <Insets bottom="200" left="25" right="200" top="55"/>
       </padding>
    </right>
 

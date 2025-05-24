@@ -51,7 +51,7 @@ public class PrimaryController implements ModelAware, Initializable {
         badgeList.setCellFactory(lv -> new ListCell<>() {
             private final FontIcon icon = new FontIcon();
             private final Label    name = new Label();
-            private final HBox     row  = new HBox(16, icon, name);
+            private final HBox     row  = new HBox(20, icon, name);
             @Override protected void updateItem(BadgeLine b, boolean empty) {
                 super.updateItem(b, empty);
                 if (empty || b == null) { setGraphic(null); }

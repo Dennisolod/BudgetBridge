@@ -103,7 +103,12 @@ public class StoreController implements ModelAware{
         addBadge(new BadgeLine("Ethereal Wings", "fas-feather-alt", Color.LIGHTSKYBLUE), 1000);
 
 
-        // TODO: Tier 3 badges: 
+        // Tier 3 badges: 
+        addBadge(new BadgeLine("Celestial Flame", "fas-sun", Color.ORANGERED), 1500);
+        addBadge(new BadgeLine("Eternal Crown", "fas-gem", Color.MEDIUMPURPLE), 2000);
+        addBadge(new BadgeLine("Timekeeper's Halo", "fas-infinity", Color.DEEPSKYBLUE), 2500);
+        addBadge(new BadgeLine("Quantum Ascendant", "fas-rocket", Color.LIGHTGOLDENRODYELLOW), 3000);
+        addBadge(new BadgeLine("Divine Architect", "fas-chess-king", Color.GOLD), 4000);
     }
 
     @FXML 
