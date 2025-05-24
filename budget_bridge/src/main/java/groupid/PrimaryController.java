@@ -1,16 +1,25 @@
 package groupid;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
+import org.kordamp.ikonli.javafx.FontIcon;
+
+import groupid.model.BadgeLine;
 import groupid.model.BudgetModel;
 import groupid.model.MissionLine;
 import groupid.model.MoneyLine;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 
 // Homescreen / My Dashboard
-public class PrimaryController implements ModelAware {
+public class PrimaryController implements ModelAware, Initializable {
 
     @FXML private Label userLabel;
     @FXML private Label netLabel;
@@ -18,6 +27,7 @@ public class PrimaryController implements ModelAware {
     @FXML private ListView<MoneyLine> expenseList;
     @FXML private Label pointsLabel;
     @FXML private ListView<MissionLine> missionList;
+    @FXML private ListView<BadgeLine> badgeList;
 
     private BudgetModel model;
 
@@ -34,6 +44,37 @@ public class PrimaryController implements ModelAware {
 
         //incomeList.setItems(m.incomes());
         //expenseList.setItems(m.expenses());
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        badgeList.setCellFactory(lv -> new ListCell<>() {
+            private final FontIcon icon = new FontIcon();
+            private final Label    name = new Label();
+            private final HBox     row  = new HBox(8, icon, name);
+            @Override protected void updateItem(BadgeLine b, boolean empty) {
+                super.updateItem(b, empty);
+                if (empty || b == null) { setGraphic(null); }
+                else {
+                    icon.setIconLiteral(b.getIconLiteral());
+                    icon.setIconColor(b.getColor());
+                    icon.setIconSize(24);
+                    name.setText(b.getName());
+                    setGraphic(row);
+                }
+            }
+        });
+        badgeList.getItems().addAll(
+            new BadgeLine("Top Earner",            "fas-medal",      Color.GOLD),
+            new BadgeLine("Savings Streak (30 d)", "fas-piggy-bank", Color.DEEPPINK),
+            new BadgeLine("Expense Tracker",       "fas-receipt",    Color.DARKSLATEBLUE)
+        );
+    }
+
+    public void addBadge(BadgeLine badge) {
+        if (!badgeList.getItems().contains(badge)) {
+            badgeList.getItems().add(badge);
+        }
     }
 
     @FXML private void onAddIncome()  { model.addIncome("Side Hustle", 200); }

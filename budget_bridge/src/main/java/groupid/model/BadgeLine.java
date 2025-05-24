@@ -6,6 +6,6 @@ import lombok.Value;
 @Value
 public class BadgeLine {
     String name;
-    String icon;
+    String iconLiteral;
     Paint color;
 }

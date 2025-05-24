@@ -67,15 +67,14 @@
    </left>
 
    <right>
+      
       <VBox alignment="BOTTOM_LEFT" spacing="30" styleClass="vbox-badges">
          <BorderPane.margin>
             <Insets top="20" right="20" bottom="20" left="20"/>
          </BorderPane.margin>
+
          <Label text="Badges:" styleClass="heading"/>
-         <HBox spacing="8">
-            <FontIcon iconLiteral="fas-star" iconSize="24" style="-fx-fill: gold;"/>
-            <Label text="All‑Star"/>
-         </HBox>
+         <ListView fx:id="badgeList"/>
       </VBox>
       <padding>
          <Insets bottom="200" left="55" right="200" top="55"/>
