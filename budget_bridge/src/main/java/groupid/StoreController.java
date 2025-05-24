@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import groupid.model.BadgeLine;
 import groupid.model.BudgetModel;
+import groupid.model.ThemeLine;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -13,6 +14,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.layout.Region;
 
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -36,10 +38,14 @@ public class StoreController implements ModelAware{
         currencyBalance.textProperty().bind(m.getGems().asString("%d Gems"));
 
         loadBadgeItems();
+        loadThemeItems();
         //pointsLabel.textProperty().bind(m.pointsProperty().asString("%d pts"));
         //badgeList.setItems(m.badges());
+
     }
 
+
+    // Badges functions for the store:
     private void addBadge(BadgeLine badge, int cost) {
         HBox row = new HBox(20);
         row.setAlignment(Pos.CENTER_LEFT);
@@ -129,7 +135,58 @@ public class StoreController implements ModelAware{
     }
 }
 
+    // Theme functions for the store:
+    private void addThemeToStore(ThemeLine theme) {
+        HBox row = new HBox(20);
+        row.setAlignment(Pos.CENTER_LEFT);
+        row.setStyle("-fx-background-color: #222c3c; -fx-background-radius: 8px; -fx-padding: 12;");
 
+        Rectangle colorPreview = new Rectangle(30, 30, theme.getBackgroundColor());
+        colorPreview.setArcWidth(10);
+        colorPreview.setArcHeight(10);
+
+        Label nameLabel = new Label(theme.getName());
+        nameLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white;");
+
+        Label costLabel = new Label(theme.getCost() + " coins");
+        costLabel.setStyle("-fx-text-fill: #FFD700; -fx-font-size: 14px;");
+
+        Region spacer = new Region();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+
+        Button actionButton = new Button();
+        actionButton.getStyleClass().add("modern-flat-button");
+
+        if (model.ownsTheme(theme)) {
+            actionButton.setText("Apply");
+            actionButton.setOnAction(e -> model.applyTheme(theme));
+        } else {
+            actionButton.setText("Purchase");
+            actionButton.setOnAction(e -> {
+                if (model.getGems().get() >= theme.getCost()) {
+                    model.setGems(model.getGems().get() - theme.getCost());
+                    model.unlockTheme(theme);
+                    model.applyTheme(theme);
+                    // reloadThemeStore(); // optional refresh
+                } else {
+                    System.out.println("Not enough coins.");
+                }
+            });
+    }
+
+    row.getChildren().addAll(colorPreview, nameLabel, costLabel, spacer, actionButton);
+    themesBox.getChildren().add(row);
+}
+
+    private void loadThemeItems() {
+        themesBox.getChildren().clear();
+
+        addThemeToStore(new ThemeLine("Ocean Blue", Color.web("#003CFF"), 5000));
+        addThemeToStore(new ThemeLine("Mystic Purple", Color.web("#1F1B2E"), 10000));
+        addThemeToStore(new ThemeLine("Golden Hour", Color.web("#FFD700"), 25000));
+        addThemeToStore(new ThemeLine("Seafoam Savings", Color.web("#0AFF9D"), 35000));
+        addThemeToStore(new ThemeLine("Aurora", Color.web("#003CFF"), 40000));
+    }
 
     @FXML private void switchToSecondary() throws IOException { App.setRoot("secondary"); }
     @FXML private void switchToPrimary() throws IOException { App.setRoot("primary"); }

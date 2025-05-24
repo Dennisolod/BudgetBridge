@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage; 
 
 /**
@@ -35,7 +36,7 @@ public class App extends Application {
         
        
         // Force css updates
-        scene.getRoot().applyCss();
+        // scene.getRoot().applyCss();
 
         stage.show();
     }
@@ -51,7 +52,10 @@ public class App extends Application {
     }
 
     public static void setRoot(String fxml) throws IOException {
+        
+        
         scene.setRoot(loadAndInject(fxml));
+
     }
 
     private void addDefaultMissions(){
@@ -69,6 +73,17 @@ public class App extends Application {
         if (ctrl instanceof ModelAware) {
             ModelAware mAware = (ModelAware) ctrl;
             mAware.setModel(model);
+        }
+
+        // Apply current theme background color
+        if (model.getCurrentTheme() != null) {
+            Color bg = model.getCurrentTheme().getBackgroundColor();
+            String webColor = String.format("#%02x%02x%02x",
+                (int)(bg.getRed() * 255),
+                (int)(bg.getGreen() * 255),
+                (int)(bg.getBlue() * 255)
+            );
+            root.setStyle("-fx-background-color: " + webColor + ";");
         }
         return root;
     }

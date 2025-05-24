@@ -15,17 +15,20 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 
 // Homescreen / My Dashboard
 public class PrimaryController implements ModelAware, Initializable {
+    @FXML private BorderPane rootPane;
 
     @FXML private Label userLabel;
     @FXML private Label netLabel;
+    @FXML private Label pointsLabel;
+
     @FXML private ListView<MoneyLine> incomeList;
     @FXML private ListView<MoneyLine> expenseList;
-    @FXML private Label pointsLabel;
     @FXML private ListView<MissionLine> missionList;
     @FXML private ListView<BadgeLine> badgeList;
 
@@ -44,10 +47,30 @@ public class PrimaryController implements ModelAware, Initializable {
 
         //incomeList.setItems(m.incomes());
         //expenseList.setItems(m.expenses());
+
+        model.currentThemeProperty().addListener((obs, oldTheme, newTheme) -> {
+            if (newTheme != null) {
+                rootPane.setStyle("-fx-background-color: " + toWebColor(newTheme.getBackgroundColor()) + ";");
+            }
+        });
+
+        // Apply immediately if theme is already set
+        if (model.getCurrentTheme() != null) {
+            rootPane.setStyle("-fx-background-color: " + toWebColor(model.getCurrentTheme().getBackgroundColor()) + ";");
+        }
+    }
+
+    private String toWebColor(Color color) {
+        return String.format("#%02x%02x%02x",
+            (int)(color.getRed() * 255),
+            (int)(color.getGreen() * 255),
+            (int)(color.getBlue() * 255)
+        );
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+         System.out.println("rootPane: " + rootPane);
         badgeList.setCellFactory(lv -> new ListCell<>() {
             private final FontIcon icon = new FontIcon();
             private final Label    name = new Label();

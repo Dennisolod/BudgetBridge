@@ -5,9 +5,11 @@ import java.util.Map;
 
 import javafx.beans.InvalidationListener;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.beans.property.ReadOnlyDoubleWrapper;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -28,6 +30,9 @@ public class BudgetModel {
     private final StringProperty rank = new SimpleStringProperty();
     private final StringProperty leaderboardPos = new SimpleStringProperty();            // LEADERBOARD POINTS
     private final IntegerProperty gems = new SimpleIntegerProperty(1000000);   // VIRTUAL CURRENCY
+    private final ObservableList<ThemeLine> ownedThemes = FXCollections.observableArrayList();
+    private final ObjectProperty<ThemeLine> currentTheme = new SimpleObjectProperty<>();
+
 
     // convenience derived values (totals, net)
     private final ReadOnlyDoubleWrapper totalIncome = new ReadOnlyDoubleWrapper();
@@ -89,6 +94,10 @@ public class BudgetModel {
     public StringProperty getLeaderboardPos() { return leaderboardPos; }
     public IntegerProperty getGems() { return gems; }
     public ObservableList<BadgeLine> getOwnedBadges() { return badges; }
+    public ObservableList<ThemeLine> getOwnedThemes() { return ownedThemes; }
+    public ThemeLine getCurrentTheme() { return currentTheme.get(); }
+    public void applyTheme(ThemeLine theme) { currentTheme.set(theme); }
+    public ObjectProperty<ThemeLine> currentThemeProperty() { return currentTheme; }
 
     public ReadOnlyDoubleProperty totalIncomeProperty(){ return totalIncome.getReadOnlyProperty(); }
     public ReadOnlyDoubleProperty totalExpenseProperty(){ return totalExpense.getReadOnlyProperty(); }
@@ -102,7 +111,9 @@ public class BudgetModel {
     public void setGems(int amount) { gems.set(amount); }
     public boolean ownsBadge(BadgeLine badge) { return badges.stream().anyMatch(b -> b.getName().equals(badge.getName())); }
     public void unlockBadge(BadgeLine badge) { if (!ownsBadge(badge)) { badges.add(badge); } }
-    
+    public boolean ownsTheme(ThemeLine theme) { return ownedThemes.stream().anyMatch(t -> t.getName().equals(theme.getName())); }
+    public void unlockTheme(ThemeLine theme) { if (!ownsTheme(theme)) { ownedThemes.add(theme); } }
+
     /*private void reward() {
         points.set(points.get() + 10);
         if (points.get() >= 50 && !badges.contains("Novice Saver"))
