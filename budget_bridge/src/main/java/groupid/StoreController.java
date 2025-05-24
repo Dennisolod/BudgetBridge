@@ -2,14 +2,21 @@ package groupid;
 
 import java.io.IOException;
 
+import groupid.model.BadgeLine;
 import groupid.model.BudgetModel;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.layout.Region;
+
+import org.kordamp.ikonli.javafx.FontIcon;
+import org.kordamp.ikonli.fontawesome5.FontAwesomeSolid;
 
 // Exhchange Store screen
 public class StoreController implements ModelAware{
@@ -28,18 +35,75 @@ public class StoreController implements ModelAware{
         this.model = m;
         currencyBalance.textProperty().bind(m.getGems().asString("%d Gems"));
 
+        loadBadgeItems();
         //pointsLabel.textProperty().bind(m.pointsProperty().asString("%d pts"));
         //badgeList.setItems(m.badges());
     }
 
-    private void loadBadges() {
-        // Example: Add a badge image + button
-        ImageView badge = new ImageView(new Image("badge1.png"));
-        badge.setFitWidth(50);
-        badge.setFitHeight(50);
-        Button redeem = new Button("Unlock (200 coins)");
-        redeem.setOnAction(e -> attemptPurchase(200));
-        badgesBox.getChildren().addAll(badge, redeem);
+    private void addBadge(BadgeLine badge, int cost) {
+        HBox row = new HBox(20);
+        row.setAlignment(Pos.CENTER_LEFT);
+        row.setStyle("-fx-background-color: #222c3c; -fx-background-radius: 8px; -fx-padding: 12;");
+
+        FontIcon icon = new FontIcon(badge.getIconLiteral());
+        icon.setIconSize(28);
+        icon.setIconColor((Color) badge.getColor());
+
+        VBox textBox = new VBox(5);
+        Label nameLabel = new Label(badge.getName());
+        nameLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white;");
+        Label costLabel = new Label(cost + " coins");
+        costLabel.setStyle("-fx-text-fill: #FFD700; -fx-font-size: 14px;");
+        textBox.getChildren().addAll(nameLabel, costLabel);
+
+        Region spacer = new Region();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+
+        Button purchaseButton = new Button("Purchase");
+        purchaseButton.getStyleClass().add("modern-flat-button");
+
+        if (model.ownsBadge(badge)) {
+            purchaseButton.setText("Owned");
+            purchaseButton.setDisable(true);
+        } else {
+            purchaseButton.setOnAction(e -> {
+                if (model.getGems().get() >= cost) {
+                    model.setGems(model.getGems().get() - cost);
+                    model.unlockBadge(badge);
+                    purchaseButton.setText("Owned");
+                    purchaseButton.setDisable(true);
+                } else {
+                    System.out.println("Not enough coins.");
+                }
+            });
+        }
+
+        row.getChildren().addAll(icon, textBox, spacer, purchaseButton);
+        badgesBox.getChildren().add(row);
+
+    }
+
+
+    public void loadBadgeItems() {
+        badgesBox.getChildren().clear(); // clears if there are any left
+
+        // Tier 1 badges:
+        addBadge(new BadgeLine("Gold Trophy", "fas-trophy", Color.GOLD), 200);
+        addBadge(new BadgeLine("Shield of Honor", "fas-shield-alt", Color.DARKGRAY), 180);
+        addBadge(new BadgeLine("Mythic Phoenix", "fas-fire-alt", Color.ORANGERED), 500);
+        addBadge(new BadgeLine("Crown Elite", "fas-crown", Color.GOLD), 250);
+        addBadge(new BadgeLine("Champion Medal", "fas-medal", Color.SILVER), 300);
+        addBadge(new BadgeLine("Secret Flame", "fas-fire", Color.ORANGERED), 220);
+
+        // Tier 2 badges
+        addBadge(new BadgeLine("Mythic Phoenix", "fas-fire-alt", Color.CRIMSON), 500);
+        addBadge(new BadgeLine("Infinity Crown", "fas-crown", Color.MEDIUMPURPLE), 600);
+        addBadge(new BadgeLine("Legend of Time", "fas-hourglass-half", Color.DARKORANGE), 750);
+        addBadge(new BadgeLine("Quantum Vault", "fas-lock", Color.DARKCYAN), 900);
+        addBadge(new BadgeLine("Ethereal Wings", "fas-feather-alt", Color.LIGHTSKYBLUE), 1000);
+
+
+        // TODO: Tier 3 badges: 
     }
 
     @FXML 
@@ -50,26 +114,17 @@ public class StoreController implements ModelAware{
         }
     }
 
-    private void loadThemes() {
-        Button theme = new Button("Ocean Theme - 150 coins");
-        theme.setOnAction(e -> attemptPurchase(150));
-        themesBox.getChildren().add(theme);
-    }
-
-    private void loadOtherRewards() {
-        Button item = new Button("Custom Avatar - 100 coins");
-        item.setOnAction(e -> attemptPurchase(100));
-        rewardsBox.getChildren().add(item);
-    }
-
-    private void attemptPurchase(int cost) {
+    private void attemptPurchase(String itemName, int cost) {
         if (model.getGems().get() >= cost) {
             model.setGems(model.getGems().get() - cost);
-            // Apply reward logic here (e.g., unlock badge, apply theme)
+            System.out.println("Unlocked: " + itemName);
+            // Add to user's unlocked badges: model.addUnlockedBadge(itemName);
         } else {
             System.out.println("Not enough coins.");
-        }
     }
+}
+
+
 
     @FXML private void switchToSecondary() throws IOException { App.setRoot("secondary"); }
     @FXML private void switchToPrimary() throws IOException { App.setRoot("primary"); }

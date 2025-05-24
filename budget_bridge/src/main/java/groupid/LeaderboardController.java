@@ -3,7 +3,6 @@ package groupid;
 import java.io.IOException;
 
 import groupid.model.BudgetModel;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;

@@ -122,3 +122,24 @@
     -fx-font-size: 36px;
     -fx-font-weight: bold;
 }
+
+.custom-tab-pane .tab-header-area {
+    -fx-background-color: transparent;
+}
+
+.custom-tab-pane .tab {
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #000000;
+    -fx-font-size: 14px;
+    -fx-font-weight: 500;
+    -fx-padding: 10 25;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 2, 0, 0, 1);
+}
+
+.custom-tab-pane .tab:selected {
+    -fx-background-color: #7fa3d3;
+}
+

@@ -63,7 +63,7 @@
     <!-- ► 3.  BUILD SECTION ⬇︎ -->
     <build>
 
-        <!-- 3‑A  𝗙𝗼𝗿𝗰𝗲 the JavaFX plugin to stay on 0.0.8 even if a parent tells Maven otherwise -->
+        <!-- 3‑A  force the JavaFX plugin to stay on 0.0.8 even if a parent tells Maven otherwise -->
         <pluginManagement>
             <plugins>
                 <plugin>

@@ -18,7 +18,7 @@
 <?import javafx.scene.textfield.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ScrollPane?>
-
+<?import javafx.scene.layout.Region?>
 
 <!-- WORK IN PROGRESS -->
 <BorderPane stylesheets="@style.css" fx:controller="groupid.StoreController" xmlns:fx="http://javafx.com/fxml/1" styleClass="background">
@@ -43,24 +43,20 @@
             <Button fx:id="leaderboardsButton" text="Leaderboards" styleClass="modern-flat-button" onAction="#switchToLeaderboard"/>
             <Button fx:id="budgetButton" text="Update Budget" styleClass="modern-flat-button" onAction="#switchToSecondary"/>
             <Button fx:id="storeButton" text="Exchange Store" styleClass="modern-flat-button" onAction="#switchToStore"/>
+            
+            <Region HBox.hgrow="ALWAYS" />
+
             <Label text="Gem Balance:" styleClass="big-heading"/>
             <Label fx:id="currencyBalance" styleClass="store-gems"/>
          </HBox>
-         <!-- <HBox spacing="20" alignment="CENTER_RIGHT">
-            <Label text="Gem Balance:" styleClass="big-heading"/>
-            <Label fx:id="currencyBalance" styleClass="store-gems"/>
-         </HBox> -->
       </VBox>
    </top>
 
-         
-
     <center>
-        <TabPane fx:id="storeTabs">
+        <TabPane fx:id="storeTabs" styleClass="custom-tab-pane">
             <Tab text="Badges" closable="false">
                 <ScrollPane fitToWidth="true">
                     <VBox fx:id="badgesBox" spacing="10" />
-
                 </ScrollPane>
             </Tab>
             <Tab text="Themes" closable="false">
@@ -75,4 +71,5 @@
             </Tab>
         </TabPane>
     </center>
+
 </BorderPane>

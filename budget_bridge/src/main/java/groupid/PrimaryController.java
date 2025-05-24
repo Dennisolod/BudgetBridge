@@ -37,7 +37,7 @@ public class PrimaryController implements ModelAware, Initializable {
 
         userLabel.textProperty().bind(m.usernameProperty());
         missionList.setItems(m.missions());
-
+        badgeList.setItems(m.getOwnedBadges());
         //pointsLabel.textProperty().bind(m.pointsProperty().asString());
 
         //netLabel.textProperty().bind(m.netBalanceProperty().asString("$%.2f"));
@@ -64,11 +64,11 @@ public class PrimaryController implements ModelAware, Initializable {
                 }
             }
         });
-        badgeList.getItems().addAll(
-            new BadgeLine("Top Earner",            "fas-medal",      Color.GOLD),
-            new BadgeLine("Savings Streak (30 d)", "fas-piggy-bank", Color.DEEPPINK),
-            new BadgeLine("Expense Tracker",       "fas-receipt",    Color.DARKSLATEBLUE)
-        );
+        // badgeList.getItems().addAll(
+        //     new BadgeLine("Top Earner",            "fas-medal",      Color.GOLD),
+        //     new BadgeLine("Savings Streak (30 d)", "fas-piggy-bank", Color.DEEPPINK),
+        //     new BadgeLine("Expense Tracker",       "fas-receipt",    Color.DARKSLATEBLUE)
+        // );
     }
 
     public void addBadge(BadgeLine badge) {

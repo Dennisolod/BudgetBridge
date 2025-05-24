@@ -20,19 +20,16 @@ public class BudgetModel {
     private final ObservableList<MoneyLine> incomes = FXCollections.observableArrayList();
     private final ObservableList<MoneyLine> expenses = FXCollections.observableArrayList();
     private final ObservableList<MissionLine> missions = FXCollections.observableArrayList();
-    private final ObservableList<BadgeLine> badges = FXCollections.observableArrayList();
+    private final ObservableList<BadgeLine> badges = FXCollections.observableArrayList();       // PLAYER OWNED BADGES
 
     // gamification
     private final IntegerProperty points = new SimpleIntegerProperty(0);
     private final ObservableList<Map.Entry<String, Integer>> leaderboard = FXCollections.observableArrayList();
     private final StringProperty rank = new SimpleStringProperty();
-    private final StringProperty leaderboardPos = new SimpleStringProperty();
-    private final IntegerProperty gems = new SimpleIntegerProperty(0);
+    private final StringProperty leaderboardPos = new SimpleStringProperty();            // LEADERBOARD POINTS
+    private final IntegerProperty gems = new SimpleIntegerProperty(1000);   // VIRTUAL CURRENCY
 
-
-    
     // convenience derived values (totals, net)
-
     private final ReadOnlyDoubleWrapper totalIncome = new ReadOnlyDoubleWrapper();
     private final ReadOnlyDoubleWrapper totalExpense= new ReadOnlyDoubleWrapper();
     private final ReadOnlyDoubleWrapper netBalance = new ReadOnlyDoubleWrapper();
@@ -91,6 +88,7 @@ public class BudgetModel {
     public StringProperty rankProperty() { return rank; }
     public StringProperty getLeaderboardPos() { return leaderboardPos; }
     public IntegerProperty getGems() { return gems; }
+    public ObservableList<BadgeLine> getOwnedBadges() { return badges; }
 
     public ReadOnlyDoubleProperty totalIncomeProperty(){ return totalIncome.getReadOnlyProperty(); }
     public ReadOnlyDoubleProperty totalExpenseProperty(){ return totalExpense.getReadOnlyProperty(); }
@@ -102,6 +100,8 @@ public class BudgetModel {
     public void addMission(String d, String f, double a) { missions.add(new MissionLine(d, f, a)); }
     public void setRankPos(String r) { leaderboardPos.set(r + "."); }
     public void setGems(int amount) { gems.set(amount); }
+    public boolean ownsBadge(BadgeLine badge) { return badges.stream().anyMatch(b -> b.getName().equals(badge.getName())); }
+    public void unlockBadge(BadgeLine badge) { if (!ownsBadge(badge)) { badges.add(badge); } }
     
     /*private void reward() {
         points.set(points.get() + 10);
