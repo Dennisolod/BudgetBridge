@@ -1,6 +1,7 @@
 package groupid.model;
 
 import java.util.AbstractMap;
+import java.util.List;
 import java.util.Map;
 
 import javafx.beans.InvalidationListener;
@@ -33,6 +34,11 @@ public class BudgetModel {
     private final IntegerProperty gems = new SimpleIntegerProperty(1000000);   // VIRTUAL CURRENCY
     private final ObservableList<ThemeLine> ownedThemes = FXCollections.observableArrayList();
     private final ObjectProperty<ThemeLine> currentTheme = new SimpleObjectProperty<>();
+    private double primaryIncome, sideIncome, otherIncome;
+    private double rent, car, groceries, diningOut, funMoney, otherExpense;
+    private List<String> goals = List.of();
+    private String budgetPlan = "";
+
 
 
     // convenience derived values (totals, net)
@@ -51,6 +57,21 @@ public class BudgetModel {
 
         // Sort the leaderboard in descending order of points
         leaderboard.sort((a, b) -> Integer.compare(b.getValue(), a.getValue()));
+    }
+
+    public void loadBudgetInfo(BudgetInfo info) {
+        primaryIncome = info.getPrimaryIncome();
+        sideIncome = info.getSideIncome();
+        otherIncome = info.getOtherIncome();
+
+        rent = info.getRent();
+        car = info.getCar();
+        groceries = info.getGroceries();
+        diningOut = info.getDiningOut();
+        funMoney = info.getFunMoney();
+        otherExpense = info.getOtherExpense();
+        goals = info.getGoals();
+        budgetPlan = info.getBudgetPlan();
     }
 
 

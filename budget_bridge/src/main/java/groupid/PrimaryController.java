@@ -2,7 +2,6 @@ package groupid;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Observable;
 import java.util.ResourceBundle;
 
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -11,6 +10,7 @@ import groupid.model.BadgeLine;
 import groupid.model.BudgetModel;
 import groupid.model.MissionLine;
 import groupid.model.MoneyLine;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -20,7 +20,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.collections.ObservableList;
 
 // Homescreen / My Dashboard
 public class PrimaryController implements ModelAware, Initializable {
@@ -69,7 +68,7 @@ public class PrimaryController implements ModelAware, Initializable {
         addMoneyLines(incomeVBox, model.incomes(), "income");
         addMoneyLines(expenseVBox, model.expenses(), "expense");
 
-        gemsLabel.textProperty().bind(model.getGems().asString("%,d Gems!"));
+        gemsLabel.textProperty().bind(m.getGems().asString("%,d Gems!"));
     }
 
     private String toWebColor(Color color) {
