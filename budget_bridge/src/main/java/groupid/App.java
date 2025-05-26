@@ -31,19 +31,12 @@ public class App extends Application {
 
         scene = new Scene(loadFXML("primary"), 1920, 1080);
         scene.getStylesheets().add(App.class.getResource("style.css").toExternalForm());
-<<<<<<< HEAD
-        getUsername();
-        addDefaultPoints();
-        fillMissionsList();
-        addDefaultMissions();;
-
-=======
         
->>>>>>> refs/remotes/origin/main
         scene = new Scene(loadAndInject("primary"));
         stage.setScene(scene);
         getUsername();
         getBudgetInfo(stage);
+        fillMissionsList();
         addDefaultPoints();
         addDefaultMissions();
 
