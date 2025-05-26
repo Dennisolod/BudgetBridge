@@ -14,4 +14,3 @@ public class MissionLine {
     return description + " (" + frequency + ")";
     }
 }
-

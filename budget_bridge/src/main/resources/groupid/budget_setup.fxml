@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<DialogPane fx:id="rootPane" xmlns:fx="http://javafx.com/fxml/1" fx:controller="groupid.BudgetSetupController" stylesheets="@style.css" styleClass="background">
+
+    <headerText>Let’s get your budget basics</headerText>
+
+    <content>
+        <VBox alignment="CENTER" spacing="25">
+            <padding>
+                <Insets top="25" right="30" bottom="25" left="30"/>
+            </padding>
+            <TitledPane text="Income Sources" expanded="true" styleClass="section-pane">
+                <content>
+                    <GridPane hgap="10" vgap="10">
+                        <Label text="Primary:"       styleClass="norm-text"/>
+                        <TextField fx:id="tfPrimaryIncome"
+                                   GridPane.columnIndex="1"/>
+
+                        <Label text="Side hustle / gigs:" GridPane.rowIndex="1" styleClass="norm-text"/>
+                        <TextField fx:id="tfSideIncome"
+                                   GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                        <Label text="Other:"          GridPane.rowIndex="2" styleClass="norm-text"/>
+                        <TextField fx:id="tfOtherIncome"
+                                   GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                    </GridPane>
+                </content>
+            </TitledPane>
+            <TitledPane text="Primary Expenses" expanded="true" styleClass="section-pane">
+                <content>
+                    <GridPane hgap="10" vgap="10">
+
+                        <Label text="Rent / Mortgage:"        styleClass="norm-text"/>
+                        <TextField fx:id="tfRent"             GridPane.columnIndex="1"/>
+
+                        <Label text="Car Payment:"             GridPane.rowIndex="1" styleClass="norm-text"/>
+                        <TextField fx:id="tfCar"              GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                        <Label text="Groceries:"               GridPane.rowIndex="2" styleClass="norm-text"/>
+                        <TextField fx:id="tfGroceries"        GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                        <Label text="Dining Out:"              GridPane.rowIndex="3" styleClass="norm-text"/>
+                        <TextField fx:id="tfDining"           GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                        <Label text="Fun Money:"               GridPane.rowIndex="4" styleClass="norm-text"/>
+                        <TextField fx:id="tfFun"              GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+                        <Label text="Other:"                   GridPane.rowIndex="5" styleClass="norm-text"/>
+                        <TextField fx:id="tfOtherExpense"     GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+                    </GridPane>
+                </content>
+            </TitledPane>
+            <VBox spacing="8" alignment="TOP_LEFT">
+                <Label text="Choose your goals (pick any):" styleClass="heading"/>
+                <CheckBox text="Emergency fund"        fx:id="chkGoal1"/>
+                <CheckBox text="Pay off debt"          fx:id="chkGoal2"/>
+                <CheckBox text="Save for vacation"     fx:id="chkGoal3"/>
+                <CheckBox text="Invest for retirement" fx:id="chkGoal4"/>
+            </VBox>
+
+            <VBox spacing="8" alignment="TOP_LEFT">
+                <Label text="Select a budget plan:" styleClass="heading"/>
+                <RadioButton text="50 / 30 / 20"      toggleGroup="$planGroup"/>
+                <RadioButton text="Zero‑based"        toggleGroup="$planGroup"/>
+                <RadioButton text="Cash‑envelope"     toggleGroup="$planGroup"/>
+                <RadioButton text="Custom (blank)"    toggleGroup="$planGroup"/>
+            </VBox>
+
+        </VBox>
+    </content>
+    <buttonTypes>
+        <ButtonType fx:id="okBtn"     text="OK"     buttonData="OK_DONE"/>
+        <ButtonType fx:id="cancelBtn" text="Cancel" buttonData="CANCEL_CLOSE"/>
+    </buttonTypes>
+</DialogPane>

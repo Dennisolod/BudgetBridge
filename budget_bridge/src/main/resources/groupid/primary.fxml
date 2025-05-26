@@ -40,7 +40,7 @@
          </BorderPane.margin>
          <Label fx:id="userLabel" styleClass="big-heading"/>
          <Label text="Budget overview:" styleClass="heading"/>
-         <Label fx:id="gemsLabel" text="20,000 Gems" styleClass="store-gems"/>
+         <Label fx:id="gemsLabel" styleClass="store-gems"/>
          <HBox spacing="25">
             <VBox fx:id="incomeVBox" alignment="CENTER_RIGHT" spacing="10">
                <Label text="Monthly Income " styleClass="norm-text"/>
@@ -82,12 +82,12 @@
    </right>
 
    <center>
-      <VBox alignment="CENTER" spacing="50" styleClass="vbox-spending">
+      <VBox alignment="CENTER" spacing="20" styleClass="vbox-spending">
          <BorderPane.margin>
-            <Insets top="20" right="20" bottom="20" left="20"/>
+            <Insets top="10" right="20" bottom="20" left="20"/>
          </BorderPane.margin>
-         <Label text="Spending:" styleClass="heading"/>
-         <HBox alignment="CENTER" spacing="25">
+         <Label text="Spending Breakdown:" styleClass="heading"/>
+         <HBox alignment="CENTER" spacing="10">
             <VBox alignment="CENTER" spacing="10" prefWidth="300" prefHeight="300">
                <ImageView fx:id="pieChart" fitWidth="600" fitHeight="600" preserveRatio="true">
                   <image>

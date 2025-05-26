@@ -1,17 +1,21 @@
 package groupid;
-
 import java.io.IOException;
+import java.net.URL;
 import java.util.Optional;
 
+import groupid.model.BudgetInfo;
 import groupid.model.BudgetModel;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage; 
+import javafx.stage.Stage;
 
 /**
  * JavaFX App
@@ -27,12 +31,14 @@ public class App extends Application {
 
         scene = new Scene(loadFXML("primary"), 1920, 1080);
         scene.getStylesheets().add(App.class.getResource("style.css").toExternalForm());
-        getUsername();
-        addDefaultPoints();
-        addDefaultMissions();;
-
+        
         scene = new Scene(loadAndInject("primary"));
         stage.setScene(scene);
+        getUsername();
+        getBudgetInfo(stage);
+        addDefaultPoints();
+        addDefaultMissions();
+
         
        
         // Force css updates
@@ -51,9 +57,27 @@ public class App extends Application {
         result.ifPresentOrElse(name -> model.usernameProperty().set(name.strip()), ()   -> Platform.exit());                  // quit if user cancels
     }
 
+    private void getBudgetInfo(Stage owner) throws IOException {
+        URL url = App.class.getResource("/groupid/budget_setup.fxml");
+        FXMLLoader loader = new FXMLLoader(url);       
+        DialogPane pane = loader.load();               
+        BudgetSetupController ctl = loader.getController();
+
+        Dialog<BudgetInfo> dialog = new Dialog<>();
+        dialog.setTitle("Welcome — Budget Setup");
+        dialog.initOwner(owner);
+        dialog.setDialogPane(pane);
+        dialog.setResultConverter(bt -> bt == ButtonType.OK ? ctl.collectResult() : null);
+
+        pane.getStylesheets()
+            .add(App.class.getResource("style.css").toExternalForm());
+
+        dialog.showAndWait()
+            .ifPresent(model::loadBudgetInfo);
+    }
+
+
     public static void setRoot(String fxml) throws IOException {
-        
-        
         scene.setRoot(loadAndInject(fxml));
 
     }
