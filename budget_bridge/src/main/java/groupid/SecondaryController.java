@@ -33,7 +33,7 @@ public class SecondaryController implements ModelAware {
         /* live lists */
         //m.addIncome(null, 0);
         incomeList.setItems(m.incomes());
-        //expenseList.setItems(m.expenses());
+        expenseList.setItems(m.expenses());
     }
 
     @FXML

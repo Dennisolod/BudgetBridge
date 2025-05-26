@@ -40,19 +40,19 @@
          </BorderPane.margin>
          <Label fx:id="userLabel" styleClass="big-heading"/>
          <Label text="Budget overview:" styleClass="heading"/>
-         <Label text="20,000 Gems" styleClass="norm-text"/>
+         <Label fx:id="gemsLabel" text="20,000 Gems" styleClass="store-gems"/>
          <HBox spacing="25">
-            <VBox alignment="CENTER_RIGHT" spacing="10">
+            <VBox fx:id="incomeVBox" alignment="CENTER_RIGHT" spacing="10">
                <Label text="Monthly Income " styleClass="norm-text"/>
-               <Label text="\$750" styleClass="income"/>
+               <!--<Label text="\$750" styleClass="income"/>
                <Label text="\$150" styleClass="income"/>
-               <Label text="\$650" styleClass="income"/>
+               <Label text="\$650" styleClass="income"/>-->
             </VBox>
-            <VBox alignment="CENTER_RIGHT" spacing="10">
+            <VBox fx:id="expenseVBox" alignment="CENTER_RIGHT" spacing="10">
                <Label text="Monthly Expenses " styleClass="norm-text"/>
-               <Label text="\$750" styleClass="expense"/>
+               <!--<Label text="\$750" styleClass="expense"/>
                <Label text="\$50" styleClass="expense"/>
-               <Label text="\$150" styleClass="expense"/>
+               <Label text="\$150" styleClass="expense"/>-->
             </VBox>
          </HBox>
          <Region VBox.vgrow="ALWAYS"/>

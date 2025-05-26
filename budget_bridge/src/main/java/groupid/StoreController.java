@@ -92,6 +92,7 @@ public class StoreController implements ModelAware{
 
     public void loadBadgeItems() {
         badgesBox.getChildren().clear(); // clears if there are any left
+        badgesBox.setStyle("-fx-background-color: #202538; -fx-background-radius: 8px; -fx-padding: 12;");
 
         // Tier 1 badges:
         addBadge(new BadgeLine("Gold Trophy", "fas-trophy", Color.GOLD), 200);
@@ -180,6 +181,7 @@ public class StoreController implements ModelAware{
 
     private void loadThemeItems() {
         themesBox.getChildren().clear();
+        themesBox.setStyle("-fx-background-color: #202538; -fx-background-radius: 8px; -fx-padding: 12;");
 
         addThemeToStore(new ThemeLine("Ocean Blue", Color.web("#003CFF"), 5000));
         addThemeToStore(new ThemeLine("Mystic Purple", Color.web("#1F1B2E"), 10000));

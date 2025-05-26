@@ -2,6 +2,7 @@ package groupid;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Observable;
 import java.util.ResourceBundle;
 
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -17,7 +18,9 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.collections.ObservableList;
 
 // Homescreen / My Dashboard
 public class PrimaryController implements ModelAware, Initializable {
@@ -26,6 +29,10 @@ public class PrimaryController implements ModelAware, Initializable {
     @FXML private Label userLabel;
     @FXML private Label netLabel;
     @FXML private Label pointsLabel;
+    @FXML private Label gemsLabel;
+
+    @FXML private VBox incomeVBox;
+    @FXML private VBox expenseVBox;
 
     @FXML private ListView<MoneyLine> incomeList;
     @FXML private ListView<MoneyLine> expenseList;
@@ -58,6 +65,11 @@ public class PrimaryController implements ModelAware, Initializable {
         if (model.getCurrentTheme() != null) {
             rootPane.setStyle("-fx-background-color: " + toWebColor(model.getCurrentTheme().getBackgroundColor()) + ";");
         }
+
+        addMoneyLines(incomeVBox, model.incomes(), "income");
+        addMoneyLines(expenseVBox, model.expenses(), "expense");
+
+        gemsLabel.textProperty().bind(model.getGems().asString("%,d Gems!"));
     }
 
     private String toWebColor(Color color) {
@@ -91,6 +103,15 @@ public class PrimaryController implements ModelAware, Initializable {
        
     }
 
+    public void addMoneyLines(VBox target, ObservableList<MoneyLine> list, String styleClass) {
+        for (MoneyLine moneyLine : list) {
+            Label label = new Label(String.format("$%.2f", moneyLine.getAmount()));
+            label.getStyleClass().add(styleClass);
+            target.getChildren().add(label);
+        }
+    }
+
+    // I don't know what this function is supposed to do, when I comment it out everything works normally
     public void addBadge(BadgeLine badge) {
         if (!badgeList.getItems().contains(badge)) {
             badgeList.getItems().add(badge);
