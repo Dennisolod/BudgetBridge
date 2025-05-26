@@ -22,6 +22,7 @@ public class BudgetModel {
     private final ObservableList<MoneyLine> incomes = FXCollections.observableArrayList();
     private final ObservableList<MoneyLine> expenses = FXCollections.observableArrayList();
     private final ObservableList<MissionLine> missions = FXCollections.observableArrayList();
+    private final ObservableList<MissionLine> missionsList = FXCollections.observableArrayList();
     private final ObservableList<BadgeLine> badges = FXCollections.observableArrayList();       // PLAYER OWNED BADGES
 
     // gamification
@@ -87,6 +88,7 @@ public class BudgetModel {
     public ObservableList<MoneyLine> incomes() { return incomes; }
     public ObservableList<MoneyLine> expenses(){ return expenses; }
     public ObservableList<MissionLine> missions() { return missions; }
+    public ObservableList<MissionLine> missionsList() { return missionsList; }
     public IntegerProperty pointsProperty() { return points; }
     public ObservableList<BadgeLine> badges(){ return badges; }
     public ObservableList<Map.Entry<String, Integer>> getLeaderboard() { return leaderboard; }
@@ -106,7 +108,8 @@ public class BudgetModel {
     // helpers
     public void addIncome (String d, double a) { incomes .add(new MoneyLine(d, a));  }
     public void addExpense(String d, double a) { expenses.add(new MoneyLine(d, a));  }
-    public void addMission(String d, String f, double a) { missions.add(new MissionLine(d, f, a)); }
+    public void addMission(Integer i) { missions.add(missionsList.get(i)); }
+    public void addMissionList(String d, String f, double a) { missionsList.add(new MissionLine(d, f, a)); }
     public void setRankPos(String r) { leaderboardPos.set(r + "."); }
     public void setGems(int amount) { gems.set(amount); }
     public boolean ownsBadge(BadgeLine badge) { return badges.stream().anyMatch(b -> b.getName().equals(badge.getName())); }

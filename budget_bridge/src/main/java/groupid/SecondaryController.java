@@ -5,6 +5,7 @@ import java.io.IOException;
 import groupid.model.BudgetModel;
 import groupid.model.MoneyLine;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -24,6 +25,12 @@ public class SecondaryController implements ModelAware {
     @FXML private TextField incomeAmountInput;
     @FXML private TextField expenseTypeInput;
     @FXML private TextField expenseAmountInput;
+    @FXML private Button dailyRewardButton;
+    @FXML private Button weeklyRewardButton;
+    @FXML private Button monthlyRewardButton;
+    @FXML private Label missionDaily;
+    @FXML private Label missionWeekly;
+    @FXML private Label missionMonthly;
 
     private BudgetModel model;
 
@@ -34,6 +41,9 @@ public class SecondaryController implements ModelAware {
         //m.addIncome(null, 0);
         incomeList.setItems(m.incomes());
         expenseList.setItems(m.expenses());
+        missionDaily.setText(model.missions().get(0).toString());
+        missionWeekly.setText(model.missions().get(1).toString());
+        missionMonthly.setText(model.missions().get(2).toString());
     }
 
     @FXML
@@ -60,6 +70,27 @@ public class SecondaryController implements ModelAware {
         } catch (NumberFormatException e) {
             expenseAmountInput.setText("Invalid number");
         }
+    }
+
+    @FXML
+    private void dailyRewards() {
+        dailyRewardButton.setDisable(true);
+        model.setGems(model.getGems().get() + 50);
+        model.addPoints(1000);
+    }
+
+    @FXML
+    private void weeklyRewards() {
+        weeklyRewardButton.setDisable(true);
+        model.setGems(model.getGems().get() + 100);
+        model.addPoints(3000);
+    }
+
+    @FXML
+    private void monthlyRewards() {
+        monthlyRewardButton.setDisable(true);
+        model.setGems(model.getGems().get() + 250);
+        model.addPoints(7000);
     }
 
 

@@ -44,96 +44,33 @@
       </VBox>
    </top>
 
-   <!-- <left>
-      <VBox alignment="TOP_CENTER" spacing="20">
-         <children>
-            <Label text="TOP LEFT" />
-            <Label text="\$750" />
-            <Label text="Remaining" />
-            <Button fx:id="primaryButton" text="Switch to Secondary View" onAction="#switchToSecondary" styleClass="modern-flat-button"/>
-         </children>
-      </VBox>
-      <padding>
-         <Insets bottom="55" left="55" right="55" top="55" />
-      </padding>
-   </left>
-
-   <right>
-      <VBox alignment="TOP_CENTER" spacing="20">
-         <children>
-            <Label text="TOP RIGHT" />
-            <Label text="78%" />
-            <Label text="Label 2" />
-            <Button fx:id="primaryButton" text="Switch to Secondary View" onAction="#switchToSecondary" styleClass="modern-flat-button"/>
-         </children>
-      </VBox>
-      <padding>
-         <Insets bottom="55" left="55" right="55" top="55" />
-      </padding>
-   </right>
-
-   <center>
-      <VBox alignment="CENTER" spacing="20">
-         <children>
-            <Label text="CENTER" />
-            <Label text="Label 1" />
-            <Label text="Label 2" />
-            <Button fx:id="primaryButton" text="Switch to Secondary View" onAction="#switchToSecondary" styleClass="modern-flat-button"/>
-         </children>
-      </VBox>
-      <padding>
-         <Insets bottom="55" left="55" right="55" top="55" />
-      </padding>
-   </center>
-
    <bottom>
-      <HBox alignment="CENTER">
-         <children>
-            <VBox alignment="CENTER_LEFT" spacing="50">
-               <children>
-                  <Label text="BOTTOM CENTER LEFT View" />
-                  <Label text="Label 1" />
-                  <Label text="Label 2" />
-                  <Button fx:id="primaryButton" text="Switch to Secondary View" onAction="#switchToSecondary" styleClass="modern-flat-button"/>
-               </children>
-            </VBox>
-
-            <VBox alignment="CENTER" spacing="50">
-               <children>
-                  <Label text="CENTER View" />
-                  <Label text="Label 1" />
-                  <Label text="Label 2" />
-                  <Button fx:id="primaryButton" text="Switch to Secondary View" onAction="#switchToSecondary" styleClass="modern-flat-button"/>
-               </children>
-            </VBox>
-
-            <VBox alignment="CENTER_RIGHT" spacing="50">
-               <children>
-                  <Label text="BOTTOM CENTER RIGHT View" />
-                  <Label text="Label 1" />
-                  <Label text="Label 2" />
-                  <Button fx:id="primaryButton" text="Switch to Secondary View" onAction="#switchToSecondary" styleClass="modern-flat-button"/>
-               </children>
-            </VBox>
-         </children>
-      </HBox>
-      <padding>
-         <Insets bottom="55" left="55" right="55" top="55" />
-      </padding>
+      <VBox alignment="BOTTOM_LEFT">
+         <HBox>
+            <Label fx:id="missionDaily" styleClass="norm-text"/>
+            <Button fx:id="dailyRewardButton" text="Claim Rewards" onAction="#dailyRewards"/>
+         </HBox>
+         <HBox>
+            <Label fx:id="missionWeekly" styleClass="norm-text"/>
+            <Button fx:id="weeklyRewardButton" text="Claim Rewards" onAction="#weeklyRewards"/>
+         </HBox>
+         <HBox>
+            <Label fx:id="missionMonthly" styleClass="norm-text"/>
+            <Button fx:id="monthlyRewardButton" text="Claim Rewards" onAction="#monthlyRewards"/>
+         </HBox>
+      </VBox>
    </bottom>
 
-    -->
-
-    <left>
-         <Label text="INCOMES" styleClass="norm-text"/>
-         <VBox>
-            <TextField fx:id="incomeTypeInput" promptText="Please enter an income item" />
-            <TextField fx:id="incomeAmountInput" promptText="Please enter an income amount" />
-            <Button text="Add" onAction="#addInputIncome" />
-            <ListView fx:id="incomeList" />
-         </VBox>
-    </left>
-    <right>
+   <left>
+      <Label text="INCOMES" styleClass="norm-text"/>
+      <VBox>
+         <TextField fx:id="incomeTypeInput" promptText="Please enter an income item" />
+         <TextField fx:id="incomeAmountInput" promptText="Please enter an income amount" />
+         <Button text="Add" onAction="#addInputIncome" />
+         <ListView fx:id="incomeList"/>
+      </VBox>
+   </left>
+   <right>
          <Label text="EXPENSES" styleClass="norm-text"/>
          <VBox>
             <TextField fx:id="expenseTypeInput" promptText="Please enter an expense item" />
@@ -141,5 +78,5 @@
             <Button text="Add" onAction="#addInputExpense" />
             <ListView fx:id="expenseList" />
          </VBox>
-    </right>
+   </right>
 </BorderPane>

@@ -29,6 +29,7 @@ public class App extends Application {
         scene.getStylesheets().add(App.class.getResource("style.css").toExternalForm());
         getUsername();
         addDefaultPoints();
+        fillMissionsList();
         addDefaultMissions();;
 
         scene = new Scene(loadAndInject("primary"));
@@ -58,10 +59,17 @@ public class App extends Application {
 
     }
 
+    private void fillMissionsList() {
+        model.addMissionList("Avoid purchasing snacks - 1000pts & 50gems", "daily", (double) 0.0);
+        model.addMissionList("Save $10 by purchasing cheaper alternatives - 3000pts & 100gems", "weekly", (double) 0.0);
+        model.addMissionList("Save $45 on groceries while keeping a healthier diet - 7000pts & 250gems", "monthly", (double) 0.0);
+    }
+
     private void addDefaultMissions(){
-        model.addMission("Mission1", "daily", (double) 0.0);
-        model.addMission("Mission2", "weekly", (double) 0.0);
-        model.addMission("Mission3", "monthly", (double) 0.0);
+        // when we implement more goals, we can just multiply 3 by the goal number and add 1 and 2 to that number for the 2nd and 3rd mission indexes
+        model.addMission(0);
+        model.addMission(1);
+        model.addMission(2);
 
     }
 
