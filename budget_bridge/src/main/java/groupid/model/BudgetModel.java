@@ -33,7 +33,7 @@ public class BudgetModel {
     private final ObservableList<Map.Entry<String, Integer>> leaderboard = FXCollections.observableArrayList();
     private final StringProperty rank = new SimpleStringProperty();
     private final StringProperty leaderboardPos = new SimpleStringProperty();            // LEADERBOARD POINTS
-    private final IntegerProperty gems = new SimpleIntegerProperty(1000000);   // VIRTUAL CURRENCY
+    private final IntegerProperty gems = new SimpleIntegerProperty(10000);   // VIRTUAL CURRENCY
     private final ObservableList<ThemeLine> ownedThemes = FXCollections.observableArrayList();
     private final ObjectProperty<ThemeLine> currentTheme = new SimpleObjectProperty<>();
     private double primaryIncome, sideIncome, otherIncome;

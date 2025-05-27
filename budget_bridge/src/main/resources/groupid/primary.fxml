@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<BorderPane fx:id="rootPane" stylesheets="@style.css" fx:controller="groupid.PrimaryController" xmlns:fx="http://javafx.com/fxml/1" styleClass="background" >
+<BorderPane fx:id="rootPane" stylesheets="@style.css" fx:controller="groupid.PrimaryController" xmlns:fx="http://javafx.com/fxml/1" styleClass="background">
    <top>
       <VBox alignment="CENTER">
          <BorderPane.margin>
@@ -25,82 +25,97 @@
                   <MenuItem fx:id="logoffButton" text="Logoff" styleClass="menu-item" onAction="#logoff"/>
                </Menu>
             </MenuBar>
-            <Button fx:id="dashboardButton" text="My dashboard" styleClass="modern-flat-button" onAction="#switchToPrimary"/>
-            <Button fx:id="leaderboardsButton" text="Leaderboards" styleClass="modern-flat-button" onAction="#switchToLeaderboard"/>
-            <Button fx:id="budgetButton" text="Update Budget" styleClass="modern-flat-button" onAction="#switchToSecondary"/>
-            <Button fx:id="storeButton" text="Exchange Store" styleClass="modern-flat-button" onAction="#switchToStore"/>
+            <Button fx:id="dashboardButton" text="My Dashboard" styleClass="modern-nav-button-active" onAction="#switchToPrimary"/>
+            <Button fx:id="leaderboardsButton" text="Leaderboards" styleClass="modern-nav-button" onAction="#switchToLeaderboard"/>
+            <Button fx:id="budgetButton" text="Update Budget" styleClass="modern-nav-button" onAction="#switchToSecondary"/>
+            <Button fx:id="storeButton" text="Exchange Store" styleClass="modern-nav-button" onAction="#switchToStore"/>
          </HBox>
       </VBox>
    </top>
 
+   <!-- LEFT COLUMN: Welcome & Budget Overview -->
    <left>
-      <VBox alignment="TOP_LEFT" spacing="30" styleClass="vbox-welcome">
+      <VBox alignment="TOP_LEFT" spacing="25" styleClass="dashboard-welcome-panel">
          <BorderPane.margin>
             <Insets top="20" right="20" bottom="20" left="20"/>
          </BorderPane.margin>
-         <Label fx:id="userLabel" styleClass="big-heading"/>
-         <Label text="Budget overview:" styleClass="heading"/>
-         <Label fx:id="gemsLabel" styleClass="store-gems"/>
-         <HBox spacing="25">
-            <VBox fx:id="incomeVBox" alignment="CENTER_RIGHT" spacing="10">
-               <Label text="Monthly Income " styleClass="norm-text"/>
-               <!--<Label text="\$750" styleClass="income"/>
-               <Label text="\$150" styleClass="income"/>
-               <Label text="\$650" styleClass="income"/>-->
-            </VBox>
-            <VBox fx:id="expenseVBox" alignment="CENTER_RIGHT" spacing="10">
-               <Label text="Monthly Expenses " styleClass="norm-text"/>
-               <!--<Label text="\$750" styleClass="expense"/>
-               <Label text="\$50" styleClass="expense"/>
-               <Label text="\$150" styleClass="expense"/>-->
-            </VBox>
-         </HBox>
-         <Region VBox.vgrow="ALWAYS"/>
-         <VBox alignment="BOTTOM_LEFT" spacing="10">
-            <Label text="Missions" styleClass="heading"/>
-            <ListView fx:id="missionList" prefHeight="150"/>
+         
+         <!-- Welcome Section -->
+         <VBox spacing="15">
+            <Label fx:id="userLabel" styleClass="panel-heading"/>
+            <Label fx:id="gemsLabel" styleClass="store-gems"/>
          </VBox>
+         
+         <!-- Budget Overview Card -->
+         <VBox spacing="20" styleClass="budget-overview-card" VBox.vgrow="ALWAYS">
+            <Label text="Budget Overview" styleClass="card-heading"/>
+            
+            <HBox spacing="30" alignment="CENTER">
+               <VBox fx:id="incomeVBox" alignment="CENTER" spacing="12" styleClass="overview-metric-card">
+                  <Label text="Monthly Income" styleClass="metric-label"/>
+                  <!-- Income items will be populated by controller -->
+               </VBox>
+               <VBox fx:id="expenseVBox" alignment="CENTER" spacing="12" styleClass="overview-metric-card">
+                  <Label text="Monthly Expenses" styleClass="metric-label"/>
+                  <!-- Expense items will be populated by controller -->
+               </VBox>
+            </HBox>
+         </VBox>
+         
       </VBox>
       <padding>
          <Insets bottom="25" left="25" right="25" top="25"/>
       </padding>
    </left>
 
+   <!-- RIGHT COLUMNMissions & Badges -->
    <right>
-      
-      <VBox alignment="BOTTOM_LEFT" spacing="30" styleClass="vbox-badges">
+      <VBox spacing="25" styleClass="dashboard-sidebar-panel">
          <BorderPane.margin>
             <Insets top="20" right="20" bottom="20" left="20"/>
          </BorderPane.margin>
-
-         <Label text="Badges:" styleClass="heading"/>
-         <ListView fx:id="badgeList" styleClass="scrollpane-badges" prefHeight="700" prefWidth="300"/>
+         
+         <!-- Missions Card (Top Half) -->
+         <VBox spacing="15" styleClass="missions-overview-card" VBox.vgrow="ALWAYS">
+            <Label text="Active Missions" styleClass="card-heading"/>
+               <ListView fx:id="missionList" styleClass="modern-list"/>
+         </VBox>
+         
+         <!-- Badges Card (Bottom Half) -->
+         <VBox spacing="15" styleClass="scrollpane-badges" VBox.vgrow="ALWAYS">
+            <Label text="Achievement Badges" styleClass="card-heading"/>
+            <ListView fx:id="badgeList" styleClass="scrollpane-badges"/>
+         </VBox>
+         
       </VBox>
       <padding>
-         <Insets bottom="200" left="25" right="200" top="55"/>
+         <Insets bottom="25" left="25" right="25" top="25"/>
       </padding>
    </right>
 
+   <!-- CENTER COLUMN: Spending Breakdown Chart -->
    <center>
-      <VBox alignment="CENTER" spacing="20" styleClass="vbox-spending">
+      <VBox alignment="CENTER" spacing="25" styleClass="dashboard-chart-panel">
          <BorderPane.margin>
             <Insets top="10" right="20" bottom="20" left="20"/>
          </BorderPane.margin>
-         <Label text="Spending Breakdown:" styleClass="heading"/>
-         <HBox alignment="CENTER" spacing="10">
-            <VBox alignment="CENTER" spacing="10" prefWidth="300" prefHeight="300">
-               <ImageView fx:id="pieChart" fitWidth="600" fitHeight="600" preserveRatio="true">
+         
+         <VBox spacing="20" styleClass="chart-display-card" alignment="CENTER">
+            <Label text="Spending Breakdown" styleClass="card-heading"/>
+            
+            <VBox alignment="CENTER" spacing="15">
+               <ImageView fx:id="pieChart" fitWidth="500" fitHeight="500" preserveRatio="true">
                   <image>
                      <Image url="@../images/budget_chart_example.png"/>
                   </image>
                </ImageView>
             </VBox>
-         </HBox>
+         </VBox>
+         
       </VBox>
       <padding>
-         <Insets bottom="200" left="10" right="55" top="55"/>
+         <Insets bottom="25" left="25" right="25" top="25"/>
       </padding>
    </center>
 
-   <bottom/>
 </BorderPane>

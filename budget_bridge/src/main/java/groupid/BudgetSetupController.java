@@ -34,7 +34,6 @@ public class BudgetSetupController {
                 .goals(selectedGoals())
                 .budgetPlan(selectedPlan())
                 .build();
-            System.out.println("DEBUG BudgetInfo = " + info);   // <‑‑ new line
             return info;
 
     }

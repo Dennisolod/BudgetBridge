@@ -81,7 +81,7 @@ public class PrimaryController implements ModelAware, Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-         System.out.println("rootPane: " + rootPane);
+
         badgeList.setCellFactory(lv -> new ListCell<>() {
             private final FontIcon icon = new FontIcon();
             private final Label    name = new Label();
