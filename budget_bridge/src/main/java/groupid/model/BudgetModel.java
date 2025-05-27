@@ -88,24 +88,24 @@ public class BudgetModel {
         recalc.invalidated(null);
 
         leaderboard.addAll(
-            Map.entry("Alice", 15000),
-            Map.entry("Bob", 14000),
-            Map.entry("Charlie", 13000),
-            Map.entry("Diana", 12000),
-            Map.entry("Ethan", 11000), 
-            Map.entry("Dylan", 10000),
-            Map.entry("Alice", 15000),
-            Map.entry("Bob", 14000),
-            Map.entry("Charlie", 13000),
-            Map.entry("Diana", 12000),
-            Map.entry("Ethan", 11000), 
-            Map.entry("Dylan", 10000),
-            Map.entry("Alice", 15000),
-            Map.entry("Bob", 14000),
-            Map.entry("Charlie", 13000),
-            Map.entry("Diana", 12000),
-            Map.entry("Ethan", 11000), 
-            Map.entry("Dylan", 10000)
+            Map.entry("Alice", 5200),
+            Map.entry("Bob", 5100),
+            Map.entry("Charlie", 5001),
+            Map.entry("Diana", 4800),
+            Map.entry("Ethan", 4200), 
+            Map.entry("Dylan", 4121),
+            Map.entry("Alice", 3400),
+            Map.entry("Bob", 3221),
+            Map.entry("Charlie", 3200),
+            Map.entry("Diana", 3100),
+            Map.entry("Ethan", 3000), 
+            Map.entry("Dylan", 2900),
+            Map.entry("Alice", 2500),
+            Map.entry("Bob", 2200),
+            Map.entry("Charlie", 1000),
+            Map.entry("Diana", 200),
+            Map.entry("Ethan", 110), 
+            Map.entry("Dylan", 100)
         );
 
     }
