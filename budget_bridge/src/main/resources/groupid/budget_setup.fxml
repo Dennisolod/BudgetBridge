@@ -3,83 +3,153 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<DialogPane fx:id="rootPane" xmlns:fx="http://javafx.com/fxml/1" fx:controller="groupid.BudgetSetupController" stylesheets="@style.css" styleClass="background">
 
-    <headerText>Let’s get your budget basics</headerText>
+<DialogPane fx:id="rootPane" xmlns:fx="http://javafx.com/fxml/1" fx:controller="groupid.BudgetSetupController" stylesheets="@style.css" styleClass="setup-background">
+
+    <headerText>Let's Set Up Your Budget</headerText>
 
     <content>
-        <VBox alignment="CENTER" spacing="25">
+        <BorderPane prefWidth="1200" prefHeight="700">
             <padding>
-                <Insets top="25" right="30" bottom="25" left="30"/>
+                <Insets top="30" right="30" bottom="30" left="30"/>
             </padding>
-            <TitledPane text="Income Sources" expanded="true" styleClass="section-pane">
-                <content>
-                    <GridPane hgap="10" vgap="10">
-                        <Label text="Primary:"       styleClass="norm-text"/>
-                        <TextField fx:id="tfPrimaryIncome"
-                                   GridPane.columnIndex="1"/>
-
-                        <Label text="Side hustle / gigs:" GridPane.rowIndex="1" styleClass="norm-text"/>
-                        <TextField fx:id="tfSideIncome"
-                                   GridPane.rowIndex="1" GridPane.columnIndex="1"/>
-
-                        <Label text="Other:"          GridPane.rowIndex="2" styleClass="norm-text"/>
-                        <TextField fx:id="tfOtherIncome"
-                                   GridPane.rowIndex="2" GridPane.columnIndex="1"/>
-                    </GridPane>
-                </content>
-            </TitledPane>
-            <TitledPane text="Primary Expenses" expanded="true" styleClass="section-pane">
-                <content>
-                    <GridPane hgap="10" vgap="10">
-
-                        <Label text="Rent / Mortgage:"        styleClass="norm-text"/>
-                        <TextField fx:id="tfRent"             GridPane.columnIndex="1"/>
-
-                        <Label text="Car Payment:"             GridPane.rowIndex="1" styleClass="norm-text"/>
-                        <TextField fx:id="tfCar"              GridPane.rowIndex="1" GridPane.columnIndex="1"/>
-
-                        <Label text="Groceries:"               GridPane.rowIndex="2" styleClass="norm-text"/>
-                        <TextField fx:id="tfGroceries"        GridPane.rowIndex="2" GridPane.columnIndex="1"/>
-
-                        <Label text="Dining Out:"              GridPane.rowIndex="3" styleClass="norm-text"/>
-                        <TextField fx:id="tfDining"           GridPane.rowIndex="3" GridPane.columnIndex="1"/>
-
-                        <Label text="Fun Money:"               GridPane.rowIndex="4" styleClass="norm-text"/>
-                        <TextField fx:id="tfFun"              GridPane.rowIndex="4" GridPane.columnIndex="1"/>
-
-                        <Label text="Other:"                   GridPane.rowIndex="5" styleClass="norm-text"/>
-                        <TextField fx:id="tfOtherExpense"     GridPane.rowIndex="5" GridPane.columnIndex="1"/>
-                    </GridPane>
-                </content>
-            </TitledPane>
-            <VBox spacing="8" alignment="TOP_LEFT">
-                <Label text="Choose your goals (pick any):" styleClass="heading"/>
-                <CheckBox text="Emergency fund"        fx:id="chkGoal1"/>
-                <CheckBox text="Pay off debt"          fx:id="chkGoal2"/>
-                <CheckBox text="Save for vacation"     fx:id="chkGoal3"/>
-                <CheckBox text="Invest for retirement" fx:id="chkGoal4"/>
-            </VBox>
-
-            <VBox spacing="8" alignment="TOP_LEFT">
-                <fx:define>
-                    <ToggleGroup fx:id="planGroup"/>
-                </fx:define>
-
-                <Label text="Select a budget plan:" styleClass="heading"/>
-
-                <RadioButton text="College Student"      toggleGroup="$planGroup"/>
-                <RadioButton text="Part-Time Worker"        toggleGroup="$planGroup"/>
-                <RadioButton text="Young Professional"     toggleGroup="$planGroup"/>
-                <RadioButton text="Living With Parents"    toggleGroup="$planGroup"/>
-                <RadioButton text="Freelancer"    toggleGroup="$planGroup"/>
-            </VBox>
-
-
-        </VBox>
+            
+            <!-- Income Sources -->
+            <left>
+                <VBox spacing="25" styleClass="setup-panel-left">
+                    <BorderPane.margin>
+                        <Insets top="0" right="15" bottom="0" left="0"/>
+                    </BorderPane.margin>
+                    
+                    <Label text="Income Sources" styleClass="setup-panel-heading"/>
+                    
+                    <VBox spacing="20" styleClass="setup-section-card">
+                        <Label text="Tell us about your income" styleClass="setup-section-subtitle"/>
+                        
+                        <VBox spacing="15">
+                            <HBox spacing="15" alignment="CENTER_LEFT">
+                                <Label text="Primary Job:" styleClass="setup-label" prefWidth="140"/>
+                                <TextField fx:id="tfPrimaryIncome" styleClass="setup-input" HBox.hgrow="ALWAYS"/>
+                            </HBox>
+                            
+                            <HBox spacing="15" alignment="CENTER_LEFT">
+                                <Label text="Side Hustle:" styleClass="setup-label" prefWidth="140"/>
+                                <TextField fx:id="tfSideIncome" styleClass="setup-input" HBox.hgrow="ALWAYS"/>
+                            </HBox>
+                            
+                            <HBox spacing="15" alignment="CENTER_LEFT">
+                                <Label text="Other Income:" styleClass="setup-label" prefWidth="140"/>
+                                <TextField fx:id="tfOtherIncome" styleClass="setup-input" HBox.hgrow="ALWAYS"/>
+                            </HBox>
+                        </VBox>
+                    </VBox>
+                    
+                    <!-- Goals Section -->
+                    <VBox spacing="20" styleClass="setup-section-card" VBox.vgrow="ALWAYS">
+                        <Label text="Financial Goals" styleClass="setup-section-title"/>
+                        <Label text="Choose your priorities (select any):" styleClass="setup-section-subtitle"/>
+                        
+                        <VBox spacing="12">
+                            <CheckBox text="Build Emergency Fund" fx:id="chkGoal1" styleClass="setup-checkbox"/>
+                            <CheckBox text="Pay Off Debt" fx:id="chkGoal2" styleClass="setup-checkbox"/>
+                            <CheckBox text="Save for Vacation" fx:id="chkGoal3" styleClass="setup-checkbox"/>
+                            <CheckBox text="Invest for Retirement" fx:id="chkGoal4" styleClass="setup-checkbox"/>
+                        </VBox>
+                    </VBox>
+                    
+                </VBox>
+            </left>
+            
+            <!-- Expenses -->
+            <right>
+                <VBox spacing="25" styleClass="setup-panel-right">
+                    <BorderPane.margin>
+                        <Insets top="0" right="0" bottom="0" left="15"/>
+                    </BorderPane.margin>
+                    
+                    <Label text="Primary Expenses" styleClass="setup-panel-heading"/>
+                    
+                    <VBox spacing="20" styleClass="setup-section-card" VBox.vgrow="ALWAYS">
+                        <Label text="Your main monthly expenses" styleClass="setup-section-subtitle"/>
+                        
+                        <VBox spacing="15">
+                            <HBox spacing="15" alignment="CENTER_LEFT">
+                                <Label text="Rent/Mortgage:" styleClass="setup-label" prefWidth="140"/>
+                                <TextField fx:id="tfRent" styleClass="setup-input" HBox.hgrow="ALWAYS"/>
+                            </HBox>
+                            
+                            <HBox spacing="15" alignment="CENTER_LEFT">
+                                <Label text="Car Payment:" styleClass="setup-label" prefWidth="140"/>
+                                <TextField fx:id="tfCar" styleClass="setup-input" HBox.hgrow="ALWAYS"/>
+                            </HBox>
+                            
+                            <HBox spacing="15" alignment="CENTER_LEFT">
+                                <Label text="Groceries:" styleClass="setup-label" prefWidth="140"/>
+                                <TextField fx:id="tfGroceries" styleClass="setup-input" HBox.hgrow="ALWAYS"/>
+                            </HBox>
+                            
+                            <HBox spacing="15" alignment="CENTER_LEFT">
+                                <Label text="Dining Out:" styleClass="setup-label" prefWidth="140"/>
+                                <TextField fx:id="tfDining" styleClass="setup-input" HBox.hgrow="ALWAYS"/>
+                            </HBox>
+                            
+                            <HBox spacing="15" alignment="CENTER_LEFT">
+                                <Label text="Fun Money:" styleClass="setup-label" prefWidth="140"/>
+                                <TextField fx:id="tfFun" styleClass="setup-input" HBox.hgrow="ALWAYS"/>
+                            </HBox>
+                            
+                            <HBox spacing="15" alignment="CENTER_LEFT">
+                                <Label text="Other:" styleClass="setup-label" prefWidth="140"/>
+                                <TextField fx:id="tfOtherExpense" styleClass="setup-input" HBox.hgrow="ALWAYS"/>
+                            </HBox>
+                        </VBox>
+                    </VBox>
+                    
+                </VBox>
+            </right>
+            
+            <!-- Budget Plan Selection -->
+            <center>
+                <VBox spacing="25" styleClass="setup-panel-center" alignment="TOP_CENTER">
+                    <BorderPane.margin>
+                        <Insets top="0" right="15" bottom="0" left="15"/>
+                    </BorderPane.margin>
+                    
+                    <Label text="Budget Plan" styleClass="setup-panel-heading"/>
+                    
+                    <VBox spacing="20" styleClass="setup-section-card" alignment="TOP_CENTER">
+                        <Label text="Choose Your Lifestyle" styleClass="setup-section-title"/>
+                        <Label text="Select the plan that best fits your situation:" styleClass="setup-section-subtitle"/>
+                        
+                        <fx:define>
+                            <ToggleGroup fx:id="planGroup"/>
+                        </fx:define>
+                        
+                        <VBox spacing="15" alignment="TOP_CENTER">
+                            <RadioButton text="College Student" toggleGroup="$planGroup" styleClass="setup-radio"/>
+                            <RadioButton text="Part-Time Worker" toggleGroup="$planGroup" styleClass="setup-radio"/>
+                            <RadioButton text="Young Professional" toggleGroup="$planGroup" styleClass="setup-radio"/>
+                            <RadioButton text="Living With Parents" toggleGroup="$planGroup" styleClass="setup-radio"/>
+                            <RadioButton text="Freelancer" toggleGroup="$planGroup" styleClass="setup-radio"/>
+                        </VBox>
+                    </VBox>
+                    
+                    <!-- Welcome Message -->
+                    <VBox spacing="15" styleClass="welcome-card" alignment="CENTER">
+                        <Label text="🌉" styleClass="welcome-emoji"/>
+                        <Label text="BudgetBridge" styleClass="welcome-text"/>
+                        <Label text="Take control of your finances!" styleClass="welcome-subtitle"/>
+                    </VBox>
+                    
+                </VBox>
+            </center>
+            
+        </BorderPane>
     </content>
+    
     <buttonTypes>
-        <ButtonType fx:id="okBtn"     text="OK"     buttonData="OK_DONE"/>
+        <ButtonType fx:id="okBtn" text="Create My Budget" buttonData="OK_DONE"/>
         <ButtonType fx:id="cancelBtn" text="Cancel" buttonData="CANCEL_CLOSE"/>
     </buttonTypes>
+    
 </DialogPane>

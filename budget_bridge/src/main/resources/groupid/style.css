@@ -22,7 +22,7 @@
 }
 
 .expense {
-    -fx-text-fill: #FF8C42; /* Soft orange */
+    -fx-text-fill: #FF8C42;
     -fx-font-weight: bold;
     -fx-font-size: 18px;
 }
@@ -102,7 +102,7 @@
 }
 
 .leaderboard-points {
-    -fx-text-fill: #00E5FF; /* Vibrant cyan */
+    -fx-text-fill: #00E5FF; 
     -fx-font-size: 36px;
     -fx-font-weight: bold;
 }
@@ -158,12 +158,11 @@
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 8, 0, 0, 3);
 }
 
-.net-positive { -fx-text-fill: #00ff2a; }   /* bright green */
-.net-negative { -fx-text-fill: #ff4d4d; }   /* soft red   */
+.net-positive { -fx-text-fill: #00ff2a; } 
+.net-negative { -fx-text-fill: #ff4d4d; } 
 .net          { -fx-font-size: 24px; -fx-font-weight: 700; }
 
 
-/* Modern Navigation Buttons */
 .modern-nav-button {
     -fx-background-color: #FFFFFF;
     -fx-text-fill: #000000;
@@ -297,7 +296,6 @@
     -fx-background-radius: 4;
 }
 
-/* Responsive Budget Summary for Center Column */
 .budget-summary-card {
     -fx-background-color: rgba(255, 255, 255, 0.08);
     -fx-background-radius: 12;
@@ -305,7 +303,6 @@
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 6, 0, 0, 3);
 }
 
-/* Missions Card for Center Column */
 .missions-card {
     -fx-background-color: rgba(255, 255, 255, 0.05);
     -fx-background-radius: 12;
@@ -313,7 +310,6 @@
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0, 0, 2);
 }
 
-/* Modern Input Fields */
 .modern-input {
     -fx-background-color: #2a3441;
     -fx-text-fill: #ffffff;
@@ -332,7 +328,6 @@
     -fx-effect: dropshadow(gaussian, rgba(127, 163, 211, 0.3), 4, 0, 0, 1);
 }
 
-/* Add Buttons */
 .add-button-income {
     -fx-background-color: #00E5FF;
     -fx-text-fill: #000000;
@@ -369,7 +364,6 @@
     -fx-background-color: #e67d3a;
 }
 
-/* Enhanced styling for landscape layout */
 .card-heading {
     -fx-text-fill: #ffffff;
     -fx-font-weight: bold;
@@ -441,7 +435,6 @@
     -fx-background-color: #00e625;
 }
 
-/* Main Scroll Pane */
 .main-scroll {
     -fx-background-color: transparent;
     -fx-control-inner-background: transparent;
@@ -464,4 +457,219 @@
 .main-scroll .scroll-bar .thumb {
     -fx-background-color: rgba(255, 255, 255, 0.3);
     -fx-background-radius: 4;
+}
+
+/* Budget Setup Dialog Background */
+.setup-background {
+    -fx-background-color: #202538;
+}
+
+/* Panel Styling for Setup Dialog */
+.setup-panel-left {
+    -fx-background-color: #222c3c;
+    -fx-background-radius: 12;
+    -fx-padding: 25;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0, 0, 4);
+    -fx-min-width: 350;
+    -fx-pref-width: 380;
+}
+
+.setup-panel-right {
+    -fx-background-color: #222c3c;
+    -fx-background-radius: 12;
+    -fx-padding: 25;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0, 0, 4);
+    -fx-min-width: 350;
+    -fx-pref-width: 380;
+}
+
+.setup-panel-center {
+    -fx-background-color: #222c3c;
+    -fx-background-radius: 12;
+    -fx-padding: 25;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0, 0, 4);
+    -fx-min-width: 320;
+    -fx-pref-width: 350;
+}
+
+/* Panel Headings */
+.setup-panel-heading {
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    -fx-font-size: 22px;
+    -fx-font-family: "Helvetica", "Arial", sans-serif;
+}
+
+/* Section Cards */
+.setup-section-card {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+    -fx-background-radius: 10;
+    -fx-padding: 20;
+}
+
+.setup-section-title {
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: 600;
+    -fx-font-size: 18px;
+    -fx-font-family: "Helvetica", "Arial", sans-serif;
+}
+
+.setup-section-subtitle {
+    -fx-text-fill: #b8c5d1;
+    -fx-font-weight: 500;
+    -fx-font-size: 14px;
+    -fx-font-family: "Helvetica", "Arial", sans-serif;
+}
+
+/* Input Labels */
+.setup-label {
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: 500;
+    -fx-font-size: 14px;
+    -fx-font-family: "Helvetica", "Arial", sans-serif;
+    -fx-alignment: center-right;
+}
+
+/* Input Fields */
+.setup-input {
+    -fx-background-color: #2a3441;
+    -fx-text-fill: #ffffff;
+    -fx-prompt-text-fill: #8a9ba8;
+    -fx-font-size: 14px;
+    -fx-padding: 10 14;
+    -fx-background-radius: 8;
+    -fx-border-color: #3a4651;
+    -fx-border-radius: 8;
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 2, 0, 0, 1);
+    -fx-font-family: "Helvetica", "Arial", sans-serif;
+}
+
+.setup-input:focused {
+    -fx-border-color: #7fa3d3;
+    -fx-effect: dropshadow(gaussian, rgba(127, 163, 211, 0.3), 4, 0, 0, 1);
+}
+
+/* Checkboxes */
+.setup-checkbox {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-font-family: "Helvetica", "Arial", sans-serif;
+    -fx-font-weight: 500;
+}
+
+.setup-checkbox .box {
+    -fx-background-color: #2a3441;
+    -fx-border-color: #3a4651;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-border-width: 1;
+}
+
+.setup-checkbox:selected .box {
+    -fx-background-color: #00E5FF;
+    -fx-border-color: #00E5FF;
+}
+
+.setup-checkbox .mark {
+    -fx-background-color: #000000;
+    -fx-shape: "M2,6 L6,10 L10,2";
+}
+
+/* Radio Buttons */
+.setup-radio {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 15px;
+    -fx-font-family: "Helvetica", "Arial", sans-serif;
+    -fx-font-weight: 500;
+    -fx-padding: 8 0;
+}
+
+.setup-radio .radio {
+    -fx-background-color: #2a3441;
+    -fx-border-color: #3a4651;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-border-width: 1;
+}
+
+.setup-radio:selected .radio {
+    -fx-background-color: #7fa3d3;
+    -fx-border-color: #7fa3d3;
+}
+
+.setup-radio .dot {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 5;
+}
+
+/* Welcome Card */
+.welcome-card {
+    -fx-background-color: rgba(127, 163, 211, 0.1);
+    -fx-background-radius: 12;
+    -fx-padding: 20;
+    -fx-effect: dropshadow(gaussian, rgba(127, 163, 211, 0.2), 4, 0, 0, 2);
+    -fx-border-color: rgba(127, 163, 211, 0.3);
+    -fx-border-radius: 12;
+    -fx-border-width: 1;
+}
+
+.welcome-emoji {
+    -fx-font-size: 32px;
+}
+
+.welcome-text {
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-font-family: "Helvetica", "Arial", sans-serif;
+}
+
+.welcome-subtitle {
+    -fx-text-fill: #b8c5d1;
+    -fx-font-size: 13px;
+    -fx-font-family: "Helvetica", "Arial", sans-serif;
+    -fx-text-alignment: center;
+    -fx-wrap-text: true;
+}
+
+/* Dialog Header */
+.dialog-pane .header-panel {
+    -fx-background-color: #222c3c;
+}
+
+.dialog-pane .header-panel .label {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Helvetica", "Arial", sans-serif;
+}
+
+/* Dialog Buttons */
+.dialog-pane .button-bar .button {
+    -fx-background-color: #7fa3d3;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-font-weight: 600;
+    -fx-padding: 12 24;
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-effect: dropshadow(gaussian, rgba(127, 163, 211, 0.3), 4, 0, 0, 2);
+    -fx-font-family: "Helvetica", "Arial", sans-serif;
+}
+
+.dialog-pane .button-bar .button:hover {
+    -fx-background-color: #6a92c4;
+}
+
+.dialog-pane .button-bar .button:default {
+    -fx-background-color: #00E5FF;
+    -fx-text-fill: #000000;
+    -fx-effect: dropshadow(gaussian, rgba(0, 229, 255, 0.4), 6, 0, 0, 2);
+}
+
+.dialog-pane .button-bar .button:default:hover {
+    -fx-background-color: #00d4e6;
 }

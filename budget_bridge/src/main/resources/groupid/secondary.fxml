@@ -28,7 +28,6 @@
             <Insets top="20" right="20" bottom="20" left="20"/>
          </BorderPane.margin>
          
-         <!-- Modern Navigation -->
          <HBox spacing="15" alignment="CENTER">
             <HBox.margin>
                <Insets top="0" right="50" bottom="0" left="50"/>
@@ -49,7 +48,6 @@
       </VBox>
    </top>
 
-   <!-- LEFT COLUMN: Income Management -->
    <left>
       <VBox alignment="TOP_LEFT" spacing="25" styleClass="income-management-panel">
          <BorderPane.margin>
@@ -58,7 +56,6 @@
          
          <Label text="Income Management" styleClass="panel-heading"/>
          
-         <!-- Add Income Section -->
          <VBox spacing="15" styleClass="add-section-card">
             <Label text="Add New Income" styleClass="section-title"/>
             <TextField fx:id="incomeTypeInput" promptText="Income source (e.g., Salary, Freelance)" styleClass="modern-input"/>
@@ -66,7 +63,6 @@
             <Button text="Add Income" onAction="#addInputIncome" styleClass="add-button-income"/>
          </VBox>
          
-         <!-- Income List -->
          <VBox spacing="12" VBox.vgrow="ALWAYS">
             <Label text="Current Income Sources" styleClass="section-title"/>
             <ScrollPane styleClass="list-scroll" VBox.vgrow="ALWAYS" prefHeight="400">
@@ -80,7 +76,6 @@
       </padding>
    </left>
 
-   <!-- RIGHT COLUMN: Expense Management -->
    <right>
       <VBox alignment="TOP_LEFT" spacing="25" styleClass="expense-management-panel">
          <BorderPane.margin>
@@ -89,7 +84,6 @@
          
          <Label text="Expense Management" styleClass="panel-heading"/>
          
-         <!-- Add Expense Section -->
          <VBox spacing="15" styleClass="add-section-card">
             <Label text="Add New Expense" styleClass="section-title"/>
             <TextField fx:id="expenseTypeInput" promptText="Expense category (e.g., Rent, Groceries)" styleClass="modern-input"/>
@@ -97,7 +91,6 @@
             <Button text="Add Expense" onAction="#addInputExpense" styleClass="add-button-expense"/>
          </VBox>
          
-         <!-- Expense List -->
          <VBox spacing="12" VBox.vgrow="ALWAYS">
             <Label text="Current Expenses" styleClass="section-title"/>
             <ScrollPane styleClass="list-scroll" VBox.vgrow="ALWAYS" prefHeight="400">
@@ -111,14 +104,12 @@
       </padding>
    </right>
 
-   <!-- CENTER COLUMN: Budget Summary & Missions -->
    <center>
       <VBox alignment="TOP_CENTER" spacing="30" styleClass="center-summary-panel">
          <BorderPane.margin>
             <Insets top="10" right="20" bottom="20" left="20"/>
          </BorderPane.margin>
          
-         <!-- Budget Summary Card -->
          <VBox fx:id="summaryCard" alignment="CENTER" spacing="20" styleClass="budget-summary-card">
             <Label text="Monthly Budget Overview" styleClass="card-heading"/>
             <HBox alignment="CENTER" spacing="50">
@@ -139,7 +130,6 @@
          
          <Region VBox.vgrow="SOMETIMES"/>
          
-         <!-- Mission Progress Card -->
          <VBox spacing="20" styleClass="missions-card" VBox.vgrow="ALWAYS">
             <Label text="Financial Goals and Rewards" styleClass="card-heading"/>
             
