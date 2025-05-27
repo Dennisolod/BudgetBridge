@@ -21,7 +21,7 @@ public class BudgetSetupController {
     @FXML private ToggleGroup planGroup;
 
     public BudgetInfo collectResult() {
-        return BudgetInfo.builder()
+        BudgetInfo info = BudgetInfo.builder()
                 .primaryIncome(parse(tfPrimaryIncome))
                 .sideIncome(parse(tfSideIncome))
                 .otherIncome(parse(tfOtherIncome))
@@ -34,6 +34,9 @@ public class BudgetSetupController {
                 .goals(selectedGoals())
                 .budgetPlan(selectedPlan())
                 .build();
+            System.out.println("DEBUG BudgetInfo = " + info);   // <‑‑ new line
+            return info;
+
     }
 
     private double parse(TextField tf) {

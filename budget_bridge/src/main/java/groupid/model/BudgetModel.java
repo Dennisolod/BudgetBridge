@@ -60,18 +60,21 @@ public class BudgetModel {
     }
 
     public void loadBudgetInfo(BudgetInfo info) {
-        primaryIncome = info.getPrimaryIncome();
-        sideIncome = info.getSideIncome();
-        otherIncome = info.getOtherIncome();
+        incomes().clear();
+        if (info.getPrimaryIncome() > 0) addIncome("Primary Job",  info.getPrimaryIncome());
+        if (info.getSideIncome()   > 0) addIncome("Side Hustle",   info.getSideIncome());
+        if (info.getOtherIncome()  > 0) addIncome("Other Income",  info.getOtherIncome());
 
-        rent = info.getRent();
-        car = info.getCar();
-        groceries = info.getGroceries();
-        diningOut = info.getDiningOut();
-        funMoney = info.getFunMoney();
-        otherExpense = info.getOtherExpense();
-        goals = info.getGoals();
-        budgetPlan = info.getBudgetPlan();
+        /* expense lines */
+        expenses().clear();
+        if (info.getRent()        > 0) addExpense("Rent/Mortgage",  info.getRent());
+        if (info.getCar()         > 0) addExpense("Car Payment",    info.getCar());
+        if (info.getGroceries()   > 0) addExpense("Groceries",      info.getGroceries());
+        if (info.getDiningOut()   > 0) addExpense("Dining Out",     info.getDiningOut());
+        if (info.getFunMoney()    > 0) addExpense("Fun Money",      info.getFunMoney());
+        if (info.getOtherExpense()> 0) addExpense("Other",          info.getOtherExpense());
+
+        recalcTotals();
     }
 
 

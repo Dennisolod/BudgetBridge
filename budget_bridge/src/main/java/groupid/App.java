@@ -10,7 +10,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ButtonType;
+import javafx.scene.control.ButtonBar;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.TextInputDialog;
@@ -68,7 +68,11 @@ public class App extends Application {
         dialog.setTitle("Welcome — Budget Setup");
         dialog.initOwner(owner);
         dialog.setDialogPane(pane);
-        dialog.setResultConverter(bt -> bt == ButtonType.OK ? ctl.collectResult() : null);
+        
+        dialog.setResultConverter(bt ->
+        (bt != null && bt.getButtonData() == ButtonBar.ButtonData.OK_DONE)
+            ? ctl.collectResult()
+            : null);
 
         pane.getStylesheets()
             .add(App.class.getResource("style.css").toExternalForm());

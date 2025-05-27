@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import groupid.model.BudgetModel;
 import groupid.model.MoneyLine;
+import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -41,10 +42,29 @@ public class SecondaryController implements ModelAware {
         //m.addIncome(null, 0);
         incomeList.setItems(m.incomes());
         expenseList.setItems(m.expenses());
+        m.incomes().addListener((ListChangeListener<MoneyLine>) c -> updateTotals());
+        m.expenses().addListener((ListChangeListener<MoneyLine>) c -> updateTotals());
+        updateTotals(); 
         missionDaily.setText(model.missions().get(0).toString());
         missionWeekly.setText(model.missions().get(1).toString());
         missionMonthly.setText(model.missions().get(2).toString());
     }
+    @FXML
+    private void updateTotals() {
+        double income  = model.incomes().stream().mapToDouble(MoneyLine::getAmount).sum();
+        double expense = model.expenses().stream().mapToDouble(MoneyLine::getAmount).sum();
+        double net     = income - expense;
+        System.out.printf("income=%.2f  expense=%.2f%n", income, expense);
+        totalIncomeLabel.setText(String.format("$%.2f", income));
+        totalExpenseLabel.setText(String.format("$%.2f", expense));
+        netLabel.setText(String.format("%s$%.2f", net >= 0 ? "+" : "-", Math.abs(net)));
+
+        netLabel.getStyleClass().removeAll("net-positive","net-negative");
+        netLabel.getStyleClass().add(net >= 0 ? "net-positive" : "net-negative");
+
+        
+    }
+
 
     @FXML
     private void addInputIncome() {

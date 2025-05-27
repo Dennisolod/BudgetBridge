@@ -62,12 +62,19 @@
             </VBox>
 
             <VBox spacing="8" alignment="TOP_LEFT">
+                <fx:define>
+                    <ToggleGroup fx:id="planGroup"/>
+                </fx:define>
+
                 <Label text="Select a budget plan:" styleClass="heading"/>
-                <RadioButton text="50 / 30 / 20"      toggleGroup="$planGroup"/>
-                <RadioButton text="Zero‑based"        toggleGroup="$planGroup"/>
-                <RadioButton text="Cash‑envelope"     toggleGroup="$planGroup"/>
-                <RadioButton text="Custom (blank)"    toggleGroup="$planGroup"/>
+
+                <RadioButton text="College Student"      toggleGroup="$planGroup"/>
+                <RadioButton text="Part-Time Worker"        toggleGroup="$planGroup"/>
+                <RadioButton text="Young Professional"     toggleGroup="$planGroup"/>
+                <RadioButton text="Living With Parents"    toggleGroup="$planGroup"/>
+                <RadioButton text="Freelancer"    toggleGroup="$planGroup"/>
             </VBox>
+
 
         </VBox>
     </content>

@@ -150,3 +150,318 @@
     -fx-padding: 10;
 }
 
+/* summary card */
+.budget-card {
+    -fx-background-color: #222c3c;
+    -fx-background-radius: 12;
+    -fx-padding: 18 26;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 8, 0, 0, 3);
+}
+
+.net-positive { -fx-text-fill: #00ff2a; }   /* bright green */
+.net-negative { -fx-text-fill: #ff4d4d; }   /* soft red   */
+.net          { -fx-font-size: 24px; -fx-font-weight: 700; }
+
+
+/* Modern Navigation Buttons */
+.modern-nav-button {
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #000000;
+    -fx-font-size: 13px;
+    -fx-font-weight: 500;
+    -fx-padding: 18 28;
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.08), 3, 0, 0, 1);
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+    -fx-font-family: "Helvetica", "Arial", sans-serif;
+}
+
+.modern-nav-button:hover {
+    -fx-background-color: #f5f7fa;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.12), 4, 0, 0, 2);
+}
+
+.modern-nav-button-active {
+    -fx-background-color: #7fa3d3;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 13px;
+    -fx-font-weight: 600;
+    -fx-padding: 18 28;
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-effect: dropshadow(gaussian, rgba(127, 163, 211, 0.3), 4, 0, 0, 2);
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+    -fx-font-family: "Helvetica", "Arial", sans-serif;
+}
+
+/* Panel Styling for Landscape Layout */
+.income-management-panel {
+    -fx-background-color: #222c3c;
+    -fx-background-radius: 12;
+    -fx-padding: 25;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0, 0, 4);
+    -fx-min-width: 350;
+    -fx-pref-width: 380;
+}
+
+.expense-management-panel {
+    -fx-background-color: #222c3c;
+    -fx-background-radius: 12;
+    -fx-padding: 25;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0, 0, 4);
+    -fx-min-width: 350;
+    -fx-pref-width: 380;
+}
+
+.center-summary-panel {
+    -fx-background-color: #222c3c;
+    -fx-background-radius: 12;
+    -fx-padding: 25;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0, 0, 4);
+    -fx-min-width: 500;
+}
+
+.panel-heading {
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    -fx-font-size: 24px;
+    -fx-font-family: "Helvetica", "Arial", sans-serif;
+}
+
+.add-section-card {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+    -fx-background-radius: 10;
+    -fx-padding: 20;
+}
+
+.section-title {
+    -fx-text-fill: #b8c5d1;
+    -fx-font-weight: 600;
+    -fx-font-size: 16px;
+    -fx-font-family: "Helvetica", "Arial", sans-serif;
+}
+
+/* Enhanced List Styling for Larger Display */
+.modern-list {
+    -fx-background-color: #2a3441;
+    -fx-border-color: #3a4651;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 8;
+    -fx-min-height: 300;
+}
+
+.modern-list .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffffff;
+    -fx-padding: 15 10;
+    -fx-font-size: 14px;
+    -fx-font-family: "Helvetica", "Arial", sans-serif;
+}
+
+.modern-list .list-cell:selected {
+    -fx-background-color: rgba(127, 163, 211, 0.3);
+    -fx-background-radius: 6;
+}
+
+.modern-list .list-cell:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+    -fx-background-radius: 6;
+}
+
+.list-scroll {
+    -fx-background-color: transparent;
+    -fx-control-inner-background: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.list-scroll .scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.list-scroll .scroll-bar .track {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-background-radius: 4;
+}
+
+.list-scroll .scroll-bar .thumb {
+    -fx-background-color: rgba(255, 255, 255, 0.3);
+    -fx-background-radius: 4;
+}
+
+/* Responsive Budget Summary for Center Column */
+.budget-summary-card {
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-background-radius: 12;
+    -fx-padding: 25;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 6, 0, 0, 3);
+}
+
+/* Missions Card for Center Column */
+.missions-card {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+    -fx-background-radius: 12;
+    -fx-padding: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0, 0, 2);
+}
+
+/* Modern Input Fields */
+.modern-input {
+    -fx-background-color: #2a3441;
+    -fx-text-fill: #ffffff;
+    -fx-prompt-text-fill: #8a9ba8;
+    -fx-font-size: 14px;
+    -fx-padding: 12 16;
+    -fx-background-radius: 8;
+    -fx-border-color: #3a4651;
+    -fx-border-radius: 8;
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 2, 0, 0, 1);
+}
+
+.modern-input:focused {
+    -fx-border-color: #7fa3d3;
+    -fx-effect: dropshadow(gaussian, rgba(127, 163, 211, 0.3), 4, 0, 0, 1);
+}
+
+/* Add Buttons */
+.add-button-income {
+    -fx-background-color: #00E5FF;
+    -fx-text-fill: #000000;
+    -fx-font-size: 14px;
+    -fx-font-weight: 600;
+    -fx-padding: 12 24;
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-effect: dropshadow(gaussian, rgba(0, 229, 255, 0.3), 4, 0, 0, 2);
+    -fx-font-family: "Helvetica", "Arial", sans-serif;
+}
+
+.add-button-income:hover {
+    -fx-background-color: #00d4e6;
+}
+
+.add-button-expense {
+    -fx-background-color: #FF8C42;
+    -fx-text-fill: #000000;
+    -fx-font-size: 14px;
+    -fx-font-weight: 600;
+    -fx-padding: 12 24;
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-effect: dropshadow(gaussian, rgba(255, 140, 66, 0.3), 4, 0, 0, 2);
+    -fx-font-family: "Helvetica", "Arial", sans-serif;
+}
+
+.add-button-expense:hover {
+    -fx-background-color: #e67d3a;
+}
+
+/* Enhanced styling for landscape layout */
+.card-heading {
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    -fx-font-size: 22px;
+    -fx-font-family: "Helvetica", "Arial", sans-serif;
+}
+
+.summary-metric {
+    -fx-padding: 15 25;
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-background-radius: 10;
+}
+
+.metric-label {
+    -fx-text-fill: #b8c5d1;
+    -fx-font-weight: 500;
+    -fx-font-size: 14px;
+    -fx-font-family: "Helvetica", "Arial", sans-serif;
+}
+
+.income-large {
+    -fx-text-fill: #00E5FF;
+    -fx-font-weight: bold;
+    -fx-font-size: 20px;
+    -fx-font-family: "Helvetica", "Arial", sans-serif;
+}
+
+.expense-large {
+    -fx-text-fill: #FF8C42;
+    -fx-font-weight: bold;
+    -fx-font-size: 20px;
+    -fx-font-family: "Helvetica", "Arial", sans-serif;
+}
+
+.net-large {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Helvetica", "Arial", sans-serif;
+}
+
+.mission-text {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 16px;
+    -fx-font-family: "Helvetica", "Arial", sans-serif;
+}
+
+.mission-subtitle {
+    -fx-text-fill: #8a9ba8;
+    -fx-font-size: 12px;
+    -fx-font-family: "Helvetica", "Arial", sans-serif;
+}
+
+.reward-button {
+    -fx-background-color: #00ff2a;
+    -fx-text-fill: #000000;
+    -fx-font-size: 12px;
+    -fx-font-weight: 600;
+    -fx-padding: 10 18;
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-effect: dropshadow(gaussian, rgba(0, 255, 42, 0.3), 3, 0, 0, 1);
+    -fx-font-family: "Helvetica", "Arial", sans-serif;
+    -fx-min-width: 160;
+}
+
+.reward-button:hover {
+    -fx-background-color: #00e625;
+}
+
+/* Main Scroll Pane */
+.main-scroll {
+    -fx-background-color: transparent;
+    -fx-control-inner-background: transparent;
+    -fx-background-insets: 0;
+}
+
+.main-scroll .viewport {
+    -fx-background-color: transparent;
+}
+
+.main-scroll .scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.main-scroll .scroll-bar .track {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-background-radius: 4;
+}
+
+.main-scroll .scroll-bar .thumb {
+    -fx-background-color: rgba(255, 255, 255, 0.3);
+    -fx-background-radius: 4;
+}
