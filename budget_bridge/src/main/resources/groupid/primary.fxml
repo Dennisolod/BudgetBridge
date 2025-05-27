@@ -33,7 +33,6 @@
       </VBox>
    </top>
 
-   <!-- LEFT COLUMN: Welcome & Budget Overview -->
    <left>
       <VBox alignment="TOP_LEFT" spacing="25" styleClass="dashboard-welcome-panel">
          <BorderPane.margin>
@@ -46,7 +45,6 @@
             <Label fx:id="gemsLabel" styleClass="store-gems"/>
          </VBox>
          
-         <!-- Budget Overview Card -->
          <VBox spacing="20" styleClass="budget-overview-card" VBox.vgrow="ALWAYS">
             <Label text="Budget Overview" styleClass="card-heading"/>
             
@@ -68,20 +66,17 @@
       </padding>
    </left>
 
-   <!-- RIGHT COLUMNMissions & Badges -->
    <right>
       <VBox spacing="25" styleClass="dashboard-sidebar-panel">
          <BorderPane.margin>
             <Insets top="20" right="20" bottom="20" left="20"/>
          </BorderPane.margin>
          
-         <!-- Missions Card (Top Half) -->
          <VBox spacing="15" styleClass="missions-overview-card" VBox.vgrow="ALWAYS">
             <Label text="Active Missions" styleClass="card-heading"/>
                <ListView fx:id="missionList" styleClass="modern-list"/>
          </VBox>
          
-         <!-- Badges Card (Bottom Half) -->
          <VBox spacing="15" styleClass="scrollpane-badges" VBox.vgrow="ALWAYS">
             <Label text="Achievement Badges" styleClass="card-heading"/>
             <ListView fx:id="badgeList" styleClass="scrollpane-badges"/>
@@ -93,7 +88,6 @@
       </padding>
    </right>
 
-   <!-- CENTER COLUMN: Spending Breakdown Chart -->
    <center>
       <VBox alignment="CENTER" spacing="25" styleClass="dashboard-chart-panel">
          <BorderPane.margin>
