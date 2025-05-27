@@ -1,6 +1,7 @@
 package groupid.model;
 
 import java.util.AbstractMap;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +16,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
 
 public class BudgetModel {
 
@@ -38,7 +40,8 @@ public class BudgetModel {
     private double rent, car, groceries, diningOut, funMoney, otherExpense;
     private List<String> goals = List.of();
     private String budgetPlan = "";
-
+    
+    public enum League { BRONZE, COPPER, SILVER, GOLD, PLATINUM, DIAMOND }
 
 
     // convenience derived values (totals, net)
@@ -90,6 +93,18 @@ public class BudgetModel {
             Map.entry("Charlie", 13000),
             Map.entry("Diana", 12000),
             Map.entry("Ethan", 11000), 
+            Map.entry("Dylan", 10000),
+            Map.entry("Alice", 15000),
+            Map.entry("Bob", 14000),
+            Map.entry("Charlie", 13000),
+            Map.entry("Diana", 12000),
+            Map.entry("Ethan", 11000), 
+            Map.entry("Dylan", 10000),
+            Map.entry("Alice", 15000),
+            Map.entry("Bob", 14000),
+            Map.entry("Charlie", 13000),
+            Map.entry("Diana", 12000),
+            Map.entry("Ethan", 11000), 
             Map.entry("Dylan", 10000)
         );
 
@@ -124,6 +139,15 @@ public class BudgetModel {
     public ThemeLine getCurrentTheme() { return currentTheme.get(); }
     public void applyTheme(ThemeLine theme) { currentTheme.set(theme); }
     public ObjectProperty<ThemeLine> currentThemeProperty() { return currentTheme; }
+    public League getCurrentLeague() {
+        int points = pointsProperty().get();
+        if (points >= 60000) return League.DIAMOND;
+        if (points >= 40000) return League.PLATINUM;
+        if (points >= 20000) return League.GOLD;
+        if (points >= 10000) return League.SILVER;
+        if (points >= 5000)  return League.COPPER;
+        return League.BRONZE;
+    }
 
     public ReadOnlyDoubleProperty totalIncomeProperty(){ return totalIncome.getReadOnlyProperty(); }
     public ReadOnlyDoubleProperty totalExpenseProperty(){ return totalExpense.getReadOnlyProperty(); }
@@ -141,11 +165,33 @@ public class BudgetModel {
     public boolean ownsTheme(ThemeLine theme) { return ownedThemes.stream().anyMatch(t -> t.getName().equals(theme.getName())); }
     public void unlockTheme(ThemeLine theme) { if (!ownsTheme(theme)) { ownedThemes.add(theme); } }
 
-    /*private void reward() {
-        points.set(points.get() + 10);
-        if (points.get() >= 50 && !badges.contains("Novice Saver"))
-            badges.add("Novice Saver");
-    }*/
+    public List<BadgeLine> getTop3BadgeLines(String username) {
+    return badges.stream()
+        .sorted(Comparator.comparingInt(this::getCostForBadge).reversed())
+        .limit(3)
+        .toList();
+    }
+
+    private int getCostForBadge(BadgeLine badge) {
+    return switch (badge.getName()) {
+        case "Gold Trophy" -> 200;
+        case "Shield of Honor" -> 180;
+        case "Mythic Phoenix" -> 500;
+        case "Crown Elite" -> 250;
+        case "Champion Medal" -> 300;
+        case "Secret Flame" -> 220;
+        case "Infinity Crown" -> 600;
+        case "Legend of Time" -> 750;
+        case "Quantum Vault" -> 900;
+        case "Ethereal Wings" -> 1000;
+        case "Celestial Flame" -> 1500;
+        case "Eternal Crown" -> 2000;
+        case "Timekeeper's Halo" -> 2500;
+        case "Quantum Ascendant" -> 3000;
+        case "Divine Architect" -> 4000;
+        default -> 0;
+    };
+}
 
     // add points to the player for their leaderboard position
     public void addPoints(int p) {

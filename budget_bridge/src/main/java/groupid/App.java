@@ -43,7 +43,7 @@ public class App extends Application {
         
        
         // Force css updates
-        // scene.getRoot().applyCss();
+        scene.getRoot().applyCss();
 
         stage.show();
     }

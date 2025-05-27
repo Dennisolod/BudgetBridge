@@ -1,13 +1,19 @@
 package groupid;
 
 import java.io.IOException;
+import java.util.List;
 
+import groupid.model.BadgeLine;
 import groupid.model.BudgetModel;
+import groupid.model.BudgetModel.League;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-
+import org.kordamp.ikonli.javafx.FontIcon;
+import javafx.scene.layout.Region;
 // Leaderboard screen
 public class LeaderboardController implements ModelAware{
 
@@ -16,6 +22,7 @@ public class LeaderboardController implements ModelAware{
     @FXML private Label userBadges;
     @FXML private Label userLabel;
     @FXML private Label userRankPos;
+    @FXML private Label leagueLabel;
 
     /* assuming friends leaderboard rows are hard coded in the FXML */
 
@@ -29,6 +36,11 @@ public class LeaderboardController implements ModelAware{
         // adds the current player to the leaderboard
         m.addUserToLeaderboard(m.usernameProperty().get(), m.pointsProperty().get());
         leaderboardVBox.getChildren().clear();
+        
+        League userLeague = m.getCurrentLeague();
+        leagueLabel.getStyleClass().add("league-" + userLeague.name().toLowerCase());
+
+        leagueLabel.setText("League: " + userLeague.name());
 
 
         String currentUser = m.usernameProperty().get();
@@ -36,6 +48,9 @@ public class LeaderboardController implements ModelAware{
         
         int rank = 1;
         for (var entry : m.getLeaderboard()) {
+            int playerPoints = entry.getValue();
+            League playerLeague = getLeagueForPoints(playerPoints);
+            if (playerLeague != userLeague) { continue; }
 
             // sets the leaderboard position of the user
             if (entry.getKey().equals(currentUser) && !userFound) {
@@ -44,28 +59,63 @@ public class LeaderboardController implements ModelAware{
                 userFound = true;
             }
 
-            GridPane row = new GridPane(); // spacing between elements
-            row.setHgap(10);
+            HBox row = new HBox();
+            row.setSpacing(15);
+            row.setAlignment(Pos.CENTER_LEFT);
+            row.getStyleClass().add("leaderboard-card");
 
-            Label rankLabel = new Label(String.format("%d.", rank++));
-            Label nameLabel = new Label(String.format(entry.getKey()));
-            Label pointsLabel = new Label(String.format("%d pts", entry.getValue()));
-
-            pointsLabel.getStyleClass().add("leaderboard-points");
-            nameLabel.getStyleClass().add("leaderboard-name");
+            Label rankLabel = new Label(rank + ".");
             rankLabel.getStyleClass().add("leaderboard-rank");
 
+            Label nameLabel = new Label(entry.getKey());
+            nameLabel.getStyleClass().add("leaderboard-name");
 
-            row.add(rankLabel, 0, 0);
-            row.add(nameLabel, 1, 0);
-            row.add(pointsLabel, 2, 0);
+            // 💎 Add badge icons
+            HBox badgeBox = new HBox(5);
+            badgeBox.setAlignment(Pos.CENTER_LEFT);
 
-            // makes the name label grow to take up extra space
-            GridPane.setHgrow(nameLabel, Priority.ALWAYS);
-            nameLabel.setMaxWidth(Double.MAX_VALUE);
+
+            List<BadgeLine> topBadges = entry.getKey().equals(currentUser)
+                ? m.getTop3BadgeLines(currentUser)
+                : List.of(); // empty for everyone else
+
+            for (BadgeLine badge : topBadges) {
+                FontIcon icon = new FontIcon(badge.getIconLiteral());
+                icon.setIconSize(20);
+                icon.setIconColor(badge.getColor());
+                icon.getStyleClass().add("badge-icon");
+                badgeBox.getChildren().add(icon);
+            }
+
+            // Spacer for alignment
+            Region spacer = new Region();
+            HBox.setHgrow(spacer, Priority.ALWAYS);
+
+            Label pointsLabel = new Label(entry.getValue() + " pts");
+            pointsLabel.getStyleClass().add("leaderboard-points");
+
+            // Add everything to the row
+            row.getChildren().addAll(rankLabel, nameLabel, badgeBox, spacer, pointsLabel);
+
+            // Highlight current user
+            if (entry.getKey().equals(currentUser)) {
+                row.getStyleClass().add("leaderboard-highlight");
+            }
+
             leaderboardVBox.getChildren().add(row);
+            rank++;
+
         }
 
+    }
+
+    private League getLeagueForPoints(int points) {
+        if (points >= 60000) return League.DIAMOND;
+        if (points >= 40000) return League.PLATINUM;
+        if (points >= 20000) return League.GOLD;
+        if (points >= 10000) return League.SILVER;
+        if (points >= 5000)  return League.COPPER;
+        return League.BRONZE;
     }
 
     @FXML private void switchToSecondary() throws IOException { App.setRoot("secondary"); }
