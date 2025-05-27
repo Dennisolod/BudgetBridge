@@ -249,7 +249,7 @@
     -fx-border-color: #3a4651;
     -fx-border-radius: 8;
     -fx-background-radius: 8;
-    -fx-padding: 8;
+    -fx-padding: 0;
     -fx-min-height: 300;
 }
 

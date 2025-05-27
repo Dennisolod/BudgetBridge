@@ -70,7 +70,7 @@ public class LeaderboardController implements ModelAware{
             Label nameLabel = new Label(entry.getKey());
             nameLabel.getStyleClass().add("leaderboard-name");
 
-            // 💎 Add badge icons
+            // Add badge icons
             HBox badgeBox = new HBox(5);
             badgeBox.setAlignment(Pos.CENTER_LEFT);
 

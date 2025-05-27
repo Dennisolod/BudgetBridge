@@ -65,7 +65,7 @@
          
          <VBox spacing="12" VBox.vgrow="ALWAYS">
             <Label text="Current Income Sources" styleClass="section-title"/>
-            <ScrollPane styleClass="list-scroll" VBox.vgrow="ALWAYS" prefHeight="400">
+            <ScrollPane styleClass="list-scroll" VBox.vgrow="ALWAYS" prefHeight="400" fitToHeight="true" fitToWidth="true">
                <ListView fx:id="incomeList" styleClass="modern-list"/>
             </ScrollPane>
          </VBox>
@@ -93,7 +93,7 @@
          
          <VBox spacing="12" VBox.vgrow="ALWAYS">
             <Label text="Current Expenses" styleClass="section-title"/>
-            <ScrollPane styleClass="list-scroll" VBox.vgrow="ALWAYS" prefHeight="400">
+            <ScrollPane styleClass="list-scroll" VBox.vgrow="ALWAYS" prefHeight="400" fitToHeight="true" fitToWidth="true">
                <ListView fx:id="expenseList" styleClass="modern-list"/>
             </ScrollPane>
          </VBox>
