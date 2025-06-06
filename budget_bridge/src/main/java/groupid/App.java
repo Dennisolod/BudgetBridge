@@ -50,7 +50,7 @@ public class App extends Application {
 
     private void getUsername() {
         TextInputDialog dialog = new TextInputDialog();
-        dialog.setTitle("Welcome!");
+        dialog.setTitle("Welcome to BudgetBridge!");
         dialog.setHeaderText("Please enter your name");
         dialog.setContentText("Name:");
 

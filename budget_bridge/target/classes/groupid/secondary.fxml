@@ -28,7 +28,7 @@
             <Insets top="20" right="20" bottom="20" left="20"/>
          </BorderPane.margin>
          
-         <HBox spacing="15" alignment="CENTER">
+         <HBox spacing="15" alignment="TOP_LEFT">
             <HBox.margin>
                <Insets top="0" right="50" bottom="0" left="50"/>
             </HBox.margin>

@@ -15,6 +15,9 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.textfield.*?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ProgressBar?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
 
 <!-- WORK IN PROGRESS -->
 <BorderPane stylesheets="@style.css" fx:controller="groupid.LeaderboardController" xmlns:fx="http://javafx.com/fxml/1" styleClass="background">
@@ -44,22 +47,41 @@
    </top>
 
     <center>
+         
          <VBox>
-            <HBox alignment="CENTER_LEFT" spacing="10">
+         <!-- User position labeling -->
+            <HBox alignment="CENTER_LEFT" spacing="20">
                <Label fx:id="userRankPos" styleClass="big-heading"/>
                <Label fx:id="userLabel" styleClass="big-heading"/>
-               <Label fx:id="userPoints" styleClass="leaderboard-points" />
-               <Label fx:id="leagueLabel" styleClass="big-heading" />
+               <Label fx:id="userPoints" styleClass="leaderboard-pointsLarge" />
+               <FontIcon fx:id="leagueIcon" iconSize="20" />
+
+               <!-- Progress bar -->
+               <Label fx:id="leagueLabel" styleClass="league-label"/>
+               <ProgressBar fx:id="leagueProgressBar" prefWidth="400" styleClass="league-progress-bar"/>
+               <Label fx:id="progressLabel" styleClass="progress-label"/>
             </HBox>
             <padding>
                <Insets bottom="25" left="25" right="25" top="25" />
             </padding>
 
+          
+            <padding>
+               <Insets bottom="25" left="25" right="25" top="25" />
+            </padding>
+
+            <!-- Leaderboard -->
             <ScrollPane styleClass="scrollpane" fitToWidth="true" prefHeight="500">
                <content>
                   <VBox fx:id="leaderboardVBox" styleClass="leaderVbox"> </VBox>
                </content>
             </ScrollPane>
+
+            <!-- general leaderboard stats -->
+            <Label fx:id="leagueUserCount" styleClass="stats-text"/>
+            <Label fx:id="topScorerLabel" styleClass="stats-text"/>
          </VBox>
+
+         
     </center>
 </BorderPane>

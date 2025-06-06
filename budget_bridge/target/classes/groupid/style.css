@@ -97,7 +97,7 @@
     -fx-font-size: 36px;
 }
 
-.leaderboard-points {
+.leaderboard-pointsLarge {
     -fx-text-fill: #00E5FF; 
     -fx-font-size: 36px;
     -fx-font-weight: bold;
@@ -686,6 +686,12 @@
     -fx-margin: 10;
 }
 
+.top-rank-highlight {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, gold, 10, 0.4, 0, 0);
+}
+
 .leaderboard-rank {
     -fx-text-fill: #FFD700; /* gold */
     -fx-font-size: 18px;
@@ -736,20 +742,46 @@
     -fx-background-radius: 5;
 }
 
-.league-bronze { -fx-text-fill: #cd7f32; }
+.league-bronze { -fx-text-fill: #824100; }
 .league-copper { -fx-text-fill: #b87333; }
 .league-silver { -fx-text-fill: #c0c0c0; }
-.league-gold   { -fx-text-fill: #ffd700; }
-.league-plat   { -fx-text-fill: #e5e4e2; }
-.league-diamond { -fx-text-fill: #b9f2ff; }
+.league-gold   { -fx-text-fill: #fff700; }
+.league-plat   { -fx-text-fill: #ffffff; }
+.league-diamond { -fx-text-fill: #05d1ff; }
 
 .league-label {
     -fx-font-size: 18px;
     -fx-font-weight: bold;
-    -fx-text-fill: #ffffff;
     -fx-background-color: #2b3445;
     -fx-background-radius: 12;
     -fx-padding: 12 16;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 4, 0, 0, 2);
     -fx-alignment: center;
 }
+
+.league-progress-bar {
+    -fx-accent: #00E5FF;
+    -fx-background-color: #2f3e54;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-pref-height: 16px;
+}
+
+.progress-label {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.font-icon {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 2, 0, 0, 1);
+}
+
+.stats-text {
+    -fx-text-fill: #a0c4ff;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Helvetica", "Arial", sans-serif;
+    -fx-padding: 4 8;
+}
+
