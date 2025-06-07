@@ -6,6 +6,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import javafx.scene.chart.PieChart?>
 
 <BorderPane fx:id="rootPane" stylesheets="@style.css" fx:controller="groupid.PrimaryController" xmlns:fx="http://javafx.com/fxml/1" styleClass="background">
    <top>
@@ -96,11 +97,9 @@
             <Label text="Spending Breakdown" styleClass="card-heading"/>
             
             <VBox alignment="CENTER" spacing="15">
-               <ImageView fx:id="pieChart" fitWidth="500" fitHeight="500" preserveRatio="true">
-                  <image>
-                     <Image url="@../images/budget_chart_example.png"/>
-                  </image>
-               </ImageView>
+               <PieChart fx:id="budgetPie"
+               prefWidth="500" prefHeight="500"
+               legendVisible="false"/>
             </VBox>
          </VBox>
          

@@ -10,9 +10,12 @@ import groupid.model.BadgeLine;
 import groupid.model.BudgetModel;
 import groupid.model.MissionLine;
 import groupid.model.MoneyLine;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -37,6 +40,8 @@ public class PrimaryController implements ModelAware, Initializable {
     @FXML private ListView<MoneyLine> expenseList;
     @FXML private ListView<MissionLine> missionList;
     @FXML private ListView<BadgeLine> badgeList;
+
+    @FXML private PieChart budgetPie;
 
     private BudgetModel model;
 
@@ -69,6 +74,8 @@ public class PrimaryController implements ModelAware, Initializable {
         addMoneyLines(expenseVBox, model.expenses(), "expense");
 
         gemsLabel.textProperty().bind(m.getGems().asString("%,d Gems!"));
+        initPie();
+        
     }
 
     private String toWebColor(Color color) {
@@ -79,9 +86,30 @@ public class PrimaryController implements ModelAware, Initializable {
         );
     }
 
+    private void initPie() {
+        ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList();
+        for (MoneyLine m : model.expenses()){
+            pieData.add(new PieChart.Data(m.getType(), m.getAmount()));
+        }
+        budgetPie.setData(pieData);
+
+        budgetPie.setLabelsVisible(true);
+        rebuildPieData(pieData);
+        model.expenses().addListener(
+            (ListChangeListener<MoneyLine>) change -> rebuildPieData(pieData));
+        }
+
+    private void rebuildPieData(ObservableList<PieChart.Data> pieData) {
+        pieData.clear();
+        for (MoneyLine m : model.expenses()) {
+            pieData.add(new PieChart.Data(m.getType(), m.getAmount()));
+        }
+    }
+
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        
         badgeList.setCellFactory(lv -> new ListCell<>() {
             private final FontIcon icon = new FontIcon();
             private final Label    name = new Label();

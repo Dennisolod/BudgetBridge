@@ -835,3 +835,18 @@
     -fx-background-radius: 50%;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 2, 0, 0, 1);
 }
+
+.default-color0.chart-pie { -fx-pie-color: #008080; }  /* teal */
+.default-color1.chart-pie { -fx-pie-color: #d4af37; }  /* gold */
+.default-color2.chart-pie { -fx-pie-color: #c94f4f; }  /* muted red */
+.default-color3.chart-pie { -fx-pie-color: #3c6e71; }  /* deep teal */
+
+.chart-pie-label {
+    -fx-fill: white;           /* text colour */
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 2, 0.5 , 0 , 0 );
+}
+
+.chart-title   { -fx-text-fill: #ededed; -fx-font-size: 16px; }
+.chart-legend  { -fx-background-color: transparent; }
+

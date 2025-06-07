@@ -16,6 +16,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.chart.PieChart;
 import javafx.scene.paint.Color;
 import groupid.model.League;
 
@@ -43,6 +44,7 @@ public class BudgetModel {
     private List<String> goals = List.of();
     private String budgetPlan = "";
     private League lastRewardedLeague = League.BRONZE;
+    public ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList();
 
 
     // public enum League { BRONZE, COPPER, SILVER, GOLD, PLATINUM, DIAMOND }
@@ -143,6 +145,8 @@ public class BudgetModel {
     public ThemeLine getCurrentTheme() { return currentTheme.get(); }
     public void applyTheme(ThemeLine theme) { currentTheme.set(theme); }
     public ObjectProperty<ThemeLine> currentThemeProperty() { return currentTheme; }
+    public ObservableList<PieChart.Data> pieDataProperty() {return pieData; }
+    
     public League getCurrentLeague() {
         int points = pointsProperty().get();
         if (points >= 60000) return League.DIAMOND;
