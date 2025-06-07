@@ -4,13 +4,13 @@ import groupid.model.BudgetModel;
 import groupid.model.BadgeLine;
 import groupid.model.MoneyLine;
 import groupid.model.League;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 
 import java.io.IOException;
 import java.util.List;
@@ -24,12 +24,16 @@ public class ProfileController implements ModelAware{
     @FXML private Label leagueLabel;
     @FXML private FontIcon leagueIcon;
     @FXML private HBox badgeBox;
-    @FXML private ListView<String> incomeList;
-    @FXML private ListView<String> expenseList;
+    
+    @FXML private ListView<MoneyLine> incomeList;
+    @FXML private ListView<MoneyLine> expenseList;
 
     @Override public void setModel(BudgetModel m) {
         //nameLabel.textProperty().bind(m.usernameProperty());
         //balanceLabel.textProperty().bind(m.netBalanceProperty().asString("Net balance: $%.2f"));
+        incomeList.setItems(m.incomes());
+        expenseList.setItems(m.expenses());
+
         
         pointsLabel.setText(m.pointsProperty().get() + " pts");
         gemsLabel.setText(m.getGems().get() + " gems");
@@ -57,15 +61,7 @@ public class ProfileController implements ModelAware{
             badgeBox.getChildren().add(icon);
         }
 
-        // Populate income and expense sources
-        incomeList.setItems(FXCollections.observableArrayList(
-            m.incomes().stream().map(MoneyLine::toString).toList()
-        ));
-
-        expenseList.setItems(FXCollections.observableArrayList(
-            m.expenses().stream().map(MoneyLine::toString).toList()
-        ));
-
+        
 
     } // end set model
     
