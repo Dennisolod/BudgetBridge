@@ -3,10 +3,9 @@ package groupid;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-
 import groupid.model.BadgeLine;
 import groupid.model.BudgetModel;
-import groupid.model.BudgetModel.League;
+import groupid.model.League;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -34,7 +33,7 @@ public class LeaderboardController implements ModelAware{
     @FXML private Label leagueUserCount;
     @FXML private Label topScorerLabel;
     @FXML private VBox leagueStatsBox;
-
+    @FXML private Label rewardsPreviewLabel;
 
     /* assuming friends leaderboard rows are hard coded in the FXML */
 
@@ -114,9 +113,6 @@ public class LeaderboardController implements ModelAware{
             row.setAlignment(Pos.CENTER_LEFT);
             row.getStyleClass().add("leaderboard-card");
 
-            
-            
-
             Label rankLabel = new Label(rank + ".");
             rankLabel.getStyleClass().add("leaderboard-rank");
 
@@ -187,11 +183,27 @@ public class LeaderboardController implements ModelAware{
             leaderboardVBox.getChildren().add(row);
             rank++;
 
+            // next league rewards
+            League nextLeague = getNextLeague(currentLeague);
+            String rewardText = switch (nextLeague) {
+                case COPPER   -> "🎖 Copper Badge";
+                case SILVER   -> "🥈 Silver Badge + 500 Gems";
+                case GOLD     -> "🥇 Gold Trophy + 1,000 Gems";
+                case PLATINUM -> "💠 Platinum Shield + 2,000 Gems";
+                case DIAMOND  -> "💎 Diamond Gem + 5,000 Gems";
+                default       -> "🏆 Max League Reached!";
+            };
+
+            rewardsPreviewLabel.setText("Next League Reward: " + rewardText);
         }
+
+
+        
 
     }
 
     private League getLeagueForPoints(int points) {
+
         if (points >= 60000) return League.DIAMOND;
         if (points >= 40000) return League.PLATINUM;
         if (points >= 20000) return League.GOLD;
@@ -210,14 +222,12 @@ public class LeaderboardController implements ModelAware{
             case DIAMOND -> League.DIAMOND; // maxed
         };
     }
-
+     
     @FXML private void switchToSecondary() throws IOException { App.setRoot("secondary"); }
     @FXML private void switchToPrimary() throws IOException { App.setRoot("primary"); }
     @FXML private void switchToLeaderboard() throws IOException { App.setRoot("leaderboard"); }
     @FXML private void switchToStore() throws IOException { App.setRoot("store"); }
     @FXML private void switchToProfile() throws IOException { App.setRoot("profile"); }
-    @FXML private void switchToSettings() throws IOException { App.setRoot("settings"); }
-    @FXML private void switchToTutorial() throws IOException { App.setRoot("tutorial"); }
     @FXML private void logoff() throws IOException { System.exit(0); }
 
     

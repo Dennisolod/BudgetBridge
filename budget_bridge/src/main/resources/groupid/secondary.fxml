@@ -35,8 +35,6 @@
             <MenuBar styleClass="modern-menu-bar">
                <Menu text="≡" styleClass="modern-menu">
                   <MenuItem fx:id="profileButton" text="Profile" styleClass="menu-item" onAction="#switchToProfile"/>
-                  <MenuItem fx:id="settingsButton" text="Settings" styleClass="menu-item" onAction="#switchToSettings"/>
-                  <MenuItem fx:id="tutorialButton" text="Tutorial" styleClass="menu-item" onAction="#switchToTutorial"/>
                   <MenuItem fx:id="logoffButton" text="Logoff" styleClass="menu-item" onAction="#logoff"/>
                </Menu>
             </MenuBar>

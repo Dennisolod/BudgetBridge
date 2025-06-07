@@ -26,22 +26,21 @@
          <BorderPane.margin>
             <Insets top="20" right="20" bottom="20" left="20"/>
          </BorderPane.margin>
-         <HBox spacing="15">
+         
+         <HBox spacing="15" alignment="TOP_LEFT">
             <HBox.margin>
                <Insets top="0" right="50" bottom="0" left="50"/>
             </HBox.margin>
             <MenuBar styleClass="modern-menu-bar">
                <Menu text="≡" styleClass="modern-menu">
                   <MenuItem fx:id="profileButton" text="Profile" styleClass="menu-item" onAction="#switchToProfile"/>
-                  <MenuItem fx:id="settingsButton" text="Settings" styleClass="menu-item" onAction="#switchToSettings"/>
-                  <MenuItem fx:id="tutorialButton" text="Tutorial" styleClass="menu-item" onAction="#switchToTutorial"/>
                   <MenuItem fx:id="logoffButton" text="Logoff" styleClass="menu-item" onAction="#logoff"/>
                </Menu>
             </MenuBar>
-            <Button fx:id="dashboardButton" text="My dashboard" styleClass="modern-flat-button" onAction="#switchToPrimary"/>
-            <Button fx:id="leaderboardsButton" text="Leaderboards" styleClass="modern-flat-button" onAction="#switchToLeaderboard"/>
-            <Button fx:id="budgetButton" text="Update Budget" styleClass="modern-flat-button" onAction="#switchToSecondary"/>
-            <Button fx:id="storeButton" text="Exchange Store" styleClass="modern-flat-button" onAction="#switchToStore"/>
+            <Button fx:id="dashboardButton" text="My Dashboard" styleClass="modern-nav-button" onAction="#switchToPrimary"/>
+            <Button fx:id="leaderboardsButton" text="Leaderboards" styleClass="modern-nav-button" onAction="#switchToLeaderboard"/>
+            <Button fx:id="budgetButton" text="Update Budget" styleClass="modern-nav-button-active" onAction="#switchToSecondary"/>
+            <Button fx:id="storeButton" text="Exchange Store" styleClass="modern-nav-button" onAction="#switchToStore"/>
          </HBox>
       </VBox>
    </top>
@@ -60,12 +59,9 @@
                <Label fx:id="leagueLabel" styleClass="league-label"/>
                <ProgressBar fx:id="leagueProgressBar" prefWidth="400" styleClass="league-progress-bar"/>
                <Label fx:id="progressLabel" styleClass="progress-label"/>
-            </HBox>
-            <padding>
-               <Insets bottom="25" left="25" right="25" top="25" />
-            </padding>
 
-          
+               
+            </HBox>
             <padding>
                <Insets bottom="25" left="25" right="25" top="25" />
             </padding>
@@ -77,9 +73,15 @@
                </content>
             </ScrollPane>
 
-            <!-- general leaderboard stats -->
-            <Label fx:id="leagueUserCount" styleClass="stats-text"/>
-            <Label fx:id="topScorerLabel" styleClass="stats-text"/>
+            <VBox fx:id="summaryBox" spacing="10" alignment="CENTER" styleClass="summary-card">
+               <Label text="League Summary" styleClass="card-heading"/>
+
+               <Label fx:id="leagueUserCount" styleClass="stats-text"/>
+               <Label fx:id="topScorerLabel" styleClass="stats-text"/>
+               <Label fx:id="personalBestLabel" styleClass="stats-text"/>
+               <Label fx:id="rewardsPreviewLabel" styleClass="rewards-preview"/>
+            </VBox>
+
          </VBox>
 
          

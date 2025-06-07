@@ -16,6 +16,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.paint.Color;
+import groupid.model.League;
 
 
 public class BudgetModel {
@@ -40,8 +42,10 @@ public class BudgetModel {
     private double rent, car, groceries, diningOut, funMoney, otherExpense;
     private List<String> goals = List.of();
     private String budgetPlan = "";
-    
-    public enum League { BRONZE, COPPER, SILVER, GOLD, PLATINUM, DIAMOND }
+    private League lastRewardedLeague = League.BRONZE;
+
+
+    // public enum League { BRONZE, COPPER, SILVER, GOLD, PLATINUM, DIAMOND }
 
 
     // convenience derived values (totals, net)
@@ -165,6 +169,31 @@ public class BudgetModel {
     public boolean ownsTheme(ThemeLine theme) { return ownedThemes.stream().anyMatch(t -> t.getName().equals(theme.getName())); }
     public void unlockTheme(ThemeLine theme) { if (!ownsTheme(theme)) { ownedThemes.add(theme); } }
 
+    private void unlockLeagueReward(League league) {
+        switch (league) {
+            case COPPER -> {
+                setGems(getGems().get() + 250);
+                unlockBadge(new BadgeLine("Copper Challenger", "fas-award", Color.web("#b87333")));
+            }
+            case SILVER -> {
+                setGems(getGems().get() + 500);
+                unlockBadge(new BadgeLine("Silver Sprinter", "fas-trophy", Color.web("#c0c0c0")));
+            }
+            case GOLD -> {
+                setGems(getGems().get() + 1000);
+                unlockBadge(new BadgeLine("Gold Achiever", "fas-star", Color.web("#ffd700")));
+            }
+            case PLATINUM -> {
+                setGems(getGems().get() + 2000);
+                unlockBadge(new BadgeLine("Platinum Hero", "fas-shield-alt", Color.web("#e5e4e2")));
+            }
+            case DIAMOND -> {
+                setGems(getGems().get() + 5000);
+                unlockBadge(new BadgeLine("Diamond Legend", "fas-gem", Color.web("#b9f2ff")));
+            }
+        }
+    }
+
     public List<BadgeLine> getTop3BadgeLines(String username) {
     return badges.stream()
         .sorted(Comparator.comparingInt(this::getCostForBadge).reversed())
@@ -193,9 +222,25 @@ public class BudgetModel {
     };
 }
 
-    // add points to the player for their leaderboard position
+    // add points to the player for their leaderboard position 
+    // and if they progress to a new league
     public void addPoints(int p) {
         points.set(points.get() + p);
+
+        League currentLeague = getCurrentLeague();
+
+        if (currentLeague.ordinal() > lastRewardedLeague.ordinal()) {
+            unlockLeagueReward(currentLeague);
+            setLastRewardedLeague(currentLeague);
+        }
+    }
+
+    public League getLastRewardedLeague() {
+        return lastRewardedLeague;
+    }
+
+    public void setLastRewardedLeague(League league) {
+        this.lastRewardedLeague = league;
     }
 
 }

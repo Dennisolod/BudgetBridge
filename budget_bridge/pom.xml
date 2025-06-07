@@ -58,6 +58,8 @@
             <artifactId>ikonli-fontawesome5-pack</artifactId>
             <version>12.4.0</version>
         </dependency>
+
+        
     </dependencies>
 
     <!-- ► 3.  BUILD SECTION ⬇︎ -->
