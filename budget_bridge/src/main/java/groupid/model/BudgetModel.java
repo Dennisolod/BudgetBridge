@@ -205,7 +205,7 @@ public class BudgetModel {
         .toList();
     }
 
-    private int getCostForBadge(BadgeLine badge) {
+    public int getCostForBadge(BadgeLine badge) {
     return switch (badge.getName()) {
         case "Gold Trophy" -> 200;
         case "Shield of Honor" -> 180;
