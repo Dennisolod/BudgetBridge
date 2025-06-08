@@ -871,6 +871,34 @@
     -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 2, 0.5 , 0 , 0 );
 }
 
+.progress-bar .track {
+    -fx-background-color: #444;
+}
+.progress-bar .bar {
+    -fx-background-color: linear-gradient(to right, #76d275, #0ac310);
+}
+
+
 .chart-title   { -fx-text-fill: #ededed; -fx-font-size: 16px; }
 .chart-legend  { -fx-background-color: transparent; }
 
+.expense-progress-section {
+    -fx-padding: 20 0 10 0;
+    -fx-spacing: 15;
+    -fx-background-color: transparent;
+}
+
+.expense-label {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.expense-progress-bar {
+    -fx-background-color: #2e2e2e;
+    -fx-accent: linear-gradient(to right, #ffa07a, #ff6347); /* salmon to tomato */
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-pref-height: 18px;
+}
