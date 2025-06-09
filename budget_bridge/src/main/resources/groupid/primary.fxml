@@ -85,7 +85,7 @@
          
       </VBox>
       <padding>
-         <Insets bottom="25" left="25" right="25" top="25"/>
+         <Insets bottom="20" left="20" right="20" top="20"/>
       </padding>
    </right>
 

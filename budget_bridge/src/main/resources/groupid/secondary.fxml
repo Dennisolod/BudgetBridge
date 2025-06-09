@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.HBox?>
@@ -71,9 +76,17 @@
                         promptText="Amount ($)"
                         styleClass="modern-input"/>
 
-            <ComboBox fx:id="incomeFreqCombo"
-                     promptText="Frequency"
-                     styleClass="modern-combo"/>
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <CheckBox fx:id="incomeRecurringCheckBox" mnemonicParsing="false"/>
+                <Label text="Recurring?" styleClass="section-title"/>
+            </HBox>
+
+            <VBox fx:id="incomeFreqSection" spacing="10">
+                <Label text="Frequency:" styleClass="field-label"/>
+                <ComboBox fx:id="incomeFreqCombo"
+                         promptText="Select frequency"
+                         styleClass="modern-combo"/>
+            </VBox>
 
             <ComboBox fx:id="incomeCatCombo"
                      editable="true"
@@ -122,17 +135,25 @@
                         promptText="Amount ($)"
                         styleClass="modern-input"/>
 
-            <ComboBox fx:id="expenseFreqCombo"
-                     promptText="Frequency"
-                     styleClass="modern-combo">
-               <items>
-                     <FXCollections fx:factory="observableArrayList">
-                        <String fx:value="Daily"/>
-                        <String fx:value="Weekly"/>
-                        <String fx:value="Monthly"/>
-                     </FXCollections>
-               </items>
-            </ComboBox>
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <CheckBox fx:id="expenseRecurringCheckBox" mnemonicParsing="false"/>
+                <Label text="Recurring?" styleClass="section-title"/>
+            </HBox>
+
+            <VBox fx:id="expenseFreqSection" spacing="10">
+                <Label text="Frequency:" styleClass="field-label"/>
+                <ComboBox fx:id="expenseFreqCombo"
+                         promptText="Select frequency"
+                         styleClass="modern-combo">
+                   <items>
+                         <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Daily"/>
+                            <String fx:value="Weekly"/>
+                            <String fx:value="Monthly"/>
+                         </FXCollections>
+                   </items>
+                </ComboBox>
+            </VBox>
 
             <ComboBox fx:id="expenseCatCombo"
                      editable="true"

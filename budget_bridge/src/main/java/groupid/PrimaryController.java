@@ -10,18 +10,25 @@ import groupid.model.BadgeLine;
 import groupid.model.BudgetModel;
 import groupid.model.MissionLine;
 import groupid.model.MoneyLine;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
@@ -99,7 +106,7 @@ public class PrimaryController implements ModelAware, Initializable {
 
     private void rebuildPieData(ObservableList<PieChart.Data> pieData) {
         pieData.clear();
-        for (MoneyLine m : model.expenses()) {
+        for (MoneyLine m : model.getCurrentMonth()) {
             pieData.add(new PieChart.Data(m.getType(), m.getAmount()));
         }
     }
@@ -132,25 +139,81 @@ public class PrimaryController implements ModelAware, Initializable {
     private void updateExpenseProgress(BudgetModel model) {
         expenseProgressVBox.getChildren().clear();  // clear old content
 
-        double totalIncome = model.totalIncomeProperty().get();
 
         for (MoneyLine expense : model.expenses()) {
             String category = expense.getType();
-            double amount = expense.getAmount();
+            double budget = expense.getAmount();
 
-            double progress = totalIncome == 0 ? 0 : amount / totalIncome;
+            // Create GridPane row
+            GridPane row = new GridPane();
+            row.setHgap(10);
+            row.setVgap(5);
 
-            // Create label
-            Label label = new Label(String.format("%s - $%.2f of $%.2f", category, amount, totalIncome));
+            // Column constraints for consistent alignment
+            ColumnConstraints col1 = new ColumnConstraints();
+            col1.setMinWidth(250); // label column
+            ColumnConstraints col2 = new ColumnConstraints();
+            col2.setMinWidth(250); // progress bar column
+            col2.setHgrow(Priority.ALWAYS);
+            ColumnConstraints col3 = new ColumnConstraints();
+            col3.setMinWidth(120); // button column
+            row.getColumnConstraints().addAll(col1, col2, col3);
+
+            // Create label showing progress
+            Label label = new Label(String.format("%s: $%.2f of $%.2f spent", category, expense.getSpent(), budget));
+            label.getStyleClass().add("expense-label");
             label.getStyleClass().add("expense-label");
 
-            // Create progress bar
-            ProgressBar bar = new ProgressBar(progress);
-            bar.setPrefWidth(250);
-            bar.setStyle("-fx-accent: #f08080;"); // light coral color
+            ProgressBar bar = new ProgressBar();
+            bar.setMaxWidth(Double.MAX_VALUE);
+            GridPane.setHgrow(bar, Priority.ALWAYS);
+            bar.progressProperty().bind(
+                Bindings.createDoubleBinding(
+                    () -> budget == 0 ? 0 : expense.getSpent() / budget,
+                    expense.spentProperty()
+                )
+            );
 
-            VBox entry = new VBox(5, label, bar);
-            expenseProgressVBox.getChildren().add(entry);
+            // Penalty and color update logic
+            expense.spentProperty().addListener((obs, oldVal, newVal) -> {
+                if (newVal.doubleValue() > budget) {
+                    bar.setStyle("-fx-accent: red;");
+                    model.getGems().set(Math.max(0, model.getGems().get() - 5));
+                    model.pointsProperty().set(Math.max(0, model.pointsProperty().get() - 10));
+                } else {
+                    bar.setStyle("-fx-accent: #f08080;");
+                }
+
+            label.setText(String.format("%s: $%.2f of $%.2f spent", category, newVal.doubleValue(), budget));
+            });
+
+            Button logButton = new Button("Log Purchase");
+            logButton.setPrefWidth(120);
+            logButton.setOnAction(e -> {
+                TextInputDialog dialog = new TextInputDialog();
+                dialog.setTitle("Log Purchase");
+                dialog.setHeaderText("Enter purchase amount for " + category + ":");
+                dialog.setContentText("Amount:");
+
+                dialog.showAndWait().ifPresent(input -> {
+                    try {
+                        double value = Double.parseDouble(input);
+                        if (value < 0) throw new NumberFormatException();
+                        expense.setSpent(expense.getSpent() + value);  // update spent
+                    } catch (NumberFormatException ex) {
+                        System.out.println("Invalid input");
+                    }
+                });
+            });
+
+            // Add components to GridPane row
+            row.add(label, 0, 0);
+            row.add(bar, 1, 0);
+            row.add(logButton, 2, 0);
+
+            // Add spacing between rows
+            VBox.setMargin(row, new Insets(8, 0, 8, 0));
+            expenseProgressVBox.getChildren().add(row);
         }
     }
 

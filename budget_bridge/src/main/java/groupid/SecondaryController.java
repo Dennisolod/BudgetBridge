@@ -13,6 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -31,6 +32,8 @@ public class SecondaryController implements ModelAware {
     @FXML private ListView<MoneyLine> incomeList;
     @FXML private VBox              incomeInputSection; // The collapsible section
     @FXML private Button            addIncomeToggleButton; // The toggle button
+    @FXML private CheckBox          incomeRecurringCheckBox; // Recurring checkbox
+    @FXML private VBox              incomeFreqSection; // Frequency section container
 
     /* ── Expense controls ─────────────────────────────────────────── */
     @FXML private ComboBox<String>  expenseFreqCombo;
@@ -39,6 +42,8 @@ public class SecondaryController implements ModelAware {
     @FXML private ListView<MoneyLine> expenseList;
     @FXML private VBox              expenseInputSection; // The collapsible section
     @FXML private Button            addExpenseToggleButton; // The toggle button
+    @FXML private CheckBox          expenseRecurringCheckBox; // Recurring checkbox
+    @FXML private VBox              expenseFreqSection; // Frequency section container
 
     /* ── Summary labels ───────────────────────────────────────────── */
     @FXML private Label totalIncomeLabel, totalExpenseLabel, netLabel;
@@ -80,6 +85,14 @@ public class SecondaryController implements ModelAware {
                 c -> c.getControlNewText().matches("\\d*(\\.\\d{0,2})?") ? c : null);
         incomeAmountInput .setTextFormatter(moneyFmt);
         expenseAmountInput.setTextFormatter(new TextFormatter<>(moneyFmt.getFilter()));
+
+        /* 5 ▸ Set up recurring checkbox listeners */
+        if (incomeRecurringCheckBox != null && incomeFreqSection != null) {
+            incomeRecurringCheckBox.setOnAction(e -> toggleIncomeFrequency());
+        }
+        if (expenseRecurringCheckBox != null && expenseFreqSection != null) {
+            expenseRecurringCheckBox.setOnAction(e -> toggleExpenseFrequency());
+        }
     }
 
     /* ── Model injection ──────────────────────────────────────────── */
@@ -87,7 +100,7 @@ public class SecondaryController implements ModelAware {
     public void setModel(BudgetModel m) {
         model = m;
         incomeList .setItems(m.incomes());
-        expenseList.setItems(m.expenses());
+        expenseList.setItems(m.getCurrentMonth());
         m.incomes() .addListener((ListChangeListener<MoneyLine>) c -> updateTotals());
         m.expenses().addListener((ListChangeListener<MoneyLine>) c -> updateTotals());
         updateTotals();
@@ -105,6 +118,16 @@ public class SecondaryController implements ModelAware {
             expenseInputSection.setVisible(false);
             expenseInputSection.setManaged(false);
         }
+        
+        /* Initialize frequency sections (hidden by default) */
+        if (incomeFreqSection != null) {
+            incomeFreqSection.setVisible(false);
+            incomeFreqSection.setManaged(false);
+        }
+        if (expenseFreqSection != null) {
+            expenseFreqSection.setVisible(false);
+            expenseFreqSection.setManaged(false);
+        }
     }
 
     /* ── Toggle income input section ─────────────────────────────── */
@@ -118,7 +141,32 @@ public class SecondaryController implements ModelAware {
         addIncomeToggleButton.setText(isVisible ? "Add Income" : "Hide Income Form");
     }
 
-    /* ── Toggle expense input section ────────────────────────────── */
+    /* ── Toggle frequency sections based on recurring checkbox ────── */
+    private void toggleIncomeFrequency() {
+        if (incomeRecurringCheckBox == null || incomeFreqSection == null) return;
+        
+        boolean isRecurring = incomeRecurringCheckBox.isSelected();
+        incomeFreqSection.setVisible(isRecurring);
+        incomeFreqSection.setManaged(isRecurring);
+        
+        // Clear frequency selection if unchecked
+        if (!isRecurring) {
+            incomeFreqCombo.setValue(null);
+        }
+    }
+
+    private void toggleExpenseFrequency() {
+        if (expenseRecurringCheckBox == null || expenseFreqSection == null) return;
+        
+        boolean isRecurring = expenseRecurringCheckBox.isSelected();
+        expenseFreqSection.setVisible(isRecurring);
+        expenseFreqSection.setManaged(isRecurring);
+        
+        // Clear frequency selection if unchecked
+        if (!isRecurring) {
+            expenseFreqCombo.setValue(null);
+        }
+    }
     @FXML
     private void toggleExpenseInput() {
         if (expenseInputSection == null || addExpenseToggleButton == null) return;
@@ -143,8 +191,16 @@ public class SecondaryController implements ModelAware {
         }
 
         /* frequency */
-        String freq = incomeFreqCombo.getValue();
-        if (freq == null) { showWarn("Select income frequency."); return; }
+        String freq = null;
+        if (incomeRecurringCheckBox != null && incomeRecurringCheckBox.isSelected()) {
+            freq = incomeFreqCombo.getValue();
+            if (freq == null) { 
+                showWarn("Select income frequency for recurring income."); 
+                return; 
+            }
+        } else {
+            freq = "One-time"; // Default for non-recurring
+        }
 
         /* category */
         String cat = Optional.ofNullable(incomeCatCombo.getEditor().getText())
@@ -152,7 +208,7 @@ public class SecondaryController implements ModelAware {
         if (cat.isEmpty()) { showWarn("Enter or select an income category."); return; }
 
         /* persist */
-        //model.addIncome(freq, cat, amt);
+        model.addIncome(freq, cat, amt);
 
         /* remember custom category */
         if (!incomeCatCombo.getItems().contains(cat))
@@ -163,6 +219,8 @@ public class SecondaryController implements ModelAware {
         incomeFreqCombo.setValue(null);
         incomeCatCombo.getSelectionModel().clearSelection();
         incomeCatCombo.getEditor().clear();
+        incomeRecurringCheckBox.setSelected(false);
+        toggleIncomeFrequency(); // Hide frequency section
     }
 
     /* ── Add new expense (unchanged except method call) ───────────── */
@@ -177,14 +235,29 @@ public class SecondaryController implements ModelAware {
             return;
         }
 
-        String freq = expenseFreqCombo.getValue();
-        if (freq == null) { showWarn("Select expense frequency."); return; }
+        String freq = null;
+        if (expenseRecurringCheckBox != null && expenseRecurringCheckBox.isSelected()) {
+            freq = expenseFreqCombo.getValue();
+            if (freq == null) { 
+                showWarn("Select expense frequency for recurring expense."); 
+                return; 
+            } 
+            } else{
+                freq = "One-time";
+        }
 
         String cat = Optional.ofNullable(expenseCatCombo.getEditor().getText())
                              .orElse("").trim();
         if (cat.isEmpty()) { showWarn("Enter or select an expense category."); return; }
 
-        //model.addExpense(freq, cat, amt);
+        if(freq.equals("One-time")){
+            addToCurrentMonthExpense(cat, freq, amt); // Add to current month
+            updateTotals();
+        } else{
+            // For recurring expenses, add to base expenses  
+            model.addExpense(freq, cat, amt);
+            updateTotals(); // Refresh current month from base
+        }
 
         if (!expenseCatCombo.getItems().contains(cat))
             expenseCatCombo.getItems().add(cat);
@@ -193,7 +266,24 @@ public class SecondaryController implements ModelAware {
         expenseFreqCombo.setValue(null);
         expenseCatCombo.getSelectionModel().clearSelection();
         expenseCatCombo.getEditor().clear();
+        expenseRecurringCheckBox.setSelected(false);
+        toggleExpenseFrequency(); // Hide frequency section
     }
+
+        private void addToCurrentMonthExpense(String category, String frequency, double amount) {
+            // For one-time expenses, find the Monthly category in current month and add to it
+            Optional<MoneyLine> expense = model.getCurrentMonth().stream()
+                .filter(moneyLine -> category.equals(moneyLine.getType()) && 
+                                    "Monthly".equals(moneyLine.getFreq())) // Always look for Monthly
+                .findFirst();
+            
+            if (expense.isPresent()) {
+                expense.get().setAmount(expense.get().getAmount() + amount);
+                updateTotals();
+            } else {
+                showWarn("Category '" + category + "' not found in current month budget.");
+            }
+        }
 
     /* ── Totals & styles ──────────────────────────────────────────── */
     @FXML
@@ -209,6 +299,14 @@ public class SecondaryController implements ModelAware {
 
         netLabel.getStyleClass().removeAll("net-positive","net-negative");
         netLabel.getStyleClass().add(net >= 0 ? "net-positive" : "net-negative");
+        
+        /* Refresh ListView displays to show updated amounts */
+        if (incomeList != null) {
+            incomeList.refresh();
+        }
+        if (expenseList != null) {
+            expenseList.refresh();
+        }
     }
 
     /* ── Helpers & unchanged reward / nav code ────────────────────── */
@@ -217,11 +315,11 @@ public class SecondaryController implements ModelAware {
         a.setHeaderText(null); a.setContentText(msg); a.showAndWait();
     }
 
-    /* ── Reward buttons (unchanged) ────────────────────────────────── */
+    
     @FXML private void dailyRewards()   { dailyRewardButton  .setDisable(true); model.setGems(model.getGems().get()+50);  model.addPoints(1000); }
     @FXML private void weeklyRewards()  { weeklyRewardButton .setDisable(true); model.setGems(model.getGems().get()+100); model.addPoints(3000); }
     @FXML private void monthlyRewards() { monthlyRewardButton.setDisable(true); model.setGems(model.getGems().get()+250); model.addPoints(7000); }
-
+    
     /* ── Demo & nav buttons (unchanged) ────────────────────────────── */
     @FXML private void switchToSecondary() throws IOException { App.setRoot("secondary"); }
     @FXML private void switchToPrimary()   throws IOException { App.setRoot("primary");   }

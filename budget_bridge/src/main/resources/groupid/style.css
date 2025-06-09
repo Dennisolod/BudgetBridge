@@ -943,3 +943,39 @@
     -fx-border-radius: 8;
     -fx-pref-height: 18px;
 }
+
+/* Checkbox styling */
+.modern-checkbox {
+    -fx-font-size: 14px;
+    -fx-text-fill: #333333;
+    -fx-spacing: 8px;
+}
+
+.modern-checkbox .box {
+    -fx-background-color: white;
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1px;
+    -fx-border-radius: 3px;
+    -fx-background-radius: 3px;
+}
+
+.modern-checkbox:selected .box {
+    -fx-background-color: #007acc;
+    -fx-border-color: #007acc;
+}
+
+.modern-checkbox:selected .mark {
+    -fx-background-color: white;
+}
+
+.modern-checkbox:hover .box {
+    -fx-border-color: #007acc;
+}
+
+/* Field label styling */
+.field-label {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #555555;
+    -fx-padding: 5 0 0 0;
+}

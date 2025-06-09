@@ -1,5 +1,6 @@
 package groupid.model;
 
+import java.time.LocalDate;
 import java.util.AbstractMap;
 import java.util.Comparator;
 import java.util.List;
@@ -27,6 +28,7 @@ public class BudgetModel {
     private final StringProperty username = new SimpleStringProperty();
     private final ObservableList<MoneyLine> incomes = FXCollections.observableArrayList();
     private final ObservableList<MoneyLine> expenses = FXCollections.observableArrayList();
+    private final ObservableList<MoneyLine> currentMonthExpenses = FXCollections.observableArrayList();
     private final ObservableList<MissionLine> missions = FXCollections.observableArrayList();
     private final ObservableList<MissionLine> missionsList = FXCollections.observableArrayList();
     private final ObservableList<BadgeLine> badges = FXCollections.observableArrayList();       // PLAYER OWNED BADGES
@@ -70,43 +72,46 @@ public class BudgetModel {
 
     public void loadBudgetInfo(BudgetInfo info) {
         incomes().clear();
-        if (info.getPrimaryIncome() > 0) addIncome("Primary Job", info.getPrimaryIncome());
-        if (info.getSideIncome() > 0) addIncome("Side Hustle", info.getSideIncome());
-        if (info.getOtherIncome() > 0) addIncome("Other Income", info.getOtherIncome());
+        if (info.getPrimaryIncome() > 0) addIncome("Primary Job", "Monthly", info.getPrimaryIncome());
+        if (info.getSideIncome() > 0) addIncome("Side Hustle", "Monthly", info.getSideIncome());
+        if (info.getOtherIncome() > 0) addIncome("Other Income", "Monthly", info.getOtherIncome());
 
         /* expense lines with limits */
         expenses().clear();
         if (info.getRent() > 0) {
-            MoneyLine rentLine = new MoneyLine("Rent/Mortgage", info.getRent());
+            MoneyLine rentLine = new MoneyLine("Rent/Mortgage", "Monthly",info.getRent());
             rentLine.setBudgetLimit(info.getRent());
             expenses.add(rentLine);
         }
         if (info.getCar() > 0) {
-            MoneyLine carLine = new MoneyLine("Car Payment", info.getCar());
+            MoneyLine carLine = new MoneyLine("Car Payment", "Monthly",info.getCar());
             carLine.setBudgetLimit(info.getCar());
             expenses.add(carLine);
         }
         if (info.getGroceries() > 0) {
-            MoneyLine groceriesLine = new MoneyLine("Groceries", info.getGroceries());
+            MoneyLine groceriesLine = new MoneyLine("Groceries", "Monthly",info.getGroceries());
             groceriesLine.setBudgetLimit(info.getGroceries());
             expenses.add(groceriesLine);
         }
         if (info.getDiningOut() > 0) {
-            MoneyLine diningLine = new MoneyLine("Dining Out", info.getDiningOut());
+            MoneyLine diningLine = new MoneyLine("Dining Out", "Monthly",info.getDiningOut());
             diningLine.setBudgetLimit(info.getDiningOut());
             expenses.add(diningLine);
         }
         if (info.getFunMoney() > 0) {
-            MoneyLine funLine = new MoneyLine("Fun Money", info.getFunMoney());
+            MoneyLine funLine = new MoneyLine("Fun Money", "Monthly",info.getFunMoney());
             funLine.setBudgetLimit(info.getFunMoney());
             expenses.add(funLine);
         }
         if (info.getOtherExpense() > 0) {
-            MoneyLine otherLine = new MoneyLine("Other", info.getOtherExpense());
+            MoneyLine otherLine = new MoneyLine("Other", "Monthly",info.getOtherExpense());
             otherLine.setBudgetLimit(info.getOtherExpense());
             expenses.add(otherLine);
         }
 
+        // Initialize current month after loading base expenses
+        initializeNewMonth();
+        
         recalcTotals();
     }
 
@@ -152,10 +157,50 @@ public class BudgetModel {
           );        netBalance.set(totalIncome.get() - totalExpense.get());
     }
 
+
+    public void initializeNewMonth() {
+        currentMonthExpenses.clear();
+        
+        expenses.forEach(baseExpense -> {
+            MoneyLine monthlyExpense = new MoneyLine(
+                baseExpense.getType(),
+                baseExpense.getFreq(), 
+                baseExpense.getAmount(), // Start with base amount
+                LocalDate.now()
+            );
+            currentMonthExpenses.add(monthlyExpense);
+        });
+    }
+
+    public void endMonth() {
+    // Optional: Save current month for historical tracking
+        //saveMonthlyReport(currentMonthExpenses);
+        
+        // Reset to base amounts for next month
+        initializeNewMonth();
+    }
+    /* 
+    public void checkForNewMonth() {
+        LocalDate lastAppRun = getLastAppRunDate(); // From preferences
+        LocalDate today = LocalDate.now();
+        
+        if (lastAppRun.getMonth() != today.getMonth() || 
+            lastAppRun.getYear() != today.getYear()) {
+            
+            // Only reset if it's actually a new month
+            initializeNewMonth();
+        }
+        
+        saveLastAppRunDate(today);
+    }
+    */
+
+
     // getters
     public StringProperty usernameProperty() { return username; }
     public ObservableList<MoneyLine> incomes() { return incomes; }
     public ObservableList<MoneyLine> expenses(){ return expenses; }
+    public ObservableList<MoneyLine> getCurrentMonth() { return currentMonthExpenses; }
     public ObservableList<MissionLine> missions() { return missions; }
     public ObservableList<MissionLine> missionsList() { return missionsList; }
     public IntegerProperty pointsProperty() { return points; }
@@ -186,8 +231,8 @@ public class BudgetModel {
     public ReadOnlyDoubleProperty netBalanceProperty(){ return netBalance .getReadOnlyProperty(); }
 
     // helpers
-    public void addIncome (String d, double a) { incomes .add(new MoneyLine(d, a));  }
-    public void addExpense(String d, double a) { expenses.add(new MoneyLine(d, a));  }
+    public void addIncome (String d, String f, double a) { incomes .add(new MoneyLine(d, f, a));  }
+    public void addExpense(String d, String f, double a) { expenses.add(new MoneyLine(d, f, a));  }
     public void addMission(Integer i) { missions.add(missionsList.get(i)); }
     public void addMissionList(String d, String f, double a) { missionsList.add(new MissionLine(d, f, a)); }
     public void setRankPos(String r) { leaderboardPos.set(r + "."); }
