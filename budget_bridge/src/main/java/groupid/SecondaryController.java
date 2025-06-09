@@ -6,6 +6,7 @@ import java.util.Locale;
 import java.util.Optional;
 
 import groupid.model.BudgetModel;
+import groupid.model.CooldownManager;
 import groupid.model.MoneyLine;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -57,7 +58,7 @@ public class SecondaryController implements ModelAware {
     /* ── Initialisation (called automatically) ───────────────────── */
     @FXML
     private void initialize() {
-
+        
         /* 1 ▸ shared frequency list */
         ObservableList<String> freqItems = FXCollections.observableArrayList(
                 "Daily", "Weekly", "Monthly");
@@ -316,7 +317,21 @@ public class SecondaryController implements ModelAware {
     }
 
     
-    @FXML private void dailyRewards()   { dailyRewardButton  .setDisable(true); model.setGems(model.getGems().get()+50);  model.addPoints(1000); }
+    @FXML private void dailyRewards() {
+        CooldownManager dailyCooldown = CooldownManager.getInstance();
+        if (!dailyCooldown.isOnCooldown()) {
+            dailyRewardButton  .setDisable(true);
+            model.setGems(model.getGems().get()+50);
+            model.addPoints(1000);
+            dailyCooldown.startCooldown(100);
+            System.out.println("The cooldown is being set");
+        } else {
+            dailyRewardButton .setDisable(false);
+        }
+        dailyRewardButton  .setDisable(true);
+        model.setGems(model.getGems().get()+50);
+        model.addPoints(1000);
+    }
     @FXML private void weeklyRewards()  { weeklyRewardButton .setDisable(true); model.setGems(model.getGems().get()+100); model.addPoints(3000); }
     @FXML private void monthlyRewards() { monthlyRewardButton.setDisable(true); model.setGems(model.getGems().get()+250); model.addPoints(7000); }
     
