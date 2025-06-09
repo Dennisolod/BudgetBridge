@@ -3,6 +3,9 @@ package groupid;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+
+import org.kordamp.ikonli.javafx.FontIcon;
+
 import groupid.model.BadgeLine;
 import groupid.model.BudgetModel;
 import groupid.model.League;
@@ -12,11 +15,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import org.kordamp.ikonli.javafx.FontIcon;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-
-import org.kordamp.ikonli.javafx.FontIcon;
 
 // Leaderboard screen
 public class LeaderboardController implements ModelAware{

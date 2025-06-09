@@ -850,3 +850,43 @@
 .chart-title   { -fx-text-fill: #ededed; -fx-font-size: 16px; }
 .chart-legend  { -fx-background-color: transparent; }
 
+/* ─── Modern combo base ──────────────────────────────────────────── */
+.modern-combo {
+    -fx-background-color: #1e1e1e,              /* outer border */
+                          #2b2b2b,              /* inner border */
+                          #333333;              /* body */
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 6;
+    -fx-padding: 4 32 4 8;                      /* room for arrow */
+    -fx-text-fill: #e0e0e0;
+    -fx-font-size: 13px;
+}
+
+/* arrow button */
+.modern-combo .arrow-button {
+    -fx-background-color: transparent;
+}
+
+/* arrow icon */
+.modern-combo .arrow {
+    -fx-background-color: #c0c0c0;              /* ⇩ color */
+}
+
+/* popup list */
+.modern-combo:showing .list-view {
+    -fx-background-color: #2b2b2b;
+    -fx-control-inner-background: #2b2b2b;
+    -fx-cell-hover-color: #3d3d3d;
+}
+
+/* list cells */
+.modern-combo .list-cell {
+    -fx-text-fill: #e0e0e0;
+    -fx-padding: 6 12 6 12;
+}
+
+/* highlight selected cell */
+.modern-combo .list-cell:selected {
+    -fx-background-color: #3d3d3d;
+    -fx-text-fill: #ffd369;
+}

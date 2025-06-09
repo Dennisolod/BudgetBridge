@@ -19,6 +19,8 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.textfield.*?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.collections.*?> 
 
 <!-- Modern Landscape Budget Layout -->
 <BorderPane stylesheets="@style.css" fx:controller="groupid.SecondaryController" xmlns:fx="http://javafx.com/fxml/1" styleClass="background">
@@ -54,11 +56,34 @@
          
          <Label text="Income Management" styleClass="panel-heading"/>
          
-         <VBox spacing="15" styleClass="add-section-card">
+         <!-- Toggle button for income input -->
+         <Button fx:id="addIncomeToggleButton" 
+                 text="Add Income" 
+                 onAction="#toggleIncomeInput" 
+                 styleClass="add-button-income"/>
+         
+         <!-- Collapsible income input section -->
+         <VBox fx:id="incomeInputSection" spacing="15" styleClass="add-section-card">
+
             <Label text="Add New Income" styleClass="section-title"/>
-            <TextField fx:id="incomeTypeInput" promptText="Income source (e.g., Salary, Freelance)" styleClass="modern-input"/>
-            <TextField fx:id="incomeAmountInput" promptText="Amount ($)" styleClass="modern-input"/>
-            <Button text="Add Income" onAction="#addInputIncome" styleClass="add-button-income"/>
+
+            <TextField fx:id="incomeAmountInput"
+                        promptText="Amount ($)"
+                        styleClass="modern-input"/>
+
+            <ComboBox fx:id="incomeFreqCombo"
+                     promptText="Frequency"
+                     styleClass="modern-combo"/>
+
+            <ComboBox fx:id="incomeCatCombo"
+                     editable="true"
+                     promptText="Income source (e.g., Salary)"
+                     styleClass="modern-combo"/>
+
+            <Button text="Save Income"
+                     onAction="#addInputIncome"
+                     styleClass="add-button-income"/>
+
          </VBox>
          
          <VBox spacing="12" VBox.vgrow="ALWAYS">
@@ -82,13 +107,53 @@
          
          <Label text="Expense Management" styleClass="panel-heading"/>
          
-         <VBox spacing="15" styleClass="add-section-card">
-            <Label text="Add New Expense" styleClass="section-title"/>
-            <TextField fx:id="expenseTypeInput" promptText="Expense category (e.g., Rent, Groceries)" styleClass="modern-input"/>
-            <TextField fx:id="expenseAmountInput" promptText="Amount ($)" styleClass="modern-input"/>
-            <Button text="Add Expense" onAction="#addInputExpense" styleClass="add-button-expense"/>
-         </VBox>
+         <!-- Toggle button for expense input -->
+         <Button fx:id="addExpenseToggleButton" 
+                 text="Add Expense" 
+                 onAction="#toggleExpenseInput" 
+                 styleClass="add-button-expense"/>
          
+         <!-- Collapsible expense input section -->
+         <VBox fx:id="expenseInputSection" spacing="15" styleClass="add-section-card">
+
+            <Label text="Add New Expense" styleClass="section-title"/>
+
+            <TextField fx:id="expenseAmountInput"
+                        promptText="Amount ($)"
+                        styleClass="modern-input"/>
+
+            <ComboBox fx:id="expenseFreqCombo"
+                     promptText="Frequency"
+                     styleClass="modern-combo">
+               <items>
+                     <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="Daily"/>
+                        <String fx:value="Weekly"/>
+                        <String fx:value="Monthly"/>
+                     </FXCollections>
+               </items>
+            </ComboBox>
+
+            <ComboBox fx:id="expenseCatCombo"
+                     editable="true"
+                     promptText="Category (e.g., Rent, Groceries)"
+                     styleClass="modern-combo">
+               <items>
+                     <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="Rent/Mortgage"/>
+                        <String fx:value="Car Payment"/>
+                        <String fx:value="Dining Out"/>
+                        <String fx:value="Fun Money"/>
+                        <String fx:value="Other"/>
+                     </FXCollections>
+               </items>
+            </ComboBox>
+
+            <Button text="Save Expense"
+                     onAction="#addInputExpense"
+                     styleClass="add-button-expense"/>
+         </VBox>
+                  
          <VBox spacing="12" VBox.vgrow="ALWAYS">
             <Label text="Current Expenses" styleClass="section-title"/>
             <ScrollPane styleClass="list-scroll" VBox.vgrow="ALWAYS" prefHeight="400" fitToHeight="true" fitToWidth="true">

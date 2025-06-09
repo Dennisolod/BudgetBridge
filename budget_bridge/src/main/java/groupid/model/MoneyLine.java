@@ -4,6 +4,7 @@ import lombok.Value;
 
 @Value
 public class MoneyLine {
+    String freq;
     String type;
     double amount;
 

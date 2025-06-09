@@ -44,7 +44,7 @@ public class BudgetModel {
     private List<String> goals = List.of();
     private String budgetPlan = "";
     private League lastRewardedLeague = League.BRONZE;
-    public ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList();
+    private ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList();
 
 
     // public enum League { BRONZE, COPPER, SILVER, GOLD, PLATINUM, DIAMOND }
@@ -70,18 +70,18 @@ public class BudgetModel {
 
     public void loadBudgetInfo(BudgetInfo info) {
         incomes().clear();
-        if (info.getPrimaryIncome() > 0) addIncome("Primary Job",  info.getPrimaryIncome());
-        if (info.getSideIncome()   > 0) addIncome("Side Hustle",   info.getSideIncome());
-        if (info.getOtherIncome()  > 0) addIncome("Other Income",  info.getOtherIncome());
+        if (info.getPrimaryIncome() > 0) addIncome("Monthly","Primary Job",  info.getPrimaryIncome());
+        if (info.getSideIncome()   > 0) addIncome("Monthly", "Side Hustle",   info.getSideIncome());
+        if (info.getOtherIncome()  > 0) addIncome("Monthly", "Other Income",  info.getOtherIncome());
 
         /* expense lines */
         expenses().clear();
-        if (info.getRent()        > 0) addExpense("Rent/Mortgage",  info.getRent());
-        if (info.getCar()         > 0) addExpense("Car Payment",    info.getCar());
-        if (info.getGroceries()   > 0) addExpense("Groceries",      info.getGroceries());
-        if (info.getDiningOut()   > 0) addExpense("Dining Out",     info.getDiningOut());
-        if (info.getFunMoney()    > 0) addExpense("Fun Money",      info.getFunMoney());
-        if (info.getOtherExpense()> 0) addExpense("Other",          info.getOtherExpense());
+        if (info.getRent()        > 0) addExpense("Monthly", "Rent/Mortgage",  info.getRent());
+        if (info.getCar()         > 0) addExpense("Monthly", "Car Payment",    info.getCar());
+        if (info.getGroceries()   > 0) addExpense("Monthly", "Groceries",      info.getGroceries());
+        if (info.getDiningOut()   > 0) addExpense("Monthly", "Dining Out",     info.getDiningOut());
+        if (info.getFunMoney()    > 0) addExpense("Monthly", "Fun Money",      info.getFunMoney());
+        if (info.getOtherExpense()> 0) addExpense("Monthly", "Other",          info.getOtherExpense());
 
         recalcTotals();
     }
@@ -162,8 +162,8 @@ public class BudgetModel {
     public ReadOnlyDoubleProperty netBalanceProperty(){ return netBalance .getReadOnlyProperty(); }
 
     // helpers
-    public void addIncome (String d, double a) { incomes .add(new MoneyLine(d, a));  }
-    public void addExpense(String d, double a) { expenses.add(new MoneyLine(d, a));  }
+    public void addIncome (String f, String d, double a) { incomes .add(new MoneyLine(f, d, a));  }
+    public void addExpense(String f, String d, double a) { expenses.add(new MoneyLine(f, d, a));  }
     public void addMission(Integer i) { missions.add(missionsList.get(i)); }
     public void addMissionList(String d, String f, double a) { missionsList.add(new MissionLine(d, f, a)); }
     public void setRankPos(String r) { leaderboardPos.set(r + "."); }

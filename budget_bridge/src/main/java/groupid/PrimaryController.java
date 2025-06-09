@@ -88,9 +88,6 @@ public class PrimaryController implements ModelAware, Initializable {
 
     private void initPie() {
         ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList();
-        for (MoneyLine m : model.expenses()){
-            pieData.add(new PieChart.Data(m.getType(), m.getAmount()));
-        }
         budgetPie.setData(pieData);
 
         budgetPie.setLabelsVisible(true);
@@ -144,9 +141,6 @@ public class PrimaryController implements ModelAware, Initializable {
             badgeList.getItems().add(badge);
         }
     }
-
-    @FXML private void onAddIncome()  { model.addIncome("Side Hustle", 200); }
-    @FXML private void onAddExpense() { model.addExpense("Coffee", 5);   }
 
     @FXML private void switchToSecondary() throws IOException { App.setRoot("secondary"); }
     @FXML private void switchToPrimary() throws IOException { App.setRoot("primary"); }
