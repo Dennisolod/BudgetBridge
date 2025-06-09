@@ -818,6 +818,13 @@
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 6, 0.2, 0, 1);
 }
 
+.badge-gallery {
+    -fx-padding: 10;
+    -fx-background-color: #1f2937;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
 .highlight-number {
     -fx-text-fill: #00E5FF;
     -fx-font-size: 24px;
@@ -836,6 +843,23 @@
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 2, 0, 0, 1);
 }
 
+.league-progress {
+    -fx-accent: linear-gradient(to right, #ffd700, #ff8c00);
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-pref-height: 10px;
+}
+
+.badge-text {
+    -fx-font-size: 14px;
+    -fx-text-fill: #FFD700;           /* gold-like color */
+    -fx-font-weight: bold;
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+    -fx-background-radius: 6;
+    -fx-padding: 6 12;
+    -fx-alignment: center;
+}
+
 .default-color0.chart-pie { -fx-pie-color: #008080; }  /* teal */
 .default-color1.chart-pie { -fx-pie-color: #d4af37; }  /* gold */
 .default-color2.chart-pie { -fx-pie-color: #c94f4f; }  /* muted red */
@@ -846,6 +870,14 @@
     -fx-font-weight: bold;
     -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 2, 0.5 , 0 , 0 );
 }
+
+.progress-bar .track {
+    -fx-background-color: #444;
+}
+.progress-bar .bar {
+    -fx-background-color: linear-gradient(to right, #76d275, #0ac310);
+}
+
 
 .chart-title   { -fx-text-fill: #ededed; -fx-font-size: 16px; }
 .chart-legend  { -fx-background-color: transparent; }

@@ -34,6 +34,7 @@ public class App extends Application {
         
         scene = new Scene(loadAndInject("primary"));
         stage.setScene(scene);
+
         getUsername();
         getBudgetInfo(stage);
         fillMissionsList();
@@ -41,7 +42,7 @@ public class App extends Application {
         addDefaultMissions();
 
         
-       
+        // getBudgetInfo(stage);
         // Force css updates
         scene.getRoot().applyCss();
 

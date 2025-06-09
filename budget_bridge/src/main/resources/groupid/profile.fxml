@@ -16,6 +16,8 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.textfield.*?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.layout.FlowPane?>
 
 <!-- WORK IN PROGRESS -->
 <BorderPane stylesheets="@style.css" fx:controller="groupid.ProfileController" xmlns:fx="http://javafx.com/fxml/1" styleClass="background">
@@ -45,7 +47,7 @@
    <center>
       <VBox spacing="30" alignment="TOP_CENTER">
          <!-- Header -->
-         <Label text="Your Profile" styleClass="big-heading" />
+         <Label fx:id="profileTitle" styleClass="big-heading" />
 
          <!-- Summary Cards -->
          <HBox spacing="30" alignment="CENTER">
@@ -64,12 +66,24 @@
                   <Label fx:id="leagueLabel" styleClass="stats-text" />
                </HBox>
             </VBox>
+
+             <!-- Top 3 Badges -->
+            <VBox spacing="10" alignment="CENTER" styleClass="summary-card">
+               <Label text="Top 3 Badges" styleClass="section-title" />
+               <HBox fx:id="badgeBox" spacing="10" alignment="CENTER" />
+            </VBox>
+
+            <!-- Most Recent Badge Earned  -->
+            <VBox spacing="10" alignment="CENTER" styleClass="summary-card">
+               <Label text="Recent Badge Earned" styleClass="section-title" />
+               <HBox fx:id="recentBadgeLabel" alignment="CENTER" spacing="6" />
+            </VBox>
          </HBox>
 
-         <!-- Top 3 Badges -->
+         <!-- Full Badge Gallery -->
          <VBox spacing="10" alignment="CENTER" styleClass="summary-card">
-            <Label text="Top 3 Badges" styleClass="section-title" />
-            <HBox fx:id="badgeBox" spacing="10" alignment="CENTER" />
+            <Label text="Badge Gallery" styleClass="section-title" />
+            <FlowPane fx:id="badgeGallery" hgap="10" vgap="10" styleClass="badge-gallery" />
          </VBox>
 
          <!-- Income and Expense Lists -->

@@ -19,6 +19,7 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -27,20 +28,18 @@ import javafx.scene.paint.Color;
 // Homescreen / My Dashboard
 public class PrimaryController implements ModelAware, Initializable {
     @FXML private BorderPane rootPane;
-
     @FXML private Label userLabel;
     @FXML private Label netLabel;
     @FXML private Label pointsLabel;
     @FXML private Label gemsLabel;
-
     @FXML private VBox incomeVBox;
     @FXML private VBox expenseVBox;
+    @FXML private VBox expenseProgressVBox;
 
     @FXML private ListView<MoneyLine> incomeList;
     @FXML private ListView<MoneyLine> expenseList;
     @FXML private ListView<MissionLine> missionList;
     @FXML private ListView<BadgeLine> badgeList;
-
     @FXML private PieChart budgetPie;
 
     private BudgetModel model;
@@ -49,6 +48,8 @@ public class PrimaryController implements ModelAware, Initializable {
     public void setModel(BudgetModel m) {
         this.model = m;
 
+        updateExpenseProgress(m);
+        
         userLabel.textProperty().bind(m.usernameProperty());
         missionList.setItems(m.missions());
         badgeList.setItems(m.getOwnedBadges());
@@ -126,6 +127,33 @@ public class PrimaryController implements ModelAware, Initializable {
         });
        
     }
+
+    // HELPERS
+    private void updateExpenseProgress(BudgetModel model) {
+        expenseProgressVBox.getChildren().clear();  // clear old content
+
+        double totalIncome = model.totalIncomeProperty().get();
+
+        for (MoneyLine expense : model.expenses()) {
+            String category = expense.getType();
+            double amount = expense.getAmount();
+
+            double progress = totalIncome == 0 ? 0 : amount / totalIncome;
+
+            // Create label
+            Label label = new Label(String.format("%s - $%.2f of $%.2f", category, amount, totalIncome));
+            label.getStyleClass().add("expense-label");
+
+            // Create progress bar
+            ProgressBar bar = new ProgressBar(progress);
+            bar.setPrefWidth(250);
+            bar.setStyle("-fx-accent: #f08080;"); // light coral color
+
+            VBox entry = new VBox(5, label, bar);
+            expenseProgressVBox.getChildren().add(entry);
+        }
+    }
+
 
     public void addMoneyLines(VBox target, ObservableList<MoneyLine> list, String styleClass) {
         for (MoneyLine moneyLine : list) {

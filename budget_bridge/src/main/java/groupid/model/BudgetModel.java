@@ -70,18 +70,42 @@ public class BudgetModel {
 
     public void loadBudgetInfo(BudgetInfo info) {
         incomes().clear();
-        if (info.getPrimaryIncome() > 0) addIncome("Monthly","Primary Job",  info.getPrimaryIncome());
-        if (info.getSideIncome()   > 0) addIncome("Monthly", "Side Hustle",   info.getSideIncome());
-        if (info.getOtherIncome()  > 0) addIncome("Monthly", "Other Income",  info.getOtherIncome());
+        if (info.getPrimaryIncome() > 0) addIncome("Primary Job", info.getPrimaryIncome());
+        if (info.getSideIncome() > 0) addIncome("Side Hustle", info.getSideIncome());
+        if (info.getOtherIncome() > 0) addIncome("Other Income", info.getOtherIncome());
 
-        /* expense lines */
+        /* expense lines with limits */
         expenses().clear();
-        if (info.getRent()        > 0) addExpense("Monthly", "Rent/Mortgage",  info.getRent());
-        if (info.getCar()         > 0) addExpense("Monthly", "Car Payment",    info.getCar());
-        if (info.getGroceries()   > 0) addExpense("Monthly", "Groceries",      info.getGroceries());
-        if (info.getDiningOut()   > 0) addExpense("Monthly", "Dining Out",     info.getDiningOut());
-        if (info.getFunMoney()    > 0) addExpense("Monthly", "Fun Money",      info.getFunMoney());
-        if (info.getOtherExpense()> 0) addExpense("Monthly", "Other",          info.getOtherExpense());
+        if (info.getRent() > 0) {
+            MoneyLine rentLine = new MoneyLine("Rent/Mortgage", info.getRent());
+            rentLine.setBudgetLimit(info.getRent());
+            expenses.add(rentLine);
+        }
+        if (info.getCar() > 0) {
+            MoneyLine carLine = new MoneyLine("Car Payment", info.getCar());
+            carLine.setBudgetLimit(info.getCar());
+            expenses.add(carLine);
+        }
+        if (info.getGroceries() > 0) {
+            MoneyLine groceriesLine = new MoneyLine("Groceries", info.getGroceries());
+            groceriesLine.setBudgetLimit(info.getGroceries());
+            expenses.add(groceriesLine);
+        }
+        if (info.getDiningOut() > 0) {
+            MoneyLine diningLine = new MoneyLine("Dining Out", info.getDiningOut());
+            diningLine.setBudgetLimit(info.getDiningOut());
+            expenses.add(diningLine);
+        }
+        if (info.getFunMoney() > 0) {
+            MoneyLine funLine = new MoneyLine("Fun Money", info.getFunMoney());
+            funLine.setBudgetLimit(info.getFunMoney());
+            expenses.add(funLine);
+        }
+        if (info.getOtherExpense() > 0) {
+            MoneyLine otherLine = new MoneyLine("Other", info.getOtherExpense());
+            otherLine.setBudgetLimit(info.getOtherExpense());
+            expenses.add(otherLine);
+        }
 
         recalcTotals();
     }
@@ -162,8 +186,8 @@ public class BudgetModel {
     public ReadOnlyDoubleProperty netBalanceProperty(){ return netBalance .getReadOnlyProperty(); }
 
     // helpers
-    public void addIncome (String f, String d, double a) { incomes .add(new MoneyLine(f, d, a));  }
-    public void addExpense(String f, String d, double a) { expenses.add(new MoneyLine(f, d, a));  }
+    public void addIncome (String d, double a) { incomes .add(new MoneyLine(d, a));  }
+    public void addExpense(String d, double a) { expenses.add(new MoneyLine(d, a));  }
     public void addMission(Integer i) { missions.add(missionsList.get(i)); }
     public void addMissionList(String d, String f, double a) { missionsList.add(new MissionLine(d, f, a)); }
     public void setRankPos(String r) { leaderboardPos.set(r + "."); }
@@ -205,7 +229,7 @@ public class BudgetModel {
         .toList();
     }
 
-    private int getCostForBadge(BadgeLine badge) {
+    public int getCostForBadge(BadgeLine badge) {
     return switch (badge.getName()) {
         case "Gold Trophy" -> 200;
         case "Shield of Honor" -> 180;

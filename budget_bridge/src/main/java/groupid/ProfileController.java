@@ -1,59 +1,46 @@
 package groupid;
 
-import groupid.model.BudgetModel;
 import groupid.model.BadgeLine;
+import groupid.model.BudgetModel;
 import groupid.model.MoneyLine;
-import groupid.model.League;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.Tooltip;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.util.Duration;
+import java.io.IOException;
+
 import org.kordamp.ikonli.javafx.FontIcon;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
+public class ProfileController implements ModelAware {
 
-import java.io.IOException;
-import java.util.List;
-
-public class ProfileController implements ModelAware{
-
-    @FXML private Label nameLabel;
-    @FXML private Label balanceLabel;
     @FXML private Label pointsLabel;
     @FXML private Label gemsLabel;
     @FXML private Label leagueLabel;
     @FXML private FontIcon leagueIcon;
     @FXML private HBox badgeBox;
-    
     @FXML private ListView<MoneyLine> incomeList;
     @FXML private ListView<MoneyLine> expenseList;
+    @FXML private FlowPane badgeGallery;
+    @FXML private HBox recentBadgeLabel;
+    @FXML private Label profileTitle;
 
-    @Override public void setModel(BudgetModel m) {
-        //nameLabel.textProperty().bind(m.usernameProperty());
-        //balanceLabel.textProperty().bind(m.netBalanceProperty().asString("Net balance: $%.2f"));
+    @Override
+    public void setModel(BudgetModel m) {
+        pointsLabel.setText(m.pointsProperty().get() + " pts");
+        gemsLabel.setText(m.getGems().get() + " Gems");
+        leagueLabel.setText(m.getCurrentLeague().name());
+        String username = m.usernameProperty().get();
+        profileTitle.setText(username + (username.endsWith("s") ? "'" : "'s") + " Profile");
+
         incomeList.setItems(m.incomes());
         expenseList.setItems(m.expenses());
 
-        
-        pointsLabel.setText(m.pointsProperty().get() + " pts");
-        gemsLabel.setText(m.getGems().get() + " gems");
-
-        League league = m.getCurrentLeague();
-        leagueLabel.setText(league.name());
-
-        switch (league) {
-            case BRONZE -> { leagueIcon.setIconLiteral("fas-medal"); leagueIcon.setIconColor(javafx.scene.paint.Color.web("#cd7f32")); }
-            case COPPER -> { leagueIcon.setIconLiteral("fas-award"); leagueIcon.setIconColor(javafx.scene.paint.Color.web("#b87333")); }
-            case SILVER -> { leagueIcon.setIconLiteral("fas-trophy"); leagueIcon.setIconColor(javafx.scene.paint.Color.web("#c0c0c0")); }
-            case GOLD ->   { leagueIcon.setIconLiteral("fas-star"); leagueIcon.setIconColor(javafx.scene.paint.Color.web("#ffd700")); }
-            case PLATINUM -> { leagueIcon.setIconLiteral("fas-shield-alt"); leagueIcon.setIconColor(javafx.scene.paint.Color.web("#e5e4e2")); }
-            case DIAMOND -> { leagueIcon.setIconLiteral("fas-gem"); leagueIcon.setIconColor(javafx.scene.paint.Color.web("#b9f2ff")); }
-        }
-
-        // Show top 3 badges
         badgeBox.getChildren().clear();
-        List<BadgeLine> topBadges = m.getTop3BadgeLines(m.usernameProperty().get());
-        for (BadgeLine badge : topBadges) {
+        for (BadgeLine badge : m.getTop3BadgeLines(m.usernameProperty().get())) {
             FontIcon icon = new FontIcon(badge.getIconLiteral());
             icon.setIconSize(20);
             icon.setIconColor(badge.getColor());
@@ -61,16 +48,49 @@ public class ProfileController implements ModelAware{
             badgeBox.getChildren().add(icon);
         }
 
-        
+        badgeGallery.getChildren().clear();
+        for (BadgeLine badge : m.getOwnedBadges()) {
+            FontIcon icon = new FontIcon(badge.getIconLiteral());
+            icon.setIconSize(28);
+            icon.setIconColor(badge.getColor());
+            icon.getStyleClass().add("badge-icon");
 
-    } // end set model
-    
+            // Tooltip
+            int price = m.getCostForBadge(badge);
+            Tooltip tooltip = new Tooltip(badge.getName() + " - " + price + " coins");
+            tooltip.setShowDelay(Duration.millis(100)); // ⏱ Fast show
+
+            Tooltip.install(icon, tooltip);
+            badgeGallery.getChildren().add(icon);
+        }
+
+        var recent = m.getOwnedBadges();
+        if (!recent.isEmpty()) {
+            BadgeLine last = recent.get(recent.size() - 1);
+            HBox recentBadgeContent = new HBox(8); // spacing between icon and label
+            recentBadgeContent.setAlignment(javafx.geometry.Pos.CENTER);
+
+            FontIcon recentIcon = new FontIcon(last.getIconLiteral());
+            recentIcon.setIconSize(18);
+            recentIcon.setIconColor(last.getColor());
+
+            Label nameLabel = new Label(last.getName());
+            nameLabel.getStyleClass().add("badge-text");
+
+            recentBadgeContent.getChildren().addAll(recentIcon, nameLabel);
+            recentBadgeLabel.getChildren().setAll(recentBadgeContent);
+
+        } else {
+            Label placeholder = new Label("No badges earned yet.");
+            placeholder.getStyleClass().add("badge-text"); // optional style
+            recentBadgeLabel.getChildren().add(placeholder);        
+        }
+    }
+
     @FXML private void switchToSecondary() throws IOException { App.setRoot("secondary"); }
     @FXML private void switchToPrimary() throws IOException { App.setRoot("primary"); }
     @FXML private void switchToLeaderboard() throws IOException { App.setRoot("leaderboard"); }
     @FXML private void switchToStore() throws IOException {App.setRoot("store"); }
     @FXML private void switchToProfile() throws IOException { App.setRoot("profile"); }
     @FXML private void logoff() throws IOException { System.exit(0); }
-
-    
 }
