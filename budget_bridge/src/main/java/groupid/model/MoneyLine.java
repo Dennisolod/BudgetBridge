@@ -62,16 +62,6 @@ public class MoneyLine {
         return budgetLimit;
     }
 
-    public double getSpent() {
-        return spent.get();
-    }
-    public void setSpent(double value) {
-        spent.set(value);
-    }
-    public DoubleProperty spentProperty() {
-        return spent;
-    }
-
     // Setters
     public void setType(String type) {
         this.type = type;
