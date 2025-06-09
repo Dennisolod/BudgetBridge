@@ -42,6 +42,7 @@ public class App extends Application {
         addDefaultMissions();
 
         
+
         // getBudgetInfo(stage);
         // Force css updates
         scene.getRoot().applyCss();
@@ -65,21 +66,51 @@ public class App extends Application {
         DialogPane pane = loader.load();               
         BudgetSetupController ctl = loader.getController();
 
-        Dialog<BudgetInfo> dialog = new Dialog<>();
+        Dialog<BudgetInfo> dialog = new Dialog<>(); // ✅ declared here
         dialog.setTitle("Welcome — Budget Setup");
         dialog.initOwner(owner);
         dialog.setDialogPane(pane);
-        
+
         dialog.setResultConverter(bt ->
-        (bt != null && bt.getButtonData() == ButtonBar.ButtonData.OK_DONE)
-            ? ctl.collectResult()
-            : null);
+            (bt != null && bt.getButtonData() == ButtonBar.ButtonData.OK_DONE)
+                ? ctl.collectResult()
+                : null);
 
-        pane.getStylesheets()
-            .add(App.class.getResource("style.css").toExternalForm());
+        pane.getStylesheets().add(App.class.getResource("style.css").toExternalForm());
 
-        dialog.showAndWait()
-            .ifPresent(model::loadBudgetInfo);
+        // ✅ use dialog here — still in scope
+        dialog.showAndWait().ifPresent(info -> {
+            model.loadBudgetInfo(info);
+            model.generateCustomBudget(info);
+            showBudgetSummaryDialog(model);
+        });
+    }
+
+    private void showBudgetSummaryDialog(BudgetModel model) {
+        StringBuilder sb = new StringBuilder("Here’s your suggested budget:\n\n");
+
+        for (var m : model.expenses()) {
+            sb.append(String.format("%s: $%.2f\n", m.getType(), m.getAmount()));
+        }
+
+        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.INFORMATION);
+        alert.setTitle("Suggested Budget");
+        alert.setHeaderText("Review Your Personalized Budget");
+        alert.setContentText(sb.toString());
+
+        // Optional: Use expandable text for long content
+        javafx.scene.control.TextArea textArea = new javafx.scene.control.TextArea(sb.toString());
+        textArea.setEditable(false);
+        textArea.setWrapText(true);
+        textArea.setMaxWidth(Double.MAX_VALUE);
+        textArea.setMaxHeight(Double.MAX_VALUE);
+
+        javafx.scene.layout.GridPane expContent = new javafx.scene.layout.GridPane();
+        expContent.setMaxWidth(Double.MAX_VALUE);
+        expContent.add(textArea, 0, 0);
+
+        alert.getDialogPane().setExpandableContent(expContent);
+        alert.showAndWait();
     }
 
 
