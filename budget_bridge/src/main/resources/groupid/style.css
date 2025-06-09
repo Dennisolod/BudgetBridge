@@ -922,3 +922,24 @@
     -fx-background-color: #3d3d3d;
     -fx-text-fill: #ffd369;
 }
+
+.expense-progress-section {
+    -fx-padding: 20 0 10 0;
+    -fx-spacing: 15;
+    -fx-background-color: transparent;
+}
+
+.expense-label {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.expense-progress-bar {
+    -fx-background-color: #2e2e2e;
+    -fx-accent: linear-gradient(to right, #ffa07a, #ff6347); /* salmon to tomato */
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-pref-height: 18px;
+}

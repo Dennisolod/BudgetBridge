@@ -152,7 +152,7 @@ public class SecondaryController implements ModelAware {
         if (cat.isEmpty()) { showWarn("Enter or select an income category."); return; }
 
         /* persist */
-        model.addIncome(freq, cat, amt);
+        //model.addIncome(freq, cat, amt);
 
         /* remember custom category */
         if (!incomeCatCombo.getItems().contains(cat))
@@ -184,7 +184,7 @@ public class SecondaryController implements ModelAware {
                              .orElse("").trim();
         if (cat.isEmpty()) { showWarn("Enter or select an expense category."); return; }
 
-        model.addExpense(freq, cat, amt);
+        //model.addExpense(freq, cat, amt);
 
         if (!expenseCatCombo.getItems().contains(cat))
             expenseCatCombo.getItems().add(cat);
