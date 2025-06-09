@@ -89,16 +89,6 @@ public class MoneyLine {
         this.budgetLimit = budgetLimit;
     }
 
-    public double getSpent() {
-        return spent.get();
-    }
-    public void setSpent(double value) {
-        spent.set(value);
-    }
-    public DoubleProperty spentProperty() {
-        return spent;
-    }
-
     @Override
     public String toString() {
         return type + " : " + String.format("%.2f", amount);
