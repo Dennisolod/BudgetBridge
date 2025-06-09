@@ -49,11 +49,9 @@
             
             <HBox spacing="30" alignment="CENTER">
                <VBox fx:id="incomeVBox" alignment="CENTER" spacing="12" styleClass="overview-metric-card">
-                  <Label text="Monthly Income" styleClass="metric-label"/>
                   <!-- Income items will be populated by controller -->
                </VBox>
                <VBox fx:id="expenseVBox" alignment="CENTER" spacing="12" styleClass="overview-metric-card">
-                  <Label text="Monthly Expenses" styleClass="metric-label"/>
                   <!-- Expense items will be populated by controller -->
                </VBox>
                

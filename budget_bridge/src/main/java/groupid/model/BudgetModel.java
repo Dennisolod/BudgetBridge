@@ -215,7 +215,6 @@ public class BudgetModel {
     public void applyTheme(ThemeLine theme) { currentTheme.set(theme); }
     public ObjectProperty<ThemeLine> currentThemeProperty() { return currentTheme; }
     public ObservableList<PieChart.Data> pieDataProperty() {return pieData; }
-    
     public League getCurrentLeague() {
         int points = pointsProperty().get();
         if (points >= 60000) return League.DIAMOND;
@@ -315,5 +314,110 @@ public class BudgetModel {
     public void setLastRewardedLeague(League league) {
         this.lastRewardedLeague = league;
     }
+
+    public void generateCustomBudget(BudgetInfo info) {
+        expenses().clear();
+
+        // Income
+        double totalIncome = info.getPrimaryIncome() + info.getSideIncome() + info.getOtherIncome();
+
+        // Fixed expenses (user-defined)
+        addExpense("Rent/Mortgage", "fixed", info.getRent());
+        addExpense("Car Payment", "fixed", info.getCar());
+        addExpense("Other Fixed Expenses", "fixed", info.getOtherExpense());
+
+        double fixedExpenses = info.getRent() + info.getCar() + info.getOtherExpense();
+        double discretionary = totalIncome - fixedExpenses;
+
+        if (discretionary <= 0) {
+            addExpense("Groceries", "variable", 0);
+            addExpense("Dining Out", "variable", 0);
+            addExpense("Fun Money", "variable", 0);
+            addExpense("Savings", "variable", 0);
+            return;
+        }
+
+        // Lifestyle presets
+        double groceriesPct = 0.25;
+        double diningPct = 0.20;
+        double funPct = 0.15;
+        double savingsPct = 0.40;
+
+        switch (info.getBudgetPlan()) {
+            case "College Student" -> {
+                groceriesPct = 0.30;
+                diningPct = 0.25;
+                funPct = 0.25;
+                savingsPct = 0.20;
+            }
+            case "Part-Time Worker" -> {
+                groceriesPct = 0.25;
+                diningPct = 0.25;
+                funPct = 0.20;
+                savingsPct = 0.30;
+            }
+            case "Young Professional" -> {
+                groceriesPct = 0.20;
+                diningPct = 0.20;
+                funPct = 0.20;
+                savingsPct = 0.40;
+            }
+            case "Living With Parents" -> {
+                groceriesPct = 0.15;
+                diningPct = 0.25;
+                funPct = 0.25;
+                savingsPct = 0.35;
+            }
+            case "Freelancer" -> {
+                groceriesPct = 0.25;
+                diningPct = 0.15;
+                funPct = 0.15;
+                savingsPct = 0.45;
+            }
+        }
+
+        // Adjustments based on goals
+        List<String> goals = info.getGoals();
+        boolean saveEmergency = goals.contains("Build Emergency Fund");
+        boolean saveRetirement = goals.contains("Invest for Retirement");
+        boolean saveVacation = goals.contains("Save for Vacation");
+        boolean payOffDebt = goals.contains("Pay Off Debt");
+
+        if (saveVacation) {
+            funPct += 0.05;
+            diningPct -= 0.05;
+        }
+
+        if (payOffDebt) {
+            savingsPct -= 0.10;
+            addExpense("Debt Payments", "variable", 0.10 * discretionary);
+        }
+
+        // Normalize percentages for remaining pool
+        double pctSum = groceriesPct + diningPct + funPct + Math.max(savingsPct, 0);
+        groceriesPct /= pctSum;
+        diningPct /= pctSum;
+        funPct /= pctSum;
+        savingsPct = Math.max(0, savingsPct / pctSum);  // Ensure non-negative
+
+        // Apply expenses
+        addExpense("Groceries", "variable", discretionary * groceriesPct);
+        addExpense("Dining Out", "variable", discretionary * diningPct);
+        addExpense("Fun Money", "variable", discretionary * funPct);
+
+        // Split savings if goals chosen
+        double savingsTotal = discretionary * savingsPct;
+        if (saveEmergency && saveRetirement) {
+            addExpense("Emergency Fund", "variable", savingsTotal * 0.5);
+            addExpense("Retirement Savings", "variable", savingsTotal * 0.5);
+        } else if (saveEmergency) {
+            addExpense("Emergency Fund", "variable", savingsTotal);
+        } else if (saveRetirement) {
+            addExpense("Retirement Savings", "variable", savingsTotal);
+        } else {
+            addExpense("Savings", "variable", savingsTotal);
+        }
+    }
+
 
 }

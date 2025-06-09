@@ -161,8 +161,7 @@
                      styleClass="modern-combo">
                <items>
                      <FXCollections fx:factory="observableArrayList">
-                        <String fx:value="Rent/Mortgage"/>
-                        <String fx:value="Car Payment"/>
+                        <String fx:value="Groceries"/>
                         <String fx:value="Dining Out"/>
                         <String fx:value="Fun Money"/>
                         <String fx:value="Other"/>

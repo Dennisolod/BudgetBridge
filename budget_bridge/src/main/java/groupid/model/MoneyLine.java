@@ -22,6 +22,7 @@ public class MoneyLine {
         
     }
 
+    
     public MoneyLine(String type, String freq, double amount){
         this.type = type;
         this.freq = freq;

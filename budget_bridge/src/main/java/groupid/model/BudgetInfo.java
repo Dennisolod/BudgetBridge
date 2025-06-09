@@ -13,10 +13,11 @@ public class BudgetInfo {
     double otherIncome;
     double rent;
     double car;
-    double groceries;
-    double diningOut;
-    double funMoney;
-    double otherExpense;
+    double debt;
+    double groceries = 0.0;
+    double diningOut = 0.0;
+    double funMoney = 0.0;
+    double otherExpense = 0.0;
 
     List<String> goals;   
     String budgetPlan;  
