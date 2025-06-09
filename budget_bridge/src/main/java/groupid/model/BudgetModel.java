@@ -88,26 +88,23 @@ public class BudgetModel {
             carLine.setBudgetLimit(info.getCar());
             expenses.add(carLine);
         }
-        if (info.getGroceries() > 0) {
+        if (info.getDebt() > 0) {
+            MoneyLine carLine = new MoneyLine("Other Debt", "Monthly",info.getDebt());
+            carLine.setBudgetLimit(info.getCar());
+            expenses.add(carLine);
+        }
             MoneyLine groceriesLine = new MoneyLine("Groceries", "Monthly",info.getGroceries());
             groceriesLine.setBudgetLimit(info.getGroceries());
             expenses.add(groceriesLine);
-        }
-        if (info.getDiningOut() > 0) {
             MoneyLine diningLine = new MoneyLine("Dining Out", "Monthly",info.getDiningOut());
             diningLine.setBudgetLimit(info.getDiningOut());
             expenses.add(diningLine);
-        }
-        if (info.getFunMoney() > 0) {
             MoneyLine funLine = new MoneyLine("Fun Money", "Monthly",info.getFunMoney());
             funLine.setBudgetLimit(info.getFunMoney());
             expenses.add(funLine);
-        }
-        if (info.getOtherExpense() > 0) {
             MoneyLine otherLine = new MoneyLine("Other", "Monthly",info.getOtherExpense());
             otherLine.setBudgetLimit(info.getOtherExpense());
             expenses.add(otherLine);
-        }
 
         // Initialize current month after loading base expenses
         initializeNewMonth();
