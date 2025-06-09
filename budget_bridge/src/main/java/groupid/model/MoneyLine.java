@@ -1,9 +1,13 @@
 package groupid.model;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+
 public class MoneyLine {
     private String type;
     private double amount;
     private double budgetLimit;
+    private final DoubleProperty spent = new SimpleDoubleProperty(0.0);
 
     public MoneyLine(String type, double amount) {
         this.type = type;
@@ -35,6 +39,16 @@ public class MoneyLine {
 
     public void setBudgetLimit(double budgetLimit) {
         this.budgetLimit = budgetLimit;
+    }
+
+    public double getSpent() {
+        return spent.get();
+    }
+    public void setSpent(double value) {
+        spent.set(value);
+    }
+    public DoubleProperty spentProperty() {
+        return spent;
     }
 
     @Override
