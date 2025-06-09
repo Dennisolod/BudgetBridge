@@ -58,6 +58,8 @@
                </VBox>
                
             </HBox>
+               <!-- Expense tracker  -->
+            <VBox fx:id="expenseProgressVBox" spacing="15" styleClass="expense-progress-section"/>
          </VBox>
          
       </VBox>
@@ -71,8 +73,8 @@
          <BorderPane.margin>
             <Insets top="20" right="20" bottom="20" left="20"/>
          </BorderPane.margin>
-         <!-- Expense tracker  -->
-         <VBox fx:id="expenseProgressVBox" spacing="15" styleClass="expense-progress-section"/>
+         
+         
          <VBox spacing="15" styleClass="missions-overview-card" VBox.vgrow="ALWAYS">
             <Label text="Active Missions" styleClass="card-heading"/>
                <ListView fx:id="missionList" styleClass="modern-list"/>

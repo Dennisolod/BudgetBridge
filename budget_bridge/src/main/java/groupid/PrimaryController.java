@@ -17,12 +17,15 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.geometry.Insets;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.Button;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
@@ -31,6 +34,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.beans.binding.Bindings;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.Priority;
 
 // Homescreen / My Dashboard
 public class PrimaryController implements ModelAware, Initializable {
@@ -143,7 +150,22 @@ public class PrimaryController implements ModelAware, Initializable {
         for (MoneyLine expense : model.expenses()) {
             String category = expense.getType();
             double budget = expense.getAmount();
+            double budget = expense.getAmount();
 
+            // Create GridPane row
+            GridPane row = new GridPane();
+            row.setHgap(10);
+            row.setVgap(5);
+
+            // Column constraints for consistent alignment
+            ColumnConstraints col1 = new ColumnConstraints();
+            col1.setMinWidth(250); // label column
+            ColumnConstraints col2 = new ColumnConstraints();
+            col2.setMinWidth(250); // progress bar column
+            col2.setHgrow(Priority.ALWAYS);
+            ColumnConstraints col3 = new ColumnConstraints();
+            col3.setMinWidth(120); // button column
+            row.getColumnConstraints().addAll(col1, col2, col3);
             // Create GridPane row
             GridPane row = new GridPane();
             row.setHgap(10);
