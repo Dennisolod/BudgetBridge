@@ -78,9 +78,6 @@ public class PrimaryController implements ModelAware, Initializable {
             rootPane.setStyle("-fx-background-color: " + toWebColor(model.getCurrentTheme().getBackgroundColor()) + ";");
         }
 
-        addMoneyLines(incomeVBox, model.incomes(), "income");
-        addMoneyLines(expenseVBox, model.expenses(), "expense");
-
         gemsLabel.textProperty().bind(m.getGems().asString("%,d Gems!"));
         initPie();
         
@@ -137,36 +134,23 @@ public class PrimaryController implements ModelAware, Initializable {
 
     // HELPERS
     private void updateExpenseProgress(BudgetModel model) {
-        expenseProgressVBox.getChildren().clear();  // clear old content
-
+        expenseProgressVBox.getChildren().clear();  // Clear previous rows
 
         for (MoneyLine expense : model.expenses()) {
             String category = expense.getType();
             double budget = expense.getAmount();
 
-            // Create GridPane row
-            GridPane row = new GridPane();
-            row.setHgap(10);
-            row.setVgap(5);
+            VBox row = new VBox(5);
+            row.setPadding(new Insets(5));
+            row.getStyleClass().add("budget-row");
 
-            // Column constraints for consistent alignment
-            ColumnConstraints col1 = new ColumnConstraints();
-            col1.setMinWidth(250); // label column
-            ColumnConstraints col2 = new ColumnConstraints();
-            col2.setMinWidth(250); // progress bar column
-            col2.setHgrow(Priority.ALWAYS);
-            ColumnConstraints col3 = new ColumnConstraints();
-            col3.setMinWidth(120); // button column
-            row.getColumnConstraints().addAll(col1, col2, col3);
-
-            // Create label showing progress
+            // Label above the bar
             Label label = new Label(String.format("%s: $%.2f of $%.2f spent", category, expense.getSpent(), budget));
             label.getStyleClass().add("expense-label");
-            label.getStyleClass().add("expense-label");
 
+            // Progress bar under the label
             ProgressBar bar = new ProgressBar();
             bar.setMaxWidth(Double.MAX_VALUE);
-            GridPane.setHgrow(bar, Priority.ALWAYS);
             bar.progressProperty().bind(
                 Bindings.createDoubleBinding(
                     () -> budget == 0 ? 0 : expense.getSpent() / budget,
@@ -174,19 +158,19 @@ public class PrimaryController implements ModelAware, Initializable {
                 )
             );
 
-            // Penalty and color update logic
+            // Update bar color and label text when spent changes
             expense.spentProperty().addListener((obs, oldVal, newVal) -> {
+                label.setText(String.format("%s: $%.2f of $%.2f spent", category, newVal.doubleValue(), budget));
                 if (newVal.doubleValue() > budget) {
                     bar.setStyle("-fx-accent: red;");
                     model.getGems().set(Math.max(0, model.getGems().get() - 5));
                     model.pointsProperty().set(Math.max(0, model.pointsProperty().get() - 10));
                 } else {
-                    bar.setStyle("-fx-accent: #f08080;");
+                    bar.setStyle("-fx-accent: #4CAF50;");
                 }
-
-            label.setText(String.format("%s: $%.2f of $%.2f spent", category, newVal.doubleValue(), budget));
             });
 
+            // Log purchase button under the bar
             Button logButton = new Button("Log Purchase");
             logButton.setPrefWidth(120);
             logButton.setOnAction(e -> {
@@ -199,23 +183,21 @@ public class PrimaryController implements ModelAware, Initializable {
                     try {
                         double value = Double.parseDouble(input);
                         if (value < 0) throw new NumberFormatException();
-                        expense.setSpent(expense.getSpent() + value);  // update spent
+                        expense.setSpent(expense.getSpent() + value);
                     } catch (NumberFormatException ex) {
                         System.out.println("Invalid input");
                     }
                 });
             });
 
-            // Add components to GridPane row
-            row.add(label, 0, 0);
-            row.add(bar, 1, 0);
-            row.add(logButton, 2, 0);
+            // Add components to row
+            row.getChildren().addAll(label, bar, logButton);
+            VBox.setMargin(row, new Insets(10, 0, 10, 0));
 
-            // Add spacing between rows
-            VBox.setMargin(row, new Insets(8, 0, 8, 0));
             expenseProgressVBox.getChildren().add(row);
         }
     }
+
 
 
     public void addMoneyLines(VBox target, ObservableList<MoneyLine> list, String styleClass) {

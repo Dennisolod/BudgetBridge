@@ -66,7 +66,7 @@ public class App extends Application {
         DialogPane pane = loader.load();               
         BudgetSetupController ctl = loader.getController();
 
-        Dialog<BudgetInfo> dialog = new Dialog<>(); // ✅ declared here
+        Dialog<BudgetInfo> dialog = new Dialog<>(); 
         dialog.setTitle("Welcome — Budget Setup");
         dialog.initOwner(owner);
         dialog.setDialogPane(pane);
@@ -78,7 +78,6 @@ public class App extends Application {
 
         pane.getStylesheets().add(App.class.getResource("style.css").toExternalForm());
 
-        // ✅ use dialog here — still in scope
         dialog.showAndWait().ifPresent(info -> {
             model.loadBudgetInfo(info);
             model.generateCustomBudget(info);

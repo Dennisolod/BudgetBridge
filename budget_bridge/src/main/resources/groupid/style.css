@@ -979,3 +979,41 @@
     -fx-text-fill: #555555;
     -fx-padding: 5 0 0 0;
 }
+
+.expense-scroll {
+    -fx-background-color: transparent;
+    -fx-padding: 10;
+    -fx-background-insets: 0;
+    -fx-border-color: transparent;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+/* Inner viewport (the scrollable area) */
+.scroll-pane > .viewport {
+    -fx-background-color: #1e1e2f; /* match your main background */
+    -fx-background-radius: 10;
+}
+
+/* Vertical scrollbar track */
+.scroll-pane .scroll-bar:vertical {
+    -fx-background-color: transparent;
+}
+
+/* Vertical scrollbar thumb (the draggable piece) */
+.scroll-pane .scroll-bar:vertical .thumb {
+    -fx-background-color: #5e5e80;
+    -fx-background-insets: 2;
+    -fx-background-radius: 8;
+}
+
+/* Optional: Hover effect for thumb */
+.scroll-pane .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: #7a7aaa;
+}
+
+.budget-row {
+    -fx-background-color: rgba(255,255,255,0.05);
+    -fx-background-radius: 10;
+    -fx-padding: 6;
+}

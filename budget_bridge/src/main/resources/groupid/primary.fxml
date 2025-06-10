@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 <?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.ScrollPane?>
 
 <BorderPane fx:id="rootPane" stylesheets="@style.css" fx:controller="groupid.PrimaryController" xmlns:fx="http://javafx.com/fxml/1" styleClass="background">
    <top>
@@ -47,17 +48,12 @@
          <VBox spacing="20" styleClass="budget-overview-card" VBox.vgrow="ALWAYS">
             <Label text="Budget Overview" styleClass="card-heading"/>
             
-            <HBox spacing="30" alignment="CENTER">
-               <VBox fx:id="incomeVBox" alignment="CENTER" spacing="12" styleClass="overview-metric-card">
-                  <!-- Income items will be populated by controller -->
-               </VBox>
-               <VBox fx:id="expenseVBox" alignment="CENTER" spacing="12" styleClass="overview-metric-card">
-                  <!-- Expense items will be populated by controller -->
-               </VBox>
-               
-            </HBox>
-               <!-- Expense tracker  -->
-            <VBox fx:id="expenseProgressVBox" spacing="15" styleClass="expense-progress-section"/>
+            <!-- Expense tracker  -->
+            <ScrollPane fitToWidth="true" prefHeight="400">
+               <content>
+                  <VBox fx:id="expenseProgressVBox" spacing="10" styleClass="expense-progress-section"/>
+               </content>
+            </ScrollPane>
          </VBox>
          
       </VBox>
