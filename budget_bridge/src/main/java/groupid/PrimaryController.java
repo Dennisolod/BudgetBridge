@@ -139,6 +139,7 @@ public class PrimaryController implements ModelAware, Initializable {
         for (MoneyLine expense : model.expenses()) {
             String category = expense.getType();
             double budget = expense.getAmount();
+            if (budget == 0) continue;  // skips empty or 0 values
 
             VBox row = new VBox(5);
             row.setPadding(new Insets(5));

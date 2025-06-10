@@ -316,108 +316,42 @@ public class BudgetModel {
     }
 
     public void generateCustomBudget(BudgetInfo info) {
-        expenses().clear();
+        expenses.clear();  // Reset current budget
 
-        // Income
-        double totalIncome = info.getPrimaryIncome() + info.getSideIncome() + info.getOtherIncome();
+        double income = info.getPrimaryIncome() + info.getSideIncome() + info.getOtherIncome();
 
-        // Fixed expenses (user-defined)
-        addExpense("Rent/Mortgage", "fixed", info.getRent());
+        // Fixed expenses
+        addExpense("Rent", "fixed", info.getRent());
         addExpense("Car Payment", "fixed", info.getCar());
-        addExpense("Other Fixed Expenses", "fixed", info.getOtherExpense());
+        addExpense("Other Debt", "fixed", info.getDebt());
 
-        double fixedExpenses = info.getRent() + info.getCar() + info.getOtherExpense();
-        double discretionary = totalIncome - fixedExpenses;
+        double fixedTotal = info.getRent() + info.getCar() + info.getDebt();
+        double discretionary = income - fixedTotal;
 
-        if (discretionary <= 0) {
-            addExpense("Groceries", "variable", 0);
-            addExpense("Dining Out", "variable", 0);
-            addExpense("Fun Money", "variable", 0);
-            addExpense("Savings", "variable", 0);
-            return;
-        }
+        if (discretionary < 0) discretionary = 0;
 
-        // Lifestyle presets
-        double groceriesPct = 0.25;
-        double diningPct = 0.20;
-        double funPct = 0.15;
-        double savingsPct = 0.40;
-
-        switch (info.getBudgetPlan()) {
-            case "College Student" -> {
-                groceriesPct = 0.30;
-                diningPct = 0.25;
-                funPct = 0.25;
-                savingsPct = 0.20;
-            }
-            case "Part-Time Worker" -> {
-                groceriesPct = 0.25;
-                diningPct = 0.25;
-                funPct = 0.20;
-                savingsPct = 0.30;
-            }
-            case "Young Professional" -> {
-                groceriesPct = 0.20;
-                diningPct = 0.20;
-                funPct = 0.20;
-                savingsPct = 0.40;
-            }
-            case "Living With Parents" -> {
-                groceriesPct = 0.15;
-                diningPct = 0.25;
-                funPct = 0.25;
-                savingsPct = 0.35;
-            }
-            case "Freelancer" -> {
-                groceriesPct = 0.25;
-                diningPct = 0.15;
-                funPct = 0.15;
-                savingsPct = 0.45;
-            }
-        }
-
-        // Adjustments based on goals
+        // Determine savings allocation based on goals
+        double savingsPct = 0.20;
         List<String> goals = info.getGoals();
-        boolean saveEmergency = goals.contains("Build Emergency Fund");
-        boolean saveRetirement = goals.contains("Invest for Retirement");
-        boolean saveVacation = goals.contains("Save for Vacation");
         boolean payOffDebt = goals.contains("Pay Off Debt");
 
-        if (saveVacation) {
-            funPct += 0.05;
-            diningPct -= 0.05;
-        }
-
-        if (payOffDebt) {
+        // If debt goal is selected AND no debt entered, allocate additional funds
+        if (payOffDebt && info.getDebt() == 0) {
+            double debtAlloc = 0.10 * discretionary;
+            addExpense("Debt Payments", "variable", debtAlloc);
             savingsPct -= 0.10;
-            addExpense("Debt Payments", "variable", 0.10 * discretionary);
         }
 
-        // Normalize percentages for remaining pool
-        double pctSum = groceriesPct + diningPct + funPct + Math.max(savingsPct, 0);
-        groceriesPct /= pctSum;
-        diningPct /= pctSum;
-        funPct /= pctSum;
-        savingsPct = Math.max(0, savingsPct / pctSum);  // Ensure non-negative
+        double savings = savingsPct * discretionary;
+        addExpense("Savings", "variable", savings);
 
-        // Apply expenses
-        addExpense("Groceries", "variable", discretionary * groceriesPct);
-        addExpense("Dining Out", "variable", discretionary * diningPct);
-        addExpense("Fun Money", "variable", discretionary * funPct);
-
-        // Split savings if goals chosen
-        double savingsTotal = discretionary * savingsPct;
-        if (saveEmergency && saveRetirement) {
-            addExpense("Emergency Fund", "variable", savingsTotal * 0.5);
-            addExpense("Retirement Savings", "variable", savingsTotal * 0.5);
-        } else if (saveEmergency) {
-            addExpense("Emergency Fund", "variable", savingsTotal);
-        } else if (saveRetirement) {
-            addExpense("Retirement Savings", "variable", savingsTotal);
-        } else {
-            addExpense("Savings", "variable", savingsTotal);
-        }
+        // Split remaining discretionary money
+        double leftover = discretionary - savings;
+        addExpense("Groceries", "variable", leftover * 0.45);
+        addExpense("Dining Out", "variable", leftover * 0.25);
+        addExpense("Fun Money", "variable", leftover * 0.30);
     }
+
 
 
 }
