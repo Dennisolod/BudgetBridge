@@ -81,6 +81,21 @@ public class PrimaryController implements ModelAware, Initializable {
         gemsLabel.textProperty().bind(m.getGems().asString("%,d Gems!"));
         initPie();
         
+        model.getCurrentMonth().addListener((ListChangeListener<MoneyLine>) c -> {
+            updatePieChart();
+            updateProgressBars();
+        });
+
+        // Dynamically update progress bars when recurring/base expenses change
+        model.expenses().addListener((ListChangeListener<MoneyLine>) c -> {
+            updateExpenseProgress(model);  // This updates the log-purchase progress bars
+        });
+
+        // Trigger initial render of both
+        updateProgressBars();
+        updatePieChart();
+        updateExpenseProgress(model);
+
     }
 
     private String toWebColor(Color color) {
@@ -131,6 +146,50 @@ public class PrimaryController implements ModelAware, Initializable {
         });
        
     }
+
+
+    // refreshes Progress Bars
+    private void updateProgressBars() {
+        expenseProgressVBox.getChildren().clear();
+
+        for (MoneyLine expense : model.getCurrentMonth()) {
+            String category = expense.getType();
+            double amount = expense.getAmount();
+            double budgeted = getBudgetGoalForCategory(category); // You can implement this as needed
+
+            double progress = budgeted > 0 ? Math.min(amount / budgeted, 1.0) : 0;
+
+            Label label = new Label(category + ": $" + String.format("%.2f", amount) + " / $" + String.format("%.2f", budgeted));
+            ProgressBar bar = new ProgressBar(progress);
+            bar.setPrefWidth(300);
+
+            VBox wrapper = new VBox(label, bar);
+            wrapper.setSpacing(5);
+            expenseProgressVBox.getChildren().add(wrapper);
+        }
+    }
+
+    private void updatePieChart() {
+        ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList();
+
+        for (MoneyLine expense : model.getCurrentMonth()) {
+            String category = expense.getType();
+            double amount = expense.getAmount();
+            if (amount > 0) {
+                pieData.add(new PieChart.Data(category, amount));
+            }
+        }
+
+        budgetPie.setData(pieData);
+    }
+
+    private double getBudgetGoalForCategory(String category) {
+        return model.expenses().stream()
+            .filter(e -> e.getType().equals(category))
+            .mapToDouble(MoneyLine::getAmount)
+            .sum();
+    }
+
 
     // HELPERS
     private void updateExpenseProgress(BudgetModel model) {
@@ -199,8 +258,6 @@ public class PrimaryController implements ModelAware, Initializable {
         }
     }
 
-
-
     public void addMoneyLines(VBox target, ObservableList<MoneyLine> list, String styleClass) {
         for (MoneyLine moneyLine : list) {
             Label label = new Label(String.format("$%.2f", moneyLine.getAmount()));
@@ -217,7 +274,17 @@ public class PrimaryController implements ModelAware, Initializable {
     }
 
     @FXML private void switchToSecondary() throws IOException { App.setRoot("secondary"); }
-    @FXML private void switchToPrimary() throws IOException { App.setRoot("primary"); }
+    @FXML private void switchToPrimary() throws IOException { 
+        model.refreshCurrentMonthFromBase(); // Keep current month in sync
+
+        // Manually fire UI updates when model state changes but FX doesn't detect it
+        if (model.getCurrentMonth() != null) {
+            // simulate a change to trigger listener in PrimaryController
+            var copy = FXCollections.observableArrayList(model.getCurrentMonth());
+            model.getCurrentMonth().setAll(copy);
+        }
+        App.setRoot("primary"); 
+    }
     @FXML private void switchToLeaderboard() throws IOException { App.setRoot("leaderboard"); }
     @FXML private void switchToStore() throws IOException {App.setRoot("store"); }
     @FXML private void switchToProfile() throws IOException { App.setRoot("profile"); }

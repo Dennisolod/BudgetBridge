@@ -294,6 +294,16 @@ public class BudgetModel {
         };
     }
 
+
+    public void refreshCurrentMonthFromBase() {
+        currentMonthExpenses.clear();
+        for (MoneyLine e : expenses) {
+            if (!e.getFreq().equals("One-time")) { // Only recurring ones
+                currentMonthExpenses.add(new MoneyLine(e.getType(), e.getFreq(), e.getAmount()));
+            }
+        }
+    }
+
     // add points to the player for their leaderboard position 
     // and if they progress to a new league
     public void addPoints(int p) {

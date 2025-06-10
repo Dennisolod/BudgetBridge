@@ -106,6 +106,9 @@ public class SecondaryController implements ModelAware {
         m.expenses().addListener((ListChangeListener<MoneyLine>) c -> updateTotals());
         updateTotals();
 
+        m.refreshCurrentMonthFromBase();
+        expenseList.setItems(m.getCurrentMonth());
+
         missionDaily  .setText(m.missions().get(0).toString());
         missionWeekly .setText(m.missions().get(1).toString());
         missionMonthly.setText(m.missions().get(2).toString());
@@ -257,6 +260,7 @@ public class SecondaryController implements ModelAware {
         } else{
             // For recurring expenses, add to base expenses  
             model.addExpense(freq, cat, amt);
+            model.refreshCurrentMonthFromBase();
             updateTotals(); // Refresh current month from base
         }
 
@@ -337,7 +341,18 @@ public class SecondaryController implements ModelAware {
     
     /* ── Demo & nav buttons (unchanged) ────────────────────────────── */
     @FXML private void switchToSecondary() throws IOException { App.setRoot("secondary"); }
-    @FXML private void switchToPrimary()   throws IOException { App.setRoot("primary");   }
+    @FXML private void switchToPrimary()   throws IOException { 
+        model.refreshCurrentMonthFromBase(); // Keep current month in sync
+
+        // Manually fire UI updates when model state changes but FX doesn't detect it
+        if (model.getCurrentMonth() != null) {
+            // simulate a change to trigger listener in PrimaryController
+            var copy = FXCollections.observableArrayList(model.getCurrentMonth());
+            model.getCurrentMonth().setAll(copy);
+        }
+        
+        App.setRoot("primary");  
+    }
     @FXML private void switchToLeaderboard() throws IOException { App.setRoot("leaderboard"); }
     @FXML private void switchToStore()    throws IOException { App.setRoot("store");     }
     @FXML private void switchToProfile()  throws IOException { App.setRoot("profile");   }
