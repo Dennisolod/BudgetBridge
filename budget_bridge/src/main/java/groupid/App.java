@@ -41,8 +41,6 @@ public class App extends Application {
         addDefaultPoints();
         addDefaultMissions();
 
-        
-
         // getBudgetInfo(stage);
         // Force css updates
         // scene.getRoot().applyCss();

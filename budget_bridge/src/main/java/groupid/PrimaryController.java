@@ -50,7 +50,7 @@ public class PrimaryController implements ModelAware, Initializable {
     @FXML private PieChart budgetPie;
 
     private BudgetModel model;
-
+ 
     @Override
     public void setModel(BudgetModel m) {
         this.model = m;

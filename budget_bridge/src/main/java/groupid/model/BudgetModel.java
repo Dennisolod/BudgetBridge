@@ -274,25 +274,25 @@ public class BudgetModel {
     }
 
     public int getCostForBadge(BadgeLine badge) {
-    return switch (badge.getName()) {
-        case "Gold Trophy" -> 200;
-        case "Shield of Honor" -> 180;
-        case "Mythic Phoenix" -> 500;
-        case "Crown Elite" -> 250;
-        case "Champion Medal" -> 300;
-        case "Secret Flame" -> 220;
-        case "Infinity Crown" -> 600;
-        case "Legend of Time" -> 750;
-        case "Quantum Vault" -> 900;
-        case "Ethereal Wings" -> 1000;
-        case "Celestial Flame" -> 1500;
-        case "Eternal Crown" -> 2000;
-        case "Timekeeper's Halo" -> 2500;
-        case "Quantum Ascendant" -> 3000;
-        case "Divine Architect" -> 4000;
-        default -> 0;
-    };
-}
+        return switch (badge.getName()) {
+            case "Gold Trophy" -> 200;
+            case "Shield of Honor" -> 180;
+            case "Mythic Phoenix" -> 500;
+            case "Crown Elite" -> 250;
+            case "Champion Medal" -> 300;
+            case "Secret Flame" -> 220;
+            case "Infinity Crown" -> 600;
+            case "Legend of Time" -> 750;
+            case "Quantum Vault" -> 900;
+            case "Ethereal Wings" -> 1000;
+            case "Celestial Flame" -> 1500;
+            case "Eternal Crown" -> 2000;
+            case "Timekeeper's Halo" -> 2500;
+            case "Quantum Ascendant" -> 3000;
+            case "Divine Architect" -> 4000;
+            default -> 0;
+        };
+    }
 
     // add points to the player for their leaderboard position 
     // and if they progress to a new league
