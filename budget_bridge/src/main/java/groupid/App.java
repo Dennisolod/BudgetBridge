@@ -45,7 +45,7 @@ public class App extends Application {
 
         // getBudgetInfo(stage);
         // Force css updates
-        scene.getRoot().applyCss();
+        // scene.getRoot().applyCss();
 
         stage.show();
     }
