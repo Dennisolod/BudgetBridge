@@ -48,10 +48,6 @@ public class BudgetModel {
     private League lastRewardedLeague = League.BRONZE;
     private ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList();
 
-
-    // public enum League { BRONZE, COPPER, SILVER, GOLD, PLATINUM, DIAMOND }
-
-
     // convenience derived values (totals, net)
     private final ReadOnlyDoubleWrapper totalIncome = new ReadOnlyDoubleWrapper();
     private final ReadOnlyDoubleWrapper totalExpense= new ReadOnlyDoubleWrapper();
@@ -294,7 +290,6 @@ public class BudgetModel {
         };
     }
 
-
     public void refreshCurrentMonthFromBase() {
         currentMonthExpenses.clear();
         for (MoneyLine e : expenses) {
@@ -326,42 +321,52 @@ public class BudgetModel {
     }
 
     public void generateCustomBudget(BudgetInfo info) {
-        expenses.clear();  // Reset current budget
+        expenses.clear();  // Reset
 
         double income = info.getPrimaryIncome() + info.getSideIncome() + info.getOtherIncome();
+        double fixed = info.getRent() + info.getCar() + info.getDebt();
 
-        // Fixed expenses
-        addExpense("Rent", "fixed", info.getRent());
-        addExpense("Car Payment", "fixed", info.getCar());
-        addExpense("Other Debt", "fixed", info.getDebt());
+        // Add fixed expenses first
+        if (info.getRent() > 0) addExpense("Rent", "fixed", info.getRent());
+        if (info.getCar() > 0) addExpense("Car Payment", "fixed", info.getCar());
+        if (info.getDebt() > 0) addExpense("Other Debt", "fixed", info.getDebt());
 
-        double fixedTotal = info.getRent() + info.getCar() + info.getDebt();
-        double discretionary = income - fixedTotal;
+        double remaining = income - fixed;
+        if (remaining < 0) remaining = 0;
 
-        if (discretionary < 0) discretionary = 0;
-
-        // Determine savings allocation based on goals
-        double savingsPct = 0.20;
+        // Define goal-based savings allocation
         List<String> goals = info.getGoals();
         boolean payOffDebt = goals.contains("Pay Off Debt");
+        boolean vacation = goals.contains("Vacation");
+        boolean retireEarly = goals.contains("Retire Early");
 
-        // If debt goal is selected AND no debt entered, allocate additional funds
-        if (payOffDebt && info.getDebt() == 0) {
-            double debtAlloc = 0.10 * discretionary;
-            addExpense("Debt Payments", "variable", debtAlloc);
-            savingsPct -= 0.10;
-        }
+        double savingsPct = 0.15; // Base savings
+        if (income >= 5000) savingsPct += 0.05;         
+        if (retireEarly)    savingsPct += 0.05;
+        if (vacation)       savingsPct += 0.05;
 
-        double savings = savingsPct * discretionary;
+        // Don't go below 10% or above 50% for savings
+        savingsPct = Math.max(0.10, Math.min(0.50, savingsPct));
+        double savings = savingsPct * remaining;
         addExpense("Savings", "variable", savings);
 
-        // Split remaining discretionary money
-        double leftover = discretionary - savings;
-        addExpense("Groceries", "variable", leftover * 0.45);
-        addExpense("Dining Out", "variable", leftover * 0.25);
-        addExpense("Fun Money", "variable", leftover * 0.30);
+        // Extra toward debt if goal is selected but amount = 0
+        if (payOffDebt && info.getDebt() == 0) {
+            double extraDebt = 0.10 * remaining;
+            addExpense("Debt Payments", "variable", extraDebt);
+            remaining -= extraDebt;
+        }
+
+        remaining -= savings;
+        if (remaining < 0) remaining = 0;
+
+        // Remaining split into essentials and lifestyle
+        double groceries = remaining * 0.50;
+        double dining    = remaining * 0.20;
+        double fun       = remaining * 0.30;
+
+        addExpense("Groceries", "variable", groceries);
+        addExpense("Dining Out", "variable", dining);
+        addExpense("Fun Money", "variable", fun);
     }
-
-
-
 }
