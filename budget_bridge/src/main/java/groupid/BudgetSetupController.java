@@ -22,17 +22,17 @@ public class BudgetSetupController {
 
     public BudgetInfo collectResult() {
         BudgetInfo info = BudgetInfo.builder()
-                .primaryIncome(parse(tfPrimaryIncome))
-                .sideIncome(parse(tfSideIncome))
-                .otherIncome(parse(tfOtherIncome))
-                .rent(parse(tfRent))
-                .car(parse(tfCar))
-                .debt(parse(tfDebt))
-                .goals(selectedGoals())
-                .budgetPlan(selectedPlan())
-                .build();
-            return info;
-
+            .primaryIncome(parse(tfPrimaryIncome))
+            .sideIncome(parse(tfSideIncome))
+            .otherIncome(parse(tfOtherIncome))
+            .rent(parse(tfRent))
+            .car(parse(tfCar))
+            .debt(parse(tfDebt))
+            .goals(selectedGoals())
+            .budgetPlan(selectedPlan())
+            .build();
+            
+        return info;
     }
 
     private double parse(TextField tf) {
