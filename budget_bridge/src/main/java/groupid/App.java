@@ -52,7 +52,7 @@ public class App extends Application {
         addDefaultMissions();
 
         
-        //UserDAO.clearAllUsers(); //Will crash the program, but also empties the user database
+        // DatabaseInitializer.clearDatabase(); //Will crash the program, but also empties the database
         BudgetInfoDAO.loadBudgetModelFromDB(model.usernameProperty(), model);
         UserDAO.listUsers();
         BudgetInfoDAO.printBudgetInfo(UserDAO.getUserIdByName(model.usernameProperty()));

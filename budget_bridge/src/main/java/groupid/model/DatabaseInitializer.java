@@ -27,9 +27,25 @@ public class DatabaseInitializer {
         try (Connection conn = SQLiteConnector.connect();
              Statement stmt = conn.createStatement()) {
             stmt.execute(createUsers);
-            //stmt.execute(dropBudgetInfo);
+            //stmt.execute(dropBudgetInfo); // Use this if you only want to start a fresh budget info table for the user
             stmt.execute(createBudgetInfo);
             System.out.println("The database has been created");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void clearDatabase() {
+        String deleteUsers = "DELETE FROM users;";
+        String deleteBudgetInfo = "DELETE FROM budget_info;";
+
+        try (Connection conn = SQLiteConnector.connect();
+            Statement stmt = conn.createStatement()) {
+            
+            stmt.execute(deleteBudgetInfo);  // Clear budget_info first to avoid FK constraint issues
+            stmt.execute(deleteUsers);       // Then clear users
+            System.out.println("All data in the database has been cleared.");
+            
         } catch (Exception e) {
             e.printStackTrace();
         }

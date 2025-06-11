@@ -45,6 +45,7 @@ public class UserDAO {
         }
     }
 
+    // clears all users from the database (doesn't clear the whole database though)
     public static void clearAllUsers() {
     String sql = "DELETE FROM users";
 
