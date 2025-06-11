@@ -59,6 +59,13 @@
             <version>12.4.0</version>
         </dependency>
 
+    <!-- SQLite database -->
+        <dependency>
+            <groupId>org.xerial</groupId>
+            <artifactId>sqlite-jdbc</artifactId>
+            <version>3.45.1.0</version>
+        </dependency>
+
         
     </dependencies>
 
@@ -103,6 +110,8 @@
 
                 <configuration>
                     <mainClass>groupid.App</mainClass>
+                    <addModules>javafx.controls,javafx.fxml</addModules>
+                    <classpathScope>compile</classpathScope>
 
                     <!-- macOS crash workaround (remove once JavaFX 21.0.4 lands) -->
                     <options>

@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import groupid.model.BudgetInfo;
 import groupid.model.BudgetModel;
+import groupid.model.DatabaseInitializer;
+import groupid.model.UserDAO;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -41,6 +43,10 @@ public class App extends Application {
         addDefaultPoints();
         addDefaultMissions();
 
+        DatabaseInitializer.initialize();
+        UserDAO.addUser(model.usernameProperty());
+        UserDAO.listUsers();
+
         // getBudgetInfo(stage);
         // Force css updates
         // scene.getRoot().applyCss();
@@ -53,6 +59,7 @@ public class App extends Application {
         dialog.setTitle("Welcome to BudgetBridge!");
         dialog.setHeaderText("Please enter your name");
         dialog.setContentText("Name:");
+
 
         Optional<String> result = dialog.showAndWait();
         result.ifPresentOrElse(name -> model.usernameProperty().set(name.strip()), ()   -> Platform.exit());                  // quit if user cancels

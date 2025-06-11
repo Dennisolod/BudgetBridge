@@ -10,5 +10,6 @@ module groupid {
     requires org.kordamp.ikonli.javafx;        // JavaFX bridge
     requires org.kordamp.ikonli.fontawesome5;
     requires javafx.graphics;  // the icon pack you chose
+    requires java.sql;
 
 }
