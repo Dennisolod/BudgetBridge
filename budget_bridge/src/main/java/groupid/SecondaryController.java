@@ -326,7 +326,7 @@ public class SecondaryController implements ModelAware {
         if (!dailyCooldown.isOnCooldown()) {
             dailyRewardButton  .setDisable(true);
             model.setGems(model.getGems().get()+50);
-            model.addPoints(1000);
+            model.addPoints(50);
             dailyCooldown.startCooldown(100);
             System.out.println("The cooldown is being set");
         } else {
@@ -336,8 +336,8 @@ public class SecondaryController implements ModelAware {
         model.setGems(model.getGems().get()+50);
         model.addPoints(1000);
     }
-    @FXML private void weeklyRewards()  { weeklyRewardButton .setDisable(true); model.setGems(model.getGems().get()+100); model.addPoints(3000); }
-    @FXML private void monthlyRewards() { monthlyRewardButton.setDisable(true); model.setGems(model.getGems().get()+250); model.addPoints(7000); }
+    @FXML private void weeklyRewards()  { weeklyRewardButton .setDisable(true); model.setGems(model.getGems().get()+100); model.addPoints(150); }
+    @FXML private void monthlyRewards() { monthlyRewardButton.setDisable(true); model.setGems(model.getGems().get()+250); model.addPoints(1000); }
     
     /* ── Demo & nav buttons (unchanged) ────────────────────────────── */
     @FXML private void switchToSecondary() throws IOException { App.setRoot("secondary"); }

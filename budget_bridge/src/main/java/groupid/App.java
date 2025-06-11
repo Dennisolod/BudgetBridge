@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.Optional;
 
 import groupid.model.BudgetInfo;
+import groupid.model.BudgetInfoDAO;
 import groupid.model.BudgetModel;
 import groupid.model.DatabaseInitializer;
 import groupid.model.UserDAO;
@@ -36,16 +37,25 @@ public class App extends Application {
         
         scene = new Scene(loadAndInject("primary"));
         stage.setScene(scene);
+        stage.setFullScreen(true); // sets the scene to full screen on startup, can be changed later
 
+        DatabaseInitializer.initialize();
         getUsername();
-        getBudgetInfo(stage);
+        if (!UserDAO.userExists(model.usernameProperty())) {
+            getBudgetInfo(stage);
+            UserDAO.addUser(model.usernameProperty());
+            int userId = UserDAO.getUserIdByName(model.usernameProperty());
+            BudgetInfoDAO.saveBudgetInfo(userId, model);
+        }
         fillMissionsList();
         addDefaultPoints();
         addDefaultMissions();
 
-        DatabaseInitializer.initialize();
-        UserDAO.addUser(model.usernameProperty());
+        
+        //UserDAO.clearAllUsers(); //Will crash the program, but also empties the user database
+        BudgetInfoDAO.loadBudgetModelFromDB(model.usernameProperty(), model);
         UserDAO.listUsers();
+        BudgetInfoDAO.printBudgetInfo(UserDAO.getUserIdByName(model.usernameProperty()));
 
         // getBudgetInfo(stage);
         // Force css updates
@@ -124,9 +134,9 @@ public class App extends Application {
     }
 
     private void fillMissionsList() {
-        model.addMissionList("Avoid purchasing snacks - 1000pts & 50gems", "daily", (double) 0.0);
-        model.addMissionList("Save $10 by purchasing cheaper alternatives - 3000pts & 100gems", "weekly", (double) 0.0);
-        model.addMissionList("Save $45 on groceries while keeping a healthier diet - 7000pts & 250gems", "monthly", (double) 0.0);
+        model.addMissionList("Avoid purchasing snacks - 50pts & 50gems", "daily", (double) 0.0);
+        model.addMissionList("Save $10 by purchasing cheaper alternatives - 150pts & 100gems", "weekly", (double) 0.0);
+        model.addMissionList("Save $45 on groceries while keeping a healthier diet - 1000pts & 250gems", "monthly", (double) 0.0);
     }
 
     private void addDefaultMissions(){
