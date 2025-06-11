@@ -1,5 +1,9 @@
 package groupid;
 
+import java.io.IOException;
+
+import org.kordamp.ikonli.javafx.FontIcon;
+
 import groupid.model.BadgeLine;
 import groupid.model.BudgetModel;
 import groupid.model.MoneyLine;
@@ -12,9 +16,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
-import java.io.IOException;
-
-import org.kordamp.ikonli.javafx.FontIcon;
 
 public class ProfileController implements ModelAware {
 
@@ -26,10 +27,11 @@ public class ProfileController implements ModelAware {
     @FXML private ListView<MoneyLine> incomeList;
     @FXML private ListView<MoneyLine> expenseList;
     @FXML private FlowPane badgeGallery;
-    @FXML private HBox recentBadgeLabel;
+    @FXML private VBox recentBadgeLabel;
     @FXML private Label profileTitle;
     @FXML private FlowPane themeGallery;
     @FXML private Label currentThemeLabel;
+    @FXML private Label rankLabel;
 
 
     @Override
@@ -37,6 +39,7 @@ public class ProfileController implements ModelAware {
         pointsLabel.setText(m.pointsProperty().get() + " pts");
         gemsLabel.setText(m.getGems().get() + " Gems");
         leagueLabel.setText(m.getCurrentLeague().name());
+        rankLabel.setText(m.rankProperty().get());
         String username = m.usernameProperty().get();
         profileTitle.setText(username + (username.endsWith("s") ? "'" : "'s") + " Profile");
 

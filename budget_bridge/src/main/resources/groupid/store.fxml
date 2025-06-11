@@ -1,74 +1,111 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.CheckMenuItem?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.Tab?>
-<?import java.lang.*?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.textfield.*?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.layout.Region?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.collections.*?>
 
-<!-- WORK IN PROGRESS -->
-<BorderPane stylesheets="@style.css" fx:controller="groupid.StoreController" xmlns:fx="http://javafx.com/fxml/1" styleClass="background">
+<!-- Store Screen – three-column layout with gem balance integrated into category bar -->
+<BorderPane fx:id="rootPane"
+           stylesheets="@style.css"
+           fx:controller="groupid.StoreController"
+           xmlns:fx="http://javafx.com/fxml/1"
+           styleClass="modern-background">
+
+   <!-- ───────── Navigation Header (gem balance removed here) ───────── -->
    <top>
-      <VBox alignment="CENTER">
-         <BorderPane.margin>
-            <Insets top="20" right="20" bottom="20" left="20"/>
-         </BorderPane.margin>
-         
-         <HBox spacing="15" alignment="TOP_LEFT">
-            <HBox.margin>
-               <Insets top="0" right="50" bottom="0" left="50"/>
-            </HBox.margin>
-            <MenuBar styleClass="modern-menu-bar">
-               <Menu text="≡" styleClass="modern-menu">
-                  <MenuItem fx:id="profileButton" text="Profile" styleClass="menu-item" onAction="#switchToProfile"/>
-                  <MenuItem fx:id="logoffButton" text="Logoff" styleClass="menu-item" onAction="#logoff"/>
-               </Menu>
-            </MenuBar>
-            <Button fx:id="dashboardButton" text="My Dashboard" styleClass="modern-nav-button" onAction="#switchToPrimary"/>
-            <Button fx:id="leaderboardsButton" text="Leaderboards" styleClass="modern-nav-button" onAction="#switchToLeaderboard"/>
-            <Button fx:id="budgetButton" text="Update Budget" styleClass="modern-nav-button-active" onAction="#switchToSecondary"/>
-            <Button fx:id="storeButton" text="Exchange Store" styleClass="modern-nav-button" onAction="#switchToStore"/>
+      <VBox styleClass="nav-header-container">
+         <HBox alignment="CENTER_LEFT" spacing="30" styleClass="nav-header">
+            <padding><Insets top="15" right="40" bottom="15" left="40"/></padding>
+
+            <!-- Brand / Logo -->
+            <HBox alignment="CENTER_LEFT" spacing="10" styleClass="brand-section">
+               <Label text="💰" styleClass="brand-icon" />
+               <Label text="BudgetBridge" styleClass="brand-name" />
+            </HBox>
 
             <Region HBox.hgrow="ALWAYS" />
 
-            <Label text="Gem Balance:" styleClass="big-heading"/>
-            <Label fx:id="currencyBalance" styleClass="store-gems"/>
+            <!-- Navigation Pills -->
+            <HBox spacing="8" styleClass="nav-pills-container">
+               <Button fx:id="dashboardButton" text="Dashboard" styleClass="nav-pill" onAction="#switchToPrimary">
+                  <graphic><Label text="📊" styleClass="nav-icon"/></graphic>
+               </Button>
+               <Button fx:id="budgetButton" text="Budget" styleClass="nav-pill" onAction="#switchToSecondary">
+                  <graphic><Label text="💳" styleClass="nav-icon"/></graphic>
+               </Button>
+               <Button fx:id="leaderboardsButton" text="Leaderboards" styleClass="nav-pill" onAction="#switchToLeaderboard">
+                  <graphic><Label text="🏆" styleClass="nav-icon"/></graphic>
+               </Button>
+               <Button fx:id="storeButton" text="Store" styleClass="nav-pill-active" onAction="#switchToStore">
+                  <graphic><Label text="🛍️" styleClass="nav-icon"/></graphic>
+               </Button>
+            </HBox>
+
+            <!-- User Menu -->
+            <MenuButton styleClass="user-menu-button">
+               <graphic>
+                  <HBox spacing="8" alignment="CENTER">
+                     <Circle radius="16" styleClass="user-avatar" />
+                     <Label text="⚙️" styleClass="settings-icon" />
+                  </HBox>
+               </graphic>
+               <items>
+                  <MenuItem fx:id="profileButton" text="My Profile" styleClass="user-menu-item" onAction="#switchToProfile" />
+                  <SeparatorMenuItem />
+                  <MenuItem fx:id="logoffButton" text="Sign Out" styleClass="user-menu-item" onAction="#logoff" />
+               </items>
+            </MenuButton>
          </HBox>
       </VBox>
    </top>
 
-    <center>
-        <TabPane fx:id="storeTabs" styleClass="custom-tab-pane">
-            <Tab text="Badges" closable="false">
-                <ScrollPane fitToWidth="true">
-                    <VBox fx:id="badgesBox" spacing="10" />
-                </ScrollPane>
-            </Tab>
-            <Tab text="Themes" closable="false">
-                <ScrollPane fitToWidth="true">
-                    <VBox fx:id="themesBox" spacing="10" />
-                </ScrollPane>
-            </Tab>
-            <Tab text="Other Rewards" closable="false">
-                <ScrollPane fitToWidth="true" >
-                    <VBox fx:id="rewardsBox" spacing="10" />
-                </ScrollPane>
-            </Tab>
-        </TabPane>
-    </center>
+   <!-- ───────── Store Content ───────── -->
+   <center>
+      <VBox spacing="35" styleClass="store-main">
+         <!-- Category Bar with Gem Balance -->
+         <HBox alignment="CENTER_LEFT" spacing="0" styleClass="store-category-bar">
+            <padding><Insets top="18" right="20" bottom="18" left="40"/></padding>
+
+            <!-- Column Labels (centered group) -->
+            <HBox alignment="CENTER" spacing="450" HBox.hgrow="ALWAYS">
+               <Label text="Badges" styleClass="store-category-label-lg" />
+               <Label text="Themes" styleClass="store-category-label-lg" />
+               <Label text="Other Rewards" styleClass="store-category-label-lg" />
+            </HBox>
+
+            <!-- Gem Balance now lives here -->
+            <HBox spacing="8" alignment="CENTER" styleClass="gems-display">
+               <Label text="💎" styleClass="gems-icon" />
+               <Label fx:id="currencyBalance" styleClass="gems-amount" />
+            </HBox>
+         </HBox>
+
+         <!-- Scrollable Columns -->
+         <HBox spacing="25" alignment="TOP_CENTER" styleClass="modern-list-compact">
+            <!-- Badges Column -->
+            <ScrollPane fitToWidth="true" fitToHeight="true" prefWidth="500" minWidth="340" styleClass="list-scroll store-column">
+               <content>
+                  <VBox fx:id="badgesBox" spacing="20" styleClass="store-column" />
+               </content>
+            </ScrollPane>
+
+            <!-- Themes Column -->
+            <ScrollPane fitToWidth="true" fitToHeight="true" prefWidth="500" minWidth="340" styleClass="list-scroll store-column">
+               <content>
+                  <VBox fx:id="themesBox" spacing="20" styleClass="store-column" />
+               </content>
+            </ScrollPane>
+
+            <!-- Other Rewards Column (fixed width even if empty) -->
+            <ScrollPane fitToWidth="true" fitToHeight="true" prefWidth="500" minWidth="340" styleClass="list-scroll store-column">
+               <content>
+                  <VBox fx:id="rewardsBox" spacing="20" styleClass="store-column" />
+               </content>
+            </ScrollPane>
+         </HBox>
+      </VBox>
+   </center>
 
 </BorderPane>

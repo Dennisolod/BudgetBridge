@@ -8,103 +8,154 @@
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.shape.Circle?>
 
-<BorderPane fx:id="rootPane" stylesheets="@style.css" fx:controller="groupid.PrimaryController" xmlns:fx="http://javafx.com/fxml/1" styleClass="background">
+<BorderPane fx:id="rootPane" stylesheets="@style.css" fx:controller="groupid.PrimaryController" xmlns:fx="http://javafx.com/fxml/1" styleClass="modern-background">
+   
+   <!-- Modern Navigation Header -->
    <top>
-      <VBox alignment="CENTER">
-         <BorderPane.margin>
-            <Insets top="20" right="20" bottom="20" left="20"/>
-         </BorderPane.margin>
-         <HBox spacing="15">
-            <HBox.margin>
-               <Insets top="0" right="50" bottom="0" left="50"/>
-            </HBox.margin>
-            <MenuBar styleClass="modern-menu-bar">
-               <Menu text="≡" styleClass="modern-menu">
-                  <MenuItem fx:id="profileButton" text="Profile" styleClass="menu-item" onAction="#switchToProfile"/>
-                  <MenuItem fx:id="logoffButton" text="Logoff" styleClass="menu-item" onAction="#logoff"/>
-               </Menu>
-            </MenuBar>
-            <Button fx:id="dashboardButton" text="My Dashboard" styleClass="modern-nav-button-active" onAction="#switchToPrimary"/>
-            <Button fx:id="leaderboardsButton" text="Leaderboards" styleClass="modern-nav-button" onAction="#switchToLeaderboard"/>
-            <Button fx:id="budgetButton" text="Update Budget" styleClass="modern-nav-button" onAction="#switchToSecondary"/>
-            <Button fx:id="storeButton" text="Exchange Store" styleClass="modern-nav-button" onAction="#switchToStore"/>
+      <VBox styleClass="nav-header-container">
+         <HBox alignment="CENTER_LEFT" spacing="30" styleClass="nav-header">
+            <padding>
+               <Insets top="15" right="40" bottom="15" left="40"/>
+            </padding>
+            
+            <!-- Logo/App Name Section -->
+            <HBox alignment="CENTER_LEFT" spacing="10" styleClass="brand-section">
+               <Label text="💰" styleClass="brand-icon"/>
+               <Label text="BudgetBridge" styleClass="brand-name"/>
+            </HBox>
+            
+            <!-- Spacer -->
+            <Region HBox.hgrow="ALWAYS"/>
+            
+            <!-- Navigation Pills -->
+            <HBox spacing="8" styleClass="nav-pills-container">
+               <Button fx:id="dashboardButton" text="Dashboard" styleClass="nav-pill-active" onAction="#switchToPrimary">
+                  <graphic>
+                     <Label text="📊" styleClass="nav-icon"/>
+                  </graphic>
+               </Button>
+               <Button fx:id="budgetButton" text="Budget" styleClass="nav-pill" onAction="#switchToSecondary">
+                  <graphic>
+                     <Label text="💳" styleClass="nav-icon"/>
+                  </graphic>
+               </Button>
+               <Button fx:id="leaderboardsButton" text="Leaderboards" styleClass="nav-pill" onAction="#switchToLeaderboard">
+                  <graphic>
+                     <Label text="🏆" styleClass="nav-icon"/>
+                  </graphic>
+               </Button>
+               <Button fx:id="storeButton" text="Store" styleClass="nav-pill" onAction="#switchToStore">
+                  <graphic>
+                     <Label text="🛍️" styleClass="nav-icon"/>
+                  </graphic>
+               </Button>
+            </HBox>
+            
+            <!-- User Menu -->
+            <MenuButton styleClass="user-menu-button">
+               <graphic>
+                  <HBox spacing="8" alignment="CENTER">
+                     <Circle radius="16" styleClass="user-avatar"/>
+                     <Label text="⚙️" styleClass="settings-icon"/>
+                  </HBox>
+               </graphic>
+               <items>
+                  <MenuItem fx:id="profileButton" text="My Profile" styleClass="user-menu-item" onAction="#switchToProfile"/>
+                  <SeparatorMenuItem/>
+                  <MenuItem fx:id="logoffButton" text="Sign Out" styleClass="user-menu-item" onAction="#logoff"/>
+               </items>
+            </MenuButton>
          </HBox>
       </VBox>
    </top>
 
-   <left>
-      <VBox alignment="TOP_LEFT" spacing="25" styleClass="dashboard-welcome-panel">
-         <BorderPane.margin>
-            <Insets top="20" right="20" bottom="20" left="20"/>
-         </BorderPane.margin>
-         
-         <!-- Welcome Section -->
-         <VBox spacing="15">
-            <Label fx:id="userLabel" styleClass="panel-heading"/>
-            <Label fx:id="gemsLabel" styleClass="store-gems"/>
-         </VBox>
-         
-         <VBox spacing="20" styleClass="budget-overview-card" VBox.vgrow="ALWAYS">
-            <Label text="Budget Overview" styleClass="card-heading"/>
-            
-            <!-- Expense tracker  -->
-            <ScrollPane fitToWidth="true" prefHeight="400">
-               <content>
-                  <VBox fx:id="expenseProgressVBox" spacing="10" styleClass="expense-progress-section"/>
-               </content>
-            </ScrollPane>
-         </VBox>
-         
-      </VBox>
-      <padding>
-         <Insets bottom="25" left="25" right="25" top="25"/>
-      </padding>
-   </left>
-
-   <right>
-      <VBox spacing="25" styleClass="dashboard-sidebar-panel">
-         <BorderPane.margin>
-            <Insets top="20" right="20" bottom="20" left="20"/>
-         </BorderPane.margin>
-         
-         
-         <VBox spacing="15" styleClass="missions-overview-card" VBox.vgrow="ALWAYS">
-            <Label text="Active Missions" styleClass="card-heading"/>
-               <ListView fx:id="missionList" styleClass="modern-list"/>
-         </VBox>
-         
-         <VBox spacing="15" styleClass="scrollpane-badges" VBox.vgrow="ALWAYS">
-            <Label text="Achievement Badges" styleClass="card-heading"/>
-            <ListView fx:id="badgeList" styleClass="scrollpane-badges"/>
-         </VBox>
-         
-      </VBox>
-      <padding>
-         <Insets bottom="20" left="20" right="20" top="20"/>
-      </padding>
-   </right>
-
+   <!-- Main Dashboard Content -->
    <center>
-      <VBox alignment="CENTER" spacing="25" styleClass="dashboard-chart-panel">
-         <BorderPane.margin>
-            <Insets top="10" right="20" bottom="20" left="20"/>
-         </BorderPane.margin>
-         
-         <VBox spacing="20" styleClass="chart-display-card" alignment="CENTER">
-            <Label text="Spending Breakdown" styleClass="card-heading"/>
-            
-            <VBox alignment="CENTER" spacing="15">
-               <PieChart fx:id="budgetPie"
-               prefWidth="500" prefHeight="500"
-               legendVisible="false"/>
+      <ScrollPane fitToWidth="true" styleClass="main-content-scroll">
+         <content>
+            <VBox spacing="30" styleClass="dashboard-content">
+               <padding>
+                  <Insets top="30" right="40" bottom="30" left="40"/>
+               </padding>
+               
+               <!-- Welcome Section -->
+               <VBox spacing="20">
+                  <HBox alignment="CENTER_LEFT" spacing="20">
+                     <Label text="Your Budget" styleClass="welcome-heading"/>
+                     <Region HBox.hgrow="ALWAYS"/>
+                     <HBox spacing="8" alignment="CENTER" styleClass="gems-display">
+                        <Label text="💎" styleClass="gems-icon"/>
+                        <Label fx:id="gemsLabel" styleClass="gems-amount"/>
+                     </HBox>
+                  </HBox>
+               </VBox>
+               
+               <!-- Main Content Grid -->
+               <GridPane hgap="25" vgap="25">
+                  <columnConstraints>
+                     <ColumnConstraints percentWidth="35"/>
+                     <ColumnConstraints percentWidth="35"/>
+                     <ColumnConstraints percentWidth="30"/>
+                  </columnConstraints>
+                  
+                  <!-- Budget Overview Card -->
+                  <VBox styleClass="dashboard-card" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                     <HBox alignment="CENTER_LEFT" spacing="10" styleClass="card-header">
+                        <Label text="📊" styleClass="card-icon"/>
+                        <Label text="Budget Overview" styleClass="card-title"/>
+                     </HBox>
+                     
+                     <ScrollPane fitToWidth="true" styleClass="budget-scroll" VBox.vgrow="ALWAYS">
+                        <content>
+                           <VBox fx:id="expenseProgressVBox" spacing="12" styleClass="budget-items-container"/>
+                        </content>
+                     </ScrollPane>
+                  </VBox>
+                  
+                  <!-- Spending Breakdown Card -->
+                  <VBox styleClass="dashboard-card" GridPane.columnIndex="1" GridPane.rowIndex="0" alignment="CENTER">
+                     <HBox alignment="CENTER_LEFT" spacing="10" styleClass="card-header">
+                        <Label text="🍩" styleClass="card-icon"/>
+                        <Label text="Spending Breakdown" styleClass="card-title"/>
+                     </HBox>
+                     
+                     <StackPane VBox.vgrow="ALWAYS" alignment="CENTER">
+                        <PieChart fx:id="budgetPie" 
+                                 prefWidth="350" 
+                                 prefHeight="350"
+                                 legendVisible="true"
+                                 styleClass="modern-pie-chart"/>
+                     </StackPane>
+                  </VBox>
+                  
+                  <!-- Right Column: Missions & Achievements -->
+                  <VBox spacing="20" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                     <!-- Active Missions Card -->
+                     <VBox styleClass="dashboard-card compact-card" VBox.vgrow="ALWAYS">
+                        <HBox alignment="CENTER_LEFT" spacing="10" styleClass="card-header">
+                           <Label text="🎯" styleClass="card-icon"/>
+                           <Label text="Active Missions" styleClass="card-title"/>
+                        </HBox>
+                        
+                        <ListView fx:id="missionList" styleClass="modern-list-compact" VBox.vgrow="ALWAYS"/>
+                     </VBox>
+                     
+                     <!-- Achievements Card -->
+                     <VBox styleClass="dashboard-card compact-card" VBox.vgrow="ALWAYS">
+                        <HBox alignment="CENTER_LEFT" spacing="10" styleClass="card-header">
+                           <Label text="🏅" styleClass="card-icon"/>
+                           <Label text="Achievement Badges" styleClass="card-title"/>
+                        </HBox>
+                        
+                        <ListView fx:id="badgeList" styleClass="modern-badges-list" VBox.vgrow="ALWAYS"/>
+                     </VBox>
+                  </VBox>
+               </GridPane>
             </VBox>
-            
-         </VBox>
-      </VBox>
-      <padding>
-         <Insets bottom="25" left="25" right="25" top="25"/>
-      </padding>
+         </content>
+      </ScrollPane>
    </center>
 
 </BorderPane>

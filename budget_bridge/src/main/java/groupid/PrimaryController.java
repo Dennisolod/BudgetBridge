@@ -25,10 +25,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
@@ -57,7 +54,7 @@ public class PrimaryController implements ModelAware, Initializable {
 
         updateExpenseProgress(m);
         
-        userLabel.textProperty().bind(m.usernameProperty());
+        //userLabel.textProperty().bind(m.usernameProperty());
         missionList.setItems(m.missions());
         badgeList.setItems(m.getOwnedBadges());
         //pointsLabel.textProperty().bind(m.pointsProperty().asString());

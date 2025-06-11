@@ -1,110 +1,203 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Button?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.CheckMenuItem?>
-<?import javafx.scene.layout.BorderPane?>
-<?import java.lang.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.textfield.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Circle?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
-<?import javafx.scene.control.ProgressBar?>
-<?import javafx.scene.layout.FlowPane?>
 
-<!-- WORK IN PROGRESS -->
-<BorderPane stylesheets="@style.css" fx:controller="groupid.ProfileController" xmlns:fx="http://javafx.com/fxml/1" styleClass="background">
+<!-- Profile Screen - Compact grid dashboard layout -->
+<BorderPane fx:id="rootPane"
+           stylesheets="@style.css"
+           fx:controller="groupid.ProfileController"
+           xmlns:fx="http://javafx.com/fxml/1"
+           styleClass="modern-background">
+
+   <!-- ───────── Navigation Header (same as other screens) ───────── -->
    <top>
-      <VBox alignment="CENTER">
-         <BorderPane.margin>
-            <Insets top="20" right="20" bottom="20" left="20"/>
-         </BorderPane.margin>
-         <HBox spacing="15" alignment="TOP_LEFT">
-            <HBox.margin>
-               <Insets top="0" right="50" bottom="0" left="50"/>
-            </HBox.margin>
-            <MenuBar styleClass="modern-menu-bar">
-               <Menu text="≡" styleClass="modern-menu">
-                  <MenuItem fx:id="profileButton" text="Profile" styleClass="menu-item" onAction="#switchToProfile"/>
-                  <MenuItem fx:id="logoffButton" text="Logoff" styleClass="menu-item" onAction="#logoff"/>
-               </Menu>
-            </MenuBar>
-            <Button fx:id="dashboardButton" text="My Dashboard" styleClass="modern-nav-button" onAction="#switchToPrimary"/>
-            <Button fx:id="leaderboardsButton" text="Leaderboards" styleClass="modern-nav-button" onAction="#switchToLeaderboard"/>
-            <Button fx:id="budgetButton" text="Update Budget" styleClass="modern-nav-button-active" onAction="#switchToSecondary"/>
-            <Button fx:id="storeButton" text="Exchange Store" styleClass="modern-nav-button" onAction="#switchToStore"/>
+      <VBox styleClass="nav-header-container">
+         <HBox alignment="CENTER_LEFT" spacing="30" styleClass="nav-header">
+            <padding><Insets top="15" right="40" bottom="15" left="40"/></padding>
+            <HBox alignment="CENTER_LEFT" spacing="10" styleClass="brand-section">
+               <Label text="💰" styleClass="brand-icon"/>
+               <Label text="BudgetBridge" styleClass="brand-name"/>
+            </HBox>
+            <Region HBox.hgrow="ALWAYS"/>
+            <HBox spacing="8" styleClass="nav-pills-container">
+               <Button fx:id="dashboardButton" text="Dashboard" styleClass="nav-pill" onAction="#switchToPrimary">
+                  <graphic><Label text="📊" styleClass="nav-icon"/></graphic>
+               </Button>
+               <Button fx:id="budgetButton" text="Budget" styleClass="nav-pill" onAction="#switchToSecondary">
+                  <graphic><Label text="💳" styleClass="nav-icon"/></graphic>
+               </Button>
+               <Button fx:id="leaderboardsButton" text="Leaderboards" styleClass="nav-pill" onAction="#switchToLeaderboard">
+                  <graphic><Label text="🏆" styleClass="nav-icon"/></graphic>
+               </Button>
+               <Button fx:id="storeButton" text="Store" styleClass="nav-pill" onAction="#switchToStore">
+                  <graphic><Label text="🛍️" styleClass="nav-icon"/></graphic>
+               </Button>
+            </HBox>
+            <MenuButton styleClass="user-menu-button">
+               <graphic>
+                  <HBox spacing="8" alignment="CENTER">
+                     <Circle radius="16" styleClass="user-avatar"/>
+                     <Label text="⚙️" styleClass="settings-icon"/>
+                  </HBox>
+               </graphic>
+               <items>
+                  <MenuItem fx:id="profileButton" text="My Profile" styleClass="user-menu-item" onAction="#switchToProfile"/>
+                  <SeparatorMenuItem/>
+                  <MenuItem fx:id="logoffButton" text="Sign Out" styleClass="user-menu-item" onAction="#logoff"/>
+               </items>
+            </MenuButton>
          </HBox>
       </VBox>
    </top>
 
+   <!-- ───────── Profile Dashboard Grid ───────── -->
    <center>
-      <VBox spacing="30" alignment="TOP_CENTER">
-         <!-- Header -->
-         <Label fx:id="profileTitle" styleClass="big-heading" />
+      <VBox spacing="25" styleClass="profile-dashboard">
+         <padding><Insets top="25" right="40" bottom="25" left="40"/></padding>
 
-         <!-- Summary Cards -->
-         <HBox spacing="30" alignment="CENTER">
-            <VBox spacing="10" styleClass="summary-card">
-               <Label text="Total Points" styleClass="section-title" />
-               <Label fx:id="pointsLabel" styleClass="highlight-number" />
-            </VBox>
-            <VBox spacing="10" styleClass="summary-card">
-               <Label text="Gems" styleClass="section-title" />
-               <Label fx:id="gemsLabel" styleClass="highlight-number" />
-            </VBox>
-            <VBox spacing="10" styleClass="summary-card">
-               <Label text="Current League" styleClass="section-title" />
-               <HBox spacing="8" alignment="CENTER">
-                  <FontIcon fx:id="leagueIcon" iconSize="18" />
-                  <Label fx:id="leagueLabel" styleClass="stats-text" />
+         <!-- Welcome Header - Full Width -->
+         <HBox alignment="CENTER_LEFT" spacing="15" styleClass="profile-welcome-bar">
+            <Label fx:id="profileTitle" text="Your Profile" styleClass="profile-main-heading"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label text="Everything about your budget journey" styleClass="profile-subtitle"/>
+         </HBox>
+
+         <!-- Main Dashboard Grid -->
+         <GridPane hgap="20" vgap="20" styleClass="profile-grid" alignment="CENTER">
+            <columnConstraints>
+               <!-- Left column: 300px -->
+               <ColumnConstraints prefWidth="300" minWidth="280" maxWidth="320"/>
+               <!-- Center column: 320px -->
+               <ColumnConstraints prefWidth="320" minWidth="300" maxWidth="340"/>
+               <!-- Right column: 300px -->
+               <ColumnConstraints prefWidth="300" minWidth="280" maxWidth="320"/>
+            </columnConstraints>
+            <rowConstraints>
+               <!-- Row 1: 180px -->
+               <RowConstraints prefHeight="180" minHeight="160" maxHeight="200"/>
+               <!-- Row 2: 180px -->
+               <RowConstraints prefHeight="180" minHeight="160" maxHeight="200"/>
+               <!-- Row 3: 200px -->
+               <RowConstraints prefHeight="200" minHeight="180" maxHeight="220"/>
+            </rowConstraints>
+
+            <!-- TOP ROW -->
+            <!-- Stats Overview - Large Rectangle (spans 2 columns) -->
+            <VBox spacing="15" styleClass="profile-card stats-overview-card" 
+                  GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2">
+               <Label text="📊 Your Stats" styleClass="card-title"/>
+               <HBox spacing="20" alignment="CENTER" VBox.vgrow="ALWAYS">
+                  <!-- Points -->
+                  <VBox spacing="8" alignment="CENTER" styleClass="compact-stat">
+                     <Label text="🏆" styleClass="stat-icon-small"/>
+                     <Label fx:id="pointsLabel" styleClass="stat-value-large"/>
+                     <Label text="Points" styleClass="stat-label-small"/>
+                  </VBox>
+                  <!-- Gems -->
+                  <VBox spacing="8" alignment="CENTER" styleClass="compact-stat">
+                     <Label text="💎" styleClass="stat-icon-small"/>
+                     <Label fx:id="gemsLabel" styleClass="stat-value-large gems-value"/>
+                     <Label text="Gems" styleClass="stat-label-small"/>
+                  </VBox>
+                  <!-- League -->
+                  <VBox spacing="8" alignment="CENTER" styleClass="compact-stat">
+                     <FontIcon fx:id="leagueIcon" iconSize="20" styleClass="stat-icon-small"/>
+                     <Label fx:id="leagueLabel" styleClass="stat-value-medium"/>
+                     <Label text="League" styleClass="stat-label-small"/>
+                  </VBox>
+                  <!-- Rank -->
+                  <VBox spacing="8" alignment="CENTER" styleClass="compact-stat">
+                     <Label text="🎯" styleClass="stat-icon-small"/>
+                     <Label fx:id="rankLabel" text="#42" styleClass="stat-value-large"/>
+                     <Label text="Rank" styleClass="stat-label-small"/>
+                  </VBox>
                </HBox>
             </VBox>
 
-             <!-- Top 3 Badges -->
-            <VBox spacing="10" alignment="CENTER" styleClass="summary-card">
-               <Label text="Top 3 Badges" styleClass="section-title" />
-               <HBox fx:id="badgeBox" spacing="10" alignment="CENTER" />
+            <!-- Current Profile Icon - Square -->
+            <VBox spacing="15" alignment="CENTER" styleClass="profile-card current-icon-card" 
+                  GridPane.columnIndex="2" GridPane.rowIndex="0">
+               <Label text="🎭 Current Icon" styleClass="card-title"/>
+               <VBox alignment="CENTER" spacing="10" VBox.vgrow="ALWAYS">
+                  <FontIcon fx:id="currentProfileIcon" iconSize="48" styleClass="current-profile-icon"/>
+                  <Label fx:id="currentIconName" text="Default Avatar" styleClass="current-icon-name"/>
+               </VBox>
             </VBox>
 
-            <!-- Most Recent Badge Earned  -->
-            <VBox spacing="10" alignment="CENTER" styleClass="summary-card">
-               <Label text="Recent Badge Earned" styleClass="section-title" />
-               <HBox fx:id="recentBadgeLabel" alignment="CENTER" spacing="6" />
+            <!-- MIDDLE ROW -->
+            <!-- Featured Badges - Rectangle -->
+            <VBox spacing="15" styleClass="profile-card featured-badges-card" 
+                  GridPane.columnIndex="0" GridPane.rowIndex="1">
+               <Label text="🏅 Top Badges" styleClass="card-title"/>
+               <HBox fx:id="badgeBox" spacing="10" alignment="CENTER" VBox.vgrow="ALWAYS"/>
             </VBox>
-         </HBox>
 
-         <!-- Full Badge Gallery -->
-         <VBox spacing="10" alignment="CENTER" styleClass="summary-card">
-            <Label text="Badge Gallery" styleClass="section-title" />
-            <FlowPane fx:id="badgeGallery" hgap="10" vgap="10" styleClass="badge-gallery" />
-         </VBox>
-         <!-- Theme Selection -->
-         <VBox spacing="10" alignment="TOP_CENTER" styleClass="setup-section-card">
-            <Label text="Theme Gallery" styleClass="setup-section-title"/>
-            <Label fx:id="currentThemeLabel" />
-            <!-- Theme cards added dynamically -->
-            <FlowPane fx:id="themeGallery" hgap="10" vgap="10" alignment="CENTER">
-            </FlowPane>
-         </VBox>
+            <!-- Recent Achievement - Rectangle -->
+            <VBox spacing="15" styleClass="profile-card recent-achievement-card" 
+                  GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <Label text="⭐ Latest Achievement" styleClass="card-title"/>
+               <VBox fx:id="recentBadgeLabel" alignment="CENTER" spacing="8" VBox.vgrow="ALWAYS"/>
+            </VBox>
 
-         <!-- Income and Expense Lists -->
-         <HBox spacing="30" alignment="CENTER">
-            <VBox spacing="10" styleClass="summary-card">
-               <Label text="Income Sources" styleClass="section-title" />
-               <ListView fx:id="incomeList" styleClass="modern-list" prefHeight="200" />
+            <!-- Current Theme - Square -->
+            <VBox spacing="15" alignment="CENTER" styleClass="profile-card current-theme-card" 
+                  GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <Label text="🎨 Active Theme" styleClass="card-title"/>
+               <VBox alignment="CENTER" spacing="10" VBox.vgrow="ALWAYS">
+                  <Region fx:id="currentThemePreview" styleClass="theme-preview-large"/>
+                  <Label fx:id="currentThemeLabel" text="Default Theme" styleClass="current-theme-name"/>
+               </VBox>
             </VBox>
-            <VBox spacing="10" styleClass="summary-card">
-               <Label text="Expense Sources" styleClass="section-title" />
-               <ListView fx:id="expenseList" styleClass="modern-list" prefHeight="200" />
+
+            <!-- BOTTOM ROW -->
+            <!-- Badge Gallery - Square -->
+            <VBox spacing="15" styleClass="profile-card badge-gallery-card" 
+                  GridPane.columnIndex="0" GridPane.rowIndex="2">
+               <Label text="🎖️ Badge Collection" styleClass="card-title"/>
+               <ScrollPane styleClass="badge-gallery-scroll" fitToWidth="true" VBox.vgrow="ALWAYS">
+                  <content>
+                     <FlowPane fx:id="badgeGallery" hgap="8" vgap="8" styleClass="badge-gallery-grid"/>
+                  </content>
+               </ScrollPane>
             </VBox>
-         </HBox>
+
+            <!-- Theme Gallery - Square -->
+            <VBox spacing="15" styleClass="profile-card theme-gallery-card" 
+                  GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <Label text="🌈 Theme Gallery" styleClass="card-title"/>
+               <ScrollPane styleClass="theme-gallery-scroll" fitToWidth="true" VBox.vgrow="ALWAYS">
+                  <content>
+                     <FlowPane fx:id="themeGallery" hgap="10" vgap="10" alignment="CENTER" styleClass="theme-gallery-grid"/>
+                  </content>
+               </ScrollPane>
+            </VBox>
+
+            <!-- Budget Overview - Square -->
+            <VBox spacing="15" styleClass="profile-card budget-overview-card" 
+                  GridPane.columnIndex="2" GridPane.rowIndex="2">
+               <Label text="💰 Budget Summary" styleClass="card-title"/>
+               <TabPane styleClass="budget-tabs" VBox.vgrow="ALWAYS">
+                  <tabs>
+                     <Tab text="Income" closable="false">
+                        <content>
+                           <ListView fx:id="incomeList" styleClass="profile-budget-list"/>
+                        </content>
+                     </Tab>
+                     <Tab text="Expenses" closable="false">
+                        <content>
+                           <ListView fx:id="expenseList" styleClass="profile-budget-list"/>
+                        </content>
+                     </Tab>
+                  </tabs>
+               </TabPane>
+            </VBox>
+
+         </GridPane>
       </VBox>
    </center>
+
 </BorderPane>

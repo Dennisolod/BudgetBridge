@@ -26,172 +26,163 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.collections.*?> 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.collections.*?>
 
-<!-- Modern Landscape Budget Layout -->
-<BorderPane stylesheets="@style.css" fx:controller="groupid.SecondaryController" xmlns:fx="http://javafx.com/fxml/1" styleClass="background">
+
+<!-- Secondary Screen – refreshed styling & primary nav bar -->
+<BorderPane fx:id="rootPane" stylesheets="@style.css" fx:controller="groupid.SecondaryController" xmlns:fx="http://javafx.com/fxml/1" styleClass="modern-background">
+   
+
    <top>
-      <VBox alignment="CENTER">
-         <BorderPane.margin>
-            <Insets top="20" right="20" bottom="20" left="20"/>
-         </BorderPane.margin>
-         
-         <HBox spacing="15" alignment="TOP_LEFT">
-            <HBox.margin>
-               <Insets top="0" right="50" bottom="0" left="50"/>
-            </HBox.margin>
-            <MenuBar styleClass="modern-menu-bar">
-               <Menu text="≡" styleClass="modern-menu">
-                  <MenuItem fx:id="profileButton" text="Profile" styleClass="menu-item" onAction="#switchToProfile"/>
-                  <MenuItem fx:id="logoffButton" text="Logoff" styleClass="menu-item" onAction="#logoff"/>
-               </Menu>
-            </MenuBar>
-            <Button fx:id="dashboardButton" text="My Dashboard" styleClass="modern-nav-button" onAction="#switchToPrimary"/>
-            <Button fx:id="leaderboardsButton" text="Leaderboards" styleClass="modern-nav-button" onAction="#switchToLeaderboard"/>
-            <Button fx:id="budgetButton" text="Update Budget" styleClass="modern-nav-button-active" onAction="#switchToSecondary"/>
-            <Button fx:id="storeButton" text="Exchange Store" styleClass="modern-nav-button" onAction="#switchToStore"/>
+      <VBox styleClass="nav-header-container">
+         <HBox alignment="CENTER_LEFT" spacing="30" styleClass="nav-header">
+            <padding>
+               <Insets top="15" right="40" bottom="15" left="40"/>
+            </padding>
+            
+            <!-- Logo/App Name -->
+            <HBox alignment="CENTER_LEFT" spacing="10" styleClass="brand-section">
+               <Label text="💰" styleClass="brand-icon"/>
+               <Label text="BudgetBridge" styleClass="brand-name"/>
+            </HBox>
+            
+            <!-- Spacer -->
+            <Region HBox.hgrow="ALWAYS"/>
+            
+            <!-- Navigation Pills -->
+            <HBox spacing="8" styleClass="nav-pills-container">
+               <Button fx:id="dashboardButton" text="Dashboard" styleClass="nav-pill" onAction="#switchToPrimary">
+                  <graphic><Label text="📊" styleClass="nav-icon"/></graphic>
+               </Button>
+               <Button fx:id="budgetButton" text="Budget" styleClass="nav-pill-active" onAction="#switchToSecondary">
+                  <graphic><Label text="💳" styleClass="nav-icon"/></graphic>
+               </Button>
+               <Button fx:id="leaderboardsButton" text="Leaderboards" styleClass="nav-pill" onAction="#switchToLeaderboard">
+                  <graphic><Label text="🏆" styleClass="nav-icon"/></graphic>
+               </Button>
+               <Button fx:id="storeButton" text="Store" styleClass="nav-pill" onAction="#switchToStore">
+                  <graphic><Label text="🛍️" styleClass="nav-icon"/></graphic>
+               </Button>
+            </HBox>
+            
+            <!-- User Menu -->
+            <MenuButton styleClass="user-menu-button">
+               <graphic>
+                  <HBox spacing="8" alignment="CENTER">
+                     <Circle radius="16" styleClass="user-avatar"/>
+                     <Label text="⚙️" styleClass="settings-icon"/>
+                  </HBox>
+               </graphic>
+               <items>
+                  <MenuItem fx:id="profileButton" text="My Profile" styleClass="user-menu-item" onAction="#switchToProfile"/>
+                  <SeparatorMenuItem/>
+                  <MenuItem fx:id="logoffButton" text="Sign Out" styleClass="user-menu-item" onAction="#logoff"/>
+               </items>
+            </MenuButton>
          </HBox>
       </VBox>
    </top>
-
+   
    <left>
       <VBox alignment="TOP_LEFT" spacing="25" styleClass="income-management-panel">
-         <BorderPane.margin>
-            <Insets top="20" right="20" bottom="20" left="20"/>
-         </BorderPane.margin>
+         <BorderPane.margin><Insets top="20" right="20" bottom="20" left="20"/></BorderPane.margin>
          
          <Label text="Income Management" styleClass="panel-heading"/>
          
-         <!-- Toggle button for income input -->
-         <Button fx:id="addIncomeToggleButton" 
-                 text="Add Income" 
-                 onAction="#toggleIncomeInput" 
-                 styleClass="add-button-income"/>
+         <Button fx:id="addIncomeToggleButton" text="Add Income" onAction="#toggleIncomeInput" styleClass="add-button-income"/>
          
-         <!-- Collapsible income input section -->
          <VBox fx:id="incomeInputSection" spacing="15" styleClass="add-section-card">
-
             <Label text="Add New Income" styleClass="section-title"/>
-
-            <TextField fx:id="incomeAmountInput"
-                        promptText="Amount ($)"
-                        styleClass="modern-input"/>
-
+            <TextField fx:id="incomeAmountInput" promptText="Amount ($)" styleClass="modern-input"/>
+            
             <HBox spacing="10" alignment="CENTER_LEFT">
-                <CheckBox fx:id="incomeRecurringCheckBox" mnemonicParsing="false"/>
-                <Label text="Recurring?" styleClass="section-title"/>
+               <CheckBox fx:id="incomeRecurringCheckBox" mnemonicParsing="false"/>
+               <Label text="Recurring?" styleClass="section-title"/>
             </HBox>
-
+            
             <VBox fx:id="incomeFreqSection" spacing="10">
-                <Label text="Frequency:" styleClass="field-label"/>
-                <ComboBox fx:id="incomeFreqCombo"
-                         promptText="Select frequency"
-                         styleClass="modern-combo"/>
+               <Label text="Frequency:" styleClass="field-label"/>
+               <ComboBox fx:id="incomeFreqCombo" promptText="Select frequency" styleClass="modern-combo"/>
             </VBox>
-
-            <ComboBox fx:id="incomeCatCombo"
-                     editable="true"
-                     promptText="Income source (e.g., Salary)"
-                     styleClass="modern-combo"/>
-
-            <Button text="Save Income"
-                     onAction="#addInputIncome"
-                     styleClass="add-button-income"/>
-
+            
+            <ComboBox fx:id="incomeCatCombo" editable="true" promptText="Income source (e.g., Salary)" styleClass="modern-combo"/>
+            
+            <Button text="Save Income" onAction="#addInputIncome" styleClass="add-button-income"/>
          </VBox>
          
          <VBox spacing="12" VBox.vgrow="ALWAYS">
             <Label text="Current Income Sources" styleClass="section-title"/>
             <ScrollPane styleClass="list-scroll" VBox.vgrow="ALWAYS" prefHeight="400" fitToHeight="true" fitToWidth="true">
-               <ListView fx:id="incomeList" styleClass="modern-list"/>
+               <content><ListView fx:id="incomeList" styleClass="modern-list"/></content>
             </ScrollPane>
          </VBox>
-         
       </VBox>
-      <padding>
-         <Insets bottom="25" left="25" right="25" top="25"/>
-      </padding>
+      <padding><Insets bottom="25" left="25" right="25" top="25"/></padding>
    </left>
-
+   
    <right>
       <VBox alignment="TOP_LEFT" spacing="25" styleClass="expense-management-panel">
-         <BorderPane.margin>
-            <Insets top="20" right="20" bottom="20" left="20"/>
-         </BorderPane.margin>
+         <BorderPane.margin><Insets top="20" right="20" bottom="20" left="20"/></BorderPane.margin>
          
          <Label text="Expense Management" styleClass="panel-heading"/>
          
-         <!-- Toggle button for expense input -->
-         <Button fx:id="addExpenseToggleButton" 
-                 text="Add Expense" 
-                 onAction="#toggleExpenseInput" 
-                 styleClass="add-button-expense"/>
+         <Button fx:id="addExpenseToggleButton" text="Add Expense" onAction="#toggleExpenseInput" styleClass="add-button-expense"/>
          
-         <!-- Collapsible expense input section -->
          <VBox fx:id="expenseInputSection" spacing="15" styleClass="add-section-card">
-
             <Label text="Add New Expense" styleClass="section-title"/>
-
-            <TextField fx:id="expenseAmountInput"
-                        promptText="Amount ($)"
-                        styleClass="modern-input"/>
-
+            <TextField fx:id="expenseAmountInput" promptText="Amount ($)" styleClass="modern-input"/>
+            
             <HBox spacing="10" alignment="CENTER_LEFT">
-                <CheckBox fx:id="expenseRecurringCheckBox" mnemonicParsing="false"/>
-                <Label text="Recurring?" styleClass="section-title"/>
+               <CheckBox fx:id="expenseRecurringCheckBox" mnemonicParsing="false"/>
+               <Label text="Recurring?" styleClass="section-title"/>
             </HBox>
-
+            
             <VBox fx:id="expenseFreqSection" spacing="10">
-                <Label text="Frequency:" styleClass="field-label"/>
-                <ComboBox fx:id="expenseFreqCombo"
-                         promptText="Select frequency"
-                         styleClass="modern-combo">
-                   <items>
-                         <FXCollections fx:factory="observableArrayList">
-                            <String fx:value="Daily"/>
-                            <String fx:value="Weekly"/>
-                            <String fx:value="Monthly"/>
-                         </FXCollections>
-                   </items>
-                </ComboBox>
-            </VBox>
-
-            <ComboBox fx:id="expenseCatCombo"
-                     editable="true"
-                     promptText="Category (e.g., Rent, Groceries)"
-                     styleClass="modern-combo">
-               <items>
+               <Label text="Frequency:" styleClass="field-label"/>
+               <ComboBox fx:id="expenseFreqCombo" promptText="Select frequency" styleClass="modern-combo">
+                  <items>
                      <FXCollections fx:factory="observableArrayList">
-                        <String fx:value="Groceries"/>
-                        <String fx:value="Dining Out"/>
-                        <String fx:value="Fun Money"/>
-                        <String fx:value="Other"/>
+                        <String fx:value="Daily"/>
+                        <String fx:value="Weekly"/>
+                        <String fx:value="Monthly"/>
                      </FXCollections>
+                  </items>
+               </ComboBox>
+            </VBox>
+            
+            <ComboBox fx:id="expenseCatCombo" editable="true" promptText="Category (e.g., Rent, Groceries)" styleClass="modern-combo">
+               <items>
+                  <FXCollections fx:factory="observableArrayList">
+                     <String fx:value="Groceries"/>
+                     <String fx:value="Dining Out"/>
+                     <String fx:value="Fun Money"/>
+                     <String fx:value="Other"/>
+                  </FXCollections>
                </items>
             </ComboBox>
-
-            <Button text="Save Expense"
-                     onAction="#addInputExpense"
-                     styleClass="add-button-expense"/>
+            
+            <Button text="Save Expense" onAction="#addInputExpense" styleClass="add-button-expense"/>
          </VBox>
-                  
+         
          <VBox spacing="12" VBox.vgrow="ALWAYS">
             <Label text="Current Expenses" styleClass="section-title"/>
             <ScrollPane styleClass="list-scroll" VBox.vgrow="ALWAYS" prefHeight="400" fitToHeight="true" fitToWidth="true">
-               <ListView fx:id="expenseList" styleClass="modern-list"/>
+               <content><ListView fx:id="expenseList" styleClass="modern-list"/></content>
             </ScrollPane>
          </VBox>
-         
       </VBox>
-      <padding>
-         <Insets bottom="25" left="25" right="25" top="25"/>
-      </padding>
+      <padding><Insets bottom="25" left="25" right="25" top="25"/></padding>
    </right>
-
+   
    <center>
       <VBox alignment="TOP_CENTER" spacing="30" styleClass="center-summary-panel">
-         <BorderPane.margin>
-            <Insets top="10" right="20" bottom="20" left="20"/>
-         </BorderPane.margin>
+         <BorderPane.margin><Insets top="10" right="20" bottom="20" left="20"/></BorderPane.margin>
          
          <VBox fx:id="summaryCard" alignment="CENTER" spacing="20" styleClass="budget-summary-card">
             <Label text="Monthly Budget Overview" styleClass="card-heading"/>
@@ -242,11 +233,8 @@
                </HBox>
             </VBox>
          </VBox>
-         
       </VBox>
-      <padding>
-         <Insets bottom="25" left="10" right="10" top="25"/>
-      </padding>
+      <padding><Insets bottom="25" left="10" right="10" top="25"/></padding>
    </center>
-
+   
 </BorderPane>

@@ -10,7 +10,6 @@
     -fx-font-size: 38px;
 }
 
-
 .heading {
     -fx-text-fill: #ffffff; 
     -fx-font-weight: bold;
@@ -55,7 +54,6 @@
     -fx-padding: 10 20;
 }
 
-
 .modern-flat-button {
     -fx-background-color: #FFFFFF;
     -fx-text-fill: #000000;
@@ -89,7 +87,6 @@
 .vbox-welcome, .vbox-badges, .vbox-spending {
     -fx-background-color: #222c3c;
     -fx-background-radius: 10px;
-
 }
 
 .leaderVbox Label {
@@ -105,12 +102,21 @@
 
 .leaderboard-name {
     -fx-font-size: 36px;
-    -fx-text-fill: #ffffff;
+    -fx-text-fill: #00E5FF; /* cyan - kept later definition */
+    -fx-font-weight: bold;
 }
 
 .leaderboard-rank {
     -fx-font-size: 36px;
-    -fx-text-fill: #ffffff;
+    -fx-text-fill: #FFD700; /* gold - kept later definition */
+    -fx-font-weight: bold;
+    -fx-min-width: 30px;
+}
+
+.leaderboard-points {
+    -fx-text-fill: #FF8C42; /* soft orange */
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
 }
 
 .store-gems {
@@ -157,7 +163,6 @@
 .net-positive { -fx-text-fill: #00ff2a; } 
 .net-negative { -fx-text-fill: #ff4d4d; } 
 .net          { -fx-font-size: 24px; -fx-font-weight: 700; }
-
 
 .modern-nav-button {
     -fx-background-color: #FFFFFF;
@@ -237,10 +242,11 @@
 }
 
 .section-title {
-    -fx-text-fill: #b8c5d1;
+    -fx-text-fill: white; /* kept later definition */
     -fx-font-weight: 600;
-    -fx-font-size: 16px;
+    -fx-font-size: 16px; /* kept later definition */
     -fx-font-family: "Helvetica", "Arial", sans-serif;
+    -fx-font-weight: bold; /* kept later definition */
 }
 
 /* Enhanced List Styling for Larger Display */
@@ -361,10 +367,9 @@
 }
 
 .card-heading {
-    -fx-text-fill: #ffffff;
+    -fx-text-fill: white; /* kept later definition */
     -fx-font-weight: bold;
-    -fx-font-size: 22px;
-    -fx-font-family: "Helvetica", "Arial", sans-serif;
+    -fx-font-size: 20px; /* kept later definition - merged from 22px and 16px definitions */
 }
 
 .summary-metric {
@@ -506,8 +511,10 @@
 .setup-section-title {
     -fx-text-fill: #ffffff;
     -fx-font-weight: 600;
-    -fx-font-size: 18px;
-    -fx-font-family: "Helvetica", "Arial", sans-serif;
+    -fx-font-size: 18px; /* kept later definition */
+    -fx-font-family: "Segoe UI", "Helvetica", sans-serif; /* kept later definition */
+    -fx-font-weight: bold; /* kept later definition */
+    -fx-padding: 0 0 6 0; /* kept later definition */
 }
 
 .setup-section-subtitle {
@@ -692,31 +699,11 @@
     -fx-effect: dropshadow(gaussian, gold, 10, 0.4, 0, 0);
 }
 
-.leaderboard-rank {
-    -fx-text-fill: #FFD700; /* gold */
-    -fx-font-size: 18px;
-    -fx-font-weight: bold;
-    -fx-min-width: 30px;
-}
-
-.leaderboard-name {
-    -fx-text-fill: #00E5FF; /* cyan */
-    -fx-font-size: 16px;
-    -fx-font-weight: bold;
-}
-
-.leaderboard-points {
-    -fx-text-fill: #FF8C42; /* soft orange */
-    -fx-font-size: 16px;
-    -fx-font-weight: bold;
-}
-
 .leaderboard-highlight {
     -fx-border-color: #00FF66;
     -fx-border-width: 2;
     -fx-background-color: #3d4b63;
 }
-
 
 .scrollpane {
     -fx-background-color: #222c3c;
@@ -792,21 +779,6 @@
     -fx-font-family: "Helvetica", "Arial", sans-serif;
     -fx-padding: 4 8;
 }
-.summary-card {
-    -fx-background-color: #2a3441;
-    -fx-background-radius: 12;
-    -fx-border-color: #3a4651;
-    -fx-border-width: 1;
-    -fx-border-radius: 12;
-    -fx-padding: 15 20;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 6, 0.2, 0, 1);
-}
-
-.card-heading {
-    -fx-text-fill: white;
-    -fx-font-size: 16px;
-    -fx-font-weight: bold;
-}
 
 .summary-card {
     -fx-background-color: #2a3441;
@@ -814,8 +786,8 @@
     -fx-border-color: #3a4651;
     -fx-border-width: 1;
     -fx-border-radius: 12;
-    -fx-padding: 12 20;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 6, 0.2, 0, 1);
+    -fx-padding: 12 20; /* kept later definition */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 6, 0.2, 0, 1); /* kept later definition */
 }
 
 .badge-gallery {
@@ -829,18 +801,6 @@
     -fx-text-fill: #00E5FF;
     -fx-font-size: 24px;
     -fx-font-weight: bold;
-}
-
-.section-title {
-    -fx-text-fill: white;
-    -fx-font-size: 16px;
-    -fx-font-weight: bold;
-}
-
-.badge-icon {
-    -fx-padding: 5;
-    -fx-background-radius: 50%;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 2, 0, 0, 1);
 }
 
 .league-progress {
@@ -877,7 +837,6 @@
 .progress-bar .bar {
     -fx-background-color: linear-gradient(to right, #76d275, #0ac310);
 }
-
 
 .chart-title   { -fx-text-fill: #ededed; -fx-font-size: 16px; }
 .chart-legend  { -fx-background-color: transparent; }
@@ -1057,17 +1016,3639 @@
     -fx-font-weight: normal;
 }
 
-.setup-section-title {
-    -fx-text-fill: #ffffff;
-    -fx-font-size: 18px;
-    -fx-font-weight: bold;
-    -fx-font-family: "Segoe UI", "Helvetica", sans-serif;
-    -fx-padding: 0 0 6 0;
-}
-
 .no-theme-label {
     -fx-text-fill: #bbbbbb;
     -fx-font-style: italic;
     -fx-font-size: 13px;
     -fx-font-family: "Segoe UI", "Helvetica", sans-serif;
+}
+
+/* ============================================
+   ADD THESE NEW STYLES TO YOUR EXISTING CSS
+   ============================================ */
+
+/* Modern Background */
+.modern-background {
+    -fx-background-color: #0f0f23;
+}
+
+/* Alternative background fix for VBox elements */
+.modern-background VBox.dashboard-card {
+    -fx-background-color: #222c3c;
+    -fx-background-radius: 20;
+    -fx-border-color: rgba(255, 255, 255, 0.08);
+    -fx-border-width: 1;
+    -fx-border-radius: 20;
+}
+
+/* Navigation Header Styles */
+.nav-header-container {
+    -fx-background-color: #1a1a2e;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 0, 2);
+}
+
+.nav-header {
+    -fx-background-color: transparent;
+}
+
+.brand-section {
+    -fx-padding: 0 20 0 0;
+}
+
+.brand-icon {
+    -fx-font-size: 28px;
+}
+
+.brand-name {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Helvetica Neue", sans-serif;
+}
+
+/* Navigation Pills */
+.nav-pills-container {
+    -fx-background-color: rgba(127, 163, 211, 0.15);
+    -fx-background-radius: 25;
+    -fx-padding: 4;
+}
+
+.nav-pill {
+    -fx-background-color: transparent;
+    -fx-text-fill: #a0aec0;
+    -fx-font-size: 14px;
+    -fx-font-weight: 500;
+    -fx-padding: 10 20;
+    -fx-cursor: hand;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-font-family: "Helvetica Neue", sans-serif;
+}
+
+.nav-pill:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-text-fill: #ffffff;
+}
+
+.nav-pill-active {
+    -fx-background-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-font-weight: 500;
+    -fx-padding: 10 20;
+    -fx-cursor: hand;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-font-family: "Helvetica Neue", sans-serif;
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.4), 10, 0, 0, 2);
+}
+
+.nav-icon {
+    -fx-font-size: 16px;
+    -fx-padding: 0 5 0 0;
+}
+
+/* User Menu Styles */
+.user-menu-button {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-background-radius: 25;
+    -fx-padding: 8 16;
+    -fx-cursor: hand;
+}
+
+.user-menu-button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.15);
+}
+
+.user-menu-button .label {
+    -fx-text-fill: #ffffff;
+}
+
+/* Menu dropdown styling */
+.user-menu-button .context-menu {
+    -fx-background-color: #1a1a2e;
+    -fx-background-radius: 8;
+    -fx-padding: 5;
+}
+
+.user-avatar {
+    -fx-fill: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -fx-stroke: #ffffff;
+    -fx-stroke-width: 2;
+}
+
+.settings-icon {
+    -fx-text-fill: #a0aec0;
+    -fx-font-size: 18px;
+}
+
+.user-menu-item {
+    -fx-background-color: #16213e;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-padding: 12 20;
+}
+
+.user-menu-item:hover {
+    -fx-background-color: #1e3a5f;
+}
+
+.user-menu-item .label {
+    -fx-text-fill: #ffffff;
+}
+
+/* Main scroll pane height constraint */
+.main-content-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-fit-to-height: true;
+}
+
+.main-content-scroll > .viewport {
+    -fx-background-color: transparent;
+}
+
+.dashboard-content {
+    -fx-background-color: transparent;
+}
+
+/* Welcome Section */
+.welcome-heading {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Helvetica Neue", sans-serif;
+}
+
+.gems-display {
+    -fx-background-color: rgba(72, 187, 120, 0.1);
+    -fx-background-radius: 20;
+    -fx-padding: 10 20;
+}
+
+.gems-icon {
+    -fx-font-size: 20px;
+}
+
+.gems-amount {
+    -fx-text-fill: #48bb78;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+/* Dashboard Cards - Force background color with higher specificity */
+VBox.dashboard-card {
+    -fx-background-color: #222c3c !important;
+    -fx-background-radius: 20;
+    -fx-padding: 25;
+    -fx-spacing: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 10, 0, 0, 3);
+    -fx-border-color: rgba(255, 255, 255, 0.05);
+    -fx-border-width: 1;
+    -fx-border-radius: 20;
+}
+
+/* Ensure all dashboard card variants have backgrounds */
+.dashboard-card, 
+.dashboard-card.compact-card,
+.dashboard-card.pie-chart-card {
+    -fx-background-color: #222c3c;
+}
+
+/* Pie Chart Card Specific Styling */
+.pie-chart-card {
+    -fx-background-color: #222c3c;
+    -fx-padding: 25 25 15 25;
+    -fx-spacing: 10;
+}
+
+.compact-card {
+    -fx-background-color: #222c3c;
+    -fx-padding: 20;
+    -fx-spacing: 15;
+}
+
+.card-header {
+    -fx-padding: 0 0 10 0;
+}
+
+.card-icon {
+    -fx-font-size: 24px;
+}
+
+.card-title {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Helvetica Neue", sans-serif;
+}
+
+/* Budget Overview Styles */
+.budget-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-padding: 0;
+}
+
+.budget-scroll > .viewport {
+    -fx-background-color: transparent;
+}
+
+.budget-items-container {
+    -fx-spacing: 12;
+    -fx-padding: 10 0;
+}
+
+/* Modern Pie Chart */
+.modern-pie-chart {
+    -fx-background-color: transparent;
+    -fx-legend-side: bottom;
+    -fx-legend-visible: true;
+    -fx-padding: 0;
+    -fx-label-line-length: 10;
+    -fx-start-angle: 90;
+}
+
+/* Reduce pie chart legend padding */
+.modern-pie-chart .chart-legend {
+    -fx-padding: 5 0 0 0;
+    -fx-background-color: transparent;
+}
+
+/* Update pie chart colors to be more vibrant */
+.modern-pie-chart .default-color0.chart-pie { -fx-pie-color: #667eea; }
+.modern-pie-chart .default-color1.chart-pie { -fx-pie-color: #f687b3; }
+.modern-pie-chart .default-color2.chart-pie { -fx-pie-color: #4fd1c5; }
+.modern-pie-chart .default-color3.chart-pie { -fx-pie-color: #f6e05e; }
+.modern-pie-chart .default-color4.chart-pie { -fx-pie-color: #fc8181; }
+.modern-pie-chart .default-color5.chart-pie { -fx-pie-color: #63b3ed; }
+
+/* Modern List Styles */
+.modern-list-compact {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.modern-list-compact .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffffff;
+    -fx-padding: 12 10;
+    -fx-font-size: 13px;
+    -fx-border-color: transparent transparent rgba(255, 255, 255, 0.05) transparent;
+    -fx-border-width: 0 0 1 0;
+}
+
+.modern-list-compact .list-cell:hover {
+    -fx-background-color: rgba(102, 126, 234, 0.1);
+    -fx-background-radius: 8;
+}
+
+.modern-list-compact .list-cell:selected {
+    -fx-background-color: rgba(102, 126, 234, 0.2);
+    -fx-background-radius: 8;
+}
+
+.modern-badges-list {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.modern-badges-list .list-cell {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+    -fx-background-radius: 12;
+    -fx-text-fill: #ffffff;
+    -fx-padding: 10;
+    -fx-font-size: 13px;
+    -fx-spacing: 5;
+}
+
+/* Debug: Force background on all VBox with dashboard-card class */
+GridPane VBox.dashboard-card {
+    -fx-background-color: #222c3c !important;
+}
+
+/* Additional selector patterns for JavaFX */
+.dashboard-card {
+    -fx-background: #222c3c;
+    -fx-background-color: #222c3c;
+}
+
+VBox.compact-card {
+    -fx-background-color: #222c3c !important;
+}
+
+VBox.pie-chart-card {
+    -fx-background-color: #222c3c !important;
+}
+
+/* Override expense progress bar for new theme */
+.expense-progress-section .expense-progress-bar {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-accent: linear-gradient(to right, #f093fb 0%, #f5576c 100%);
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-pref-height: 12px;
+}
+
+/* Mission List Formatting */
+.mission-item {
+    -fx-background-color: rgba(102, 126, 234, 0.1);
+    -fx-background-radius: 12;
+    -fx-padding: 15;
+    -fx-spacing: 10;
+    -fx-border-color: rgba(102, 126, 234, 0.2);
+    -fx-border-width: 1;
+    -fx-border-radius: 12;
+}
+
+.mission-item:hover {
+    -fx-background-color: rgba(102, 126, 234, 0.15);
+    -fx-border-color: rgba(102, 126, 234, 0.3);
+}
+
+.mission-title {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-wrap-text: true;
+}
+
+.mission-description {
+    -fx-text-fill: #a0aec0;
+    -fx-font-size: 12px;
+    -fx-wrap-text: true;
+}
+
+.mission-reward {
+    -fx-text-fill: #48bb78;
+    -fx-font-size: 13px;
+    -fx-font-weight: 500;
+}
+
+.mission-progress {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-accent: linear-gradient(to right, #667eea 0%, #764ba2 100%);
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-pref-height: 6px;
+}
+
+/* Ensure no horizontal scrolling in lists */
+.modern-list-compact .scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-pref-height: 0;
+}
+
+.modern-badges-list .scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-pref-height: 0;
+}
+
+/* Mission list cell wrapping */
+.modern-list-compact .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffffff;
+    -fx-padding: 8 10;
+    -fx-font-size: 13px;
+    -fx-border-color: transparent transparent rgba(255, 255, 255, 0.05) transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-wrap-text: true;
+    -fx-text-overrun: ellipsis;
+}
+
+/* Improve list view to prevent horizontal scroll */
+.modern-list-compact {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+    -fx-fit-to-width: true;
+}
+
+.modern-badges-list {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+    -fx-fit-to-width: true;
+}
+
+/* ============================================
+   ADD THESE NEW STYLES TO YOUR EXISTING CSS
+   ============================================ */
+
+/* Modern Background */
+.modern-background {
+    -fx-background-color: #0f0f23;
+}
+
+/* Navigation Header Styles */
+.nav-header-container {
+    -fx-background-color: #1a1a2e;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 0, 2);
+}
+
+.nav-header {
+    -fx-background-color: transparent;
+}
+
+.brand-section {
+    -fx-padding: 0 20 0 0;
+}
+
+.brand-icon {
+    -fx-font-size: 28px;
+}
+
+.brand-name {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Helvetica Neue", sans-serif;
+}
+
+/* Navigation Pills */
+.nav-pills-container {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+    -fx-background-radius: 25;
+    -fx-padding: 4;
+}
+
+.nav-pill {
+    -fx-background-color: transparent;
+    -fx-text-fill: #c0bba0;
+    -fx-font-size: 14px;
+    -fx-font-weight: 500;
+    -fx-padding: 10 20;
+    -fx-cursor: hand;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-font-family: "Helvetica Neue", sans-serif;
+}
+
+.nav-pill:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-text-fill: #ffffff;
+}
+
+.nav-pill-active {
+    -fx-background-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -fx-text-fill: #0f0f23;
+    -fx-font-size: 14px;
+    -fx-font-weight: 500;
+    -fx-padding: 10 20;
+    -fx-cursor: hand;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-font-family: "Helvetica Neue", sans-serif;
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.4), 10, 0, 0, 2);
+}
+
+.nav-icon {
+    -fx-font-size: 16px;
+    -fx-padding: 0 5 0 0;
+}
+
+/* User Menu Styles */
+.user-menu-button {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-background-radius: 25;
+    -fx-padding: 8 16;
+    -fx-cursor: hand;
+}
+
+.user-menu-button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.15);
+}
+
+.user-avatar {
+    -fx-fill: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -fx-stroke: #ffffff;
+    -fx-stroke-width: 2;
+}
+
+.settings-icon {
+    -fx-text-fill: #a0aec0;
+    -fx-font-size: 18px;
+}
+
+.user-menu-item {
+    -fx-background-color: #16213e;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-padding: 12 20;
+}
+
+.user-menu-item:hover {
+    -fx-background-color: #1e3a5f;
+}
+
+/* Dashboard Content Styles */
+.main-content-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+}
+
+.main-content-scroll > .viewport {
+    -fx-background-color: transparent;
+}
+
+.dashboard-content {
+    -fx-background-color: transparent;
+}
+
+/* Welcome Section */
+.welcome-heading {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Helvetica Neue", sans-serif;
+}
+
+.gems-display {
+    -fx-background-color: rgba(72, 187, 120, 0.1);
+    -fx-background-radius: 20;
+    -fx-padding: 10 20;
+}
+
+.gems-icon {
+    -fx-font-size: 20px;
+}
+
+.gems-amount {
+    -fx-text-fill: #48bb78;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+/* Dashboard Cards */
+.dashboard-card {
+    -fx-background-color: #16213e;
+    -fx-background-radius: 20;
+    -fx-padding: 25;
+    -fx-spacing: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 10, 0, 0, 3);
+}
+
+.compact-card {
+    -fx-padding: 20;
+    -fx-spacing: 15;
+}
+
+.card-header {
+    -fx-padding: 0 0 10 0;
+}
+
+.card-icon {
+    -fx-font-size: 24px;
+}
+
+.card-title {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Helvetica Neue", sans-serif;
+}
+
+/* Budget Overview Styles */
+.budget-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-padding: 0;
+}
+
+.budget-scroll > .viewport {
+    -fx-background-color: transparent;
+}
+
+.budget-items-container {
+    -fx-spacing: 12;
+    -fx-padding: 10 0;
+}
+
+/* Modern Pie Chart */
+.modern-pie-chart {
+    -fx-background-color: transparent;
+    -fx-legend-side: bottom;
+    -fx-legend-visible: true;
+}
+
+/* Update pie chart colors to be more vibrant */
+.modern-pie-chart .default-color0.chart-pie { -fx-pie-color: #667eea; }
+.modern-pie-chart .default-color1.chart-pie { -fx-pie-color: #f687b3; }
+.modern-pie-chart .default-color2.chart-pie { -fx-pie-color: #4fd1c5; }
+.modern-pie-chart .default-color3.chart-pie { -fx-pie-color: #f6e05e; }
+.modern-pie-chart .default-color4.chart-pie { -fx-pie-color: #fc8181; }
+.modern-pie-chart .default-color5.chart-pie { -fx-pie-color: #63b3ed; }
+
+/* Modern List Styles */
+.modern-list-compact {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.modern-list-compact .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffffff;
+    -fx-padding: 12 10;
+    -fx-font-size: 13px;
+    -fx-border-color: transparent transparent rgba(255, 255, 255, 0.05) transparent;
+    -fx-border-width: 0 0 1 0;
+}
+
+.modern-list-compact .list-cell:hover {
+    -fx-background-color: rgba(102, 126, 234, 0.1);
+    -fx-background-radius: 8;
+}
+
+.modern-list-compact .list-cell:selected {
+    -fx-background-color: rgba(102, 126, 234, 0.2);
+    -fx-background-radius: 8;
+}
+
+.modern-badges-list {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.modern-badges-list .list-cell {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+    -fx-background-radius: 12;
+    -fx-text-fill: #ffffff;
+    -fx-padding: 10;
+    -fx-font-size: 13px;
+    -fx-spacing: 5;
+}
+
+/* Override expense progress bar for new theme */
+.expense-progress-section .expense-progress-bar {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-accent: linear-gradient(to right, #f093fb 0%, #f5576c 100%);
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-pref-height: 12px;
+}
+
+/* CATEGORY BAR + LABELS */
+.store-category-bar {
+    -fx-background-color: rgba(102, 126, 234, 0.1);
+    -fx-background-radius: 12;
+    -fx-padding: 18 40 18 40;   /* taller bar */
+}
+
+.store-category-label-lg {
+    -fx-font-size: 20;
+    -fx-font-weight: 700;
+    -fx-text-fill: #ffffff;
+}
+
+.store-column {
+    -fx-background-color: rgba(255,255,255,0.03);
+    -fx-background-radius: 8;
+}
+
+.gems-display .gems-amount {
+    -fx-font-size: 1.1em;
+    -fx-font-weight: 600;
+}
+
+
+/* ITEM “PURCHASE” BUTTON */
+.purchase-btn {
+    -fx-background-color: #22C55E;
+    -fx-text-fill: white;
+    -fx-font-weight: 600;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+.purchase-btn:hover {
+    -fx-background-color: #16A34A;
+}
+
+.rank-summary-bar   { -fx-spacing: 22; -fx-alignment: CENTER_LEFT; }
+.user-rank-pos-lg   { -fx-font-size: 2.2em; -fx-font-weight: 800; -fx-text-fill: #ffffff; }
+.leaderboard-points-lg { -fx-font-size: 1.6em; -fx-font-weight: 700; -fx-text-fill: #00E0FF; }
+
+.league-progress-bar-lg {
+    -fx-pref-height: 18;
+    -fx-accent: #22C55E; /* keep brand green */
+}
+
+.card-heading-lg     { -fx-font-size: 1.5em; -fx-font-weight: 700; }
+.leaderboard-summary-card {
+    -fx-background-color: rgba(255,255,255,0.04);
+    -fx-background-radius: 10;
+    -fx-padding: 20 40 30 40;
+}
+
+/* High‑contrast, larger fonts */
+.user-rank-pos-lg      { -fx-font-size: 2.4em; -fx-font-weight: 800; -fx-text-fill: #FFFFFF; }
+.leaderboard-points-lg { -fx-font-size: 1.8em; -fx-font-weight: 700; -fx-text-fill: #00E0FF; }
+.league-label, .progress-label { -fx-text-fill: #FACC15; -fx-font-size: 1.1em; -fx-font-weight: 600; }
+
+.rank-summary-bar      { -fx-spacing: 24; -fx-alignment: CENTER_LEFT; }
+
+/* Wider, taller progress bar */
+.league-progress-bar   { -fx-pref-height: 18; -fx-accent: #22C55E; }
+
+/* ScrollPane container & list */
+.leader-scroll .viewport { -fx-background-color: transparent; }
+.leaderVbox { -fx-spacing: 14; }
+
+/* Summary card */
+.summary-card-lg {
+    -fx-background-color: rgba(255,255,255,0.05);
+    -fx-background-radius: 12;
+    -fx-padding: 28 36 32 36;
+    -fx-spacing: 14;
+}
+.card-heading-lg { -fx-font-size: 1.6em; -fx-font-weight: 700; -fx-text-fill: #FFFFFF; }
+.stats-text       { -fx-text-fill: #E5E7EB; -fx-font-size: 1.15em; }
+
+/* Optional badge preview */
+.rewards-preview  { -fx-text-fill: #34D399; -fx-font-size: 1.15em; -fx-font-weight: 600; }
+
+
+
+/* ============================================
+   LEADERBOARD SCREEN ENHANCEMENTS
+   ============================================ */
+
+/* Rank Summary Bar - Enhanced visibility */
+.rank-summary-bar {
+    -fx-background-color: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
+    -fx-background-radius: 16;
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-width: 1;
+    -fx-border-radius: 16;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 8, 0, 0, 2);
+    -fx-spacing: 28;
+    -fx-alignment: CENTER_LEFT;
+}
+
+/* User Rank and Labels - Much more prominent */
+.user-rank-pos-lg {
+    -fx-font-size: 2.8em;
+    -fx-font-weight: 900;
+    -fx-text-fill: #FFD700;
+    -fx-effect: dropshadow(gaussian, rgba(255, 215, 0, 0.4), 6, 0, 0, 0);
+}
+
+.user-label-lg {
+    -fx-font-size: 1.4em;
+    -fx-font-weight: 700;
+    -fx-text-fill: #ffffff;
+}
+
+.leaderboard-points-lg {
+    -fx-font-size: 2em;
+    -fx-font-weight: 800;
+    -fx-text-fill: #00E5FF;
+    -fx-effect: dropshadow(gaussian, rgba(0, 229, 255, 0.3), 4, 0, 0, 0);
+}
+
+.league-label-lg {
+    -fx-font-size: 1.3em;
+    -fx-font-weight: 700;
+    -fx-text-fill: #FACC15;
+}
+
+.progress-label-lg {
+    -fx-font-size: 1.1em;
+    -fx-font-weight: 600;
+    -fx-text-fill: #E5E7EB;
+}
+
+/* League Progress Bar - Enhanced */
+.league-progress-bar-lg {
+    -fx-pref-height: 20;
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-background-radius: 12;
+    -fx-accent: linear-gradient(to right, #22C55E 0%, #16A34A 100%);
+    -fx-effect: dropshadow(gaussian, rgba(34, 197, 94, 0.3), 4, 0, 0, 1);
+}
+
+.league-progress-bar-lg .track {
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-background-radius: 12;
+}
+
+.league-progress-bar-lg .bar {
+    -fx-background-color: linear-gradient(to right, #22C55E 0%, #16A34A 100%);
+    -fx-background-radius: 12;
+}
+
+/* Leaderboard List - Transparent with no scroll bars */
+.leader-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+}
+
+.leader-scroll .viewport {
+    -fx-background-color: transparent;
+}
+
+.leader-scroll .scroll-bar:vertical {
+    -fx-opacity: 0;
+    -fx-pref-width: 0;
+}
+
+.leader-scroll .scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-pref-height: 0;
+}
+
+/* Leaderboard VBox Container */
+.leaderVbox {
+    -fx-background-color: transparent;
+    -fx-spacing: 16;
+    -fx-padding: 20 10;
+}
+
+/* Individual Leaderboard Items */
+.leaderboard-card {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+    -fx-background-radius: 16;
+    -fx-padding: 20 24;
+    -fx-spacing: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 6, 0, 0, 2);
+    -fx-alignment: center-left;
+    -fx-border-color: rgba(255, 255, 255, 0.08);
+    -fx-border-width: 1;
+    -fx-border-radius: 16;
+}
+
+.leaderboard-card:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-border-color: rgba(102, 126, 234, 0.3);
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.2), 8, 0, 0, 3);
+}
+
+/* League Summary Card - Enhanced Background and Typography */
+.leaderboard-summary-card-lg {
+    -fx-background-color: linear-gradient(145deg, rgba(34, 40, 49, 0.9) 0%, rgba(43, 52, 69, 0.9) 100%);
+    -fx-background-radius: 20;
+    -fx-border-color: rgba(255, 255, 255, 0.12);
+    -fx-border-width: 1;
+    -fx-border-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 12, 0, 0, 4);
+}
+
+.card-heading-lg {
+    -fx-font-size: 1.8em;
+    -fx-font-weight: 800;
+    -fx-text-fill: #ffffff;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 2, 0, 0, 1);
+}
+
+.stats-text-lg {
+    -fx-text-fill: #E5E7EB;
+    -fx-font-size: 1.2em;
+    -fx-font-weight: 600;
+    -fx-line-spacing: 4;
+}
+
+.rewards-preview-lg {
+    -fx-text-fill: #34D399;
+    -fx-font-size: 1.2em;
+    -fx-font-weight: 700;
+    -fx-effect: dropshadow(gaussian, rgba(52, 211, 153, 0.3), 2, 0, 0, 0);
+}
+
+/* League Icons */
+.league-icon {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 4, 0, 0, 1);
+}
+
+/* ============================================
+   STORE SCREEN ENHANCEMENTS
+   ============================================ */
+
+/* Store Category Bar - Enhanced */
+.store-category-bar {
+    -fx-background-color: linear-gradient(135deg, rgba(102, 126, 234, 0.12) 0%, rgba(118, 75, 162, 0.12) 100%);
+    -fx-background-radius: 16;
+    -fx-border-color: rgba(255, 255, 255, 0.08);
+    -fx-border-width: 1;
+    -fx-border-radius: 16;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 6, 0, 0, 2);
+}
+
+.store-category-label-lg {
+    -fx-font-size: 1.4em;
+    -fx-font-weight: 800;
+    -fx-text-fill: #ffffff;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 2, 0, 0, 1);
+}
+
+/* Gems Display - Enhanced */
+.gems-display {
+    -fx-background-color: linear-gradient(135deg, rgba(72, 187, 120, 0.15) 0%, rgba(34, 197, 94, 0.15) 100%);
+    -fx-background-radius: 20;
+    -fx-padding: 12 24;
+    -fx-border-color: rgba(72, 187, 120, 0.3);
+    -fx-border-width: 1;
+    -fx-border-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(72, 187, 120, 0.2), 6, 0, 0, 2);
+}
+
+.gems-icon {
+    -fx-font-size: 22px;
+    -fx-effect: dropshadow(gaussian, rgba(72, 187, 120, 0.4), 3, 0, 0, 0);
+}
+
+.gems-amount {
+    -fx-text-fill: #48bb78;
+    -fx-font-size: 1.3em;
+    -fx-font-weight: 800;
+    -fx-effect: dropshadow(gaussian, rgba(72, 187, 120, 0.3), 2, 0, 0, 0);
+}
+
+/* Store Columns - Transparent Scroll Panes */
+.store-column {
+    -fx-background-color: transparent;
+    -fx-background-radius: 12;
+    -fx-padding: 15;
+    -fx-spacing: 18;
+}
+
+/* Store List Scroll Panes - Completely Transparent */
+.list-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+}
+
+.list-scroll .viewport {
+    -fx-background-color: transparent;
+}
+
+.list-scroll .scroll-bar:vertical {
+    -fx-opacity: 0;
+    -fx-pref-width: 0;
+}
+
+.list-scroll .scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-pref-height: 0;
+}
+
+.list-scroll .corner {
+    -fx-background-color: transparent;
+}
+
+/* Store Item Cards */
+.store-item-card {
+    -fx-background-color: rgba(255, 255, 255, 0.06);
+    -fx-background-radius: 14;
+    -fx-padding: 18 20;
+    -fx-spacing: 12;
+    -fx-border-color: rgba(255, 255, 255, 0.08);
+    -fx-border-width: 1;
+    -fx-border-radius: 14;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.12), 4, 0, 0, 2);
+}
+
+.store-item-card:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.09);
+    -fx-border-color: rgba(102, 126, 234, 0.3);
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.15), 6, 0, 0, 3);
+}
+
+/* Purchase Button */
+.purchase-btn {
+    -fx-background-color: linear-gradient(135deg, #22C55E 0%, #16A34A 100%);
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: 700;
+    -fx-font-size: 0.9em;
+    -fx-padding: 10 20;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(34, 197, 94, 0.3), 4, 0, 0, 2);
+}
+
+.purchase-btn:hover {
+    -fx-background-color: linear-gradient(135deg, #16A34A 0%, #15803D 100%);
+    -fx-effect: dropshadow(gaussian, rgba(34, 197, 94, 0.4), 6, 0, 0, 3);
+}
+
+.purchase-btn:disabled {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-text-fill: rgba(255, 255, 255, 0.5);
+    -fx-effect: none;
+}
+
+/* ============================================
+   GENERAL ENHANCEMENTS
+   ============================================ */
+
+/* Smooth transitions for interactive elements */
+.leaderboard-card,
+.store-item-card,
+.purchase-btn {
+    -fx-transition: all 0.2s ease;
+}
+
+/* Enhanced text hierarchy */
+.item-title {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 1.1em;
+    -fx-font-weight: 700;
+}
+
+.item-description {
+    -fx-text-fill: #B0B7C3;
+    -fx-font-size: 0.9em;
+    -fx-font-weight: 500;
+    -fx-wrap-text: true;
+}
+
+.item-price {
+    -fx-text-fill: #FACC15;
+    -fx-font-size: 1em;
+    -fx-font-weight: 700;
+}
+
+/* Main content areas */
+.store-main {
+    -fx-background-color: transparent;
+}
+
+/* Remove any lingering white backgrounds */
+.scroll-pane,
+.scroll-pane .viewport,
+.scroll-pane .content {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+}
+
+/* League-specific colors for icons */
+.league-bronze { -fx-text-fill: #CD7F32; }
+.league-copper { -fx-text-fill: #B87333; }
+.league-silver { -fx-text-fill: #C0C0C0; }
+.league-gold   { -fx-text-fill: #FFD700; }
+.league-plat   { -fx-text-fill: #E5E4E2; }
+.league-diamond { -fx-text-fill: #B9F2FF; }
+
+/* Additional leaderboard styling */
+.leaderboard-name {
+    -fx-font-size: 1.3em;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: 700;
+}
+
+.leaderboard-rank {
+    -fx-font-size: 1.8em;
+    -fx-text-fill: #FFD700;
+    -fx-font-weight: 900;
+    -fx-min-width: 60px;
+    -fx-text-alignment: center;
+}
+
+.leaderboard-points {
+    -fx-text-fill: #00E5FF;
+    -fx-font-size: 1.1em;
+    -fx-font-weight: 700;
+}
+
+/* ============================================
+   ENHANCED STYLES FOR LEADERBOARD & STORE SCREENS
+   ============================================ */
+
+/* Base styles (keeping existing ones) */
+.norm-text {
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: 600;
+    -fx-font-size: 18px;
+}
+
+.big-heading {
+    -fx-text-fill: #ffffff; 
+    -fx-font-weight: bold;
+    -fx-font-size: 38px;
+}
+
+.heading {
+    -fx-text-fill: #ffffff; 
+    -fx-font-weight: bold;
+    -fx-font-size: 34px;
+}
+
+.expense {
+    -fx-text-fill: #FF8C42;
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
+}
+
+.income {
+    -fx-text-fill: #00E5FF;
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
+}
+
+.modern-background {
+    -fx-background-color: #0f0f23;
+}
+
+/* ============================================
+   NAVIGATION HEADER (keeping existing)
+   ============================================ */
+.nav-header-container {
+    -fx-background-color: #1a1a2e;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 0, 2);
+}
+
+.nav-header {
+    -fx-background-color: transparent;
+}
+
+.brand-section {
+    -fx-padding: 0 20 0 0;
+}
+
+.brand-icon {
+    -fx-font-size: 28px;
+}
+
+.brand-name {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Helvetica Neue", sans-serif;
+}
+
+.nav-pills-container {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+    -fx-background-radius: 25;
+    -fx-padding: 4;
+}
+
+.nav-pill {
+    -fx-background-color: transparent;
+    -fx-text-fill: #c0bba0;
+    -fx-font-size: 14px;
+    -fx-font-weight: 500;
+    -fx-padding: 10 20;
+    -fx-cursor: hand;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-font-family: "Helvetica Neue", sans-serif;
+}
+
+.nav-pill:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-text-fill: #ffffff;
+}
+
+.nav-pill-active {
+    -fx-background-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-font-weight: 600;
+    -fx-padding: 10 20;
+    -fx-cursor: hand;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-font-family: "Helvetica Neue", sans-serif;
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.4), 10, 0, 0, 2);
+}
+
+.nav-icon {
+    -fx-font-size: 16px;
+    -fx-padding: 0 5 0 0;
+}
+
+.user-menu-button {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-background-radius: 25;
+    -fx-padding: 8 16;
+    -fx-cursor: hand;
+}
+
+.user-menu-button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.15);
+}
+
+.user-avatar {
+    -fx-fill: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -fx-stroke: #ffffff;
+    -fx-stroke-width: 2;
+}
+
+/* New User Avatar Icon Styling */
+.user-avatar-icon {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 4, 0, 0, 1);
+}
+
+.user-avatar-icon:hover {
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.3), 6, 0, 0, 2);
+}
+
+.settings-icon {
+    -fx-text-fill: #a0aec0;
+    -fx-font-size: 18px;
+}
+
+.user-menu-item {
+    -fx-background-color: #16213e;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-padding: 12 20;
+}
+
+.user-menu-item:hover {
+    -fx-background-color: #1e3a5f;
+}
+
+/* ============================================
+   LEADERBOARD SCREEN ENHANCEMENTS
+   ============================================ */
+
+/* Rank Summary Bar - Enhanced visibility */
+.rank-summary-bar {
+    -fx-background-color: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
+    -fx-background-radius: 16;
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-width: 1;
+    -fx-border-radius: 16;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 8, 0, 0, 2);
+    -fx-spacing: 28;
+    -fx-alignment: CENTER_LEFT;
+}
+
+/* User Rank and Labels - Much more prominent */
+.user-rank-pos-lg {
+    -fx-font-size: 2.8em;
+    -fx-font-weight: 900;
+    -fx-text-fill: #FFD700;
+    -fx-effect: dropshadow(gaussian, rgba(255, 215, 0, 0.4), 6, 0, 0, 0);
+}
+
+.user-label-lg {
+    -fx-font-size: 1.4em;
+    -fx-font-weight: 700;
+    -fx-text-fill: #ffffff;
+}
+
+.leaderboard-points-lg {
+    -fx-font-size: 2em;
+    -fx-font-weight: 800;
+    -fx-text-fill: #00E5FF;
+    -fx-effect: dropshadow(gaussian, rgba(0, 229, 255, 0.3), 4, 0, 0, 0);
+}
+
+.league-label-lg {
+    -fx-font-size: 1.3em;
+    -fx-font-weight: 700;
+    -fx-text-fill: #FACC15;
+}
+
+.progress-label-lg {
+    -fx-font-size: 1.1em;
+    -fx-font-weight: 600;
+    -fx-text-fill: #E5E7EB;
+}
+
+/* League Progress Bar - Enhanced */
+.league-progress-bar-lg {
+    -fx-pref-height: 20;
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-background-radius: 12;
+    -fx-accent: linear-gradient(to right, #22C55E 0%, #16A34A 100%);
+    -fx-effect: dropshadow(gaussian, rgba(34, 197, 94, 0.3), 4, 0, 0, 1);
+}
+
+.league-progress-bar-lg .track {
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-background-radius: 12;
+}
+
+.league-progress-bar-lg .bar {
+    -fx-background-color: linear-gradient(to right, #22C55E 0%, #16A34A 100%);
+    -fx-background-radius: 12;
+}
+
+/* Leaderboard List - Transparent with no scroll bars */
+.leader-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+}
+
+.leader-scroll .viewport {
+    -fx-background-color: transparent;
+}
+
+.leader-scroll .scroll-bar:vertical {
+    -fx-opacity: 0;
+    -fx-pref-width: 0;
+}
+
+.leader-scroll .scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-pref-height: 0;
+}
+
+/* Leaderboard VBox Container */
+.leaderVbox {
+    -fx-background-color: transparent;
+    -fx-spacing: 16;
+    -fx-padding: 20 10;
+}
+
+/* Individual Leaderboard Items */
+.leaderboard-card {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+    -fx-background-radius: 16;
+    -fx-padding: 20 24;
+    -fx-spacing: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 6, 0, 0, 2);
+    -fx-alignment: center-left;
+    -fx-border-color: rgba(255, 255, 255, 0.08);
+    -fx-border-width: 1;
+    -fx-border-radius: 16;
+}
+
+.leaderboard-card:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-border-color: rgba(102, 126, 234, 0.3);
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.2), 8, 0, 0, 3);
+}
+
+/* League Summary Card - Enhanced Background and Typography */
+.leaderboard-summary-card-lg {
+    -fx-background-color: linear-gradient(145deg, rgba(34, 40, 49, 0.9) 0%, rgba(43, 52, 69, 0.9) 100%);
+    -fx-background-radius: 20;
+    -fx-border-color: rgba(255, 255, 255, 0.12);
+    -fx-border-width: 1;
+    -fx-border-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 12, 0, 0, 4);
+}
+
+.card-heading-lg {
+    -fx-font-size: 1.8em;
+    -fx-font-weight: 800;
+    -fx-text-fill: #ffffff;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 2, 0, 0, 1);
+}
+
+.stats-text-lg {
+    -fx-text-fill: #E5E7EB;
+    -fx-font-size: 1.2em;
+    -fx-font-weight: 600;
+    -fx-line-spacing: 4;
+}
+
+.rewards-preview-lg {
+    -fx-text-fill: #34D399;
+    -fx-font-size: 1.2em;
+    -fx-font-weight: 700;
+    -fx-effect: dropshadow(gaussian, rgba(52, 211, 153, 0.3), 2, 0, 0, 0);
+}
+
+/* League Icons */
+.league-icon {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 4, 0, 0, 1);
+}
+
+/* ============================================
+   STORE SCREEN ENHANCEMENTS
+   ============================================ */
+
+/* Store Category Bar - Enhanced */
+.store-category-bar {
+    -fx-background-color: linear-gradient(135deg, rgba(102, 126, 234, 0.12) 0%, rgba(118, 75, 162, 0.12) 100%);
+    -fx-background-radius: 16;
+    -fx-border-color: rgba(255, 255, 255, 0.08);
+    -fx-border-width: 1;
+    -fx-border-radius: 16;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 6, 0, 0, 2);
+}
+
+.store-category-label-lg {
+    -fx-font-size: 1.4em;
+    -fx-font-weight: 800;
+    -fx-text-fill: #ffffff;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 2, 0, 0, 1);
+}
+
+/* Gems Display - Enhanced */
+.gems-display {
+    -fx-background-color: linear-gradient(135deg, rgba(72, 187, 120, 0.15) 0%, rgba(34, 197, 94, 0.15) 100%);
+    -fx-background-radius: 20;
+    -fx-padding: 12 24;
+    -fx-border-color: rgba(72, 187, 120, 0.3);
+    -fx-border-width: 1;
+    -fx-border-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(72, 187, 120, 0.2), 6, 0, 0, 2);
+}
+
+.gems-icon {
+    -fx-font-size: 22px;
+    -fx-effect: dropshadow(gaussian, rgba(72, 187, 120, 0.4), 3, 0, 0, 0);
+}
+
+.gems-amount {
+    -fx-text-fill: #48bb78;
+    -fx-font-size: 1.3em;
+    -fx-font-weight: 800;
+    -fx-effect: dropshadow(gaussian, rgba(72, 187, 120, 0.3), 2, 0, 0, 0);
+}
+
+/* Store Columns - Transparent Scroll Panes */
+.store-column {
+    -fx-background-color: transparent;
+    -fx-background-radius: 12;
+    -fx-padding: 15;
+    -fx-spacing: 18;
+}
+
+/* Store List Scroll Panes - Completely Transparent */
+.list-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+}
+
+.list-scroll .viewport {
+    -fx-background-color: transparent;
+}
+
+.list-scroll .scroll-bar:vertical {
+    -fx-opacity: 0;
+    -fx-pref-width: 0;
+}
+
+.list-scroll .scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-pref-height: 0;
+}
+
+.list-scroll .corner {
+    -fx-background-color: transparent;
+}
+
+/* Store Item Cards */
+.store-item-card {
+    -fx-background-color: rgba(255, 255, 255, 0.06);
+    -fx-background-radius: 14;
+    -fx-padding: 18 20;
+    -fx-spacing: 12;
+    -fx-border-color: rgba(255, 255, 255, 0.08);
+    -fx-border-width: 1;
+    -fx-border-radius: 14;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.12), 4, 0, 0, 2);
+}
+
+.store-item-card:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.09);
+    -fx-border-color: rgba(102, 126, 234, 0.3);
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.15), 6, 0, 0, 3);
+}
+
+/* Purchase Button */
+.purchase-btn {
+    -fx-background-color: linear-gradient(135deg, #22C55E 0%, #16A34A 100%);
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: 700;
+    -fx-font-size: 0.9em;
+    -fx-padding: 10 20;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(34, 197, 94, 0.3), 4, 0, 0, 2);
+}
+
+.purchase-btn:hover {
+    -fx-background-color: linear-gradient(135deg, #16A34A 0%, #15803D 100%);
+    -fx-effect: dropshadow(gaussian, rgba(34, 197, 94, 0.4), 6, 0, 0, 3);
+}
+
+.purchase-btn:disabled {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-text-fill: rgba(255, 255, 255, 0.5);
+    -fx-effect: none;
+}
+
+/* Active Profile Icon Button */
+.active-btn {
+    -fx-background-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -fx-text-fill: #ffffff;
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.4), 6, 0, 0, 3);
+}
+
+.active-btn:disabled {
+    -fx-background-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -fx-text-fill: #ffffff;
+    -fx-opacity: 0.8;
+}
+
+/* ============================================
+   PROFILE SCREEN STYLES
+   ============================================ */
+
+/* Main Profile Content */
+.profile-main-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+}
+
+.profile-main-scroll .viewport {
+    -fx-background-color: transparent;
+}
+
+.profile-main-scroll .scroll-bar:vertical {
+    -fx-opacity: 0;
+    -fx-pref-width: 0;
+}
+
+.profile-main-scroll .scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-pref-height: 0;
+}
+
+.profile-content {
+    -fx-background-color: transparent;
+    -fx-max-width: 1200px;
+    -fx-alignment: top-center;
+}
+
+/* Header Section */
+.profile-header-section {
+    -fx-background-color: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%);
+    -fx-background-radius: 20;
+    -fx-padding: 30 40;
+    -fx-border-color: rgba(255, 255, 255, 0.06);
+    -fx-border-width: 1;
+    -fx-border-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 8, 0, 0, 2);
+}
+
+.profile-main-heading {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 2.2em;
+    -fx-font-weight: 800;
+    -fx-font-family: "Helvetica Neue", sans-serif;
+}
+
+.profile-subtitle {
+    -fx-text-fill: #B0B7C3;
+    -fx-font-size: 1.1em;
+    -fx-font-weight: 500;
+    -fx-font-family: "Helvetica Neue", sans-serif;
+}
+
+/* Section Containers */
+.profile-section {
+    -fx-background-color: transparent;
+    -fx-spacing: 20;
+}
+
+.profile-section-heading {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 1.5em;
+    -fx-font-weight: 700;
+    -fx-font-family: "Helvetica Neue", sans-serif;
+    -fx-padding: 0 0 5 0;
+}
+
+/* Stats Grid */
+.stats-grid {
+    -fx-alignment: center;
+}
+
+.profile-stat-card {
+    -fx-background-color: linear-gradient(145deg, rgba(34, 40, 49, 0.8) 0%, rgba(43, 52, 69, 0.8) 100%);
+    -fx-background-radius: 16;
+    -fx-padding: 20 15;
+    -fx-border-color: rgba(255, 255, 255, 0.08);
+    -fx-border-width: 1;
+    -fx-border-radius: 16;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 6, 0, 0, 2);
+    -fx-min-height: 120;
+    -fx-max-width: 200;
+}
+
+.profile-stat-card:hover {
+    -fx-background-color: linear-gradient(145deg, rgba(43, 52, 69, 0.9) 0%, rgba(54, 63, 80, 0.9) 100%);
+    -fx-border-color: rgba(102, 126, 234, 0.2);
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.15), 8, 0, 0, 3);
+}
+
+.stat-icon {
+    -fx-font-size: 1.8em;
+}
+
+.stat-label {
+    -fx-text-fill: #B0B7C3;
+    -fx-font-size: 0.9em;
+    -fx-font-weight: 500;
+    -fx-font-family: "Helvetica Neue", sans-serif;
+}
+
+.stat-value {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 1.4em;
+    -fx-font-weight: 700;
+    -fx-font-family: "Helvetica Neue", sans-serif;
+}
+
+.gems-value {
+    -fx-text-fill: #48bb78;
+    -fx-effect: dropshadow(gaussian, rgba(72, 187, 120, 0.3), 2, 0, 0, 0);
+}
+
+/* Profile Cards */
+.profile-card {
+    -fx-background-color: linear-gradient(145deg, rgba(34, 40, 49, 0.6) 0%, rgba(43, 52, 69, 0.6) 100%);
+    -fx-background-radius: 18;
+    -fx-padding: 25;
+    -fx-border-color: rgba(255, 255, 255, 0.06);
+    -fx-border-width: 1;
+    -fx-border-radius: 18;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.12), 8, 0, 0, 3);
+}
+
+.card-title {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 1.2em;
+    -fx-font-weight: 700;
+    -fx-font-family: "Helvetica Neue", sans-serif;
+}
+
+/* Budget Overview Cards */
+.budget-overview-card {
+    -fx-min-width: 300;
+    -fx-pref-width: 350;
+}
+
+/* Badge Gallery */
+.featured-badges {
+    -fx-background-color: rgba(255, 255, 255, 0.03);
+    -fx-background-radius: 12;
+    -fx-padding: 15 20;
+    -fx-min-height: 60;
+}
+
+.recent-achievement {
+    -fx-background-color: rgba(255, 255, 255, 0.03);
+    -fx-background-radius: 12;
+    -fx-padding: 15 20;
+    -fx-min-height: 50;
+}
+
+.badge-gallery-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+}
+
+.badge-gallery-scroll .viewport {
+    -fx-background-color: transparent;
+}
+
+.badge-gallery-scroll .scroll-bar:vertical {
+    -fx-opacity: 0;
+    -fx-pref-width: 0;
+}
+
+.badge-gallery-scroll .scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-pref-height: 0;
+}
+
+.badge-gallery-grid {
+    -fx-background-color: rgba(255, 255, 255, 0.02);
+    -fx-background-radius: 10;
+    -fx-padding: 15;
+}
+
+/* Theme Gallery */
+.current-selection-label {
+    -fx-text-fill: #B0B7C3;
+    -fx-font-size: 0.95em;
+    -fx-font-weight: 500;
+    -fx-font-style: italic;
+}
+
+.theme-gallery-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+}
+
+.theme-gallery-scroll .viewport {
+    -fx-background-color: transparent;
+}
+
+.theme-gallery-scroll .scroll-bar:vertical {
+    -fx-opacity: 0;
+    -fx-pref-width: 0;
+}
+
+.theme-gallery-scroll .scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-pref-height: 0;
+}
+
+.theme-gallery-grid {
+    -fx-background-color: rgba(255, 255, 255, 0.02);
+    -fx-background-radius: 10;
+    -fx-padding: 15;
+}
+
+/* Budget Lists */
+.budget-list-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+}
+
+.budget-list-scroll .viewport {
+    -fx-background-color: transparent;
+}
+
+.budget-list-scroll .scroll-bar:vertical {
+    -fx-opacity: 0;
+    -fx-pref-width: 0;
+}
+
+.budget-list-scroll .scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-pref-height: 0;
+}
+
+.profile-budget-list {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+}
+
+.profile-budget-list .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #E5E7EB;
+    -fx-padding: 10 12;
+    -fx-font-size: 0.9em;
+    -fx-font-weight: 500;
+    -fx-border-color: transparent transparent rgba(255, 255, 255, 0.05) transparent;
+    -fx-border-width: 0 0 1 0;
+}
+
+.profile-budget-list .list-cell:hover {
+    -fx-background-color: rgba(102, 126, 234, 0.08);
+    -fx-background-radius: 8;
+}
+
+.profile-budget-list .list-cell:selected {
+    -fx-background-color: rgba(102, 126, 234, 0.15);
+    -fx-background-radius: 8;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .stats-grid {
+        -fx-hgap: 15;
+        -fx-vgap: 10;
+    }
+    
+    .profile-stat-card {
+        -fx-padding: 15 10;
+        -fx-min-height: 100;
+    }
+}
+
+/* ============================================
+   GENERAL ENHANCEMENTS
+   ============================================ */
+
+/* Smooth transitions for interactive elements */
+.leaderboard-card,
+.store-item-card,
+.purchase-btn {
+    -fx-transition: all 0.2s ease;
+}
+
+/* Enhanced text hierarchy */
+.item-title {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 1.1em;
+    -fx-font-weight: 700;
+}
+
+.item-description {
+    -fx-text-fill: #B0B7C3;
+    -fx-font-size: 0.9em;
+    -fx-font-weight: 500;
+    -fx-wrap-text: true;
+}
+
+.item-price {
+    -fx-text-fill: #FACC15;
+    -fx-font-size: 1em;
+    -fx-font-weight: 700;
+}
+
+/* Main content areas */
+.store-main {
+    -fx-background-color: transparent;
+}
+
+/* Remove any lingering white backgrounds */
+.scroll-pane,
+.scroll-pane .viewport,
+.scroll-pane .content {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+}
+
+/* League-specific colors for icons */
+.league-bronze { -fx-text-fill: #CD7F32; }
+.league-copper { -fx-text-fill: #B87333; }
+.league-silver { -fx-text-fill: #C0C0C0; }
+.league-gold   { -fx-text-fill: #FFD700; }
+.league-plat   { -fx-text-fill: #E5E4E2; }
+.league-diamond { -fx-text-fill: #B9F2FF; }
+
+/* Additional leaderboard styling */
+.leaderboard-name {
+    -fx-font-size: 1.3em;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: 700;
+}
+
+.leaderboard-rank {
+    -fx-font-size: 1.8em;
+    -fx-text-fill: #FFD700;
+    -fx-font-weight: 900;
+    -fx-min-width: 60px;
+    -fx-text-alignment: center;
+}
+
+.leaderboard-points {
+    -fx-text-fill: #00E5FF;
+    -fx-font-size: 1.1em;
+    -fx-font-weight: 700;
+}
+
+/* ============================================
+   ENHANCED STYLES FOR LEADERBOARD & STORE SCREENS
+   ============================================ */
+
+/* Base styles (keeping existing ones) */
+.norm-text {
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: 600;
+    -fx-font-size: 18px;
+}
+
+.big-heading {
+    -fx-text-fill: #ffffff; 
+    -fx-font-weight: bold;
+    -fx-font-size: 38px;
+}
+
+.heading {
+    -fx-text-fill: #ffffff; 
+    -fx-font-weight: bold;
+    -fx-font-size: 34px;
+}
+
+.expense {
+    -fx-text-fill: #FF8C42;
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
+}
+
+.income {
+    -fx-text-fill: #00E5FF;
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
+}
+
+.modern-background {
+    -fx-background-color: #0f0f23;
+}
+
+/* ============================================
+   NAVIGATION HEADER (keeping existing)
+   ============================================ */
+.nav-header-container {
+    -fx-background-color: #1a1a2e;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 0, 2);
+}
+
+.nav-header {
+    -fx-background-color: transparent;
+}
+
+.brand-section {
+    -fx-padding: 0 20 0 0;
+}
+
+.brand-icon {
+    -fx-font-size: 28px;
+}
+
+.brand-name {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Helvetica Neue", sans-serif;
+}
+
+.nav-pills-container {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+    -fx-background-radius: 25;
+    -fx-padding: 4;
+}
+
+.nav-pill {
+    -fx-background-color: transparent;
+    -fx-text-fill: #c0bba0;
+    -fx-font-size: 14px;
+    -fx-font-weight: 500;
+    -fx-padding: 10 20;
+    -fx-cursor: hand;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-font-family: "Helvetica Neue", sans-serif;
+}
+
+.nav-pill:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-text-fill: #ffffff;
+}
+
+.nav-pill-active {
+    -fx-background-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-font-weight: 600;
+    -fx-padding: 10 20;
+    -fx-cursor: hand;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-font-family: "Helvetica Neue", sans-serif;
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.4), 10, 0, 0, 2);
+}
+
+.nav-icon {
+    -fx-font-size: 16px;
+    -fx-padding: 0 5 0 0;
+}
+
+.user-menu-button {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-background-radius: 25;
+    -fx-padding: 8 16;
+    -fx-cursor: hand;
+}
+
+.user-menu-button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.15);
+}
+
+.user-avatar {
+    -fx-fill: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -fx-stroke: #ffffff;
+    -fx-stroke-width: 2;
+}
+
+/* New User Avatar Icon Styling */
+.user-avatar-icon {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 4, 0, 0, 1);
+}
+
+.user-avatar-icon:hover {
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.3), 6, 0, 0, 2);
+}
+
+.settings-icon {
+    -fx-text-fill: #a0aec0;
+    -fx-font-size: 18px;
+}
+
+.user-menu-item {
+    -fx-background-color: #16213e;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-padding: 12 20;
+}
+
+.user-menu-item:hover {
+    -fx-background-color: #1e3a5f;
+}
+
+/* ============================================
+   LEADERBOARD SCREEN ENHANCEMENTS
+   ============================================ */
+
+/* Rank Summary Bar - Enhanced visibility */
+.rank-summary-bar {
+    -fx-background-color: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
+    -fx-background-radius: 16;
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-width: 1;
+    -fx-border-radius: 16;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 8, 0, 0, 2);
+    -fx-spacing: 28;
+    -fx-alignment: CENTER_LEFT;
+}
+
+/* User Rank and Labels - Much more prominent */
+.user-rank-pos-lg {
+    -fx-font-size: 2.8em;
+    -fx-font-weight: 900;
+    -fx-text-fill: #FFD700;
+    -fx-effect: dropshadow(gaussian, rgba(255, 215, 0, 0.4), 6, 0, 0, 0);
+}
+
+.user-label-lg {
+    -fx-font-size: 1.4em;
+    -fx-font-weight: 700;
+    -fx-text-fill: #ffffff;
+}
+
+.leaderboard-points-lg {
+    -fx-font-size: 2em;
+    -fx-font-weight: 800;
+    -fx-text-fill: #00E5FF;
+    -fx-effect: dropshadow(gaussian, rgba(0, 229, 255, 0.3), 4, 0, 0, 0);
+}
+
+.league-label-lg {
+    -fx-font-size: 1.3em;
+    -fx-font-weight: 700;
+    -fx-text-fill: #FACC15;
+}
+
+.progress-label-lg {
+    -fx-font-size: 1.1em;
+    -fx-font-weight: 600;
+    -fx-text-fill: #E5E7EB;
+}
+
+/* League Progress Bar - Enhanced */
+.league-progress-bar-lg {
+    -fx-pref-height: 20;
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-background-radius: 12;
+    -fx-accent: linear-gradient(to right, #22C55E 0%, #16A34A 100%);
+    -fx-effect: dropshadow(gaussian, rgba(34, 197, 94, 0.3), 4, 0, 0, 1);
+}
+
+.league-progress-bar-lg .track {
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-background-radius: 12;
+}
+
+.league-progress-bar-lg .bar {
+    -fx-background-color: linear-gradient(to right, #22C55E 0%, #16A34A 100%);
+    -fx-background-radius: 12;
+}
+
+/* Leaderboard List - Transparent with no scroll bars */
+.leader-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+}
+
+.leader-scroll .viewport {
+    -fx-background-color: transparent;
+}
+
+.leader-scroll .scroll-bar:vertical {
+    -fx-opacity: 0;
+    -fx-pref-width: 0;
+}
+
+.leader-scroll .scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-pref-height: 0;
+}
+
+/* Leaderboard VBox Container */
+.leaderVbox {
+    -fx-background-color: transparent;
+    -fx-spacing: 16;
+    -fx-padding: 20 10;
+}
+
+/* Individual Leaderboard Items */
+.leaderboard-card {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+    -fx-background-radius: 16;
+    -fx-padding: 20 24;
+    -fx-spacing: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 6, 0, 0, 2);
+    -fx-alignment: center-left;
+    -fx-border-color: rgba(255, 255, 255, 0.08);
+    -fx-border-width: 1;
+    -fx-border-radius: 16;
+}
+
+.leaderboard-card:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-border-color: rgba(102, 126, 234, 0.3);
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.2), 8, 0, 0, 3);
+}
+
+/* League Summary Card - Enhanced Background and Typography */
+.leaderboard-summary-card-lg {
+    -fx-background-color: linear-gradient(145deg, rgba(34, 40, 49, 0.9) 0%, rgba(43, 52, 69, 0.9) 100%);
+    -fx-background-radius: 20;
+    -fx-border-color: rgba(255, 255, 255, 0.12);
+    -fx-border-width: 1;
+    -fx-border-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 12, 0, 0, 4);
+}
+
+.card-heading-lg {
+    -fx-font-size: 1.8em;
+    -fx-font-weight: 800;
+    -fx-text-fill: #ffffff;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 2, 0, 0, 1);
+}
+
+.stats-text-lg {
+    -fx-text-fill: #E5E7EB;
+    -fx-font-size: 1.2em;
+    -fx-font-weight: 600;
+    -fx-line-spacing: 4;
+}
+
+.rewards-preview-lg {
+    -fx-text-fill: #34D399;
+    -fx-font-size: 1.2em;
+    -fx-font-weight: 700;
+    -fx-effect: dropshadow(gaussian, rgba(52, 211, 153, 0.3), 2, 0, 0, 0);
+}
+
+/* League Icons */
+.league-icon {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 4, 0, 0, 1);
+}
+
+/* ============================================
+   STORE SCREEN ENHANCEMENTS
+   ============================================ */
+
+/* Store Category Bar - Enhanced */
+.store-category-bar {
+    -fx-background-color: linear-gradient(135deg, rgba(102, 126, 234, 0.12) 0%, rgba(118, 75, 162, 0.12) 100%);
+    -fx-background-radius: 16;
+    -fx-border-color: rgba(255, 255, 255, 0.08);
+    -fx-border-width: 1;
+    -fx-border-radius: 16;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 6, 0, 0, 2);
+}
+
+.store-category-label-lg {
+    -fx-font-size: 1.4em;
+    -fx-font-weight: 800;
+    -fx-text-fill: #ffffff;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 2, 0, 0, 1);
+}
+
+/* Gems Display - Enhanced */
+.gems-display {
+    -fx-background-color: linear-gradient(135deg, rgba(72, 187, 120, 0.15) 0%, rgba(34, 197, 94, 0.15) 100%);
+    -fx-background-radius: 20;
+    -fx-padding: 12 24;
+    -fx-border-color: rgba(72, 187, 120, 0.3);
+    -fx-border-width: 1;
+    -fx-border-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(72, 187, 120, 0.2), 6, 0, 0, 2);
+}
+
+.gems-icon {
+    -fx-font-size: 22px;
+    -fx-effect: dropshadow(gaussian, rgba(72, 187, 120, 0.4), 3, 0, 0, 0);
+}
+
+.gems-amount {
+    -fx-text-fill: #48bb78;
+    -fx-font-size: 1.3em;
+    -fx-font-weight: 800;
+    -fx-effect: dropshadow(gaussian, rgba(72, 187, 120, 0.3), 2, 0, 0, 0);
+}
+
+/* Store Columns - Transparent Scroll Panes */
+.store-column {
+    -fx-background-color: transparent;
+    -fx-background-radius: 12;
+    -fx-padding: 15;
+    -fx-spacing: 18;
+}
+
+/* Store List Scroll Panes - Completely Transparent */
+.list-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+}
+
+.list-scroll .viewport {
+    -fx-background-color: transparent;
+}
+
+.list-scroll .scroll-bar:vertical {
+    -fx-opacity: 0;
+    -fx-pref-width: 0;
+}
+
+.list-scroll .scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-pref-height: 0;
+}
+
+.list-scroll .corner {
+    -fx-background-color: transparent;
+}
+
+/* Store Item Cards */
+.store-item-card {
+    -fx-background-color: rgba(255, 255, 255, 0.06);
+    -fx-background-radius: 14;
+    -fx-padding: 18 20;
+    -fx-spacing: 12;
+    -fx-border-color: rgba(255, 255, 255, 0.08);
+    -fx-border-width: 1;
+    -fx-border-radius: 14;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.12), 4, 0, 0, 2);
+}
+
+.store-item-card:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.09);
+    -fx-border-color: rgba(102, 126, 234, 0.3);
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.15), 6, 0, 0, 3);
+}
+
+/* Purchase Button */
+.purchase-btn {
+    -fx-background-color: linear-gradient(135deg, #22C55E 0%, #16A34A 100%);
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: 700;
+    -fx-font-size: 0.9em;
+    -fx-padding: 10 20;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(34, 197, 94, 0.3), 4, 0, 0, 2);
+}
+
+.purchase-btn:hover {
+    -fx-background-color: linear-gradient(135deg, #16A34A 0%, #15803D 100%);
+    -fx-effect: dropshadow(gaussian, rgba(34, 197, 94, 0.4), 6, 0, 0, 3);
+}
+
+.purchase-btn:disabled {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-text-fill: rgba(255, 255, 255, 0.5);
+    -fx-effect: none;
+}
+
+/* Active Profile Icon Button */
+.active-btn {
+    -fx-background-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -fx-text-fill: #ffffff;
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.4), 6, 0, 0, 3);
+}
+
+.active-btn:disabled {
+    -fx-background-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -fx-text-fill: #ffffff;
+    -fx-opacity: 0.8;
+}
+
+/* ============================================
+   PROFILE SCREEN STYLES - COMPACT GRID LAYOUT
+   ============================================ */
+
+/* Main Profile Dashboard */
+.profile-dashboard {
+    -fx-background-color: transparent;
+    -fx-alignment: center;
+}
+
+/* Welcome Header */
+.profile-welcome-bar {
+    -fx-background-color: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%);
+    -fx-background-radius: 16;
+    -fx-padding: 20 30;
+    -fx-border-color: rgba(255, 255, 255, 0.06);
+    -fx-border-width: 1;
+    -fx-border-radius: 16;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 6, 0, 0, 2);
+}
+
+.profile-main-heading {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 1.8em;
+    -fx-font-weight: 800;
+    -fx-font-family: "Helvetica Neue", sans-serif;
+}
+
+.profile-subtitle {
+    -fx-text-fill: #B0B7C3;
+    -fx-font-size: 1em;
+    -fx-font-weight: 500;
+    -fx-font-family: "Helvetica Neue", sans-serif;
+}
+
+/* Main Grid */
+.profile-grid {
+    -fx-background-color: transparent;
+}
+
+/* Base Profile Card */
+.profile-card {
+    -fx-background-color: linear-gradient(145deg, rgba(34, 40, 49, 0.7) 0%, rgba(43, 52, 69, 0.7) 100%);
+    -fx-background-radius: 16;
+    -fx-padding: 20;
+    -fx-border-color: rgba(255, 255, 255, 0.08);
+    -fx-border-width: 1;
+    -fx-border-radius: 16;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 6, 0, 0, 2);
+}
+
+.profile-card:hover {
+    -fx-border-color: rgba(102, 126, 234, 0.2);
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.1), 8, 0, 0, 3);
+}
+
+.card-title {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 1em;
+    -fx-font-weight: 700;
+    -fx-font-family: "Helvetica Neue", sans-serif;
+}
+
+/* Stats Overview Card (Large Rectangle) */
+.stats-overview-card {
+    -fx-background-color: linear-gradient(145deg, rgba(102, 126, 234, 0.12) 0%, rgba(118, 75, 162, 0.12) 100%);
+}
+
+.compact-stat {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+    -fx-background-radius: 12;
+    -fx-padding: 15 20;
+    -fx-min-width: 80;
+}
+
+.stat-icon-small {
+    -fx-font-size: 1.2em;
+}
+
+.stat-value-large {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 1.3em;
+    -fx-font-weight: 800;
+    -fx-font-family: "Helvetica Neue", sans-serif;
+}
+
+.stat-value-medium {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 1em;
+    -fx-font-weight: 700;
+    -fx-font-family: "Helvetica Neue", sans-serif;
+}
+
+.stat-label-small {
+    -fx-text-fill: #B0B7C3;
+    -fx-font-size: 0.8em;
+    -fx-font-weight: 500;
+    -fx-font-family: "Helvetica Neue", sans-serif;
+}
+
+.gems-value {
+    -fx-text-fill: #48bb78;
+    -fx-effect: dropshadow(gaussian, rgba(72, 187, 120, 0.3), 2, 0, 0, 0);
+}
+
+/* Current Profile Icon Card (Square) */
+.current-icon-card {
+    -fx-background-color: linear-gradient(145deg, rgba(72, 187, 120, 0.08) 0%, rgba(34, 197, 94, 0.08) 100%);
+}
+
+.current-profile-icon {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 6, 0, 0, 2);
+}
+
+.current-icon-name {
+    -fx-text-fill: #E5E7EB;
+    -fx-font-size: 0.9em;
+    -fx-font-weight: 600;
+    -fx-text-alignment: center;
+}
+
+/* Featured Badges Card (Rectangle) */
+.featured-badges-card {
+    -fx-background-color: linear-gradient(145deg, rgba(255, 215, 0, 0.08) 0%, rgba(255, 193, 7, 0.08) 100%);
+}
+
+/* Recent Achievement Card (Rectangle) */
+.recent-achievement-card {
+    -fx-background-color: linear-gradient(145deg, rgba(139, 69, 19, 0.08) 0%, rgba(160, 82, 45, 0.08) 100%);
+}
+
+/* Current Theme Card (Square) */
+.current-theme-card {
+    -fx-background-color: linear-gradient(145deg, rgba(147, 51, 234, 0.08) 0%, rgba(168, 85, 247, 0.08) 100%);
+}
+
+.theme-preview-large {
+    -fx-background-color: #667eea;
+    -fx-background-radius: 8;
+    -fx-pref-width: 60;
+    -fx-pref-height: 40;
+    -fx-border-color: rgba(255, 255, 255, 0.2);
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+}
+
+.current-theme-name {
+    -fx-text-fill: #E5E7EB;
+    -fx-font-size: 0.9em;
+    -fx-font-weight: 600;
+    -fx-text-alignment: center;
+}
+
+/* Badge Gallery Card (Square) */
+.badge-gallery-card {
+    -fx-background-color: linear-gradient(145deg, rgba(30, 58, 138, 0.08) 0%, rgba(37, 99, 235, 0.08) 100%);
+}
+
+.badge-gallery-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+}
+
+.badge-gallery-scroll .viewport {
+    -fx-background-color: transparent;
+}
+
+.badge-gallery-scroll .scroll-bar:vertical {
+    -fx-opacity: 0;
+    -fx-pref-width: 0;
+}
+
+.badge-gallery-scroll .scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-pref-height: 0;
+}
+
+.badge-gallery-grid {
+    -fx-background-color: rgba(255, 255, 255, 0.02);
+    -fx-background-radius: 8;
+    -fx-padding: 10;
+}
+
+/* Theme Gallery Card (Square) */
+.theme-gallery-card {
+    -fx-background-color: linear-gradient(145deg, rgba(220, 38, 127, 0.08) 0%, rgba(244, 114, 182, 0.08) 100%);
+}
+
+.theme-gallery-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+}
+
+.theme-gallery-scroll .viewport {
+    -fx-background-color: transparent;
+}
+
+.theme-gallery-scroll .scroll-bar:vertical {
+    -fx-opacity: 0;
+    -fx-pref-width: 0;
+}
+
+.theme-gallery-scroll .scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-pref-height: 0;
+}
+
+.theme-gallery-grid {
+    -fx-background-color: rgba(255, 255, 255, 0.02);
+    -fx-background-radius: 8;
+    -fx-padding: 10;
+}
+
+/* Budget Overview Card (Square) */
+.budget-overview-card {
+    -fx-background-color: linear-gradient(145deg, rgba(5, 150, 105, 0.08) 0%, rgba(16, 185, 129, 0.08) 100%);
+}
+
+.budget-tabs {
+    -fx-background-color: transparent;
+}
+
+.budget-tabs .tab-header-area {
+    -fx-background-color: transparent;
+}
+
+.budget-tabs .tab {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-text-fill: #B0B7C3;
+    -fx-font-size: 0.85em;
+    -fx-font-weight: 600;
+    -fx-padding: 8 16;
+    -fx-background-radius: 8 8 0 0;
+}
+
+.budget-tabs .tab:selected {
+    -fx-background-color: rgba(102, 126, 234, 0.2);
+    -fx-text-fill: #ffffff;
+}
+
+.budget-tabs .tab-content-area {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.profile-budget-list {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+}
+
+.profile-budget-list .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #E5E7EB;
+    -fx-padding: 8 10;
+    -fx-font-size: 0.85em;
+    -fx-font-weight: 500;
+    -fx-border-color: transparent transparent rgba(255, 255, 255, 0.05) transparent;
+    -fx-border-width: 0 0 1 0;
+}
+
+.profile-budget-list .list-cell:hover {
+    -fx-background-color: rgba(102, 126, 234, 0.08);
+    -fx-background-radius: 6;
+}
+
+.profile-budget-list .list-cell:selected {
+    -fx-background-color: rgba(102, 126, 234, 0.15);
+    -fx-background-radius: 6;
+}
+
+/* Responsive Design for Landscape */
+@media (max-width: 1200px) {
+    .profile-grid {
+        -fx-hgap: 15;
+        -fx-vgap: 15;
+    }
+    
+    .profile-card {
+        -fx-padding: 15;
+    }
+    
+    .compact-stat {
+        -fx-padding: 12 15;
+        -fx-min-width: 70;
+    }
+}
+
+/* Hover effects for interactive cards */
+.badge-gallery-card:hover,
+.theme-gallery-card:hover,
+.current-icon-card:hover,
+.current-theme-card:hover {
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.2), 10, 0, 0, 4);
+}
+
+/* Special styling for empty states */
+.empty-state {
+    -fx-text-fill: #8A9BA8;
+    -fx-font-size: 0.9em;
+    -fx-font-style: italic;
+    -fx-text-alignment: center;
+}
+
+.profile-budget-list {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+}
+
+.profile-budget-list .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #E5E7EB;
+    -fx-padding: 10 12;
+    -fx-font-size: 0.9em;
+    -fx-font-weight: 500;
+    -fx-border-color: transparent transparent rgba(255, 255, 255, 0.05) transparent;
+    -fx-border-width: 0 0 1 0;
+}
+
+.profile-budget-list .list-cell:hover {
+    -fx-background-color: rgba(102, 126, 234, 0.08);
+    -fx-background-radius: 8;
+}
+
+.profile-budget-list .list-cell:selected {
+    -fx-background-color: rgba(102, 126, 234, 0.15);
+    -fx-background-radius: 8;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .stats-grid {
+        -fx-hgap: 15;
+        -fx-vgap: 10;
+    }
+    
+    .profile-stat-card {
+        -fx-padding: 15 10;
+        -fx-min-height: 100;
+    }
+}
+
+/* ============================================
+   GENERAL ENHANCEMENTS
+   ============================================ */
+
+/* Smooth transitions for interactive elements */
+.leaderboard-card,
+.store-item-card,
+.purchase-btn {
+    -fx-transition: all 0.2s ease;
+}
+
+/* Enhanced text hierarchy */
+.item-title {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 1.1em;
+    -fx-font-weight: 700;
+}
+
+.item-description {
+    -fx-text-fill: #B0B7C3;
+    -fx-font-size: 0.9em;
+    -fx-font-weight: 500;
+    -fx-wrap-text: true;
+}
+
+.item-price {
+    -fx-text-fill: #FACC15;
+    -fx-font-size: 1em;
+    -fx-font-weight: 700;
+}
+
+/* Main content areas */
+.store-main {
+    -fx-background-color: transparent;
+}
+
+/* Remove any lingering white backgrounds */
+.scroll-pane,
+.scroll-pane .viewport,
+.scroll-pane .content {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+}
+
+/* League-specific colors for icons */
+.league-bronze { -fx-text-fill: #CD7F32; }
+.league-copper { -fx-text-fill: #B87333; }
+.league-silver { -fx-text-fill: #C0C0C0; }
+.league-gold   { -fx-text-fill: #FFD700; }
+.league-plat   { -fx-text-fill: #E5E4E2; }
+.league-diamond { -fx-text-fill: #B9F2FF; }
+
+/* Additional leaderboard styling */
+.leaderboard-name {
+    -fx-font-size: 1.3em;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: 700;
+}
+
+.leaderboard-rank {
+    -fx-font-size: 1.8em;
+    -fx-text-fill: #FFD700;
+    -fx-font-weight: 900;
+    -fx-min-width: 60px;
+    -fx-text-alignment: center;
+}
+
+.leaderboard-points {
+    -fx-text-fill: #00E5FF;
+    -fx-font-size: 1.1em;
+    -fx-font-weight: 700;
+}
+
+/* ============================================
+   ENHANCED STYLES FOR LEADERBOARD & STORE SCREENS
+   ============================================ */
+
+/* Base styles (keeping existing ones) */
+.norm-text {
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: 600;
+    -fx-font-size: 18px;
+}
+
+.big-heading {
+    -fx-text-fill: #ffffff; 
+    -fx-font-weight: bold;
+    -fx-font-size: 38px;
+}
+
+.heading {
+    -fx-text-fill: #ffffff; 
+    -fx-font-weight: bold;
+    -fx-font-size: 34px;
+}
+
+.expense {
+    -fx-text-fill: #FF8C42;
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
+}
+
+.income {
+    -fx-text-fill: #00E5FF;
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
+}
+
+.modern-background {
+    -fx-background-color: #0f0f23;
+}
+
+/* ============================================
+   NAVIGATION HEADER (keeping existing)
+   ============================================ */
+.nav-header-container {
+    -fx-background-color: #1a1a2e;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 0, 2);
+}
+
+.nav-header {
+    -fx-background-color: transparent;
+}
+
+.brand-section {
+    -fx-padding: 0 20 0 0;
+}
+
+.brand-icon {
+    -fx-font-size: 28px;
+}
+
+.brand-name {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Helvetica Neue", sans-serif;
+}
+
+.nav-pills-container {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+    -fx-background-radius: 25;
+    -fx-padding: 4;
+}
+
+.nav-pill {
+    -fx-background-color: transparent;
+    -fx-text-fill: #c0bba0;
+    -fx-font-size: 14px;
+    -fx-font-weight: 500;
+    -fx-padding: 10 20;
+    -fx-cursor: hand;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-font-family: "Helvetica Neue", sans-serif;
+}
+
+.nav-pill:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-text-fill: #ffffff;
+}
+
+.nav-pill-active {
+    -fx-background-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -fx-text-fill: #0f0f23;
+    -fx-font-size: 14px;
+    -fx-font-weight: 600;
+    -fx-padding: 10 20;
+    -fx-cursor: hand;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-font-family: "Helvetica Neue", sans-serif;
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.4), 10, 0, 0, 2);
+}
+
+.nav-icon {
+    -fx-font-size: 16px;
+    -fx-padding: 0 5 0 0;
+}
+
+.user-menu-button {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-background-radius: 25;
+    -fx-padding: 8 16;
+    -fx-cursor: hand;
+}
+
+.user-menu-button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.15);
+}
+
+.user-avatar {
+    -fx-fill: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -fx-stroke: #ffffff;
+    -fx-stroke-width: 2;
+}
+
+/* New User Avatar Icon Styling */
+.user-avatar-icon {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 4, 0, 0, 1);
+}
+
+.user-avatar-icon:hover {
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.3), 6, 0, 0, 2);
+}
+
+.settings-icon {
+    -fx-text-fill: #a0aec0;
+    -fx-font-size: 18px;
+}
+
+.user-menu-item {
+    -fx-background-color: #16213e;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-padding: 12 20;
+}
+
+.user-menu-item:hover {
+    -fx-background-color: #1e3a5f;
+}
+
+/* ============================================
+   LEADERBOARD SCREEN ENHANCEMENTS
+   ============================================ */
+
+/* Rank Summary Bar - Enhanced visibility */
+.rank-summary-bar {
+    -fx-background-color: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
+    -fx-background-radius: 16;
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-width: 1;
+    -fx-border-radius: 16;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 8, 0, 0, 2);
+    -fx-spacing: 28;
+    -fx-alignment: CENTER_LEFT;
+}
+
+/* User Rank and Labels - Much more prominent */
+.user-rank-pos-lg {
+    -fx-font-size: 2.8em;
+    -fx-font-weight: 900;
+    -fx-text-fill: #FFD700;
+    -fx-effect: dropshadow(gaussian, rgba(255, 215, 0, 0.4), 6, 0, 0, 0);
+}
+
+.user-label-lg {
+    -fx-font-size: 1.4em;
+    -fx-font-weight: 700;
+    -fx-text-fill: #ffffff;
+}
+
+.leaderboard-points-lg {
+    -fx-font-size: 2em;
+    -fx-font-weight: 800;
+    -fx-text-fill: #00E5FF;
+    -fx-effect: dropshadow(gaussian, rgba(0, 229, 255, 0.3), 4, 0, 0, 0);
+}
+
+.league-label-lg {
+    -fx-font-size: 1.3em;
+    -fx-font-weight: 700;
+    -fx-text-fill: #FACC15;
+}
+
+.progress-label-lg {
+    -fx-font-size: 1.1em;
+    -fx-font-weight: 600;
+    -fx-text-fill: #E5E7EB;
+}
+
+/* League Progress Bar - Enhanced */
+.league-progress-bar-lg {
+    -fx-pref-height: 20;
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-background-radius: 12;
+    -fx-accent: linear-gradient(to right, #22C55E 0%, #16A34A 100%);
+    -fx-effect: dropshadow(gaussian, rgba(34, 197, 94, 0.3), 4, 0, 0, 1);
+}
+
+.league-progress-bar-lg .track {
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-background-radius: 12;
+}
+
+.league-progress-bar-lg .bar {
+    -fx-background-color: linear-gradient(to right, #22C55E 0%, #16A34A 100%);
+    -fx-background-radius: 12;
+}
+
+/* Leaderboard List - Transparent with no scroll bars */
+.leader-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+}
+
+.leader-scroll .viewport {
+    -fx-background-color: transparent;
+}
+
+.leader-scroll .scroll-bar:vertical {
+    -fx-opacity: 0;
+    -fx-pref-width: 0;
+}
+
+.leader-scroll .scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-pref-height: 0;
+}
+
+/* Leaderboard VBox Container */
+.leaderVbox {
+    -fx-background-color: transparent;
+    -fx-spacing: 16;
+    -fx-padding: 20 10;
+}
+
+/* Individual Leaderboard Items */
+.leaderboard-card {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+    -fx-background-radius: 16;
+    -fx-padding: 20 24;
+    -fx-spacing: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 6, 0, 0, 2);
+    -fx-alignment: center-left;
+    -fx-border-color: rgba(255, 255, 255, 0.08);
+    -fx-border-width: 1;
+    -fx-border-radius: 16;
+}
+
+.leaderboard-card:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-border-color: rgba(102, 126, 234, 0.3);
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.2), 8, 0, 0, 3);
+}
+
+/* League Summary Card - Enhanced Background and Typography */
+.leaderboard-summary-card-lg {
+    -fx-background-color: linear-gradient(145deg, rgba(34, 40, 49, 0.9) 0%, rgba(43, 52, 69, 0.9) 100%);
+    -fx-background-radius: 20;
+    -fx-border-color: rgba(255, 255, 255, 0.12);
+    -fx-border-width: 1;
+    -fx-border-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 12, 0, 0, 4);
+}
+
+.card-heading-lg {
+    -fx-font-size: 1.8em;
+    -fx-font-weight: 800;
+    -fx-text-fill: #ffffff;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 2, 0, 0, 1);
+}
+
+.stats-text-lg {
+    -fx-text-fill: #E5E7EB;
+    -fx-font-size: 1.2em;
+    -fx-font-weight: 600;
+    -fx-line-spacing: 4;
+}
+
+.rewards-preview-lg {
+    -fx-text-fill: #34D399;
+    -fx-font-size: 1.2em;
+    -fx-font-weight: 700;
+    -fx-effect: dropshadow(gaussian, rgba(52, 211, 153, 0.3), 2, 0, 0, 0);
+}
+
+/* League Icons */
+.league-icon {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 4, 0, 0, 1);
+}
+
+/* ============================================
+   STORE SCREEN ENHANCEMENTS
+   ============================================ */
+
+/* Store Category Bar - Enhanced */
+.store-category-bar {
+    -fx-background-color: linear-gradient(135deg, rgba(102, 126, 234, 0.12) 0%, rgba(118, 75, 162, 0.12) 100%);
+    -fx-background-radius: 16;
+    -fx-border-color: rgba(255, 255, 255, 0.08);
+    -fx-border-width: 1;
+    -fx-border-radius: 16;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 6, 0, 0, 2);
+}
+
+.store-category-label-lg {
+    -fx-font-size: 1.4em;
+    -fx-font-weight: 800;
+    -fx-text-fill: #ffffff;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 2, 0, 0, 1);
+}
+
+/* Gems Display - Enhanced */
+.gems-display {
+    -fx-background-color: linear-gradient(135deg, rgba(72, 187, 120, 0.15) 0%, rgba(34, 197, 94, 0.15) 100%);
+    -fx-background-radius: 20;
+    -fx-padding: 12 24;
+    -fx-border-color: rgba(72, 187, 120, 0.3);
+    -fx-border-width: 1;
+    -fx-border-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(72, 187, 120, 0.2), 6, 0, 0, 2);
+}
+
+.gems-icon {
+    -fx-font-size: 22px;
+    -fx-effect: dropshadow(gaussian, rgba(72, 187, 120, 0.4), 3, 0, 0, 0);
+}
+
+.gems-amount {
+    -fx-text-fill: #48bb78;
+    -fx-font-size: 1.3em;
+    -fx-font-weight: 800;
+    -fx-effect: dropshadow(gaussian, rgba(72, 187, 120, 0.3), 2, 0, 0, 0);
+}
+
+/* Store Columns - Transparent Scroll Panes */
+.store-column {
+    -fx-background-color: transparent;
+    -fx-background-radius: 12;
+    -fx-padding: 15;
+    -fx-spacing: 18;
+}
+
+/* Store List Scroll Panes - Completely Transparent */
+.list-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+}
+
+.list-scroll .viewport {
+    -fx-background-color: transparent;
+}
+
+.list-scroll .scroll-bar:vertical {
+    -fx-opacity: 0;
+    -fx-pref-width: 0;
+}
+
+.list-scroll .scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-pref-height: 0;
+}
+
+.list-scroll .corner {
+    -fx-background-color: transparent;
+}
+
+/* Store Item Cards */
+.store-item-card {
+    -fx-background-color: rgba(255, 255, 255, 0.06);
+    -fx-background-radius: 14;
+    -fx-padding: 18 20;
+    -fx-spacing: 12;
+    -fx-border-color: rgba(255, 255, 255, 0.08);
+    -fx-border-width: 1;
+    -fx-border-radius: 14;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.12), 4, 0, 0, 2);
+}
+
+.store-item-card:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.09);
+    -fx-border-color: rgba(102, 126, 234, 0.3);
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.15), 6, 0, 0, 3);
+}
+
+/* Purchase Button */
+.purchase-btn {
+    -fx-background-color: linear-gradient(135deg, #22C55E 0%, #16A34A 100%);
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: 700;
+    -fx-font-size: 0.9em;
+    -fx-padding: 10 20;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(34, 197, 94, 0.3), 4, 0, 0, 2);
+}
+
+.purchase-btn:hover {
+    -fx-background-color: linear-gradient(135deg, #16A34A 0%, #15803D 100%);
+    -fx-effect: dropshadow(gaussian, rgba(34, 197, 94, 0.4), 6, 0, 0, 3);
+}
+
+.purchase-btn:disabled {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-text-fill: rgba(255, 255, 255, 0.5);
+    -fx-effect: none;
+}
+
+/* Active Profile Icon Button */
+.active-btn {
+    -fx-background-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -fx-text-fill: #ffffff;
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.4), 6, 0, 0, 3);
+}
+
+.active-btn:disabled {
+    -fx-background-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -fx-text-fill: #ffffff;
+    -fx-opacity: 0.8;
+}
+
+/* ============================================
+   PROFILE SCREEN STYLES - COMPACT GRID LAYOUT
+   ============================================ */
+
+/* Main Profile Dashboard */
+.profile-dashboard {
+    -fx-background-color: transparent;
+    -fx-alignment: center;
+}
+
+/* Welcome Header */
+.profile-welcome-bar {
+    -fx-background-color: linear-gradient(135deg, rgba(102, 126, 234, 0.12) 0%, rgba(118, 75, 162, 0.12) 100%);
+    -fx-background-radius: 20;
+    -fx-padding: 25 35;
+    -fx-border-color: rgba(255, 255, 255, 0.08);
+    -fx-border-width: 1;
+    -fx-border-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 8, 0, 0, 3);
+}
+
+.profile-main-heading {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 2.8em;
+    -fx-font-weight: 800;
+    -fx-font-family: "Helvetica Neue", sans-serif;
+}
+
+.profile-subtitle {
+    -fx-text-fill: #B0B7C3;
+    -fx-font-size: 1.3em;
+    -fx-font-weight: 500;
+    -fx-font-family: "Helvetica Neue", sans-serif;
+}
+
+/* Main Grid */
+.profile-grid {
+    -fx-background-color: transparent;
+}
+
+/* Base Profile Card */
+.profile-card {
+    -fx-background-color: linear-gradient(145deg, rgba(34, 40, 49, 0.8) 0%, rgba(43, 52, 69, 0.8) 100%);
+    -fx-background-radius: 20;
+    -fx-padding: 30;
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-width: 1;
+    -fx-border-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 4);
+}
+
+.profile-card:hover {
+    -fx-border-color: rgba(102, 126, 234, 0.25);
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.15), 12, 0, 0, 5);
+}
+
+.card-title {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 1.4em;
+    -fx-font-weight: 700;
+    -fx-font-family: "Helvetica Neue", sans-serif;
+}
+
+/* Stats Overview Card (Large Rectangle) */
+.stats-overview-card {
+    -fx-background-color: linear-gradient(145deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
+}
+
+.compact-stat {
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-background-radius: 16;
+    -fx-padding: 20 25;
+    -fx-min-width: 120;
+    -fx-pref-width: 140;
+}
+
+.stat-icon-small {
+    -fx-font-size: 1.8em;
+}
+
+.stat-value-large {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 1.8em;
+    -fx-font-weight: 800;
+    -fx-font-family: "Helvetica Neue", sans-serif;
+}
+
+.stat-value-medium {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 1.3em;
+    -fx-font-weight: 700;
+    -fx-font-family: "Helvetica Neue", sans-serif;
+}
+
+.stat-label-small {
+    -fx-text-fill: #B0B7C3;
+    -fx-font-size: 1em;
+    -fx-font-weight: 600;
+    -fx-font-family: "Helvetica Neue", sans-serif;
+}
+
+.gems-value {
+    -fx-text-fill: #48bb78;
+    -fx-effect: dropshadow(gaussian, rgba(72, 187, 120, 0.4), 3, 0, 0, 0);
+}
+
+/* Current Profile Icon Card (Square) */
+.current-icon-card {
+    -fx-background-color: linear-gradient(145deg, rgba(72, 187, 120, 0.12) 0%, rgba(34, 197, 94, 0.12) 100%);
+}
+
+.current-profile-icon {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 8, 0, 0, 3);
+}
+
+.current-icon-name {
+    -fx-text-fill: #E5E7EB;
+    -fx-font-size: 1.1em;
+    -fx-font-weight: 600;
+    -fx-text-alignment: center;
+}
+
+/* Featured Badges Card (Rectangle) */
+.featured-badges-card {
+    -fx-background-color: linear-gradient(145deg, rgba(255, 215, 0, 0.12) 0%, rgba(255, 193, 7, 0.12) 100%);
+}
+
+/* Recent Achievement Card (Rectangle) */
+.recent-achievement-card {
+    -fx-background-color: linear-gradient(145deg, rgba(139, 69, 19, 0.12) 0%, rgba(160, 82, 45, 0.12) 100%);
+}
+
+/* Current Theme Card (Square) */
+.current-theme-card {
+    -fx-background-color: linear-gradient(145deg, rgba(147, 51, 234, 0.12) 0%, rgba(168, 85, 247, 0.12) 100%);
+}
+
+.theme-preview-large {
+    -fx-background-color: #667eea;
+    -fx-background-radius: 12;
+    -fx-pref-width: 80;
+    -fx-pref-height: 50;
+    -fx-border-color: rgba(255, 255, 255, 0.25);
+    -fx-border-width: 2;
+    -fx-border-radius: 12;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 4, 0, 0, 2);
+}
+
+.current-theme-name {
+    -fx-text-fill: #E5E7EB;
+    -fx-font-size: 1.1em;
+    -fx-font-weight: 600;
+    -fx-text-alignment: center;
+}
+
+/* Badge Gallery Card (Square) */
+.badge-gallery-card {
+    -fx-background-color: linear-gradient(145deg, rgba(30, 58, 138, 0.12) 0%, rgba(37, 99, 235, 0.12) 100%);
+}
+
+.badge-gallery-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+}
+
+.badge-gallery-scroll .viewport {
+    -fx-background-color: transparent;
+}
+
+.badge-gallery-scroll .scroll-bar:vertical {
+    -fx-opacity: 0;
+    -fx-pref-width: 0;
+}
+
+.badge-gallery-scroll .scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-pref-height: 0;
+}
+
+.badge-gallery-grid {
+    -fx-background-color: rgba(255, 255, 255, 0.04);
+    -fx-background-radius: 12;
+    -fx-padding: 15;
+}
+
+/* Theme Gallery Card (Square) */
+.theme-gallery-card {
+    -fx-background-color: linear-gradient(145deg, rgba(220, 38, 127, 0.12) 0%, rgba(244, 114, 182, 0.12) 100%);
+}
+
+.theme-gallery-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+}
+
+.theme-gallery-scroll .viewport {
+    -fx-background-color: transparent;
+}
+
+.theme-gallery-scroll .scroll-bar:vertical {
+    -fx-opacity: 0;
+    -fx-pref-width: 0;
+}
+
+.theme-gallery-scroll .scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-pref-height: 0;
+}
+
+.theme-gallery-grid {
+    -fx-background-color: rgba(255, 255, 255, 0.04);
+    -fx-background-radius: 12;
+    -fx-padding: 15;
+}
+
+/* Budget Overview Card (Square) */
+.budget-overview-card {
+    -fx-background-color: linear-gradient(145deg, rgba(5, 150, 105, 0.12) 0%, rgba(16, 185, 129, 0.12) 100%);
+}
+
+.budget-tabs {
+    -fx-background-color: transparent;
+}
+
+.budget-tabs .tab-header-area {
+    -fx-background-color: transparent;
+    -fx-padding: 0 0 10 0;
+}
+
+.budget-tabs .tab {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-text-fill: #B0B7C3;
+    -fx-font-size: 1em;
+    -fx-font-weight: 600;
+    -fx-padding: 12 20;
+    -fx-background-radius: 10 10 0 0;
+}
+
+.budget-tabs .tab:selected {
+    -fx-background-color: rgba(102, 126, 234, 0.25);
+    -fx-text-fill: #ffffff;
+}
+
+.budget-tabs .tab-content-area {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.profile-budget-list {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+}
+
+.profile-budget-list .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #E5E7EB;
+    -fx-padding: 12 15;
+    -fx-font-size: 1em;
+    -fx-font-weight: 500;
+    -fx-border-color: transparent transparent rgba(255, 255, 255, 0.08) transparent;
+    -fx-border-width: 0 0 1 0;
+}
+
+.profile-budget-list .list-cell:hover {
+    -fx-background-color: rgba(102, 126, 234, 0.1);
+    -fx-background-radius: 8;
+}
+
+.profile-budget-list .list-cell:selected {
+    -fx-background-color: rgba(102, 126, 234, 0.2);
+    -fx-background-radius: 8;
+}
+
+/* Responsive Design for Landscape */
+@media (max-width: 1400px) {
+    .profile-grid {
+        -fx-hgap: 25;
+        -fx-vgap: 25;
+    }
+    
+    .profile-card {
+        -fx-padding: 25;
+    }
+    
+    .compact-stat {
+        -fx-padding: 18 20;
+        -fx-min-width: 100;
+    }
+}
+
+/* Hover effects for interactive cards */
+.badge-gallery-card:hover,
+.theme-gallery-card:hover,
+.current-icon-card:hover,
+.current-theme-card:hover {
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.25), 14, 0, 0, 6);
+}
+
+/* Special styling for empty states */
+.empty-state {
+    -fx-text-fill: #8A9BA8;
+    -fx-font-size: 1.1em;
+    -fx-font-style: italic;
+    -fx-text-alignment: center;
+}
+
+/* Responsive Design for Landscape */
+@media (max-width: 1200px) {
+    .profile-grid {
+        -fx-hgap: 15;
+        -fx-vgap: 15;
+    }
+    
+    .profile-card {
+        -fx-padding: 15;
+    }
+    
+    .compact-stat {
+        -fx-padding: 12 15;
+        -fx-min-width: 70;
+    }
+}
+
+/* Hover effects for interactive cards */
+.badge-gallery-card:hover,
+.theme-gallery-card:hover,
+.current-icon-card:hover,
+.current-theme-card:hover {
+    -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.2), 10, 0, 0, 4);
+}
+
+/* Special styling for empty states */
+.empty-state {
+    -fx-text-fill: #8A9BA8;
+    -fx-font-size: 0.9em;
+    -fx-font-style: italic;
+    -fx-text-alignment: center;
+}
+
+.profile-budget-list {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+}
+
+.profile-budget-list .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #E5E7EB;
+    -fx-padding: 10 12;
+    -fx-font-size: 0.9em;
+    -fx-font-weight: 500;
+    -fx-border-color: transparent transparent rgba(255, 255, 255, 0.05) transparent;
+    -fx-border-width: 0 0 1 0;
+}
+
+.profile-budget-list .list-cell:hover {
+    -fx-background-color: rgba(102, 126, 234, 0.08);
+    -fx-background-radius: 8;
+}
+
+.profile-budget-list .list-cell:selected {
+    -fx-background-color: rgba(102, 126, 234, 0.15);
+    -fx-background-radius: 8;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .stats-grid {
+        -fx-hgap: 15;
+        -fx-vgap: 10;
+    }
+    
+    .profile-stat-card {
+        -fx-padding: 15 10;
+        -fx-min-height: 100;
+    }
+}
+
+/* ============================================
+   GENERAL ENHANCEMENTS
+   ============================================ */
+
+/* Smooth transitions for interactive elements */
+.leaderboard-card,
+.store-item-card,
+.purchase-btn {
+    -fx-transition: all 0.2s ease;
+}
+
+/* Enhanced text hierarchy */
+.item-title {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 1.1em;
+    -fx-font-weight: 700;
+}
+
+.item-description {
+    -fx-text-fill: #B0B7C3;
+    -fx-font-size: 0.9em;
+    -fx-font-weight: 500;
+    -fx-wrap-text: true;
+}
+
+.item-price {
+    -fx-text-fill: #FACC15;
+    -fx-font-size: 1em;
+    -fx-font-weight: 700;
+}
+
+/* Main content areas */
+.store-main {
+    -fx-background-color: transparent;
+}
+
+/* Remove any lingering white backgrounds */
+.scroll-pane,
+.scroll-pane .viewport,
+.scroll-pane .content {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+}
+
+/* League-specific colors for icons */
+.league-bronze { -fx-text-fill: #CD7F32; }
+.league-copper { -fx-text-fill: #B87333; }
+.league-silver { -fx-text-fill: #C0C0C0; }
+.league-gold   { -fx-text-fill: #FFD700; }
+.league-plat   { -fx-text-fill: #E5E4E2; }
+.league-diamond { -fx-text-fill: #B9F2FF; }
+
+/* Additional leaderboard styling */
+.leaderboard-name {
+    -fx-font-size: 1.3em;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: 700;
+}
+
+.leaderboard-rank {
+    -fx-font-size: 1.8em;
+    -fx-text-fill: #FFD700;
+    -fx-font-weight: 900;
+    -fx-min-width: 60px;
+    -fx-text-alignment: center;
+}
+
+.leaderboard-points {
+    -fx-text-fill: #00E5FF;
+    -fx-font-size: 1.1em;
+    -fx-font-weight: 700;
 }

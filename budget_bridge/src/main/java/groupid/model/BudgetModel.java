@@ -47,6 +47,8 @@ public class BudgetModel {
     private String budgetPlan = "";
     private League lastRewardedLeague = League.BRONZE;
     private ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList();
+    private ObservableList<ProfileIcon> unlockedProfileIcons = FXCollections.observableArrayList();
+    private ObjectProperty<ProfileIcon> currentProfileIcon = new SimpleObjectProperty<>();
 
     // convenience derived values (totals, net)
     private final ReadOnlyDoubleWrapper totalIncome = new ReadOnlyDoubleWrapper();
@@ -65,6 +67,60 @@ public class BudgetModel {
         // Sort the leaderboard in descending order of points
         leaderboard.sort((a, b) -> Integer.compare(b.getValue(), a.getValue()));
     }
+        public boolean ownsProfileIcon(ProfileIcon profileIcon) {
+        return unlockedProfileIcons.contains(profileIcon);
+    }
+    
+    /**
+     * Unlock a profile icon for the user
+     */
+    public void unlockProfileIcon(ProfileIcon profileIcon) {
+        if (!unlockedProfileIcons.contains(profileIcon)) {
+            unlockedProfileIcons.add(profileIcon);
+        }
+    }
+    
+    /**
+     * Apply a profile icon as the user's current icon
+     */
+    public void applyProfileIcon(ProfileIcon profileIcon) {
+        if (ownsProfileIcon(profileIcon)) {
+            currentProfileIcon.set(profileIcon);
+        }
+    }
+    
+    /**
+     * Get the currently active profile icon
+     */
+    public ProfileIcon getCurrentProfileIcon() {
+        return currentProfileIcon.get();
+    }
+    
+    /**
+     * Get the current profile icon property for binding
+     */
+    public ObjectProperty<ProfileIcon> currentProfileIconProperty() {
+        return currentProfileIcon;
+    }
+    
+    /**
+     * Get the list of unlocked profile icons
+     */
+    public ObservableList<ProfileIcon> getUnlockedProfileIcons() {
+        return unlockedProfileIcons;
+    }
+    
+    /**
+     * Initialize with a default profile icon (call this in your model initialization)
+     */
+    public void initializeDefaultProfileIcon() {
+        // Create a default profile icon that's always available
+        ProfileIcon defaultIcon = new ProfileIcon("Default Avatar", "fas-user-circle", 
+                                                 javafx.scene.paint.Color.LIGHTGRAY, 0, "Your starting profile");
+        unlockProfileIcon(defaultIcon);
+        applyProfileIcon(defaultIcon);
+    }
+    
 
     public void loadBudgetInfo(BudgetInfo info) {
         incomes().clear();
@@ -84,26 +140,26 @@ public class BudgetModel {
             carLine.setBudgetLimit(info.getCar());
             expenses.add(carLine);
         }
-        if (info.getGroceries() > 0) {
+        if (info.getDebt() > 0) {
+            MoneyLine carLine = new MoneyLine("Car Payment", "Monthly",info.getCar());
+            carLine.setBudgetLimit(info.getCar());
+            expenses.add(carLine);
+        }
             MoneyLine groceriesLine = new MoneyLine("Groceries", "Monthly",info.getGroceries());
             groceriesLine.setBudgetLimit(info.getGroceries());
             expenses.add(groceriesLine);
-        }
-        if (info.getDiningOut() > 0) {
+
             MoneyLine diningLine = new MoneyLine("Dining Out", "Monthly",info.getDiningOut());
             diningLine.setBudgetLimit(info.getDiningOut());
             expenses.add(diningLine);
-        }
-        if (info.getFunMoney() > 0) {
+        
             MoneyLine funLine = new MoneyLine("Fun Money", "Monthly",info.getFunMoney());
             funLine.setBudgetLimit(info.getFunMoney());
             expenses.add(funLine);
-        }
-        if (info.getOtherExpense() > 0) {
+        
             MoneyLine otherLine = new MoneyLine("Other", "Monthly",info.getOtherExpense());
             otherLine.setBudgetLimit(info.getOtherExpense());
             expenses.add(otherLine);
-        }
 
         // Initialize current month after loading base expenses
         initializeNewMonth();
