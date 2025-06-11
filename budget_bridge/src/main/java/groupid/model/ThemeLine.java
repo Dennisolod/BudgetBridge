@@ -8,4 +8,8 @@ public class ThemeLine {
     String name;
     Color backgroundColor;
     int cost;
+
+    public String getIconLiteral() {
+        return "fas-fill-drip"; 
+    }
 }

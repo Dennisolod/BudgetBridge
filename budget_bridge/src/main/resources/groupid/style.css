@@ -1017,3 +1017,57 @@
     -fx-background-radius: 10;
     -fx-padding: 6;
 }
+
+/* Container for each theme (VBox) */
+.theme-card {
+    -fx-background-color: #2b2f3b;
+    -fx-padding: 10;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-alignment: center;
+    -fx-spacing: 5;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 2, 0, 0, 1);
+    -fx-transition: all 0.2s ease;
+}
+
+/* Optional: on hover */
+.theme-card:hover {
+    -fx-background-color: #3b4052;
+}
+
+/* Highlight selected theme */
+.theme-card.selected {
+    -fx-border-color: gold;
+    -fx-border-width: 2px;
+}
+
+/* Name label under each theme */
+.theme-name {
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-font-weight: 600;
+    -fx-text-alignment: center;
+}
+
+/* Label that shows the currently selected theme name */
+.theme-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #cccccc;
+    -fx-font-weight: normal;
+}
+
+.setup-section-title {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Segoe UI", "Helvetica", sans-serif;
+    -fx-padding: 0 0 6 0;
+}
+
+.no-theme-label {
+    -fx-text-fill: #bbbbbb;
+    -fx-font-style: italic;
+    -fx-font-size: 13px;
+    -fx-font-family: "Segoe UI", "Helvetica", sans-serif;
+}
