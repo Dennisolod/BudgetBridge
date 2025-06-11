@@ -264,7 +264,7 @@ public class BudgetModel {
     public ObservableList<BadgeLine> getOwnedBadges() { return badges; }
     public ObservableList<ThemeLine> getOwnedThemes() { return ownedThemes; }
     public ThemeLine getCurrentTheme() { return currentTheme.get(); }
-    public void applyTheme(ThemeLine theme) { currentTheme.set(theme); }
+    public void applyTheme(ThemeLine theme) { currentTheme.set(theme); MetaDataDAO.saveMetaData(UserDAO.getUserIdByName(username), this); }
     public ObjectProperty<ThemeLine> currentThemeProperty() { return currentTheme; }
     public ObservableList<PieChart.Data> pieDataProperty() {return pieData; }
     public League getCurrentLeague() {
@@ -287,11 +287,21 @@ public class BudgetModel {
     public void addMission(Integer i) { missions.add(missionsList.get(i)); }
     public void addMissionList(String d, String f, double a) { missionsList.add(new MissionLine(d, f, a)); }
     public void setRankPos(String r) { leaderboardPos.set(r + "."); }
-    public void setGems(int amount) { gems.set(amount); }
+    public void setGemsStart(int amount) { gems.set(amount); }
+    public void setPointsStart(int amount) { points.set(amount); }
+    public void applyThemeStart(ThemeLine theme) { currentTheme.set(theme); }
+    public void unlockBadgeStart(BadgeLine badge) { badges.add(badge); }
+    public void unlockThemeStart(ThemeLine theme) {ownedThemes.add(theme); }
+    public void setGems(int amount) { gems.set(amount); MetaDataDAO.saveMetaData(UserDAO.getUserIdByName(username), this); }
     public boolean ownsBadge(BadgeLine badge) { return badges.stream().anyMatch(b -> b.getName().equals(badge.getName())); }
-    public void unlockBadge(BadgeLine badge) { if (!ownsBadge(badge)) { badges.add(badge); } }
+    public void unlockBadge(BadgeLine badge) {
+        if (!ownsBadge(badge)) { badges.add(badge); MetaDataDAO.saveOwnedBadges(UserDAO.getUserIdByName(username), badges); } }
     public boolean ownsTheme(ThemeLine theme) { return ownedThemes.stream().anyMatch(t -> t.getName().equals(theme.getName())); }
-    public void unlockTheme(ThemeLine theme) { if (!ownsTheme(theme)) { ownedThemes.add(theme); } }
+    public void unlockTheme(ThemeLine theme) {
+        if (!ownsTheme(theme)) { ownedThemes.add(theme); MetaDataDAO.saveOwnedThemes(UserDAO.getUserIdByName(username), ownedThemes); } }
+
+    
+
 
     private void unlockLeagueReward(League league) {
         switch (league) {
@@ -366,6 +376,7 @@ public class BudgetModel {
             unlockLeagueReward(currentLeague);
             setLastRewardedLeague(currentLeague);
         }
+        MetaDataDAO.saveMetaData(UserDAO.getUserIdByName(username), this);
     }
 
     public League getLastRewardedLeague() {

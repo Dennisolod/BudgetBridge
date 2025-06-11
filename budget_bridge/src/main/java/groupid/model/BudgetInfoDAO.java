@@ -68,7 +68,7 @@ public class BudgetInfoDAO {
         }
     }
 
-    public static void loadBudgetModelFromDB(StringProperty username, BudgetModel model) {
+    public static void loadBudgetInfoFromDB(StringProperty username, BudgetModel model) {
         int userId = UserDAO.getUserIdByName(username);
         if (userId == -1) return;
 
@@ -102,6 +102,61 @@ public class BudgetInfoDAO {
 
             model.initializeNewMonth();
             model.refreshCurrentMonthFromBase();  // Optional: sync monthly view
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // this fuction is meant to be used every time that the user updates an aspect of their budget so its saved
+    public static void updateBudgetInfoForUser(int userId, BudgetModel model) {
+        String deleteSQL = "DELETE FROM budget_info WHERE user_id = ?";
+        String insertSQL = """
+            INSERT INTO budget_info (user_id, type, name, frequency, amount, budget_limit)
+            VALUES (?, ?, ?, ?, ?, ?);
+        """;
+
+        try (Connection conn = SQLiteConnector.connect()) {
+            conn.setAutoCommit(false);
+
+            try (
+                PreparedStatement deleteStmt = conn.prepareStatement(deleteSQL);
+                PreparedStatement insertStmt = conn.prepareStatement(insertSQL)
+            ) {
+                // Clear existing budget info for user
+                deleteStmt.setInt(1, userId);
+                deleteStmt.executeUpdate();
+
+                // Insert updated incomes
+                for (MoneyLine income : model.incomes()) {
+                    insertStmt.setInt(1, userId);
+                    insertStmt.setString(2, "income");
+                    insertStmt.setString(3, income.getType());
+                    insertStmt.setString(4, income.getFreq());
+                    insertStmt.setDouble(5, income.getAmount());
+                    insertStmt.setObject(6, income.getBudgetLimit());
+                    insertStmt.addBatch();
+                }
+
+                // Insert updated expenses
+                for (MoneyLine expense : model.expenses()) {
+                    insertStmt.setInt(1, userId);
+                    insertStmt.setString(2, "expense");
+                    insertStmt.setString(3, expense.getType());
+                    insertStmt.setString(4, expense.getFreq());
+                    insertStmt.setDouble(5, expense.getAmount());
+                    insertStmt.setObject(6, expense.getBudgetLimit());
+                    insertStmt.addBatch();
+                }
+
+                insertStmt.executeBatch();
+                conn.commit();
+                System.out.println("Budget info successfully updated for user ID: " + userId);
+
+            } catch (Exception e) {
+                conn.rollback();
+                e.printStackTrace();
+            }
 
         } catch (Exception e) {
             e.printStackTrace();

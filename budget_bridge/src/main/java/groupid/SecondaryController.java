@@ -5,9 +5,11 @@ import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.Optional;
 
+import groupid.model.BudgetInfoDAO;
 import groupid.model.BudgetModel;
 import groupid.model.CooldownManager;
 import groupid.model.MoneyLine;
+import groupid.model.UserDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -213,6 +215,7 @@ public class SecondaryController implements ModelAware {
 
         /* persist */
         model.addIncome(freq, cat, amt);
+        BudgetInfoDAO.updateBudgetInfoForUser(UserDAO.getUserIdByName(model.usernameProperty()), model);
 
         /* remember custom category */
         if (!incomeCatCombo.getItems().contains(cat))
@@ -263,7 +266,7 @@ public class SecondaryController implements ModelAware {
             model.refreshCurrentMonthFromBase();
             updateTotals(); // Refresh current month from base
         }
-
+        BudgetInfoDAO.updateBudgetInfoForUser(UserDAO.getUserIdByName(model.usernameProperty()), model);
         if (!expenseCatCombo.getItems().contains(cat))
             expenseCatCombo.getItems().add(cat);
 
@@ -334,7 +337,7 @@ public class SecondaryController implements ModelAware {
         }
         dailyRewardButton  .setDisable(true);
         model.setGems(model.getGems().get()+50);
-        model.addPoints(1000);
+        model.addPoints(50);
     }
     @FXML private void weeklyRewards()  { weeklyRewardButton .setDisable(true); model.setGems(model.getGems().get()+100); model.addPoints(150); }
     @FXML private void monthlyRewards() { monthlyRewardButton.setDisable(true); model.setGems(model.getGems().get()+250); model.addPoints(1000); }

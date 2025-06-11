@@ -133,7 +133,13 @@ public class PrimaryController implements ModelAware, Initializable {
                 if (empty || b == null) { setGraphic(null); }
                 else {
                     icon.setIconLiteral(b.getIconLiteral());
-                    icon.setIconColor(b.getColor());
+
+                    if (b.getColor() instanceof Color c) {
+                        icon.setIconColor(c);
+                    } else {
+                        icon.setIconColor(Color.BLACK);
+                    }
+                    //icon.setIconColor(b.getColor());
                     icon.setIconSize(48);
                     name.setText(b.getName());
                     name.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white;");

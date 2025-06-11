@@ -7,6 +7,7 @@ import groupid.model.BudgetInfo;
 import groupid.model.BudgetInfoDAO;
 import groupid.model.BudgetModel;
 import groupid.model.DatabaseInitializer;
+import groupid.model.MetaDataDAO;
 import groupid.model.UserDAO;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -41,19 +42,28 @@ public class App extends Application {
 
         DatabaseInitializer.initialize();
         getUsername();
-        if (!UserDAO.userExists(model.usernameProperty())) {
+        if (!UserDAO.userExists(model.usernameProperty())) { // This is a new user
             getBudgetInfo(stage);
             UserDAO.addUser(model.usernameProperty());
             int userId = UserDAO.getUserIdByName(model.usernameProperty());
             BudgetInfoDAO.saveBudgetInfo(userId, model);
+
+
+        } else {
+            //addDefaultPoints();
         }
+        // once I have implemented missions into the database, these two will be moved up into the else statement above
         fillMissionsList();
-        addDefaultPoints();
         addDefaultMissions();
 
+        MetaDataDAO.loadMetaData(UserDAO.getUserIdByName(model.usernameProperty()), model);
+
         
+
         // DatabaseInitializer.clearDatabase(); //Will crash the program, but also empties the database
-        BudgetInfoDAO.loadBudgetModelFromDB(model.usernameProperty(), model);
+        
+        
+        BudgetInfoDAO.loadBudgetInfoFromDB(model.usernameProperty(), model);
         UserDAO.listUsers();
         BudgetInfoDAO.printBudgetInfo(UserDAO.getUserIdByName(model.usernameProperty()));
 
