@@ -2,6 +2,7 @@ package groupid.model;
 
 import java.time.LocalDate;
 import java.util.AbstractMap;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -49,6 +50,7 @@ public class BudgetModel {
     private ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList();
     private ObservableList<ProfileIcon> unlockedProfileIcons = FXCollections.observableArrayList();
     private ObjectProperty<ProfileIcon> currentProfileIcon = new SimpleObjectProperty<>();
+    private List<BadgeLine> top3Badges = new ArrayList<>();
 
     // convenience derived values (totals, net)
     private final ReadOnlyDoubleWrapper totalIncome = new ReadOnlyDoubleWrapper();
@@ -175,24 +177,24 @@ public class BudgetModel {
         recalc.invalidated(null);
 
         leaderboard.addAll(
-            Map.entry("Alice", 5200),
-            Map.entry("Bob", 5100),
-            Map.entry("Charlie", 5001),
-            Map.entry("Diana", 4800),
-            Map.entry("Ethan", 4200), 
-            Map.entry("Dylan", 4121),
-            Map.entry("Alice", 3400),
-            Map.entry("Bob", 3221),
-            Map.entry("Charlie", 3200),
-            Map.entry("Diana", 3100),
-            Map.entry("Ethan", 3000), 
-            Map.entry("Dylan", 2900),
-            Map.entry("Alice", 2500),
-            Map.entry("Bob", 2200),
-            Map.entry("Charlie", 1000),
-            Map.entry("Diana", 200),
-            Map.entry("Ethan", 110), 
-            Map.entry("Dylan", 100)
+            // Map.entry("Alice", 5200),
+            // Map.entry("Bob", 5100),
+            // Map.entry("Charlie", 5001),
+            // Map.entry("Diana", 4800),
+            // Map.entry("Ethan", 4200), 
+            // Map.entry("Dylan", 4121),
+            // Map.entry("Alice", 3400),
+            // Map.entry("Bob", 3221),
+            // Map.entry("Charlie", 3200),
+            // Map.entry("Diana", 3100),
+            // Map.entry("Ethan", 3000), 
+            // Map.entry("Dylan", 2900),
+            // Map.entry("Alice", 2500),
+            // Map.entry("Bob", 2200),
+            // Map.entry("Charlie", 1000),
+            // Map.entry("Diana", 200),
+            // Map.entry("Ethan", 110), 
+            // Map.entry("Dylan", 100)
         );
 
     }
@@ -280,6 +282,7 @@ public class BudgetModel {
     public ReadOnlyDoubleProperty totalIncomeProperty(){ return totalIncome.getReadOnlyProperty(); }
     public ReadOnlyDoubleProperty totalExpenseProperty(){ return totalExpense.getReadOnlyProperty(); }
     public ReadOnlyDoubleProperty netBalanceProperty(){ return netBalance .getReadOnlyProperty(); }
+    public List<BadgeLine> getTop3Badges() {return top3Badges; }
 
     // helpers
     public void addIncome (String d, String f, double a) { incomes .add(new MoneyLine(d, f, a));  }
@@ -299,6 +302,10 @@ public class BudgetModel {
     public boolean ownsTheme(ThemeLine theme) { return ownedThemes.stream().anyMatch(t -> t.getName().equals(theme.getName())); }
     public void unlockTheme(ThemeLine theme) {
         if (!ownsTheme(theme)) { ownedThemes.add(theme); MetaDataDAO.saveOwnedThemes(UserDAO.getUserIdByName(username), ownedThemes); } }
+    public void setTop3Badges(List<BadgeLine> threeBadges) {
+        top3Badges.clear();
+        top3Badges.addAll(threeBadges);
+    }
 
     
 
@@ -307,23 +314,23 @@ public class BudgetModel {
         switch (league) {
             case COPPER -> {
                 setGems(getGems().get() + 250);
-                unlockBadge(new BadgeLine("Copper Challenger", "fas-award", Color.web("#b87333")));
+                unlockBadge(new BadgeLine("Copper Challenger", "fas-award", Color.web("#b87333"), 250));
             }
             case SILVER -> {
                 setGems(getGems().get() + 500);
-                unlockBadge(new BadgeLine("Silver Sprinter", "fas-trophy", Color.web("#c0c0c0")));
+                unlockBadge(new BadgeLine("Silver Sprinter", "fas-trophy", Color.web("#c0c0c0"), 500));
             }
             case GOLD -> {
                 setGems(getGems().get() + 1000);
-                unlockBadge(new BadgeLine("Gold Achiever", "fas-star", Color.web("#ffd700")));
+                unlockBadge(new BadgeLine("Gold Achiever", "fas-star", Color.web("#ffd700"), 1000));
             }
             case PLATINUM -> {
                 setGems(getGems().get() + 2000);
-                unlockBadge(new BadgeLine("Platinum Hero", "fas-shield-alt", Color.web("#e5e4e2")));
+                unlockBadge(new BadgeLine("Platinum Hero", "fas-shield-alt", Color.web("#e5e4e2"), 2000));
             }
             case DIAMOND -> {
                 setGems(getGems().get() + 5000);
-                unlockBadge(new BadgeLine("Diamond Legend", "fas-gem", Color.web("#b9f2ff")));
+                unlockBadge(new BadgeLine("Diamond Legend", "fas-gem", Color.web("#b9f2ff"), 5000));
             }
         }
     }

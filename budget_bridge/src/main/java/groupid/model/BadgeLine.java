@@ -8,4 +8,5 @@ public class BadgeLine {
     String name;
     String iconLiteral;
     Paint color;
+    int cost;
 }

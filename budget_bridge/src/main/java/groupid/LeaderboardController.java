@@ -1,6 +1,8 @@
 package groupid;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +11,7 @@ import org.kordamp.ikonli.javafx.FontIcon;
 import groupid.model.BadgeLine;
 import groupid.model.BudgetModel;
 import groupid.model.League;
+import groupid.model.MetaDataDAO;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -95,6 +98,14 @@ public class LeaderboardController implements ModelAware{
         
         int rank = 1;
 
+        Map<String, List<BadgeLine>> badgeMap = new HashMap<>();
+        for (var entry : m.getLeaderboard()) {
+            String username = entry.getKey();
+            BudgetModel tempModel = new BudgetModel(); // Just to collect the badges
+            MetaDataDAO.populateLeaderboardBadges(username, tempModel);
+            badgeMap.put(username, new ArrayList<>(tempModel.getTop3Badges()));
+        }
+
         // leaderboard row loop
         for (var entry : m.getLeaderboard()) {
             int playerPoints = entry.getValue();
@@ -128,19 +139,16 @@ public class LeaderboardController implements ModelAware{
             // Add badge icons
             HBox badgeBox = new HBox(5);
             badgeBox.setAlignment(Pos.CENTER_LEFT);
+            List<BadgeLine> userBadges = badgeMap.get(entry.getKey());
 
-
-            List<BadgeLine> topBadges = entry.getKey().equals(currentUser)
-                ? m.getTop3BadgeLines(currentUser)
-                : List.of(); // empty for everyone else
-
-            for (BadgeLine badge : topBadges) {
+            for (BadgeLine badge : userBadges) {
                 FontIcon icon = new FontIcon(badge.getIconLiteral());
                 icon.setIconSize(20);
                 icon.setIconColor(badge.getColor());
                 icon.getStyleClass().add("badge-icon");
                 badgeBox.getChildren().add(icon);
             }
+
 
             int points = m.pointsProperty().get();
             League currentLeague = m.getCurrentLeague();
@@ -196,10 +204,6 @@ public class LeaderboardController implements ModelAware{
 
             rewardsPreviewLabel.setText("Next League Reward: " + rewardText);
         }
-
-
-        
-
     }
 
     private League getLeagueForPoints(int points) {

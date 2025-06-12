@@ -48,7 +48,6 @@ public class App extends Application {
             int userId = UserDAO.getUserIdByName(model.usernameProperty());
             BudgetInfoDAO.saveBudgetInfo(userId, model);
 
-
         } else {
             //addDefaultPoints();
         }
@@ -64,6 +63,7 @@ public class App extends Application {
         
         
         BudgetInfoDAO.loadBudgetInfoFromDB(model.usernameProperty(), model);
+        MetaDataDAO.populateLeaderboard(model);
         UserDAO.listUsers();
         BudgetInfoDAO.printBudgetInfo(UserDAO.getUserIdByName(model.usernameProperty()));
 

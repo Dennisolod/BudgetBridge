@@ -23,7 +23,7 @@ public class DatabaseInitializer {
                 FOREIGN KEY(user_id) REFERENCES users(id)
             );
         """;
-
+        String dropMetaData = "DROP TABLE IF EXISTS meta_data;";
         String createMetaData = """
             CREATE TABLE IF NOT EXISTS meta_data (
                 user_id INTEGER PRIMARY KEY,
@@ -33,17 +33,18 @@ public class DatabaseInitializer {
                 FOREIGN KEY(user_id) REFERENCES users(id)
             );
         """;
-
+        String dropBadges = "DROP TABLE IF EXISTS badges;";
         String createBadges = """
             CREATE TABLE IF NOT EXISTS badges (
                 user_id INTEGER NOT NULL,
                 badge_name TEXT NOT NULL,
                 color TEXT NOT NULL,
                 icon_literal TEXT NOT NULL,
+                cost INTEGER NOT NULL,
                 FOREIGN KEY(user_id) REFERENCES users(id)
             );
         """;
-
+        String dropThemes = "DROP TABLE IF EXISTS themes;";
         String createThemes = """
             CREATE TABLE IF NOT EXISTS themes (
                 user_id INTEGER NOT NULL,
@@ -57,7 +58,10 @@ public class DatabaseInitializer {
         try (Connection conn = SQLiteConnector.connect();
              Statement stmt = conn.createStatement()) {
             stmt.execute(createUsers);
-            //stmt.execute(dropBudgetInfo); // Use this if you only want to start a fresh budget info table for the user
+            // stmt.execute(dropBudgetInfo); // Use this if you only want to start a fresh budget info table for the user
+            // stmt.execute(dropBadges); // Use this if you only want to start a fresh budget info table for the user
+            // stmt.execute(dropMetaData); // Use this if you only want to start a fresh budget info table for the user
+            // stmt.execute(dropThemes);// Use this if you only want to start a fresh budget info table for the user
             stmt.execute(createBudgetInfo);
             stmt.execute(createMetaData);
             stmt.execute(createBadges);

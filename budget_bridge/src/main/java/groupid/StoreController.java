@@ -152,7 +152,7 @@ public class StoreController implements ModelAware{
     }
 
     // Badges functions for the store (keeping existing code):
-    private void addBadge(BadgeLine badge, int cost) {
+    private void addBadge(BadgeLine badge) {
         HBox row = new HBox(20);
         row.setAlignment(Pos.CENTER_LEFT);
         row.getStyleClass().add("store-item-card");
@@ -164,7 +164,7 @@ public class StoreController implements ModelAware{
         VBox textBox = new VBox(5);
         Label nameLabel = new Label(badge.getName());
         nameLabel.getStyleClass().add("item-title");
-        Label costLabel = new Label(cost + " gems");
+        Label costLabel = new Label(badge.getCost() + " gems");
         costLabel.getStyleClass().add("item-price");
         textBox.getChildren().addAll(nameLabel, costLabel);
 
@@ -179,8 +179,8 @@ public class StoreController implements ModelAware{
             purchaseButton.setDisable(true);
         } else {
             purchaseButton.setOnAction(e -> {
-                if (model.getGems().get() >= cost) {
-                    model.setGems(model.getGems().get() - cost);
+                if (model.getGems().get() >= badge.getCost()) {
+                    model.setGems(model.getGems().get() - badge.getCost());
                     model.unlockBadge(badge);
                     purchaseButton.setText("Owned");
                     purchaseButton.setDisable(true);
@@ -199,26 +199,26 @@ public class StoreController implements ModelAware{
         badgesBox.getStyleClass().add("store-column");
 
         // Tier 1 badges:
-        addBadge(new BadgeLine("Gold Trophy", "fas-trophy", Color.GOLD), 200);
-        addBadge(new BadgeLine("Shield of Honor", "fas-shield-alt", Color.DARKGRAY), 180);
-        addBadge(new BadgeLine("Mythic Phoenix", "fas-fire-alt", Color.ORANGERED), 500);
-        addBadge(new BadgeLine("Crown Elite", "fas-crown", Color.GOLD), 250);
-        addBadge(new BadgeLine("Champion Medal", "fas-medal", Color.SILVER), 300);
-        addBadge(new BadgeLine("Secret Flame", "fas-fire", Color.ORANGERED), 220);
+        addBadge(new BadgeLine("Gold Trophy", "fas-trophy", Color.GOLD, 200));
+        addBadge(new BadgeLine("Shield of Honor", "fas-shield-alt", Color.DARKGRAY, 180));
+        addBadge(new BadgeLine("Mythic Phoenix", "fas-fire-alt", Color.ORANGERED, 500));
+        addBadge(new BadgeLine("Crown Elite", "fas-crown", Color.GOLD, 250));
+        addBadge(new BadgeLine("Champion Medal", "fas-medal", Color.SILVER, 300));
+        addBadge(new BadgeLine("Secret Flame", "fas-fire", Color.ORANGERED, 220));
 
         // Tier 2 badges
-        addBadge(new BadgeLine("Mythic Phoenix", "fas-fire-alt", Color.CRIMSON), 500);
-        addBadge(new BadgeLine("Infinity Crown", "fas-crown", Color.MEDIUMPURPLE), 600);
-        addBadge(new BadgeLine("Legend of Time", "fas-hourglass-half", Color.DARKORANGE), 750);
-        addBadge(new BadgeLine("Quantum Vault", "fas-lock", Color.DARKCYAN), 900);
-        addBadge(new BadgeLine("Ethereal Wings", "fas-feather-alt", Color.LIGHTSKYBLUE), 1000);
+        addBadge(new BadgeLine("Mythic Phoenix", "fas-fire-alt", Color.CRIMSON, 500));
+        addBadge(new BadgeLine("Infinity Crown", "fas-crown", Color.MEDIUMPURPLE, 600));
+        addBadge(new BadgeLine("Legend of Time", "fas-hourglass-half", Color.DARKORANGE, 750));
+        addBadge(new BadgeLine("Quantum Vault", "fas-lock", Color.DARKCYAN, 900));
+        addBadge(new BadgeLine("Ethereal Wings", "fas-feather-alt", Color.LIGHTSKYBLUE, 1000));
 
         // Tier 3 badges: 
-        addBadge(new BadgeLine("Celestial Flame", "fas-sun", Color.ORANGERED), 1500);
-        addBadge(new BadgeLine("Eternal Crown", "fas-gem", Color.MEDIUMPURPLE), 2000);
-        addBadge(new BadgeLine("Timekeeper's Halo", "fas-infinity", Color.DEEPSKYBLUE), 2500);
-        addBadge(new BadgeLine("Quantum Ascendant", "fas-rocket", Color.LIGHTGOLDENRODYELLOW), 3000);
-        addBadge(new BadgeLine("Divine Architect", "fas-chess-king", Color.GOLD), 4000);
+        addBadge(new BadgeLine("Celestial Flame", "fas-sun", Color.ORANGERED, 1500));
+        addBadge(new BadgeLine("Eternal Crown", "fas-gem", Color.MEDIUMPURPLE, 2000));
+        addBadge(new BadgeLine("Timekeeper's Halo", "fas-infinity", Color.DEEPSKYBLUE, 2500));
+        addBadge(new BadgeLine("Quantum Ascendant", "fas-rocket", Color.LIGHTGOLDENRODYELLOW, 3000));
+        addBadge(new BadgeLine("Divine Architect", "fas-chess-king", Color.GOLD, 4000));
     }
 
     @FXML 

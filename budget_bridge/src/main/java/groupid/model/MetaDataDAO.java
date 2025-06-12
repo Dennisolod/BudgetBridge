@@ -4,8 +4,17 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.kordamp.ikonli.javafx.FontIcon;
+
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
@@ -36,7 +45,7 @@ public class MetaDataDAO {
 
     public static void saveOwnedBadges(int userId, List<BadgeLine> badges) {
         String deleteSql = "DELETE FROM badges WHERE user_id = ?";
-        String insertSql = "INSERT INTO badges(user_id, badge_name, color, icon_literal) VALUES (?, ?, ?, ?)";
+        String insertSql = "INSERT INTO badges(user_id, badge_name, color, icon_literal, cost) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection conn = SQLiteConnector.connect()) {
             conn.setAutoCommit(false);
@@ -52,6 +61,7 @@ public class MetaDataDAO {
                     insertStmt.setString(2, badge.getName());
                     insertStmt.setString(3, toHexPaint(badge.getColor()));
                     insertStmt.setString(4, badge.getIconLiteral());
+                    insertStmt.setInt(5, badge.getCost());
                     insertStmt.addBatch();
                 }
                 insertStmt.executeBatch();
@@ -98,7 +108,7 @@ public class MetaDataDAO {
 
     public static void loadMetaData(int userId, BudgetModel model) {
         String metaSql = "SELECT gems, points, current_theme_name FROM meta_data WHERE user_id = ?";
-        String badgeSql = "SELECT badge_name, icon_literal, color FROM badges WHERE user_id = ?";
+        String badgeSql = "SELECT badge_name, icon_literal, color, cost FROM badges WHERE user_id = ?";
         String themeSql = "SELECT theme_name, background_color, cost FROM themes WHERE user_id = ?";
 
         try (Connection conn = SQLiteConnector.connect()) {
@@ -134,7 +144,8 @@ public class MetaDataDAO {
                         color = Color.BLACK;
                     }
                     String icon = rs.getString("icon_literal");
-                    model.unlockBadgeStart(new BadgeLine(name, icon, color));
+                    int cost = rs.getInt("cost");
+                    model.unlockBadgeStart(new BadgeLine(name, icon, color, cost));
                 }
             }
 
@@ -208,14 +219,60 @@ public class MetaDataDAO {
     }
     // I made another one because for whatever reason badge line saves color as paint instead of color
     private static String toHexPaint(Paint paint) {
-    if (paint instanceof Color) {
-        Color color = (Color) paint;
-        return String.format("#%02x%02x%02x",
-                (int)(color.getRed() * 255),
-                (int)(color.getGreen() * 255),
-                (int)(color.getBlue() * 255));
+        if (paint instanceof Color) {
+            Color color = (Color) paint;
+            return String.format("#%02x%02x%02x",
+                    (int)(color.getRed() * 255),
+                    (int)(color.getGreen() * 255),
+                    (int)(color.getBlue() * 255));
+        }
+        return "#000000"; // fallback or throw
     }
-    return "#000000"; // fallback or throw
-}
+
+    public static void populateLeaderboard(BudgetModel model) {
+        String userSQL = "SELECT * FROM users";
+        //String badgeSQL = "SELECT * FROM badges ORDER BY cost DESC LIMIT 3 WHERE user_id = ?";
+
+        try (Connection conn = SQLiteConnector.connect(); 
+             PreparedStatement pstmt = conn.prepareStatement(userSQL)) {
+            
+            ResultSet rs = pstmt.executeQuery();
+            
+            while (rs.next()) {
+                StringProperty name = new SimpleStringProperty(rs.getString("name"));
+                model.addUserToLeaderboard(rs.getString("name"), getPoints(UserDAO.getUserIdByName(name)));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void populateLeaderboardBadges(String name, BudgetModel model) {
+        String badgeSQL = "SELECT * FROM badges WHERE user_id = ? ORDER BY cost DESC LIMIT 3 ";
+
+        try (Connection conn = SQLiteConnector.connect(); 
+            PreparedStatement pstmt = conn.prepareStatement(badgeSQL)) {
+
+            StringProperty user = new SimpleStringProperty(name);
+            pstmt.setInt(1, UserDAO.getUserIdByName(user));
+            ResultSet rs = pstmt.executeQuery();
+
+            List<BadgeLine> topBadges = new ArrayList<>();
+
+            while (rs.next()) {
+                BadgeLine badge = new BadgeLine(rs.getString("badge_name"),
+                rs.getString("icon_literal"), 
+                Color.web(rs.getString("color")),
+                rs.getInt("cost"));
+                topBadges.add(badge);
+            }
+
+            model.setTop3Badges(topBadges);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
 
