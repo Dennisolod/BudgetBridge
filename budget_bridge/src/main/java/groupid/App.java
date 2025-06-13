@@ -1,5 +1,6 @@
 package groupid;
 import java.io.IOException;
+import java.util.zip.DataFormatException;
 
 import groupid.model.BudgetInfoDAO;
 import groupid.model.BudgetModel;
@@ -28,6 +29,7 @@ public class App extends Application {
         stage.setTitle("BudgetBridge");
 
         // Initialize database
+        // DatabaseInitializer.clearDatabase();
         DatabaseInitializer.initialize();
 
         // Load the main screen with ScreenController

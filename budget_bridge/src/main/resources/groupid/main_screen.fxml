@@ -18,6 +18,10 @@
                 <Label text="Enter your name to get started:" styleClass="input-label"/>
                 <TextField fx:id="usernameField" onKeyPressed="#handleUsernameKeyPressed" 
                           promptText="Your name here..." styleClass="username-input"/>
+                <HBox spacing="10">
+                    <Label fx:id="usernameErrorLabel" textFill="red" visible="false"/>
+                </HBox>
+
                 <Button fx:id="usernameSubmitButton" onAction="#handleUsernameSubmit" 
                        styleClass="primary-button" text="Continue" prefWidth="200"/>
             </VBox>

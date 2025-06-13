@@ -37,6 +37,7 @@ public class ScreenController {
     @FXML private VBox budgetItemsContainer;
     @FXML private Label totalBudgetLabel;
     @FXML private Label welcomeLabel;
+    @FXML private Label usernameErrorLabel;
     @FXML private Button continueButton;
     @FXML private Button editBudgetButton;
     
@@ -52,6 +53,10 @@ public class ScreenController {
         if (usernameField != null) {
             usernameField.requestFocus();
         }
+        
+        usernameField.textProperty().addListener((obs, oldText, newText) -> {
+            usernameErrorLabel.setVisible(false);
+        });
     }
     
     public void setModel(BudgetModel model) {
@@ -126,24 +131,44 @@ public class ScreenController {
     @FXML
     private void handleUsernameSubmit() {
         StringProperty username = usernameField.textProperty();
-        if (!username.get().isEmpty()) {
-            model.usernameProperty().bind(username);
-            
-            // Check if user exists
-            isNewUser = !UserDAO.userExists(username);
-            
-            if (isNewUser) {
-                // New user - show budget setup
-                showBudgetSetupScreen();
-            } else {
-                // Existing user - notify callback to load data and go to primary
-                if (onUsernameCollected != null) {
-                    onUsernameCollected.run();
-                }
+        String name = username.get().strip();  // Trim spaces
+
+        usernameErrorLabel.setVisible(false); // Hide error by default
+
+        if (name.isEmpty()) {
+            usernameErrorLabel.setText("Username cannot be empty.");
+            usernameErrorLabel.setVisible(true);
+            return;
+        }
+
+        if (!name.matches("^[a-zA-Z0-9_]{3,20}$")) {
+            usernameErrorLabel.setText("Username must be 3-20 characters (letters, numbers, underscores).");
+            usernameErrorLabel.setVisible(true);
+            return;
+        }
+
+        model.usernameProperty().set(name);
+
+        isNewUser = !UserDAO.userExists(model.usernameProperty());
+
+        if (isNewUser) {
+            showBudgetSetupScreen();
+        } else {
+            if (onUsernameCollected != null) {
+                onUsernameCollected.run();
             }
         }
     }
     
+    private void showError(String message) {
+        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
+        alert.setTitle("Invalid Input");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+
     @FXML
     private void handleUsernameKeyPressed(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
