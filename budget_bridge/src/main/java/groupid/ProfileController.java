@@ -121,10 +121,10 @@ public class ProfileController implements ModelAware {
             recentBadgeContent.getChildren().addAll(recentIcon, nameLabel);
             recentBadgeLabel.getChildren().setAll(recentBadgeContent);
 
-        } else {
+        } else if (recentBadgeLabel.getChildren().isEmpty())  {
             Label placeholder = new Label("No badges earned yet.");
             placeholder.getStyleClass().add("badge-text"); // optional style
-            recentBadgeLabel.getChildren().add(placeholder);        
+            recentBadgeLabel.getChildren().add(placeholder);
         }
     }
 
