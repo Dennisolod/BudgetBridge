@@ -55,21 +55,22 @@
                             <Label fx:id="errRent" textFill="red" visible="false"/>
                         </VBox>
                         
-                        <VBox spacing="6.0">
+                        <VBox spacing="3.0">
                             <Label text="Car Payment:" styleClass="setup-field-label"/>
                             <TextField fx:id="tfCar" promptText="Monthly amount" styleClass="setup-input"/>
                             <Label fx:id="errCar" textFill="red" visible="false"/>
                         </VBox>
 
-                        <VBox spacing="6.0">
+                        <VBox spacing="3.0">
                             <Label text="Insurance:" styleClass="setup-field-label"/>
                             <TextField fx:id="tfIns" promptText="Monthly amount" styleClass="setup-input"/>
                             <Label fx:id="errIns" textFill="red" visible="false"/>
                         </VBox>
                         
-                        <VBox spacing="6.0">
+                        <VBox spacing="3.0">
                             <Label text="Other Debt:" styleClass="setup-field-label"/>
                             <TextField fx:id="tfDebt" promptText="Monthly amount" styleClass="setup-input"/>
+                            <!-- Probelmatic error label -->
                             <!-- <Label fx:id="errDebt" textFill="red" visible="false"/> -->
                         </VBox>
                     </VBox>

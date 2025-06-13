@@ -30,6 +30,8 @@ public class BudgetSetupController {
     @FXML private Label errDebt;
 
     public BudgetInfo collectResult() {
+        boolean hasError = false;
+
         Double primary = parseAndValidate(tfPrimaryIncome, errPrimaryIncome, "Primary Income");
         Double side = parseAndValidate(tfSideIncome, errSideIncome, "Side Income");
         Double other = parseAndValidate(tfOtherIncome, errOtherIncome, "Other Income");
@@ -39,11 +41,16 @@ public class BudgetSetupController {
         Double ins = parseAndValidate(tfIns, errIns, "Insurance");
         Double debt = parseAndValidate(tfDebt, errDebt, "Debt");
 
-        // If any are invalid, stop and return null
-        if (primary == null || side == null || other == null ||
-            rent == null || car == null || ins == null || debt == null) {
-            return null;
-        }
+       // Check individually
+        if (primary == null) hasError = true;
+        if (side == null) hasError = true;
+        if (other == null) hasError = true;
+        if (rent == null) hasError = true;
+        if (car == null) hasError = true;
+        if (ins == null) hasError = true;
+        if (debt == null) hasError = true;
+
+        if (hasError) return null;
 
         BudgetInfo info = BudgetInfo.builder()
             .primaryIncome(primary)
