@@ -7,14 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.kordamp.ikonli.javafx.FontIcon;
-
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.geometry.Pos;
-import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
@@ -135,8 +129,10 @@ public class MetaDataDAO {
             try (PreparedStatement badgeStmt = conn.prepareStatement(badgeSql)) {
                 badgeStmt.setInt(1, userId);
                 ResultSet rs = badgeStmt.executeQuery();
+                System.out.println("Loading badges for user ID: " + userId);
                 while (rs.next()) {
                     String name = rs.getString("badge_name");
+                    System.out.println("Found badge in DB: " + name);
                     Paint color;
                     try {
                         color = Color.web(rs.getString("color"));
@@ -146,7 +142,9 @@ public class MetaDataDAO {
                     String icon = rs.getString("icon_literal");
                     int cost = rs.getInt("cost");
                     model.unlockBadgeStart(new BadgeLine(name, icon, color, cost));
+                    
                 }
+                System.out.println("Total badges loaded from DB: " + model.badges().size());
             }
 
             try (PreparedStatement themeStmt = conn.prepareStatement(themeSql)) {

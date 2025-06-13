@@ -58,8 +58,8 @@ public class DatabaseInitializer {
 
         try (Connection conn = SQLiteConnector.connect();
              Statement stmt = conn.createStatement()) {
-            //stmt.execute(createUsers);
-             //stmt.execute(dropBudgetInfo); // Use this if you only want to start a fresh budget info table for the user
+            stmt.execute(createUsers);
+            //stmt.execute(dropBudgetInfo); // Use this if you only want to start a fresh budget info table for the user
             // stmt.execute(dropBadges); // Use this if you only want to start a fresh budget info table for the user
             // stmt.execute(dropMetaData); // Use this if you only want to start a fresh budget info table for the user
             // stmt.execute(dropThemes);// Use this if you only want to start a fresh budget info table for the user
