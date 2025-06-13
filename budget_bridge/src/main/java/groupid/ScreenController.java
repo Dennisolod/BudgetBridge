@@ -38,6 +38,7 @@ public class ScreenController {
     @FXML private Label totalBudgetLabel;
     @FXML private Label welcomeLabel;
     @FXML private Label usernameErrorLabel;
+
     @FXML private Button continueButton;
     @FXML private Button editBudgetButton;
     
@@ -53,10 +54,6 @@ public class ScreenController {
         if (usernameField != null) {
             usernameField.requestFocus();
         }
-        
-        usernameField.textProperty().addListener((obs, oldText, newText) -> {
-            usernameErrorLabel.setVisible(false);
-        });
     }
     
     public void setModel(BudgetModel model) {
@@ -131,19 +128,15 @@ public class ScreenController {
     @FXML
     private void handleUsernameSubmit() {
         StringProperty username = usernameField.textProperty();
-        String name = username.get().strip();  // Trim spaces
-
-        usernameErrorLabel.setVisible(false); // Hide error by default
+        String name = username.get().strip();  // Remove leading/trailing whitespace
 
         if (name.isEmpty()) {
-            usernameErrorLabel.setText("Username cannot be empty.");
-            usernameErrorLabel.setVisible(true);
+            showError("Username cannot be empty.");
             return;
         }
 
-        if (!name.matches("^[a-zA-Z0-9_]{3,20}$")) {
-            usernameErrorLabel.setText("Username must be 3-20 characters (letters, numbers, underscores).");
-            usernameErrorLabel.setVisible(true);
+        if (!name.matches("^[a-zA-Z0-9_]{3,20}$")) { // Only allow alphanumeric and underscores, length limit
+            showError("Username must be 3-20 characters long and contain only letters, numbers, or underscores.");
             return;
         }
 

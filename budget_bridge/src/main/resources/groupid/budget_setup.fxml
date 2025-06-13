@@ -27,16 +27,19 @@
                         <VBox spacing="6.0">
                             <Label text="Primary Income:" styleClass="setup-field-label"/>
                             <TextField fx:id="tfPrimaryIncome" promptText="Monthly amount" styleClass="setup-input"/>
+                            <Label fx:id="errPrimaryIncome" textFill="red" visible="false"/>
                         </VBox>
                         
                         <VBox spacing="6.0">
                             <Label text="Side Income:" styleClass="setup-field-label"/>
                             <TextField fx:id="tfSideIncome" promptText="Monthly amount" styleClass="setup-input"/>
+                            <Label fx:id="errSideIncome" textFill="red" visible="false"/>
                         </VBox>
                         
                         <VBox spacing="6.0">
                             <Label text="Other Income:" styleClass="setup-field-label"/>
                             <TextField fx:id="tfOtherIncome" promptText="Monthly amount" styleClass="setup-input"/>
+                            <Label fx:id="errOtherIncome" textFill="red" visible="false"/>
                         </VBox>
                     </VBox>
                 </VBox>
@@ -49,11 +52,13 @@
                         <VBox spacing="6.0">
                             <Label text="Rent/Mortgage:" styleClass="setup-field-label"/>
                             <TextField fx:id="tfRent" promptText="Monthly amount" styleClass="setup-input"/>
+                            <Label fx:id="errRent" textFill="red" visible="false"/>
                         </VBox>
                         
                         <VBox spacing="6.0">
                             <Label text="Car Payment:" styleClass="setup-field-label"/>
                             <TextField fx:id="tfCar" promptText="Monthly amount" styleClass="setup-input"/>
+                            <Label fx:id="errCar" textFill="red" visible="false"/>
                         </VBox>
 
                         <VBox spacing="6.0">
