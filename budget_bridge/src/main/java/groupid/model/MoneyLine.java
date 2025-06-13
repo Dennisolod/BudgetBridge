@@ -39,7 +39,7 @@ public class MoneyLine {
     }
 
     public boolean isActiveThisMonth() {
-        if ("One-time".equals(freq)) {
+        if ("variable".equals(freq)) {
             return dateAdded.getMonth() == LocalDate.now().getMonth() 
                 && dateAdded.getYear() == LocalDate.now().getYear();
         }

@@ -28,9 +28,7 @@
         </VBox>
     </VBox>
     
-    <!-- Budget Setup Screen (placeholder - actual dialog will be shown) -->
     <VBox fx:id="budgetSetupScreen" styleClass="screen-container" visible="false" managed="false">
-        <!-- This is just a placeholder - the actual budget setup uses a dialog -->
     </VBox>
     
     <!-- Budget Summary Screen -->

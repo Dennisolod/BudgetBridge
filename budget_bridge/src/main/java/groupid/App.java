@@ -47,7 +47,10 @@ public class App extends Application {
         // Set up callbacks
         screenController.setOnUsernameCollected(() -> {
             StringProperty username = model.usernameProperty();
+            System.out.println("Username collected: " + username.get());
+            System.out.println("User exists check: " + UserDAO.userExists(username));
             if (!UserDAO.userExists(username)) {
+                 System.out.println("New user path");
                 // New user - will show budget setup
                 // User will be added to database when budget setup is complete
             } else {
@@ -61,6 +64,7 @@ public class App extends Application {
                 
                 // Navigate to primary screen
                 try {
+                    System.out.println("Badges loaded: " + model.badges().size());
                     navigateToPrimary();
                 } catch (IOException e) {
                     e.printStackTrace();

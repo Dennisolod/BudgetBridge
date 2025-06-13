@@ -6,14 +6,12 @@
 <?import javafx.scene.shape.Circle?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<!-- Leaderboard Screen – improved readability & two‑column layout (2/3 list, 1/3 summary) -->
 <BorderPane fx:id="rootPane"
            stylesheets="@style.css"
            fx:controller="groupid.LeaderboardController"
            xmlns:fx="http://javafx.com/fxml/1"
            styleClass="modern-background">
 
-   <!-- ───────── Navigation Header (unchanged from primary) ───────── -->
    <top>
       <VBox styleClass="nav-header-container">
          <HBox alignment="CENTER_LEFT" spacing="30" styleClass="nav-header">
