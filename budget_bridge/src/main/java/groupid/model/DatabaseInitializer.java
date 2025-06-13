@@ -5,7 +5,7 @@ import java.sql.Statement;
 
 public class DatabaseInitializer {
     public static void initialize() {
-        //clearDatabase();
+        // clearDatabase();
         String createUsers = """
             CREATE TABLE IF NOT EXISTS users (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -75,6 +75,7 @@ public class DatabaseInitializer {
         String deleteMetaData = "DELETE FROM meta_data";
         String deleteBadges = "DELETE FROM badges";
         String deleteThemes = "DELETE FROM themes";
+        String dropUsers = "DROP TABLE IF EXISTS users;";
         String dropThemes = "DROP TABLE IF EXISTS themes;";
         String dropBadges = "DROP TABLE IF EXISTS badges;";
         String dropMetaData = "DROP TABLE IF EXISTS meta_data;";
@@ -89,10 +90,11 @@ public class DatabaseInitializer {
             stmt.execute(deleteBadges);       // Then clear badges
             stmt.execute(deleteThemes);       // Then clear Themes
             stmt.execute(deleteUsers);       // Then clear users
-            stmt.execute(dropBudgetInfo); // Use this if you only want to start a fresh budget info table for the user
-            stmt.execute(dropBadges); // Use this if you only want to start a fresh budget info table for the user
-            stmt.execute(dropMetaData); // Use this if you only want to start a fresh budget info table for the user
-            stmt.execute(dropThemes);// Use this if you only want to start a fresh budget info table for the user
+            stmt.execute(dropUsers);        // drops users table
+            stmt.execute(dropBudgetInfo);   // drops budget info table
+            stmt.execute(dropBadges);       // drops badges table
+            stmt.execute(dropMetaData);     // drop metadata table
+            stmt.execute(dropThemes);       // drops themes table
             System.out.println("All data in the database has been cleared.");
             
         } catch (Exception e) {
