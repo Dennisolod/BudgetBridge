@@ -284,11 +284,15 @@ public class StoreController implements ModelAware{
         themesBox.getChildren().clear();
         themesBox.getStyleClass().add("store-column");
 
-        addThemeToStore(new ThemeLine("Ocean Blue", Color.web("#003CFF"), 5000));
-        addThemeToStore(new ThemeLine("Mystic Purple", Color.web("#1F1B2E"), 10000));
-        addThemeToStore(new ThemeLine("Golden Hour", Color.web("#FFD700"), 25000));
-        addThemeToStore(new ThemeLine("Seafoam Savings", Color.web("#0AFF9D"), 35000));
-        addThemeToStore(new ThemeLine("Aurora", Color.web("#003CFF"), 40000));
+        addThemeToStore(new ThemeLine("Ocean Blue", Color.web("#1b4180"), 5000));
+        addThemeToStore(new ThemeLine("Deep Wine Red", Color.web("#5A1A1A"), 5000));
+        addThemeToStore(new ThemeLine("Royal Navy", Color.web("#1A2B5A"), 7500));
+        addThemeToStore(new ThemeLine("British Racing Green", Color.web("#355E3B"), 10000));
+        addThemeToStore(new ThemeLine("Mystic Purple", Color.web("#1F1B2E"), 10000)); 
+        addThemeToStore(new ThemeLine("Golden Hour", Color.web("#AA8800"), 25000));      // darkened gold
+        addThemeToStore(new ThemeLine("Seafoam Savings", Color.web("#009977"), 35000));  // darker seafoam
+        addThemeToStore(new ThemeLine("Aurora", Color.web("#2233AA"), 40000));           // more navy aurora
+
     }
 
     // Navigation methods (keeping existing):

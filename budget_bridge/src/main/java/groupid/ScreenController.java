@@ -127,38 +127,33 @@ public class ScreenController {
     
     @FXML
     private void handleUsernameSubmit() {
-        StringProperty username = usernameField.textProperty();
-        String name = username.get().strip();  // Remove leading/trailing whitespace
+        String name = usernameField.getText().strip();
+        usernameErrorLabel.setVisible(false);  // reset error label
 
+        // Validation logic:
         if (name.isEmpty()) {
-            showError("Username cannot be empty.");
+            usernameErrorLabel.setText("Username cannot be empty.");
+            usernameErrorLabel.setVisible(true);
             return;
         }
 
-        if (!name.matches("^[a-zA-Z0-9_]{3,20}$")) { // Only allow alphanumeric and underscores, length limit
-            showError("Username must be 3-20 characters long and contain only letters, numbers, or underscores.");
+        if (!name.matches("^[a-zA-Z0-9_]{3,20}$")) {
+            usernameErrorLabel.setText("Username must be 3-20 characters (letters, numbers, underscores).");
+            usernameErrorLabel.setVisible(true);
             return;
         }
 
         model.usernameProperty().set(name);
-
         isNewUser = !UserDAO.userExists(model.usernameProperty());
 
         if (isNewUser) {
+            // continue to budget setup
             showBudgetSetupScreen();
         } else {
             if (onUsernameCollected != null) {
                 onUsernameCollected.run();
             }
         }
-    }
-    
-    private void showError(String message) {
-        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
-        alert.setTitle("Invalid Input");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 
 
