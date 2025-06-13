@@ -10,7 +10,6 @@ import groupid.model.BudgetModel;
 import groupid.model.CooldownManager;
 import groupid.model.MoneyLine;
 import groupid.model.UserDAO;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -135,24 +134,6 @@ public class SecondaryController implements ModelAware {
             expenseFreqSection.setVisible(false);
             expenseFreqSection.setManaged(false);
         }
-        // Set up cooldown listeners to update button text dynamically
-        CooldownManager cooldownManager = CooldownManager.getInstance();
-        
-        // Update buttons initially
-        updateRewardButtons();
-        
-        // Set up listeners for dynamic updates
-        cooldownManager.secondsLeftProperty("daily").addListener((obs, old, newVal) -> {
-            Platform.runLater(this::updateRewardButtons);
-        });
-        
-        cooldownManager.secondsLeftProperty("weekly").addListener((obs, old, newVal) -> {
-            Platform.runLater(this::updateRewardButtons);
-        });
-        
-        cooldownManager.secondsLeftProperty("monthly").addListener((obs, old, newVal) -> {
-            Platform.runLater(this::updateRewardButtons);
-        });
     }
 
     /* ── Toggle income input section ─────────────────────────────── */
@@ -339,104 +320,27 @@ public class SecondaryController implements ModelAware {
     }
 
     
-     @FXML private void dailyRewards() {
-        CooldownManager cooldownManager = CooldownManager.getInstance();
-        
-        // Check if already claimed (prevents multiple claims)
-        if (cooldownManager.hasClaimedReward("daily")) {
-            showWarn("Daily reward already claimed! Next available in: " + 
-                     cooldownManager.getFormattedTimeLeft("daily"));
-            return;
+@FXML private void dailyRewards() {
+        CooldownManager dailyCooldown = CooldownManager.getInstance();
+        if (!dailyCooldown.isOnCooldown()) {
+            dailyRewardButton  .setDisable(true);
+            model.setGems(model.getGems().get()+50);
+            model.addPoints(50);
+            dailyCooldown.startCooldown(100);
+            System.out.println("The cooldown is being set");
+        } else {
+            dailyRewardButton .setDisable(false);
         }
-        
-        // Claim the reward
-        model.setGems(model.getGems().get() + 50);
+        dailyRewardButton  .setDisable(true);
+        model.setGems(model.getGems().get()+50);
         model.addPoints(50);
-        
-        // Start cooldown (24 hours = 86400 seconds, using 100 for testing)
-        cooldownManager.startCooldown("daily", 100); // Change to 86400 for production
-        
-        // Update button state
-        updateRewardButtons();
-        
-        // Save to database
-        BudgetInfoDAO.updateBudgetInfoForUser(UserDAO.getUserIdByName(model.usernameProperty()), model);
     }
     
-    @FXML private void weeklyRewards() {
-        CooldownManager cooldownManager = CooldownManager.getInstance();
-        
-        if (cooldownManager.hasClaimedReward("weekly")) {
-            showWarn("Weekly reward already claimed! Next available in: " + 
-                     cooldownManager.getFormattedTimeLeft("weekly"));
-            return;
-        }
-        
-        model.setGems(model.getGems().get() + 100);
-        model.addPoints(150);
-        
-        // Start cooldown (7 days = 604800 seconds, using 200 for testing)
-        cooldownManager.startCooldown("weekly", 200); // Change to 604800 for production
-        
-        updateRewardButtons();
-        BudgetInfoDAO.updateBudgetInfoForUser(UserDAO.getUserIdByName(model.usernameProperty()), model);
-    }
+    @FXML private void weeklyRewards()  { weeklyRewardButton .setDisable(true); model.setGems(model.getGems().get()+100); model.addPoints(150); }  
+
+    @FXML private void monthlyRewards() { monthlyRewardButton.setDisable(true); model.setGems(model.getGems().get()+250); model.addPoints(1000); }
+
     
-    @FXML private void monthlyRewards() {
-        CooldownManager cooldownManager = CooldownManager.getInstance();
-        
-        if (cooldownManager.hasClaimedReward("monthly")) {
-            showWarn("Monthly reward already claimed! Next available in: " + 
-                     cooldownManager.getFormattedTimeLeft("monthly"));
-            return;
-        }
-        
-        model.setGems(model.getGems().get() + 250);
-        model.addPoints(1000);
-        
-        // Start cooldown (30 days = 2592000 seconds, using 300 for testing)
-        cooldownManager.startCooldown("monthly", 300); // Change to 2592000 for production
-        
-        updateRewardButtons();
-        BudgetInfoDAO.updateBudgetInfoForUser(UserDAO.getUserIdByName(model.usernameProperty()), model);
-    }
-    
-    private void updateRewardButtons() {
-        CooldownManager cooldownManager = CooldownManager.getInstance();
-        
-        // Update button states and text
-        if (dailyRewardButton != null) {
-            boolean claimed = cooldownManager.hasClaimedReward("daily");
-            dailyRewardButton.setDisable(claimed);
-            if (claimed && cooldownManager.isOnCooldown("daily")) {
-                dailyRewardButton.setText("Daily (" + cooldownManager.getFormattedTimeLeft("daily") + ")");
-            } else {
-                dailyRewardButton.setText("Claim Daily");
-            }
-        }
-        
-        if (weeklyRewardButton != null) {
-            boolean claimed = cooldownManager.hasClaimedReward("weekly");
-            weeklyRewardButton.setDisable(claimed);
-            if (claimed && cooldownManager.isOnCooldown("weekly")) {
-                weeklyRewardButton.setText("Weekly (" + cooldownManager.getFormattedTimeLeft("weekly") + ")");
-            } else {
-                weeklyRewardButton.setText("Claim Weekly");
-            }
-        }
-        
-        if (monthlyRewardButton != null) {
-            boolean claimed = cooldownManager.hasClaimedReward("monthly");
-            monthlyRewardButton.setDisable(claimed);
-            if (claimed && cooldownManager.isOnCooldown("monthly")) {
-                monthlyRewardButton.setText("Monthly (" + cooldownManager.getFormattedTimeLeft("monthly") + ")");
-            } else {
-                monthlyRewardButton.setText("Claim Monthly");
-            }
-        }
-    }
-    
-    /* ── Demo & nav buttons (unchanged) ────────────────────────────── */
     @FXML private void switchToSecondary() throws IOException { App.setRoot("secondary"); }
     @FXML private void switchToPrimary()   throws IOException { 
         model.refreshCurrentMonthFromBase(); // Keep current month in sync
