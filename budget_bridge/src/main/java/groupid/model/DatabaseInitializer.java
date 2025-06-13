@@ -12,7 +12,7 @@ public class DatabaseInitializer {
                 name TEXT NOT NULL
             );
         """;
-        String dropBudgetInfo = "DROP TABLE IF EXISTS budget_info;";
+        
         String createBudgetInfo = """
             CREATE TABLE IF NOT EXISTS budget_info (
                 user_id INTEGER NOT NULL,
@@ -24,7 +24,7 @@ public class DatabaseInitializer {
                 FOREIGN KEY(user_id) REFERENCES users(id)
             );
         """;
-        String dropMetaData = "DROP TABLE IF EXISTS meta_data;";
+        
         String createMetaData = """
             CREATE TABLE IF NOT EXISTS meta_data (
                 user_id INTEGER PRIMARY KEY,
@@ -34,7 +34,7 @@ public class DatabaseInitializer {
                 FOREIGN KEY(user_id) REFERENCES users(id)
             );
         """;
-        String dropBadges = "DROP TABLE IF EXISTS badges;";
+        
         String createBadges = """
             CREATE TABLE IF NOT EXISTS badges (
                 user_id INTEGER NOT NULL,
@@ -45,7 +45,7 @@ public class DatabaseInitializer {
                 FOREIGN KEY(user_id) REFERENCES users(id)
             );
         """;
-        String dropThemes = "DROP TABLE IF EXISTS themes;";
+
         String createThemes = """
             CREATE TABLE IF NOT EXISTS themes (
                 user_id INTEGER NOT NULL,
@@ -59,10 +59,6 @@ public class DatabaseInitializer {
         try (Connection conn = SQLiteConnector.connect();
              Statement stmt = conn.createStatement()) {
             stmt.execute(createUsers);
-            //stmt.execute(dropBudgetInfo); // Use this if you only want to start a fresh budget info table for the user
-            // stmt.execute(dropBadges); // Use this if you only want to start a fresh budget info table for the user
-            // stmt.execute(dropMetaData); // Use this if you only want to start a fresh budget info table for the user
-            // stmt.execute(dropThemes);// Use this if you only want to start a fresh budget info table for the user
             stmt.execute(createBudgetInfo);
             stmt.execute(createMetaData);
             stmt.execute(createBadges);
@@ -79,6 +75,11 @@ public class DatabaseInitializer {
         String deleteMetaData = "DELETE FROM meta_data";
         String deleteBadges = "DELETE FROM badges";
         String deleteThemes = "DELETE FROM themes";
+        String dropThemes = "DROP TABLE IF EXISTS themes;";
+        String dropBadges = "DROP TABLE IF EXISTS badges;";
+        String dropMetaData = "DROP TABLE IF EXISTS meta_data;";
+        String dropBudgetInfo = "DROP TABLE IF EXISTS budget_info;";
+
 
         try (Connection conn = SQLiteConnector.connect();
             Statement stmt = conn.createStatement()) {
@@ -88,6 +89,10 @@ public class DatabaseInitializer {
             stmt.execute(deleteBadges);       // Then clear badges
             stmt.execute(deleteThemes);       // Then clear Themes
             stmt.execute(deleteUsers);       // Then clear users
+            stmt.execute(dropBudgetInfo); // Use this if you only want to start a fresh budget info table for the user
+            stmt.execute(dropBadges); // Use this if you only want to start a fresh budget info table for the user
+            stmt.execute(dropMetaData); // Use this if you only want to start a fresh budget info table for the user
+            stmt.execute(dropThemes);// Use this if you only want to start a fresh budget info table for the user
             System.out.println("All data in the database has been cleared.");
             
         } catch (Exception e) {
