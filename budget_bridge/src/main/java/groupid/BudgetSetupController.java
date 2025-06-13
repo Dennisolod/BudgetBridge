@@ -16,7 +16,7 @@ import javafx.scene.control.ToggleGroup;
 public class BudgetSetupController {
     @FXML private DialogPane rootPane;          
     @FXML private TextField tfPrimaryIncome, tfSideIncome, tfOtherIncome;
-    @FXML private TextField tfRent, tfCar, tfDebt;
+    @FXML private TextField tfRent, tfCar, tfDebt, tfIns;
     @FXML private CheckBox  chkGoal1, chkGoal2, chkGoal3, chkGoal4;
     @FXML private ToggleGroup planGroup;
 
@@ -27,6 +27,7 @@ public class BudgetSetupController {
             .otherIncome(parse(tfOtherIncome))
             .rent(parse(tfRent))
             .car(parse(tfCar))
+            .ins(parse(tfIns))
             .debt(parse(tfDebt))
             .goals(selectedGoals())
             .budgetPlan(selectedPlan())

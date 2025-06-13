@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
+import groupid.SecondaryController;
 import javafx.beans.InvalidationListener;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
@@ -126,40 +128,46 @@ public class BudgetModel {
 
     public void loadBudgetInfo(BudgetInfo info) {
         incomes().clear();
-        if (info.getPrimaryIncome() > 0) addIncome("Primary Job", "Monthly", info.getPrimaryIncome());
-        if (info.getSideIncome() > 0) addIncome("Side Hustle", "Monthly", info.getSideIncome());
-        if (info.getOtherIncome() > 0) addIncome("Other Income", "Monthly", info.getOtherIncome());
+        if (info.getPrimaryIncome() > 0) addIncome("Primary Job", "fixed", info.getPrimaryIncome());
+        if (info.getSideIncome() > 0) addIncome("Side Hustle", "fixed", info.getSideIncome());
+        if (info.getOtherIncome() > 0) addIncome("Other Income", "fixed", info.getOtherIncome());
 
         /* expense lines with limits */
         expenses().clear();
         if (info.getRent() > 0) {
-            MoneyLine rentLine = new MoneyLine("Rent/Mortgage", "Monthly",info.getRent());
+            MoneyLine rentLine = new MoneyLine("Rent/Mortgage", "fixed",info.getRent());
             rentLine.setBudgetLimit(info.getRent());
             expenses.add(rentLine);
         }
         if (info.getCar() > 0) {
-            MoneyLine carLine = new MoneyLine("Car Payment", "Monthly",info.getCar());
+            MoneyLine carLine = new MoneyLine("Car Payment", "fixed",info.getCar());
             carLine.setBudgetLimit(info.getCar());
             expenses.add(carLine);
         }
+        if (info.getIns() > 0) {
+            MoneyLine insLine = new MoneyLine("Insurance", "fixed",info.getIns());
+            insLine.setBudgetLimit(info.getCar());
+            expenses.add(insLine);
+        }
+
         if (info.getDebt() > 0) {
-            MoneyLine carLine = new MoneyLine("Car Payment", "Monthly",info.getCar());
-            carLine.setBudgetLimit(info.getCar());
-            expenses.add(carLine);
+            MoneyLine debtLine = new MoneyLine("Debt", "fixed",info.getCar());
+            debtLine.setBudgetLimit(info.getCar());
+            expenses.add(debtLine);
         }
-            MoneyLine groceriesLine = new MoneyLine("Groceries", "Monthly",info.getGroceries());
+            MoneyLine groceriesLine = new MoneyLine("Groceries", "variable",info.getGroceries());
             groceriesLine.setBudgetLimit(info.getGroceries());
             expenses.add(groceriesLine);
 
-            MoneyLine diningLine = new MoneyLine("Dining Out", "Monthly",info.getDiningOut());
+            MoneyLine diningLine = new MoneyLine("Dining Out", "variable",info.getDiningOut());
             diningLine.setBudgetLimit(info.getDiningOut());
             expenses.add(diningLine);
         
-            MoneyLine funLine = new MoneyLine("Fun Money", "Monthly",info.getFunMoney());
+            MoneyLine funLine = new MoneyLine("Fun Money", "variable",info.getFunMoney());
             funLine.setBudgetLimit(info.getFunMoney());
             expenses.add(funLine);
         
-            MoneyLine otherLine = new MoneyLine("Other", "Monthly",info.getOtherExpense());
+            MoneyLine otherLine = new MoneyLine("Other", "variable",info.getOtherExpense());
             otherLine.setBudgetLimit(info.getOtherExpense());
             expenses.add(otherLine);
 
@@ -366,7 +374,7 @@ public class BudgetModel {
     public void refreshCurrentMonthFromBase() {
         currentMonthExpenses.clear();
         for (MoneyLine e : expenses) {
-            if (!e.getFreq().equals("One-time")) { // Only recurring ones
+            if (!e.getFreq().equals("fixed")) { // Only recurring ones
                 currentMonthExpenses.add(new MoneyLine(e.getType(), e.getFreq(), e.getAmount()));
             }
         }
@@ -395,50 +403,96 @@ public class BudgetModel {
     }
 
     public void generateCustomBudget(BudgetInfo info) {
-        expenses.clear();  // Reset
-
+        expenses.clear(); // Reset
         double income = info.getPrimaryIncome() + info.getSideIncome() + info.getOtherIncome();
         double fixed = info.getRent() + info.getCar() + info.getDebt();
-
+        
         // Add fixed expenses first
         if (info.getRent() > 0) addExpense("Rent", "fixed", info.getRent());
         if (info.getCar() > 0) addExpense("Car Payment", "fixed", info.getCar());
         if (info.getDebt() > 0) addExpense("Other Debt", "fixed", info.getDebt());
-
+        
         double remaining = income - fixed;
         if (remaining < 0) remaining = 0;
-
-        // Define goal-based savings allocation
-        List<String> goals = info.getGoals();
-        boolean payOffDebt = goals.contains("Pay Off Debt");
-        boolean vacation = goals.contains("Vacation");
-        boolean retireEarly = goals.contains("Retire Early");
-
+        
+        // Define plan-based budget allocation
+        String plan = info.getBudgetPlan();
         double savingsPct = 0.15; // Base savings
-        if (income >= 5000) savingsPct += 0.05;         
-        if (retireEarly)    savingsPct += 0.05;
-        if (vacation)       savingsPct += 0.05;
-
-        // Don't go below 10% or above 50% for savings
-        savingsPct = Math.max(0.10, Math.min(0.50, savingsPct));
+        double groceriesPct = 0.50; // Base groceries percentage
+        double diningPct = 0.20; // Base dining percentage
+        double funPct = 0.30; // Base fun money percentage
+        boolean includeExtraDebt = false;
+        double extraDebtPct = 0.0;
+        
+        // Plan-specific rules
+        if (plan.equals("College Student")) {
+            savingsPct = 0.05; // Minimal savings, focus on survival
+            groceriesPct = 0.60; // More on groceries, less dining
+            diningPct = 0.10;
+            funPct = 0.30;
+        } else if (plan.equals("Building My Career")) {
+            savingsPct = 0.20; // Building wealth
+            groceriesPct = 0.40; // Balanced lifestyle
+            diningPct = 0.30; // More social dining
+            funPct = 0.30;
+            // Include extra debt payments if no existing debt
+            if (info.getDebt() == 0) {
+                includeExtraDebt = true;
+                extraDebtPct = 0.05;
+            }
+        } else if (plan.equals("Family Planning")) {
+            savingsPct = 0.15; // Moderate savings
+            groceriesPct = 0.65; // Family groceries priority
+            diningPct = 0.15; // Less dining out
+            funPct = 0.20; // Reduced fun money
+        } else if (plan.equals("Doing Well Financially")) {
+            savingsPct = 0.30; // Aggressive savings
+            if (income >= 8000) savingsPct = 0.35; // Even more for high earners
+            groceriesPct = 0.35; // Can afford quality groceries
+            diningPct = 0.35; // Lifestyle dining
+            funPct = 0.30;
+            // Extra debt payments to eliminate debt faster
+            if (info.getDebt() == 0) {
+                includeExtraDebt = true;
+                extraDebtPct = 0.10;
+            }
+        } else if (plan.equals("Nearing Retirement")) {
+            savingsPct = 0.25; // Catch-up savings
+            if (income >= 6000) savingsPct = 0.30; // More if higher income
+            groceriesPct = 0.50; // Conservative grocery spending
+            diningPct = 0.20; // Moderate dining
+            funPct = 0.30;
+            // Focus on debt elimination before retirement
+            if (info.getDebt() == 0) {
+                includeExtraDebt = true;
+                extraDebtPct = 0.15;
+            }
+        }
+        
+        // Apply income-based adjustments
+        if (income >= 5000) savingsPct += 0.05;
+        
+        // Don't go below 5% or above 50% for savings
+        savingsPct = Math.max(0.05, Math.min(0.50, savingsPct));
+        
         double savings = savingsPct * remaining;
         addExpense("Savings", "variable", savings);
-
-        // Extra toward debt if goal is selected but amount = 0
-        if (payOffDebt && info.getDebt() == 0) {
-            double extraDebt = 0.10 * remaining;
+        
+        // Extra toward debt if plan includes it but current debt amount = 0
+        if (includeExtraDebt && info.getDebt() == 0) {
+            double extraDebt = extraDebtPct * remaining;
             addExpense("Debt Payments", "variable", extraDebt);
             remaining -= extraDebt;
         }
-
+        
         remaining -= savings;
         if (remaining < 0) remaining = 0;
-
-        // Remaining split into essentials and lifestyle
-        double groceries = remaining * 0.50;
-        double dining    = remaining * 0.20;
-        double fun       = remaining * 0.30;
-
+        
+        // Remaining split based on plan percentages
+        double groceries = remaining * groceriesPct;
+        double dining = remaining * diningPct;
+        double fun = remaining * funPct;
+        
         addExpense("Groceries", "variable", groceries);
         addExpense("Dining Out", "variable", dining);
         addExpense("Fun Money", "variable", fun);

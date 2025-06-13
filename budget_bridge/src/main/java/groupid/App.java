@@ -1,23 +1,16 @@
 package groupid;
 import java.io.IOException;
-import java.net.URL;
-import java.util.Optional;
 
-import groupid.model.BudgetInfo;
 import groupid.model.BudgetInfoDAO;
 import groupid.model.BudgetModel;
 import groupid.model.DatabaseInitializer;
 import groupid.model.MetaDataDAO;
 import groupid.model.UserDAO;
 import javafx.application.Application;
-import javafx.application.Platform;
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.DialogPane;
-import javafx.scene.control.TextInputDialog;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -28,133 +21,106 @@ public class App extends Application {
 
     private static Scene scene;
     private static final BudgetModel model = new BudgetModel();
+    private static ScreenController screenController;
 
     @Override
     public void start(Stage stage) throws IOException {
         stage.setTitle("BudgetBridge");
 
-        scene = new Scene(loadFXML("primary"), 1920, 1080);
+        // Initialize database
+        DatabaseInitializer.initialize();
+
+        // Load the main screen with ScreenController
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("/groupid/main_screen.fxml"));
+        Parent root = loader.load();
+        screenController = loader.getController();
+        screenController.setModel(model);
+        
+        scene = new Scene(root, 1920, 1080);
         scene.getStylesheets().add(App.class.getResource("style.css").toExternalForm());
         
-        scene = new Scene(loadAndInject("primary"));
         stage.setScene(scene);
-        stage.setFullScreen(true); // sets the scene to full screen on startup, can be changed later
+        stage.setFullScreen(true);
 
-        DatabaseInitializer.initialize();
-        getUsername();
-        if (!UserDAO.userExists(model.usernameProperty())) { // This is a new user
-            getBudgetInfo(stage);
-            UserDAO.addUser(model.usernameProperty());
-            int userId = UserDAO.getUserIdByName(model.usernameProperty());
-            BudgetInfoDAO.saveBudgetInfo(userId, model);
+        // Set up callbacks
+        screenController.setOnUsernameCollected(() -> {
+            StringProperty username = model.usernameProperty();
+            if (!UserDAO.userExists(username)) {
+                // New user - will show budget setup
+                // User will be added to database when budget setup is complete
+            } else {
+                // Existing user - load their data and go directly to primary
+                int userId = UserDAO.getUserIdByName(username);
+                BudgetInfoDAO.loadBudgetInfoFromDB(username, model);
+                MetaDataDAO.loadMetaData(userId, model);
+                fillMissionsList();
+                addDefaultMissions();
+                MetaDataDAO.populateLeaderboard(model);
+                
+                // Navigate to primary screen
+                try {
+                    navigateToPrimary();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
-        } else {
-            //addDefaultPoints();
-        }
-        // once I have implemented missions into the database, these two will be moved up into the else statement above
-        fillMissionsList();
-        addDefaultMissions();
-
-        MetaDataDAO.loadMetaData(UserDAO.getUserIdByName(model.usernameProperty()), model);
-
-        
-
-        // DatabaseInitializer.clearDatabase(); //Will crash the program, but also empties the database
-        
-        
-        BudgetInfoDAO.loadBudgetInfoFromDB(model.usernameProperty(), model);
-        MetaDataDAO.populateLeaderboard(model);
-        UserDAO.listUsers();
-        BudgetInfoDAO.printBudgetInfo(UserDAO.getUserIdByName(model.usernameProperty()));
-
-        // getBudgetInfo(stage);
-        // Force css updates
-        // scene.getRoot().applyCss();
+        screenController.setOnBudgetComplete(() -> {
+            // After budget setup is complete, navigate to primary
+            try {
+                navigateToPrimary();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
 
         stage.show();
     }
 
-    private void getUsername() {
-        TextInputDialog dialog = new TextInputDialog();
-        dialog.setTitle("Welcome to BudgetBridge!");
-        dialog.setHeaderText("Please enter your name");
-        dialog.setContentText("Name:");
-
-
-        Optional<String> result = dialog.showAndWait();
-        result.ifPresentOrElse(name -> model.usernameProperty().set(name.strip()), ()   -> Platform.exit());                  // quit if user cancels
+    public static void handleNewUserBudgetSetup() {
+        // This is called from ScreenController when a new user completes budget setup
+        // First, add the user to the database
+        StringProperty username = model.usernameProperty();
+        UserDAO.addUser(username);
+        
+        // Now get the user ID
+        int userId = UserDAO.getUserIdByName(username);
+        BudgetInfoDAO.saveBudgetInfo(userId, model);
+        
+        // Initialize missions for new user
+        fillMissionsList();
+        addDefaultMissions();
+        
+        // Load all data
+        MetaDataDAO.loadMetaData(userId, model);
+        BudgetInfoDAO.loadBudgetInfoFromDB(username, model);
+        MetaDataDAO.populateLeaderboard(model);
+        
+        // Debug prints
+        UserDAO.listUsers();
+        BudgetInfoDAO.printBudgetInfo(userId);
     }
 
-    private void getBudgetInfo(Stage owner) throws IOException {
-        URL url = App.class.getResource("/groupid/budget_setup.fxml");
-        FXMLLoader loader = new FXMLLoader(url);       
-        DialogPane pane = loader.load();               
-        BudgetSetupController ctl = loader.getController();
-
-        Dialog<BudgetInfo> dialog = new Dialog<>(); 
-        dialog.setTitle("Welcome — Budget Setup");
-        dialog.initOwner(owner);
-        dialog.setDialogPane(pane);
-
-        dialog.setResultConverter(bt ->
-            (bt != null && bt.getButtonData() == ButtonBar.ButtonData.OK_DONE)
-                ? ctl.collectResult()
-                : null);
-
-        pane.getStylesheets().add(App.class.getResource("style.css").toExternalForm());
-
-        dialog.showAndWait().ifPresent(info -> {
-            model.loadBudgetInfo(info);
-            model.generateCustomBudget(info);
-            showBudgetSummaryDialog(model);
-        });
+    private static void navigateToPrimary() throws IOException {
+        scene.setRoot(loadAndInject("primary"));
     }
-
-    private void showBudgetSummaryDialog(BudgetModel model) {
-        StringBuilder sb = new StringBuilder("Here’s your suggested budget:\n\n");
-
-        for (var m : model.expenses()) {
-            sb.append(String.format("%s: $%.2f\n", m.getType(), m.getAmount()));
-        }
-
-        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.INFORMATION);
-        alert.setTitle("Suggested Budget");
-        alert.setHeaderText("Review Your Personalized Budget");
-        alert.setContentText(sb.toString());
-
-        // Optional: Use expandable text for long content
-        javafx.scene.control.TextArea textArea = new javafx.scene.control.TextArea(sb.toString());
-        textArea.setEditable(false);
-        textArea.setWrapText(true);
-        textArea.setMaxWidth(Double.MAX_VALUE);
-        textArea.setMaxHeight(Double.MAX_VALUE);
-
-        javafx.scene.layout.GridPane expContent = new javafx.scene.layout.GridPane();
-        expContent.setMaxWidth(Double.MAX_VALUE);
-        expContent.add(textArea, 0, 0);
-
-        alert.getDialogPane().setExpandableContent(expContent);
-        alert.showAndWait();
-    }
-
 
     public static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadAndInject(fxml));
-
     }
 
-    private void fillMissionsList() {
+    private static void fillMissionsList() {
+
         model.addMissionList("Avoid purchasing snacks - 50pts & 50gems", "daily", (double) 0.0);
         model.addMissionList("Save $10 by purchasing cheaper alternatives - 150pts & 100gems", "weekly", (double) 0.0);
         model.addMissionList("Save $45 on groceries while keeping a healthier diet - 1000pts & 250gems", "monthly", (double) 0.0);
     }
 
-    private void addDefaultMissions(){
-        // when we implement more goals, we can just multiply 3 by the goal number and add 1 and 2 to that number for the 2nd and 3rd mission indexes
+    private static void addDefaultMissions() {
         model.addMission(0);
         model.addMission(1);
         model.addMission(2);
-
     }
 
     private static Parent loadAndInject(String name) throws IOException {
@@ -182,17 +148,10 @@ public class App extends Application {
 
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
-        Object c = fxmlLoader.getController();
-
         return fxmlLoader.load();
-    }
-
-    private static void addDefaultPoints(){
-        model.addPoints(0);
     }
 
     public static void main(String[] args) {
         launch();
     }
-
 }

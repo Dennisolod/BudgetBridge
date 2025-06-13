@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<StackPane fx:id="screenContainer" xmlns:fx="http://javafx.com/fxml/1" fx:controller="groupid.ScreenController" styleClass="main-container">
+    
+    <!-- Username Screen -->
+    <VBox fx:id="usernameScreen" alignment="CENTER" spacing="30.0" styleClass="screen-container">
+        <VBox alignment="CENTER" spacing="20.0" styleClass="login-panel">
+            <Label text="🌉" styleClass="app-icon"/>
+            <Label styleClass="app-title" text="BudgetBridge" />
+            <Label styleClass="app-subtitle" text="Your path to financial freedom" />
+            
+            <VBox alignment="CENTER" spacing="15.0" maxWidth="400.0">
+                <Label text="Enter your name to get started:" styleClass="input-label"/>
+                <TextField fx:id="usernameField" onKeyPressed="#handleUsernameKeyPressed" 
+                          promptText="Your name here..." styleClass="username-input"/>
+                <Button fx:id="usernameSubmitButton" onAction="#handleUsernameSubmit" 
+                       styleClass="primary-button" text="Continue" prefWidth="200"/>
+            </VBox>
+        </VBox>
+    </VBox>
+    
+    <!-- Budget Setup Screen (placeholder - actual dialog will be shown) -->
+    <VBox fx:id="budgetSetupScreen" styleClass="screen-container" visible="false" managed="false">
+        <!-- This is just a placeholder - the actual budget setup uses a dialog -->
+    </VBox>
+    
+    <!-- Budget Summary Screen -->
+    <VBox fx:id="budgetSummaryScreen" alignment="CENTER" spacing="30.0" styleClass="screen-container" visible="false">
+        <VBox alignment="CENTER" spacing="20.0" styleClass="summary-panel">
+            <VBox alignment="CENTER" spacing="10.0">
+                <Label fx:id="welcomeLabel" styleClass="welcome-title" text="Welcome!" />
+                <Label styleClass="summary-subtitle" text="Here's your personalized budget breakdown:" />
+            </VBox>
+            
+            <VBox styleClass="budget-summary-container" maxWidth="900.0" minHeight="700.0">
+                <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="budget-scroll" VBox.vgrow="ALWAYS">
+                    <content>
+                        <VBox fx:id="budgetItemsContainer" spacing="10.0" styleClass="budget-items">
+                            <padding>
+                                <Insets top="20" right="30" bottom="20" left="30"/>
+                            </padding>
+                        </VBox>
+                    </content>
+                </ScrollPane>
+                
+                <VBox spacing="15.0" styleClass="summary-footer">
+                    <Separator styleClass="summary-separator" />
+                    <HBox alignment="CENTER" styleClass="total-container">
+                        <Label fx:id="totalBudgetLabel" styleClass="total-label" text="Total: $0.00" />
+                    </HBox>
+                </VBox>
+            </VBox>
+            
+            <HBox alignment="CENTER" spacing="20.0">
+                <Button fx:id="editBudgetButton" onAction="#handleEditBudget" 
+                       styleClass="secondary-button" text="Edit Budget" prefWidth="150"/>
+                <Button fx:id="continueButton" onAction="#handleContinue" 
+                       styleClass="primary-button" text="Continue to Dashboard" prefWidth="200"/>
+            </HBox>
+        </VBox>
+    </VBox>
+    
+    <padding>
+        <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+    </padding>
+</StackPane>

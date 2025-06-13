@@ -156,7 +156,7 @@
                </ComboBox>
             </VBox>
             
-            <ComboBox fx:id="expenseCatCombo" editable="true" promptText="Category (e.g., Rent, Groceries)" styleClass="modern-combo">
+            <ComboBox fx:id="expenseCatCombo" promptText="Category (e.g., Rent, Groceries)" styleClass="modern-combo">
                <items>
                   <FXCollections fx:factory="observableArrayList">
                      <String fx:value="Groceries"/>

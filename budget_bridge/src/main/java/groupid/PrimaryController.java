@@ -155,20 +155,23 @@ public class PrimaryController implements ModelAware, Initializable {
     private void updateProgressBars() {
         expenseProgressVBox.getChildren().clear();
 
-        for (MoneyLine expense : model.getCurrentMonth()) {
-            String category = expense.getType();
-            double amount = expense.getAmount();
-            double budgeted = getBudgetGoalForCategory(category); // You can implement this as needed
+        for (MoneyLine expense : model.expenses()) {
+            System.out.println(expense.getFreq() + " " + expense.getType());
+            if(expense.getFreq().equals("variable") && !expense.getType().equals("Savings")){
+                String category = expense.getType();
+                double amount = expense.getAmount();
+                double budgeted = getBudgetGoalForCategory(category); // You can implement this as needed
 
-            double progress = budgeted > 0 ? Math.min(amount / budgeted, 1.0) : 0;
+                double progress = budgeted > 0 ? Math.min(amount / budgeted, 1.0) : 0;
 
-            Label label = new Label(category + ": $" + String.format("%.2f", amount) + " / $" + String.format("%.2f", budgeted));
-            ProgressBar bar = new ProgressBar(progress);
-            bar.setPrefWidth(300);
+                Label label = new Label(category + ": $" + String.format("%.2f", amount) + " / $" + String.format("%.2f", budgeted));
+                ProgressBar bar = new ProgressBar(progress);
+                bar.setPrefWidth(300);
 
-            VBox wrapper = new VBox(label, bar);
-            wrapper.setSpacing(5);
-            expenseProgressVBox.getChildren().add(wrapper);
+                VBox wrapper = new VBox(label, bar);
+                wrapper.setSpacing(5);
+                expenseProgressVBox.getChildren().add(wrapper);
+            }
         }
     }
 
@@ -199,26 +202,28 @@ public class PrimaryController implements ModelAware, Initializable {
         expenseProgressVBox.getChildren().clear();  // Clear previous rows
 
         for (MoneyLine expense : model.expenses()) {
-            String category = expense.getType();
-            double budget = expense.getAmount();
-            if (budget == 0) continue;  // skips empty or 0 values
+            if(expense.getFreq().equals("variable") && !expense.getType().equals("Savings")){
+                String category = expense.getType();
+                double budget = expense.getAmount();
+                if (budget == 0) continue;  // skips empty or 0 values
 
-            VBox row = new VBox(5);
-            row.setPadding(new Insets(5));
-            row.getStyleClass().add("budget-row");
+                VBox row = new VBox(5);
+                row.setPadding(new Insets(5));
+                row.getStyleClass().add("budget-row");
 
-            // Label above the bar
-            Label label = new Label(String.format("%s: $%.2f of $%.2f spent", category, expense.getSpent(), budget));
-            label.getStyleClass().add("expense-label");
+                // Label above the bar
+                Label label = new Label(String.format("%s: $%.2f of $%.2f spent", category, expense.getSpent(), budget));
+                label.getStyleClass().add("expense-label");
 
-            // Progress bar under the label
-            ProgressBar bar = new ProgressBar();
-            bar.setMaxWidth(Double.MAX_VALUE);
-            bar.progressProperty().bind(
-                Bindings.createDoubleBinding(
-                    () -> budget == 0 ? 0 : expense.getSpent() / budget,
-                    expense.spentProperty()
-                )
+                // Progress bar under the label
+                ProgressBar bar = new ProgressBar();
+                bar.setMaxWidth(Double.MAX_VALUE);
+                bar.progressProperty().bind(
+                    Bindings.createDoubleBinding(
+                        () -> budget == 0 ? 0 : expense.getSpent() / budget,
+                        expense.spentProperty()
+                    )
+                    
             );
 
             // Update bar color and label text when spent changes
@@ -258,6 +263,7 @@ public class PrimaryController implements ModelAware, Initializable {
             VBox.setMargin(row, new Insets(10, 0, 10, 0));
 
             expenseProgressVBox.getChildren().add(row);
+            }
         }
     }
 
