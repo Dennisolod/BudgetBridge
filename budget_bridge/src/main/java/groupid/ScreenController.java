@@ -38,6 +38,7 @@ public class ScreenController {
     @FXML private Label totalBudgetLabel;
     @FXML private Label welcomeLabel;
     @FXML private Label usernameErrorLabel;
+    @FXML private Label deficitWarningLabel;
 
     @FXML private Button continueButton;
     @FXML private Button editBudgetButton;
@@ -187,6 +188,14 @@ public class ScreenController {
         
         // Add income display
         double totalIncome = model.totalIncomeProperty().get();
+
+        if ((totalExpenses + totalSavings) > totalIncome) {
+            deficitWarningLabel.setText("Warning: Your expenses exceed your income. Consider adjusting your budget.");
+            deficitWarningLabel.setVisible(true);
+        } else {
+            deficitWarningLabel.setVisible(false);
+        }
+
         if (totalIncome > 0) {
             // Income display with header
             Label incomeHeader = new Label("MONTHLY INCOME");
@@ -307,13 +316,13 @@ public class ScreenController {
             recommendationLabel.getStyleClass().add("recommendation-label");
             
             if (savingsPercent >= 20) {
-                recommendationLabel.setText("✓ Excellent! You're saving " + String.format("%.1f%%", savingsPercent) + " of your income (recommended: 20%+)");
+                recommendationLabel.setText("Excellent! You're saving " + String.format("%.1f%%", savingsPercent) + " of your income (recommended: 20%+)");
                 recommendationLabel.getStyleClass().add("recommendation-positive");
             } else if (savingsPercent >= 10) {
-                recommendationLabel.setText("◐ Good! You're saving " + String.format("%.1f%%", savingsPercent) + " of your income (target: 20%+)");
+                recommendationLabel.setText("Good! You're saving " + String.format("%.1f%%", savingsPercent) + " of your income (target: 20%+)");
                 recommendationLabel.getStyleClass().add("recommendation-neutral");
             } else {
-                recommendationLabel.setText("⚠ Consider increasing savings to 20% of income (currently: " + String.format("%.1f%%", savingsPercent) + ")");
+                recommendationLabel.setText("Consider increasing savings to 20% of income (currently: " + String.format("%.1f%%", savingsPercent) + ")");
                 recommendationLabel.getStyleClass().add("recommendation-warning");
             }
             
