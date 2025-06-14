@@ -6,8 +6,11 @@ import org.kordamp.ikonli.javafx.FontIcon;
 
 import groupid.model.BadgeLine;
 import groupid.model.BudgetModel;
+import groupid.model.MetaDataDAO;
 import groupid.model.MoneyLine;
+import groupid.model.ProfileIcon;
 import groupid.model.ThemeLine;
+import groupid.model.UserDAO;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -15,6 +18,7 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 public class ProfileController implements ModelAware {
@@ -127,7 +131,6 @@ public class ProfileController implements ModelAware {
             placeholder.getStyleClass().add("badge-text"); // optional style
             recentBadgeLabel.getChildren().add(placeholder);
         }
-
         currentProfileIcon.setIconLiteral(m.getCurrentProfileIcon().getIconLiteral());
         currentProfileIcon.setIconSize(48);
         currentProfileIcon.setIconColor(m.getCurrentProfileIcon().getColor());

@@ -6,6 +6,8 @@ import groupid.model.BudgetInfoDAO;
 import groupid.model.BudgetModel;
 import groupid.model.DatabaseInitializer;
 import groupid.model.MetaDataDAO;
+import groupid.model.ProfileIcon;
+import groupid.model.ThemeLine;
 import groupid.model.UserDAO;
 import javafx.application.Application;
 import javafx.beans.property.StringProperty;
@@ -50,7 +52,7 @@ public class App extends Application {
             System.out.println("Username collected: " + username.get());
             System.out.println("User exists check: " + UserDAO.userExists(username));
             if (!UserDAO.userExists(username)) {
-                 System.out.println("New user path");
+                System.out.println("New user path");
                 // New user - will show budget setup
                 // User will be added to database when budget setup is complete
             } else {

@@ -6,8 +6,10 @@ import org.kordamp.ikonli.javafx.FontIcon;
 
 import groupid.model.BadgeLine;
 import groupid.model.BudgetModel;
+import groupid.model.MetaDataDAO;
 import groupid.model.ProfileIcon;
 import groupid.model.ThemeLine;
+import groupid.model.UserDAO;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -121,7 +123,7 @@ public class StoreController implements ModelAware{
         rewardsBox.getStyleClass().add("store-column");
 
         // Basic Profile Icons (Tier 1)
-        addProfileIcon(new ProfileIcon("Classic Avatar", "fas-user", Color.LIGHTBLUE, 100, "Simple and clean profile look"));
+        addProfileIcon(new ProfileIcon("Classic Avatar", "fas-user", Color.LIGHTBLUE, 0, "Simple and clean profile look"));
         addProfileIcon(new ProfileIcon("Star Performer", "fas-star", Color.GOLD, 150, "Show your stellar progress"));
         addProfileIcon(new ProfileIcon("Savings Shield", "fas-shield-alt", Color.DARKBLUE, 200, "Defender of budgets"));
         addProfileIcon(new ProfileIcon("Money Tree", "fas-leaf", Color.GREEN, 250, "Growing your wealth"));
@@ -149,6 +151,11 @@ public class StoreController implements ModelAware{
     private void refreshProfileIconButtons() {
         // Clear and reload the profile icons to update button states
         loadProfileIconItems();
+    }
+
+    // Helper function to refresh all theme buttons
+    private void refreshThemeButtons() {
+        loadThemeItems();
     }
 
     // Badges functions for the store (keeping existing code):
@@ -259,10 +266,18 @@ public class StoreController implements ModelAware{
 
         Button actionButton = new Button();
         actionButton.getStyleClass().add("purchase-btn");
+        // MetaDataDAO.loadMetaData(UserDAO.getUserIdByName(model.usernameProperty()), model);
+        // if (model.getCurrentTheme() == null) {
+        //     model.applyTheme(new ThemeLine("Default Blue", Color.web("#202538"),0));
+        // }
+        if (model.getCurrentTheme().equals(theme)){
+            actionButton.setText("Active");
+            actionButton.setDisable(true);
+            actionButton.getStyleClass().add("active-btn");
 
-        if (model.ownsTheme(theme)) {
+        } else if (model.ownsTheme(theme)) {
             actionButton.setText("Apply");
-            actionButton.setOnAction(e -> model.applyTheme(theme));
+            actionButton.setOnAction(e -> { model.applyTheme(theme); refreshThemeButtons();});
         } else {
             actionButton.setText("Purchase");
             actionButton.setOnAction(e -> {
@@ -273,6 +288,7 @@ public class StoreController implements ModelAware{
                 } else {
                     System.out.println("Not enough gems.");
                 }
+                refreshThemeButtons();
             });
         }
 
@@ -284,6 +300,7 @@ public class StoreController implements ModelAware{
         themesBox.getChildren().clear();
         themesBox.getStyleClass().add("store-column");
 
+        addThemeToStore(new ThemeLine("Default Blue", Color.web("#202538"),0));
         addThemeToStore(new ThemeLine("Ocean Blue", Color.web("#1b4180"), 5000));
         addThemeToStore(new ThemeLine("Deep Wine Red", Color.web("#5A1A1A"), 5000));
         addThemeToStore(new ThemeLine("Royal Navy", Color.web("#1A2B5A"), 7500));

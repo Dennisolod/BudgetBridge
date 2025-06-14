@@ -14,14 +14,15 @@ import javafx.scene.paint.Paint;
 
 public class MetaDataDAO {
     
-        public static void saveMetaData(int userId, BudgetModel model) {
+    public static void saveMetaData(int userId, BudgetModel model) {
         String sql = """
-            INSERT INTO meta_data(user_id, gems, points, current_theme_name)
-            VALUES (?, ?, ?, ?)
+            INSERT INTO meta_data(user_id, gems, points, current_theme_name, current_profile_icon_name)
+            VALUES (?, ?, ?, ?, ?)
             ON CONFLICT(user_id) DO UPDATE SET
                 gems = excluded.gems,
                 points = excluded.points,
-                current_theme_name = excluded.current_theme_name;
+                current_theme_name = excluded.current_theme_name,
+                current_profile_icon_name = excluded.current_profile_icon_name;
         """;
 
         try (Connection conn = SQLiteConnector.connect();
@@ -134,11 +135,15 @@ public class MetaDataDAO {
     }
 
     public static void loadMetaData(int userId, BudgetModel model) {
-        String metaSql = "SELECT gems, points, current_theme_name FROM meta_data WHERE user_id = ?";
-        String badgeSql = "SELECT badge_name, icon_literal, color, cost FROM badges WHERE user_id = ?";
-        String themeSql = "SELECT theme_name, background_color, cost FROM themes WHERE user_id = ?";
-        String iconSql = "SELECT icon_name, color, icon_literal, cost, description FROM profile_icons WHERE user_id = ?";
+        String metaSql = "SELECT DISTINCT gems, points, current_theme_name, current_profile_icon_name FROM meta_data WHERE user_id = ?";
+        String badgeSql = "SELECT DISTINCT badge_name, icon_literal, color, cost FROM badges WHERE user_id = ?";
+        String themeSql = "SELECT DISTINCT theme_name, background_color, cost FROM themes WHERE user_id = ?";
+        String iconSql = "SELECT DISTINCT icon_name, color, icon_literal, cost, description FROM profile_icons WHERE user_id = ?";
 
+        model.getUnlockedProfileIcons().clear();
+        model.getOwnedBadges().clear();
+        model.getOwnedThemes().clear();
+        
         // load meta
         try (Connection conn = SQLiteConnector.connect()) {
             try (PreparedStatement metaStmt = conn.prepareStatement(metaSql)) {
@@ -154,6 +159,15 @@ public class MetaDataDAO {
                         for (ThemeLine t : model.getOwnedThemes()) {
                             if (t.getName().equals(themeName)) {
                                 model.applyThemeStart(t);
+                                break;
+                            }
+                        }
+                    }
+                    String profileIconName = rs.getString("current_profile_icon_name");
+                    if (profileIconName!= null) {
+                        for (ProfileIcon p : model.getUnlockedProfileIcons()) {
+                            if (p.getName().equals(profileIconName)) {
+                                model.applyProfileIconStart(p);
                                 break;
                             }
                         }

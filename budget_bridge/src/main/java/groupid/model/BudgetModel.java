@@ -42,16 +42,16 @@ public class BudgetModel {
     private final StringProperty rank = new SimpleStringProperty();
     private final StringProperty leaderboardPos = new SimpleStringProperty();            // LEADERBOARD POINTS
     private final IntegerProperty gems = new SimpleIntegerProperty(1000000);   // VIRTUAL CURRENCY
-    private final ObservableList<ThemeLine> ownedThemes = FXCollections.observableArrayList();
-    private final ObjectProperty<ThemeLine> currentTheme = new SimpleObjectProperty<>();
+    private final ObservableList<ThemeLine> ownedThemes = FXCollections.observableArrayList(new ThemeLine("Default Blue", Color.web("#202538"),0));
+    private final ObjectProperty<ThemeLine> currentTheme = new SimpleObjectProperty<>(new ThemeLine("Default Blue", Color.web("#202538"),0));
     private double primaryIncome, sideIncome, otherIncome;
     private double rent, car, groceries, diningOut, funMoney, otherExpense;
     private List<String> goals = List.of();
     private String budgetPlan = "";
     private League lastRewardedLeague = League.BRONZE;
     private ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList();
-    private ObservableList<ProfileIcon> unlockedProfileIcons = FXCollections.observableArrayList(new ProfileIcon("Classic Avatar", "fas-user", Color.LIGHTBLUE, 100, "Simple and clean profile look"));
-    private ObjectProperty<ProfileIcon> currentProfileIcon = new SimpleObjectProperty<>(unlockedProfileIcons.get(0));
+    private ObservableList<ProfileIcon> unlockedProfileIcons = FXCollections.observableArrayList(new ProfileIcon("Classic Avatar", "fas-user", Color.LIGHTBLUE, 0, "Simple and clean profile look"));
+    private ObjectProperty<ProfileIcon> currentProfileIcon = new SimpleObjectProperty<>(new ProfileIcon("Classic Avatar", "fas-user", Color.LIGHTBLUE, 0, "Simple and clean profile look"));
     private List<BadgeLine> top3Badges = new ArrayList<>();
 
     // convenience derived values (totals, net)
@@ -91,6 +91,7 @@ public class BudgetModel {
     public void applyProfileIcon(ProfileIcon profileIcon) {
         if (ownsProfileIcon(profileIcon)) {
             currentProfileIcon.set(profileIcon);
+            MetaDataDAO.saveMetaData(UserDAO.getUserIdByName(username), this);
         }
     }
     
@@ -305,6 +306,7 @@ public class BudgetModel {
     public void setGemsStart(int amount) { gems.set(amount); }
     public void setPointsStart(int amount) { points.set(amount); }
     public void applyThemeStart(ThemeLine theme) { currentTheme.set(theme); }
+    public void applyProfileIconStart(ProfileIcon icon) { currentProfileIcon.set(icon); }
     public void unlockBadgeStart(BadgeLine badge) { badges.add(badge); }
     public void unlockThemeStart(ThemeLine theme) {ownedThemes.add(theme); }
     public void unlockProfileIconStart(ProfileIcon icon) {unlockedProfileIcons.add(icon); }
