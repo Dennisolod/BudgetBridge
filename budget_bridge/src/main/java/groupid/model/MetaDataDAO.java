@@ -100,11 +100,46 @@ public class MetaDataDAO {
         }
     }
 
+    public static void saveOwnedIcons(int userId, List<ProfileIcon> icons) {
+        String deleteSql = "DELETE FROM profile_icons WHERE user_id = ?";
+        String insertSql = "INSERT INTO profile_icons(user_id, icon_name, color, icon_literal, cost, description) VALUES (?, ?, ?, ?, ?, ?)";
+
+        try (Connection conn = SQLiteConnector.connect()) {
+            conn.setAutoCommit(false);
+
+            try (PreparedStatement deleteStmt = conn.prepareStatement(deleteSql);
+                 PreparedStatement insertStmt = conn.prepareStatement(insertSql)) {
+
+                deleteStmt.setInt(1, userId);
+                deleteStmt.executeUpdate();
+
+                for (ProfileIcon icon : icons) {
+                    insertStmt.setInt(1, userId);
+                    insertStmt.setString(2, icon.getName());
+                    insertStmt.setString(3, toHexPaint(icon.getColor()));
+                    insertStmt.setString(4, icon.getIconLiteral());
+                    insertStmt.setInt(5, icon.getCost());
+                    insertStmt.setString(6, icon.getDescription());
+                    insertStmt.addBatch();
+                }
+                insertStmt.executeBatch();
+                conn.commit();
+            } catch (SQLException e) {
+                conn.rollback();
+                throw e;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void loadMetaData(int userId, BudgetModel model) {
         String metaSql = "SELECT gems, points, current_theme_name FROM meta_data WHERE user_id = ?";
         String badgeSql = "SELECT badge_name, icon_literal, color, cost FROM badges WHERE user_id = ?";
         String themeSql = "SELECT theme_name, background_color, cost FROM themes WHERE user_id = ?";
+        String iconSql = "SELECT icon_name, color, icon_literal, cost, description FROM profile_icons WHERE user_id = ?";
 
+        // load meta
         try (Connection conn = SQLiteConnector.connect()) {
             try (PreparedStatement metaStmt = conn.prepareStatement(metaSql)) {
                 metaStmt.setInt(1, userId);
@@ -125,7 +160,7 @@ public class MetaDataDAO {
                     }
                 }
             }
-
+            // load badges
             try (PreparedStatement badgeStmt = conn.prepareStatement(badgeSql)) {
                 badgeStmt.setInt(1, userId);
                 ResultSet rs = badgeStmt.executeQuery();
@@ -146,7 +181,7 @@ public class MetaDataDAO {
                 }
                 System.out.println("Total badges loaded from DB: " + model.badges().size());
             }
-
+            // load themes
             try (PreparedStatement themeStmt = conn.prepareStatement(themeSql)) {
                 themeStmt.setInt(1, userId);
                 ResultSet rs = themeStmt.executeQuery();
@@ -160,6 +195,24 @@ public class MetaDataDAO {
                     }
                     int cost = rs.getInt("cost");
                     model.unlockThemeStart(new ThemeLine(name, color, cost));
+                }
+            }
+            // load icons
+            try (PreparedStatement iconStmt = conn.prepareStatement(iconSql)) {
+                iconStmt.setInt(1, userId);
+                ResultSet rs = iconStmt.executeQuery();
+                while (rs.next()) {
+                    String name = rs.getString("icon_name");
+                    Paint color;
+                    try {
+                        color = Color.web(rs.getString("color"));
+                    } catch (IllegalArgumentException e) {
+                        color = Color.BLACK;
+                    }
+                    String icon_literal = rs.getString("icon_literal");
+                    int cost = rs.getInt("cost");
+                    String description = rs.getString("description");
+                    model.unlockProfileIconStart(new ProfileIcon(name, icon_literal, color, cost, description));
                 }
             }
         } catch (Exception e) {

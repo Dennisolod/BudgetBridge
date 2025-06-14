@@ -5,7 +5,6 @@ import java.sql.Statement;
 
 public class DatabaseInitializer {
     public static void initialize() {
-        // clearDatabase();
         String createUsers = """
             CREATE TABLE IF NOT EXISTS users (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -31,6 +30,7 @@ public class DatabaseInitializer {
                 gems INTEGER DEFAULT 0,
                 points INTEGER DEFAULT 0,
                 current_theme_name TEXT,
+                current_profile_icon_name TEXT,
                 FOREIGN KEY(user_id) REFERENCES users(id)
             );
         """;
@@ -56,6 +56,18 @@ public class DatabaseInitializer {
             );
         """;
 
+        String createProfileIcons = """
+            CREATE TABLE IF NOT EXISTS profile_icons (
+                user_id INTEGER NOT NULL,
+                icon_name TEXT NOT NULL,
+                color TEXT NOT NULL,
+                icon_literal TEXT NOT NULL,
+                cost INTEGER NOT NULL,
+                description TEXT NOT NULL,
+                FOREIGN KEY(user_id) REFERENCES users(id)
+            );
+        """;
+
         try (Connection conn = SQLiteConnector.connect();
              Statement stmt = conn.createStatement()) {
             stmt.execute(createUsers);
@@ -63,6 +75,7 @@ public class DatabaseInitializer {
             stmt.execute(createMetaData);
             stmt.execute(createBadges);
             stmt.execute(createThemes);
+            stmt.execute(createProfileIcons);
             System.out.println("The database has been created");
         } catch (Exception e) {
             e.printStackTrace();
@@ -80,6 +93,7 @@ public class DatabaseInitializer {
         String dropBadges = "DROP TABLE IF EXISTS badges;";
         String dropMetaData = "DROP TABLE IF EXISTS meta_data;";
         String dropBudgetInfo = "DROP TABLE IF EXISTS budget_info;";
+        String dropProfileIcons = "DROP TABLE IF EXISTS profile_icons;";
 
 
         try (Connection conn = SQLiteConnector.connect();
@@ -95,6 +109,7 @@ public class DatabaseInitializer {
             stmt.execute(dropBadges);       // drops badges table
             stmt.execute(dropMetaData);     // drop metadata table
             stmt.execute(dropThemes);       // drops themes table
+            stmt.execute(dropProfileIcons);
             System.out.println("All data in the database has been cleared.");
             
         } catch (Exception e) {

@@ -32,6 +32,7 @@ public class ProfileController implements ModelAware {
     @FXML private FlowPane themeGallery;
     @FXML private Label currentThemeLabel;
     @FXML private Label rankLabel;
+    @FXML private FontIcon currentProfileIcon;
 
 
     @Override
@@ -126,8 +127,15 @@ public class ProfileController implements ModelAware {
             placeholder.getStyleClass().add("badge-text"); // optional style
             recentBadgeLabel.getChildren().add(placeholder);
         }
-    }
 
+        currentProfileIcon.setIconLiteral(m.getCurrentProfileIcon().getIconLiteral());
+        currentProfileIcon.setIconSize(48);
+        currentProfileIcon.setIconColor(m.getCurrentProfileIcon().getColor());
+        Tooltip tooltip = new Tooltip(m.getCurrentProfileIcon().getName() + ": " + m.getCurrentProfileIcon().getDescription());
+        tooltip.setStyle("-fx-font-size: 14px;");
+        Tooltip.install(currentProfileIcon, tooltip);
+    }
+    
     @FXML private void switchToSecondary() throws IOException { App.setRoot("secondary"); }
     @FXML private void switchToPrimary() throws IOException { App.setRoot("primary"); }
     @FXML private void switchToLeaderboard() throws IOException { App.setRoot("leaderboard"); }

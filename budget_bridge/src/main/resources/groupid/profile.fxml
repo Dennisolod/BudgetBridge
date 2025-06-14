@@ -124,7 +124,7 @@
                <Label text="🎭 Current Icon" styleClass="card-title"/>
                <VBox alignment="CENTER" spacing="10" VBox.vgrow="ALWAYS">
                   <FontIcon fx:id="currentProfileIcon" iconSize="48" styleClass="current-profile-icon"/>
-                  <Label fx:id="currentIconName" text="Default Avatar" styleClass="current-icon-name"/>
+                  <!-- <Label fx:id="currentIconName" text="Default Avatar" styleClass="current-icon-name"/> -->
                </VBox>
             </VBox>
 

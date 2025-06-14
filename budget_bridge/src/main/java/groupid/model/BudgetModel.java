@@ -50,8 +50,8 @@ public class BudgetModel {
     private String budgetPlan = "";
     private League lastRewardedLeague = League.BRONZE;
     private ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList();
-    private ObservableList<ProfileIcon> unlockedProfileIcons = FXCollections.observableArrayList();
-    private ObjectProperty<ProfileIcon> currentProfileIcon = new SimpleObjectProperty<>();
+    private ObservableList<ProfileIcon> unlockedProfileIcons = FXCollections.observableArrayList(new ProfileIcon("Classic Avatar", "fas-user", Color.LIGHTBLUE, 100, "Simple and clean profile look"));
+    private ObjectProperty<ProfileIcon> currentProfileIcon = new SimpleObjectProperty<>(unlockedProfileIcons.get(0));
     private List<BadgeLine> top3Badges = new ArrayList<>();
 
     // convenience derived values (totals, net)
@@ -81,6 +81,7 @@ public class BudgetModel {
     public void unlockProfileIcon(ProfileIcon profileIcon) {
         if (!unlockedProfileIcons.contains(profileIcon)) {
             unlockedProfileIcons.add(profileIcon);
+            MetaDataDAO.saveOwnedIcons(UserDAO.getUserIdByName(username), unlockedProfileIcons);
         }
     }
     
@@ -97,6 +98,9 @@ public class BudgetModel {
      * Get the currently active profile icon
      */
     public ProfileIcon getCurrentProfileIcon() {
+        if (currentProfileIcon == null) {
+            currentProfileIcon.set(new ProfileIcon("Classic Avatar", "fas-user", Color.LIGHTBLUE, 100, "Simple and clean profile look"));
+        }
         return currentProfileIcon.get();
     }
     
@@ -303,6 +307,7 @@ public class BudgetModel {
     public void applyThemeStart(ThemeLine theme) { currentTheme.set(theme); }
     public void unlockBadgeStart(BadgeLine badge) { badges.add(badge); }
     public void unlockThemeStart(ThemeLine theme) {ownedThemes.add(theme); }
+    public void unlockProfileIconStart(ProfileIcon icon) {unlockedProfileIcons.add(icon); }
     public void setGems(int amount) { gems.set(amount); MetaDataDAO.saveMetaData(UserDAO.getUserIdByName(username), this); }
     public boolean ownsBadge(BadgeLine badge) { return badges.stream().anyMatch(b -> b.getName().equals(badge.getName())); }
     public void unlockBadge(BadgeLine badge) {
