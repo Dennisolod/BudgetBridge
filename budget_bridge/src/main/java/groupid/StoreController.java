@@ -43,6 +43,23 @@ public class StoreController implements ModelAware{
         loadBadgeItems();
         loadThemeItems();
         loadProfileIconItems(); // Load profile icons
+        
+        model.currentThemeProperty().addListener((obs, oldTheme, newTheme) -> {
+            applyThemeToScene();
+        });
+    }
+
+    private void applyThemeToScene() {
+        // Get the scene from any node (currencyBalance is safe here)
+        if (currencyBalance.getScene() == null) return;
+
+        // Clear any existing stylesheets
+        currencyBalance.getScene().getStylesheets().clear();
+
+        // Load the main stylesheet again
+        currencyBalance.getScene().getStylesheets().add(App.class.getResource("style.css").toExternalForm());
+
+        // You can also dynamically update any theme-specific styles here if you add multiple CSS files later
     }
 
     // Profile Icon functions for the store:

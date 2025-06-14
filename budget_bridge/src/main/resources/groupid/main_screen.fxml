@@ -55,6 +55,7 @@
                     <HBox alignment="CENTER" styleClass="total-container">
                         <Label fx:id="totalBudgetLabel" styleClass="total-label" text="Total: $0.00" />
                     </HBox>
+                    <Label fx:id="deficitWarningLabel" styleClass="soft-warning" textFill="red" visible="false"/>
                 </VBox>
             </VBox>
             

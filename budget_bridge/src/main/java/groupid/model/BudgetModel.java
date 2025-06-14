@@ -279,7 +279,12 @@ public class BudgetModel {
     public ObservableList<BadgeLine> getOwnedBadges() { return badges; }
     public ObservableList<ThemeLine> getOwnedThemes() { return ownedThemes; }
     public ThemeLine getCurrentTheme() { return currentTheme.get(); }
-    public void applyTheme(ThemeLine theme) { currentTheme.set(theme); MetaDataDAO.saveMetaData(UserDAO.getUserIdByName(username), this); }
+    
+    public void applyTheme(ThemeLine theme) { 
+        currentTheme.set(theme); 
+        MetaDataDAO.saveMetaData(UserDAO.getUserIdByName(username), this); 
+    }
+
     public ObjectProperty<ThemeLine> currentThemeProperty() { return currentTheme; }
     public ObservableList<PieChart.Data> pieDataProperty() {return pieData; }
     public League getCurrentLeague() {
